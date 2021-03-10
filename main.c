@@ -10,13 +10,13 @@ int		main(void)
 {
 	pid_t	pid;
 	char	comando[64];
-	printf("Minishell: ");
-	memset(comando, '\0', 64);
-	scanf("%s", comando);
-	while (strcmp(comando, "exit"))
+	printf("minishell: ");
+	memset(comando, '\0', 64);	// empty's string
+	scanf("%s", comando);		// reads from keybord a command
+	while (strcmp(comando, "exit")) // compares the command with "exit"
 	{
-		pid = fork();
-		if (pid == 0)
+		pid = fork();	//creates a process
+		if (pid == 0)	//child process
 		{
 			execlp(comando, comando, NULL);
 			printf("comando no valido\n");
@@ -24,12 +24,12 @@ int		main(void)
 		}
 		else
 		{
-			if (pid > 0)
+			if (pid > 0) //parent process
 			{
 				waitpid(pid, 0, 0);
-				printf("Minishell: ");
-				memset(comando, '\0', 64);
-				scanf("%s", comando);
+				printf("minishell: ");
+				memset(comando, '\0', 64);	// empty's string
+				scanf("%s", comando);	// reads from keybord a command
 			}
 			else
 				perror("Error Fork\n");

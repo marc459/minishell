@@ -18,7 +18,7 @@ int		main(void)
 		pid = fork();	//creates a process
 		if (pid == 0)	//child process
 		{
-			execlp(comando, comando, NULL);
+			execlp(comando, comando, NULL); 
 			printf("comando no valido\n");
 			exit(0);
 		}
@@ -26,7 +26,7 @@ int		main(void)
 		{
 			if (pid > 0) //parent process
 			{
-				waitpid(pid, 0, 0);
+				waitpid(pid, 0, 0); // waits until child process finish
 				printf("minishell: ");
 				memset(comando, '\0', 64);	// empty's string
 				scanf("%s", comando);	// reads from keybord a command
@@ -37,3 +37,8 @@ int		main(void)
 	}
 	exit(0);
 }
+
+<-->-<-->- ->--<->--
+X2(LFFRF)
+X2(FRFFL)
+

@@ -7,21 +7,23 @@
 #include <wchar.h>
 #include <locale.h>
 
+#include <minishell.h>
 int		main(void)
 {
+	int status;
 	pid_t	pid;
 	char	comando[64];
 	printf("minishell: ");
-	memset(comando, '\0', 64);
+	ft_memset(comando, '\0', 64);
 	scanf("%s", comando);
 	while (strcmp(comando, "exit"))
 	{
 		pid = fork();
 		if (pid == 0)
 		{
-			printf("f\n");
+			printf("comand->%s\n",comando);
 			execlp(comando, comando, NULL); 
-			printf("comando no valido\n");
+			ft_printf("comando no valido\n");
 			exit(0);
 		}
 		else
@@ -29,8 +31,8 @@ int		main(void)
 			if (pid > 0)
 			{
 				waitpid(pid, &status, 0);
-				printf("minishell:");
-				memset(comando, '\0', 64);
+				ft_printf("minishell:");
+				ft_memset(comando, '\0', 64);
 				scanf("%s", comando);
 			}
 			else

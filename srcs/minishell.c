@@ -3,20 +3,17 @@
 
 int		main(void)
 {
-	printf( "%s\n", readline( "test> " ) );
-	/*int status;
+	int status;
 	pid_t	pid;
-	char	comando[64];
-	printf("minishell: ");
+	char	*comando;
+	comando = malloc(sizeof(char) * 64);
 	ft_memset(comando, '\0', 64);
-	//scanf("%s", comando);
-	readline(comando);
-	while (strcmp(comando, "exit"))
+	comando = readline("Minishell:");
+	while (ft_strncmp(comando, "exit", ft_strlen(comando)))
 	{
 		pid = fork();
 		if (pid == 0)
 		{
-			printf("comand->%s\n",comando);
 			execlp(comando, comando, NULL); 
 			ft_printf("comando no valido\n");
 			exit(0);
@@ -25,14 +22,13 @@ int		main(void)
 		{
 			if (pid > 0)
 			{
-				waitpid(pid, -1, 0);
-				ft_printf("minishell:");
+				waitpid(pid, &status, 0);
 				ft_memset(comando, '\0', 64);
-				scanf("%s", comando);
+				comando = readline("Minishell:");
 			}
 			else
 				perror("Error Fork\n");
 		}
-	}*/
+	}
 	exit(0);
 }

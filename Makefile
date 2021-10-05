@@ -4,12 +4,14 @@ PROGRAM = minishell
 #LIBS
 LIBFT = libft_42/libft.a
 PRINTF = ft_printf_42/libftprintf.a
+READLINE = readline/libreadline.a
+#readline/libhistory.a 
 LIBS = $(LIBFT) $(PRINTF)
 
 #PATHS
 OBJ_PATH = ./objs
 SRC_PATH = ./srcs
-INCLUDES = -I ./includes
+INCLUDES = -I ./includes -I ./readline -I ./readline/examples
 
 #SRCS
 PROGRAM_SRCS = minishell.c
@@ -20,6 +22,8 @@ PROGRAM_OBJS = $(addprefix $(OBJ_PATH)/,$(PROGRAM_SRCS:.c=.o))
 #FLAGS
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
+TERMCAP_LIB = -ltermcap
+
 	
 #INSTRUCTIONS
 all: submodule ft_printf libft minishell
@@ -40,7 +44,7 @@ libft:
 	@make -C libft_42 > /dev/null
 							
 minishell: $(PROGRAM_OBJS)
-	@$(CC) $(INCLUDES) $(PROGRAM_OBJS) $(LIBFT) $(PRINTF) -o $(PROGRAM)
+	@$(CC)  $(PROGRAM_OBJS) $(LIBFT) $(PRINTF) $(READLINE) $(TERMCAP_LIB) -o $(PROGRAM)
 								
 clean:
 	@rm -rf $(OBJ_PATH)

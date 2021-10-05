@@ -5,6 +5,7 @@ FLAGS = -Wall -Wextra -Werror
 NAME = libftprintf.a
 
 LIB = ../libft_42/libft.a
+LIB_PATH = ../libft_42/
 
 SRC_PATH = ./src
 INC_PATH = ./src
@@ -19,13 +20,11 @@ check_width.c check_precision.c check_zero.c
 INCLUDES = -I printf.h
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
-OBJLIB_NAME = $(LIB_NAME:.c=.o)
 
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAME))
 LIB = $(addprefix $(LIB_PATH)/, $(LIB_NAME))
 INC = $(addprefix $(INC_PATH)/, $(INC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
-OBJLIB = $(addprefix $(OBJ_PATH)/,$(OBJLIB_NAME))
 
 all: libft $(NAME)
 
@@ -35,8 +34,8 @@ libft:
 		echo Error, no existe la libreria $(LIB) ; \
 	fi
 
-$(NAME): $(OBJ) $(OBJLIB)
-	@ar rc $(NAME) $(OBJ) $(LIB)
+$(NAME): $(OBJ)
+	@ar rc $(NAME) $(OBJ) $(LIB_PATH)*.o
 	@ranlib $(NAME)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c

@@ -36,7 +36,6 @@ int main(int argc, char* argv[])
         
         dup2(fd1[WRITE_END], STDOUT_FILENO); 
         close(fd1[WRITE_END]);
-		usleep(5000000);
         execlp("/bin/ls", "ls", "-la", NULL);
 		
     }

@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/06 22:26:09 by msantos-          #+#    #+#             */
-/*   Updated: 2021/10/07 22:07:16 by msantos-         ###   ########.fr       */
+/*   Created: 2021/10/07 22:12:07 by msantos-          #+#    #+#             */
+/*   Updated: 2021/10/07 22:36:51 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int		parser(char *command)
+void	quitsignal(int sig)
 {
-	char	**commands;
-	int i;
-
-	i = 0;
-	commands = ft_split(command,' ');
-	while(commands[i])
-	{
-		ft_printf("%s\n",commands[i]);
-		i++;
-	}
-	return(1);
+	ft_printf("\nQuineshell-1.0:");
+}
+void	signals()
+{
+	//signal(SIGQUIT, &quitsignal);
+	//signal(SIGKILL, &quitsignal);
+	signal(SIGINT, &quitsignal); //// 5 - Ctrl + C
+	//signal(SIGTRAP, &quitsignal); // 5 - Ctrl + Z
 }

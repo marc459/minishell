@@ -6,13 +6,15 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/10/06 22:27:37 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/10/07 22:31:49 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # ifndef MINISHELL_H
 # define MINISHELL_H
 
+#include <signal.h>
+#include <math.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -26,5 +28,16 @@
 
 
 int		parser(char *command);
+void	signals();
+void	quitsignal(int sig);
+
+typedef struct		c_cmd {
+	char			**args;
+	int				type;
+	int				pp[2];
+	struct c_cmd	*next;
+	struct c_cmd	*prev;
+}					t_cmd;
+
 
 # endif	

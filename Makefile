@@ -14,7 +14,7 @@ SRC_PATH = ./srcs
 INCLUDES = -I ./includes -I ./readline -I ./readline/examples
 
 #SRCS
-PROGRAM_SRCS = minishell.c
+PROGRAM_SRCS = minishell.c parser.c
 
 #OBJS
 PROGRAM_OBJS = $(addprefix $(OBJ_PATH)/,$(PROGRAM_SRCS:.c=.o))

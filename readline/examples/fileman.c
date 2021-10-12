@@ -146,14 +146,14 @@ main (argc, argv)
 
       /* Remove leading and trailing whitespace from the line.
          Then, if there is anything left, add it to the history list
-         and execute it. 
-      s = stripwhite (line);
+         and execute it. */
+     // s = stripwhite (line);
 
-      if (*s)
-        {
-          add_history (s);
-          execute_line (s);
-        }*/
+    /*  if (*s)
+        {*/
+          add_history (line);
+          //execute_line (s);
+        //}
 
       free (line);
     }

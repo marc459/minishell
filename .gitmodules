@@ -1,0 +1,6 @@
+[submodule "libft_42"]
+	path = libft_42
+	url = https://github.com/marc459/libft_42
+[submodule "ft_printf_42"]
+	path = ft_printf_42
+	url = https://github.com/marc459/ft_printf_42.git

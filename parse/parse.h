@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:11:27 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/10/22 15:59:28 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/10/22 17:40:57 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 
 typedef struct s_arg {
-	size_t	tipe;
+	size_t	type;
 	char	*content;
 }			t_arg;
 

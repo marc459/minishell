@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/10/12 20:24:32 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/10/21 21:06:48 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,17 @@ int		parser(char *command);
 void	signals();
 void	quitsignal(int sig);
 
+typedef struct		c_minishell {
+	int 			n_pipes;
+	struct c_cmd	**cmd;
+}					t_minishell;
+
 typedef struct		c_cmd {
 	char			**args;
-	int				type;
-	int				pp[2];
 	struct c_cmd	*next;
-	struct c_cmd	*prev;
 }					t_cmd;
+
+t_minishell g_minishell;
 
 
 # endif	

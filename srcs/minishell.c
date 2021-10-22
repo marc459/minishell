@@ -19,7 +19,7 @@ char *stripwhite (char *string)
 	return s;
 }
 
-int		main(int argc,char **argv, char **env)
+int		main(int argc,char **argv, char **env,char **envp)
 {
 	int status;
 	pid_t	pid;
@@ -45,7 +45,7 @@ int		main(int argc,char **argv, char **env)
 			//Parser
 
 			//Executor
-							
+			executor(envp);							
 			execlp(command, command, NULL); 
 			ft_printf("Quineshell: %s: command not found\n",command);
 			free(command);

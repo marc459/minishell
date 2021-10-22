@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:07:10 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/10/22 15:59:37 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/10/22 16:22:24 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_printgeneral(void)
 		printf("arg[%zu] : %s\n", i, g_general.arg[i].content);
 }
 
-/* char	**ft_fillcomands(size_t size, int argc, char ** argv)
+char	**ft_fillcomands(size_t size, int argc, char ** argv)
 {
 	char	**comnds;
 	char	*comnd;
@@ -72,7 +72,7 @@ void	ft_printgeneral(void)
 	{
 		
 	}
-} */
+}
 
 char	**ft_parse(int argc, char **argv)
 {

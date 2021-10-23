@@ -16,13 +16,14 @@ Example :
 comand : < infile.txt ls -la | grep hola > outfile.txt
 
 {
-npipes = 1;
 
-ncomands = 2;
+&emsp;npipes = 1;
 
-nredirections = 2;
+&emsp;ncomands = 2;
 
-nfiles = 2;
+&emsp;nredirections = 2;
+
+&emsp;nfiles = 2;
 	
 t_arg =
 |	1	|		4			|		3		|	5   	|		3		|	2	|		4			|

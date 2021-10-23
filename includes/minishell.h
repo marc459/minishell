@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/10/22 17:26:00 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/10/23 16:17:53 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,17 @@ void	signals();
 void	quitsignal(int sig);
 void       executor(char **envp);
 
-typedef struct		c_minishell {
-	int 			n_pipes;
-	struct c_cmd	**cmd;
-}					t_minishell;
+typedef struct s_arg {
+	size_t	type;
+	char	*content;
+}			t_arg;
 
-typedef struct		c_cmd {
-	char			**args;
-	struct c_cmd	*next;
-}					t_cmd;
+typedef struct s_general {
+	size_t	npipes;
+	size_t	ncomands;
+	size_t	nredirections;
+	t_arg	*args;
+}			t_general;
 
 t_minishell g_minishell;
 

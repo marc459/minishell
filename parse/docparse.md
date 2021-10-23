@@ -9,7 +9,7 @@ t_general : General structure has the next parameters.
 |	size_t	|	nfiles			|	Number of files.							|
 |	t_arg	|	*arg			|	Array of a t_arg structure that has all the	|
 |			|					|	information about the string.				|
-|-----------|-------------------|-----------------------------------------------|
+
 
 Example :
 
@@ -20,12 +20,12 @@ comand : < infile.txt ls -la | grep hola > outfile.txt
 	ncomands = 2;
 	nredirections = 2;
 	nfiles = 2;
-	t_arg =
-|		|					|				|		|				|		|					|
-|-------|-------------------|---------------|-------|---------------|-------|-------------------|
-|	1	|		4			|		3		|	5	|		3		|	2	|		4			|
-|	"<"	|	"infile.txt"	|	"ls -la"	|	"|"	|	"grep hola"	|	">"	|	"outfile.txt"	|
-|-------|-------------------|---------------|-------|---------------|-------|-------------------|
+	
+t_arg =
+|	1	|		4			|		3		|	5   	|		3		|	2	|		4			|
+|-------|-------------------|---------------|-----------|---------------|-------|-------------------|
+|	"<"	|	"infile.txt"	|	"ls -la"	|  "\|"	    |   "grep hola"	|   ">"	|	"outfile.txt"	|
+
 	
 }
 
@@ -45,5 +45,4 @@ t_arg : Argument structure has the infromtion of itch comand, pipe, redirection,
 |			|					|	8 .- Heredoc redirection. (<<)				|
 |			|					|												|
 |	char *	|	content			|	String whith the content of the instruction	|
-|-----------|-------------------|-----------------------------------------------|
 

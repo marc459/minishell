@@ -6,7 +6,7 @@
 #    By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/18 15:15:09 by emgarcia          #+#    #+#              #
-#    Updated: 2021/10/19 16:42:52 by emgarcia         ###   ########.fr        #
+#    Updated: 2021/10/24 16:18:09 by emgarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ LIBFT	=	libft/libft.a
 OBJS	=	${SRCS:.c=.o}
 NAME	=	parse
 CC		=	gcc
-CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g3
+#CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS	=	-Wall -Wextra -Werror
 RM		=	rm -rf
 
 all:	${NAME}

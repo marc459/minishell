@@ -6,16 +6,17 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:22:15 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/10/21 20:03:03 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/10/24 14:59:33 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-int	main(int argc, char *argv[])
+int	main(int argc, char *split[])
 {
-	char	**parseo;
+	t_general	general;
 
-	parseo = ft_parse(argc, argv);
+	ft_inigeneral(&general);
+	ft_parse(argc, split, &general);
 	return (0);
 }

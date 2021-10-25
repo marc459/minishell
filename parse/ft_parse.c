@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:07:10 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/10/24 18:39:19 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/10/25 16:39:41 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,48 +65,37 @@ char	**ft_fillcomands(size_t size, int argc, char **split)
 	char	*aux;
 	size_t	i;
 	size_t	j;
-	size_t	k;
 
 	i = -1;
 	j = 0;
-	k = -1;
 	comnds = malloc(sizeof(char *) * size);
 	if (!comnds)
 		return (NULL);
 	comnd = NULL;
 	while (++i < (size_t)argc)
 	{
-		printf("i : %zu\n", i);
-		printf("split[%zu] : %s\n", i, split[i]);
 		if (ft_findchar(split[i], '|') || ft_findchar(split[i], '<')
 			|| ft_findchar(split[i], '>') || ft_findchar(split[i], ';'))
 		{
 			if (comnd && i > 0)
 			{
-				printf("j : %zu\n", j);
 				comnds[j++] = ft_strdup(comnd);
 				free(comnd);
 				comnd = NULL;
 			}
-			comnds[j++] = split[i];
+			comnds[j++] = ft_strdup(split[i]);
 		}
 		else if (comnd)
 		{
 			aux = comnd;
 			comnd = ft_strjoin(comnd, split[i]);
+			free(aux);
 		}
 		else
-			comnd = split[i];
-		comnds[j++] = ft_strdup(comnd);
-		if (j > 0)
-		{
-			printf("comnds[0] : %s\n", comnds[0]);
-			printf("comnds[1] : %s\n", comnds[1]);
-		}
-		printf("comnd : %s\n", comnd);
+			comnd = ft_strdup(split[i]);
 	}
-	while (++k < 5)
-		printf("comnds[%zu] : %s\n", k, comnds[k]);
+	comnds[j] = ft_strdup(comnd);
+	free(comnd);
 	return (comnds);
 }
 
@@ -122,4 +111,10 @@ void	ft_parse(int argc, char **split, t_general *general)
 	printf("%zu\n", comndssize);
 	printf("\n");
 	comands = ft_fillcomands(comndssize, argc, split);
+	while (++i < comndssize)
+		printf("comnds[%zu] : %s\n", i, comands[i]);
+	i = -1;
+	while (++i < comndssize)
+		free(comands[i]);
+	free(comands);
 }

@@ -21,8 +21,8 @@
 #include <sys/types.h>
 #include <stdlib.h>
 #include <string.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+#include "../readline/readline.h"
+#include "../readline/history.h"
 #include "../ft_printf_42/src/printf.h"
 #include "../libft_42/libft.h"
 

@@ -21,7 +21,7 @@ static size_t	ft_count_words(char const *s, size_t *i, char c)
 	find_let = 0;
 	while (s[++*i] != '\0')
 	{
-		if ((s[*i] == c) && (i > 0) && (find_let > 0))
+		if ((s[*i] == c) && (*i > 0) && (find_let > 0))
 		{
 			cont_str++;
 			find_let = 0;

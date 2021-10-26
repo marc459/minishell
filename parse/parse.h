@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:11:27 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/10/22 17:40:57 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/10/24 15:11:13 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ typedef struct s_general {
 	t_arg	*args;
 }			t_general;
 
-t_general	g_general;
-
-char	**ft_parse(int argc, char **argv);
+void	ft_parse(int argc, char **split, t_general *general);
+void	ft_inigeneral(t_general *general);
 
 #endif

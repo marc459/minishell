@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:22:15 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/10/25 15:33:45 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/10/26 21:32:12 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,25 @@
 int	main(int argc, char *split[])
 {
 	t_general	general;
+	size_t		i;
+	char		*join;
+	char		*aux;
 
+	//atexit(leak);
+	i = 0;
+	join = ft_strdup(split[i]);
+	while (++i < (size_t)argc)
+	{
+		aux = join;
+		join = ft_strjoin(join, " ");
+		free(aux);
+		aux = join;
+		join = ft_strjoin(join, split[i]);
+		free(aux);
+	}
+	printf("join : %s\n", join);
 	ft_inigeneral(&general);
-	ft_parse(argc, split, &general);
-	system("leaks parse");
+	ft_parse(join, &general);
+	free (join);
 	return (0);
 }

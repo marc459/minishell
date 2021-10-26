@@ -6,100 +6,105 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:07:10 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/10/25 16:39:41 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/10/26 21:56:17 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-size_t	ft_comndssize(int argc, char **split)
+void	ft_iniparse(t_parse *parse)
 {
+	parse->comand = -1;
+	parse->quot = 1;
+	parse->dquot = 1;
+	parse->comndssize = 0;
+}
+
+size_t	ft_comndssize(char *str)
+{
+	t_parse	p;
 	size_t	i;
-	size_t	comand;
-	size_t	comndssize;
 
 	i = -1;
-	comand = 1;
-	comndssize = 0;
-	while (++i < (size_t)argc)
+	ft_iniparse(&p);
+	while (++i < ft_strlen(str))
 	{
-		if (ft_findchar(split[i], '|') || ft_findchar(split[i], '<')
-			|| ft_findchar(split[i], '>') || ft_findchar(split[i], ';'))
+		if (str[i] == '\'')
+			p.quot = -p.quot;
+		else if (str[i] == '\"')
+			p.dquot = -p.dquot;
+		else if (ft_spchar(str[i]) && p.quot > 0 && p.dquot > 0)
 		{
-			comndssize++;
-			comand = 1;
+			p.comndssize++;
+			p.comand = 1;
 		}
-		else if (comand)
+		else if (p.comand)
 		{
-			comndssize++;
-			comand = 0;
+			p.comndssize++;
+			p.comand = 0;
 		}
 	}
-	return (comndssize);
+	return (p.comndssize);
 }
 
-void	ft_inigeneral(t_general *general)
+char	*ft_joincomnd(char **split, size_t *i, size_t size)
 {
-	general->npipes = 0;
-	general->ncomands = 0;
-	general->nredirections = 0;
-	general->args = NULL;
-}
-
-void	ft_printgeneral(t_general *general)
-{
-	size_t	i;
-
-	i = -1;
-	printf("npipes : %zu\n", general->npipes);
-	printf("ncomands : %zu\n", general->ncomands);
-	printf("nredirections : %zu\n", general->nredirections);
-	while (general->args && general->args[++i].content)
-		printf("arg[%zu] : %s\n", i, general->args[i].content);
-}
-
-char	**ft_fillcomands(size_t size, int argc, char **split)
-{
-	char	**comnds;
 	char	*comnd;
 	char	*aux;
+
+	comnd = NULL;
+	while (*i < size && !ft_findspchar(split[*i]))
+	{
+		if (!comnd)
+			comnd = ft_strdup(split[*i]);
+		else
+		{
+			aux = comnd;
+			comnd = ft_strjoin(comnd, " ");
+			free(aux);
+			aux = comnd;
+			comnd = ft_strjoin(comnd, split[*i]);
+			free(aux);
+		}
+		*i += 1;
+	}
+	*i -= 1;
+	return (comnd);
+}
+
+char	**ft_fillcomands(size_t size, char *str)
+{
+	t_parse	p;
+	size_t	ini;
 	size_t	i;
 	size_t	j;
+	char	**comnds;
 
+	ini = 0;
 	i = -1;
 	j = 0;
+	ft_iniparse(&p);
 	comnds = malloc(sizeof(char *) * size);
 	if (!comnds)
 		return (NULL);
-	comnd = NULL;
-	while (++i < (size_t)argc)
+	while (++i < ft_strlen(str))
 	{
-		if (ft_findchar(split[i], '|') || ft_findchar(split[i], '<')
-			|| ft_findchar(split[i], '>') || ft_findchar(split[i], ';'))
+		if (str[i] == '\'')
+			p.quot = -p.quot;
+		else if (str[i] == '\"')
+			p.dquot = -p.dquot;
+		else if (ft_spchar(str[i]) && p.quot > 0 && p.dquot > 0)
 		{
-			if (comnd && i > 0)
-			{
-				comnds[j++] = ft_strdup(comnd);
-				free(comnd);
-				comnd = NULL;
-			}
-			comnds[j++] = ft_strdup(split[i]);
+			comnds[j++] = ft_substr(str, ini, i - ini);
+			ini = i + 1;
+			comnds[j++] = ft_substr(str, i, 1);
 		}
-		else if (comnd)
-		{
-			aux = comnd;
-			comnd = ft_strjoin(comnd, split[i]);
-			free(aux);
-		}
-		else
-			comnd = ft_strdup(split[i]);
 	}
-	comnds[j] = ft_strdup(comnd);
-	free(comnd);
+	comnds[j++] = ft_substr(str, ini, i - ini);
 	return (comnds);
 }
 
-void	ft_parse(int argc, char **split, t_general *general)
+void	ft_parse(char *str, t_general *general)
 {
 	size_t	comndssize;
 	char	**comands;
@@ -107,10 +112,10 @@ void	ft_parse(int argc, char **split, t_general *general)
 
 	i = -1;
 	ft_printgeneral(general);
-	comndssize = ft_comndssize(argc, split);
+	comndssize = ft_comndssize(str);
 	printf("%zu\n", comndssize);
 	printf("\n");
-	comands = ft_fillcomands(comndssize, argc, split);
+	comands = ft_fillcomands(comndssize, str);
 	while (++i < comndssize)
 		printf("comnds[%zu] : %s\n", i, comands[i]);
 	i = -1;

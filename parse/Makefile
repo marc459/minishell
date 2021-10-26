@@ -6,17 +6,17 @@
 #    By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/18 15:15:09 by emgarcia          #+#    #+#              #
-#    Updated: 2021/10/25 15:30:39 by emgarcia         ###   ########.fr        #
+#    Updated: 2021/10/26 21:56:34 by emgarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	=	ft_parse.c main.c
+SRCS	=	ft_aux.c ft_parse.c main.c
 LIBFT	=	libft/libft.a
 OBJS	=	${SRCS:.c=.o}
 NAME	=	parse
 CC		=	gcc
-#CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g3
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g3
+#CFLAGS	=	-Wall -Wextra -Werror
 RM		=	rm -rf
 
 all:	${NAME}

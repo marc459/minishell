@@ -6,11 +6,11 @@
 #    By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/18 15:15:09 by emgarcia          #+#    #+#              #
-#    Updated: 2021/10/28 00:41:35 by emgarcia         ###   ########.fr        #
+#    Updated: 2021/10/28 04:31:21 by emgarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	=	ft_aux.c ft_parse.c main.c
+SRCS	=	ft_args.c ft_aux2.c ft_aux.c ft_parse.c main.c
 LIBFT	=	libft/libft.a
 OBJS	=	${SRCS:.c=.o}
 NAME	=	parse

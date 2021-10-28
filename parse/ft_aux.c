@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:32:36 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/10/26 18:02:33 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/10/28 04:24:32 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,14 @@ void	ft_printgeneral(t_general *general)
 	printf("npipes : %zu\n", general->npipes);
 	printf("ncomands : %zu\n", general->ncomands);
 	printf("nredirections : %zu\n", general->nredirections);
-	while (general->args && general->args[++i].content)
-		printf("arg[%zu] : %s\n", i, general->args[i].content);
+	printf("quot : %d\n", general->quot);
+	printf("dquot : %d\n", general->dquot);
+	printf("comndssize : %zu\n", general->parse.comndssize);
+	while (general->args && ++i < general->parse.comndssize)
+	{
+		printf("arg[%zu].type : %zu\n", i, general->args[i].type);
+		printf("arg[%zu].content : %s\n", i, general->args[i].content);
+	}
 }
 
 void	ft_inigeneral(t_general *general)
@@ -44,6 +50,11 @@ void	ft_inigeneral(t_general *general)
 	general->npipes = 0;
 	general->ncomands = 0;
 	general->nredirections = 0;
+	general->quot = 1;
+	general->dquot = 1;
+	general->parse.comand = -1;
+	general->parse.comndssize = 0;
+	general->parse.comnds = NULL;
 	general->args = NULL;
 }
 

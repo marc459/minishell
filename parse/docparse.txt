@@ -6,7 +6,7 @@
 #    By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/22 17:07:22 by emgarcia          #+#    #+#              #
-#    Updated: 2021/10/22 18:56:07 by emgarcia         ###   ########.fr        #
+#    Updated: 2021/10/28 01:18:17 by emgarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,22 @@ t_general : General structure has the next parameters.
 |	----	|		----		|					----						|
 |	size_t	|	nfiles			|	Number of files.							|
 |	----	|		----		|					----						|
+|	int		|	quote			|	Integer who is 1 if the single quote are	|
+|			|					|	closed or -1 if are open.					|
+|			|					|	Example :									|
+|			|					|	1.- str = echo 'hi my name is EMA.'			|
+|			|					|	1.- quote = 1. 								|
+|			|					|	2.- str = echo 'hi my name is EMA.			|
+|			|					|	2.- quote = -1. 							|
+|	----	|		----		|					----						|
+|	int		|	dquote			|	Integer who is 1 if the double quote are	|
+|			|					|	closed or -1 if are open.					|
+|			|					|	Example :									|
+|			|					|	1.- str = echo "hi my name is EMA."			|
+|			|					|	1.- quote = 1. 								|
+|			|					|	2.- str = echo "hi my name is EMA.			|
+|			|					|	2.- quote = -1. 							|
+|	----	|		----		|					----						|
 |	t_arg	|	*arg			|	Array of a t_arg structure that has all the	|
 |			|					|	information about the string.				|
 |	----	|		----		|					----						|
@@ -37,6 +53,8 @@ comand : < infile.txt ls -la | grep hola > outfile.txt
 	ncomands = 2;
 	nredirections = 2;
 	nfiles = 2;
+	quote = 1;
+	dquote = 1;
 	t_arg =	.-------.-------------------.---------------.-------.---------------.-------.-------------------.
 			|	1	|		4			|		3		|	5	|		3		|	2	|		4			|
 			|	"<"	|	"infile.txt"	|	"ls -la"	|	"|"	|	"grep hola"	|	">"	|	"outfile.txt"	|

@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:22:15 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/10/26 21:32:12 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/10/28 04:32:26 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,11 @@ int	main(int argc, char *split[])
 	}
 	printf("join : %s\n", join);
 	ft_inigeneral(&general);
-	ft_parse(join, &general);
+	ft_printgeneral(&general);
+	printf("\n");
+	ft_parse(&general, join);
+	ft_printgeneral(&general);
 	free (join);
+	ft_freeall(&general);
 	return (0);
 }

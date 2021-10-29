@@ -6,82 +6,104 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:07:10 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/10/22 16:22:24 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/10/28 04:28:18 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-size_t	ft_comndssize(int argc, char **argv)
+void	ft_pcont(t_general *g, size_t type)
 {
-	size_t	i;
-	size_t	comand;
-	size_t	comndssize;
-
-	i = -1;
-	comand = 1;
-	comndssize = 0;
-	while (++i < (size_t)argc)
+	if (type)
 	{
-		if (ft_findchar(argv[i], '|') || ft_findchar(argv[i], '<')
-			|| ft_findchar(argv[i], '>') || ft_findchar(argv[i], ';'))
-		{
-			comndssize++;
-			comand = 1;
-		}
-		else if (comand)
-		{
-			comndssize++;
-			comand = 0;
-		}
+		g->parse.comndssize++;
+		g->parse.comand = 1;
 	}
-	return (comndssize);
+	else
+	{
+		g->parse.comndssize++;
+		g->parse.comand = 0;
+	}
 }
 
-void	ft_inigeneral(void)
-{
-	g_general.npipes = 0;
-	g_general.ncomands = 0;
-	g_general.nredirections = 0;
-	g_general.args = NULL;
-}
-
-void	ft_printgeneral(void)
+void	ft_comndssize(t_general *g, char *str)
 {
 	size_t	i;
 
 	i = -1;
-	printf("npipes : %zu\n", g_general.npipes);
-	printf("npipes : %zu\n", g_general.ncomands);
-	printf("npipes : %zu\n", g_general.nredirections);
-	while (g_general.args && g_general.args[++i].content)
-		printf("arg[%zu] : %s\n", i, g_general.arg[i].content);
+	while (++i < ft_strlen(str))
+	{
+		if (str[i] == '\'' && g->dquot > 0)
+			g->quot = -g->quot;
+		else if (str[i] == '\"' && g->quot > 0)
+			g->dquot = -g->dquot;
+		else if (ft_spchar(str[i]) && g->quot > 0 && g->dquot > 0)
+			ft_pcont(g, 1);
+		else if (g->parse.comand)
+			ft_pcont(g, 0);
+	}
 }
 
-char	**ft_fillcomands(size_t size, int argc, char ** argv)
+char	*ft_joincomnd(char **split, size_t *i, size_t size)
 {
-	char	**comnds;
 	char	*comnd;
-	size_t	i;
+	char	*aux;
 
-	i = -1;
-	comnds = malloc(sizeof(char *) * size);
-	if	(!comnds)
-		return(NULL);
-	while (++i < (size_t)argc)
+	comnd = NULL;
+	while (*i < size && !ft_findspchar(split[*i]))
 	{
-		
+		if (!comnd)
+			comnd = ft_strdup(split[*i]);
+		else
+		{
+			aux = comnd;
+			comnd = ft_strjoin(comnd, " ");
+			free(aux);
+			aux = comnd;
+			comnd = ft_strjoin(comnd, split[*i]);
+			free(aux);
+		}
+		*i += 1;
 	}
+	*i -= 1;
+	return (comnd);
 }
 
-char	**ft_parse(int argc, char **argv)
+void	ft_fillcomands(t_general *g, char *str)
 {
-	size_t	comndssize;
+	size_t	ini;
+	size_t	i;
+	size_t	j;
 
-	ft_inigeneral();
-	ft_printgeneral();
-	comndssize = ft_comndssize(argc, argv);
-	printf("%zu\n", comndssize);
-	//comnds = ft_fillcomands(comndssize, argc, argv);
-	return (argv);
+	ini = 0;
+	i = -1;
+	j = 0;
+	while (++i < ft_strlen(str))
+	{
+		if (str[i] == '\'' && g->dquot > 0)
+			g->quot = -g->quot;
+		else if (str[i] == '\"' && g->quot > 0)
+			g->dquot = -g->dquot;
+		else if (ft_spchar(str[i]) && g->quot > 0 && g->dquot > 0)
+		{
+			if (i - ini > 0)
+				g->parse.comnds[j++] = ft_substr(str, ini, i - ini);
+			g->parse.comnds[j++] = ft_substr(str, i, 1);
+			ini = i + 1;
+		}
+	}
+	if (j < g->parse.comndssize)
+		g->parse.comnds[j++] = ft_substr(str, ini, i - ini);
+}
+
+void	ft_parse(t_general *general, char *str)
+{
+	ft_comndssize(general, str);
+	general->parse.comnds = malloc(sizeof(char *) * general->parse.comndssize);
+	general->args = malloc(sizeof(t_arg) * general->parse.comndssize);
+	if (general->parse.comnds && general->args)
+	{
+		ft_fillcomands(general, str);
+		ft_iniargs(general);
+	}	
 }

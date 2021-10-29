@@ -21,10 +21,27 @@
 #include <sys/types.h>
 #include <stdlib.h>
 #include <string.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+#include "../readline/readline.h"
+#include "../readline/history.h"
 #include "../ft_printf_42/src/printf.h"
 #include "../libft_42/libft.h"
+
+
+# if defined(__APPLE__)
+#  define SO "MACOS"
+
+char **read_line(char *command)
+{
+	command = readline("Quineshell-1.0:");
+	add_history (command);
+}
+# else
+#  define SO "LINUX"
+void read_line(char *command)
+{	
+	scanf("%s",command);
+}
+# endif
 
 
 int		parser(char *command);
@@ -43,8 +60,5 @@ typedef struct s_general {
 	size_t	nredirections;
 	t_arg	*args;
 }			t_general;
-
-t_minishell g_minishell;
-
 
 # endif	

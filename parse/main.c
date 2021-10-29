@@ -6,16 +6,38 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:22:15 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/10/21 20:03:03 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/10/28 04:32:26 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-int	main(int argc, char *argv[])
+int	main(int argc, char *split[])
 {
-	char	**parseo;
+	t_general	general;
+	size_t		i;
+	char		*join;
+	char		*aux;
 
-	parseo = ft_parse(argc, argv);
+	//atexit(leak);
+	i = 0;
+	join = ft_strdup(split[i]);
+	while (++i < (size_t)argc)
+	{
+		aux = join;
+		join = ft_strjoin(join, " ");
+		free(aux);
+		aux = join;
+		join = ft_strjoin(join, split[i]);
+		free(aux);
+	}
+	printf("join : %s\n", join);
+	ft_inigeneral(&general);
+	ft_printgeneral(&general);
+	printf("\n");
+	ft_parse(&general, join);
+	ft_printgeneral(&general);
+	free (join);
+	ft_freeall(&general);
 	return (0);
 }

@@ -22,8 +22,19 @@ PROGRAM_OBJS = $(addprefix $(OBJ_PATH)/,$(PROGRAM_SRCS:.c=.o))
 #FLAGS
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
-TERMCAP_LIB = -ltermcap
 
+ifeq ($(OS),Windows_NT) 
+ detected_OS := Windows
+else
+ detected_OS := $(shell sh -c 'uname 2>/dev/null || echo Unknown')
+endif
+
+ifeq ($(detected_OS),Darwin)
+ TERMCAP_LIB = -ltermcap
+endif
+ifeq ($(detected_OS),Linux)
+ TERMCAP_LIB =
+endif
 	
 #INSTRUCTIONS
 all: submodule ft_printf libft minishell

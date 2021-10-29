@@ -19,6 +19,7 @@ char *stripwhite (char *string)
 	return s;
 }
 
+
 int		main(int argc,char **argv, char **env,char **envp)
 {
 	int status;
@@ -32,8 +33,7 @@ int		main(int argc,char **argv, char **env,char **envp)
 	signals();
 	command = malloc(sizeof(char) * 64);
 	ft_memset(command, '\0', 64);
-	command = readline("Quineshell-1.0:");
-	add_history (command);
+	read_line(command);
 
 	while (ft_strncmp(command, "exit", ft_strlen(command)))
 	{
@@ -56,8 +56,10 @@ int		main(int argc,char **argv, char **env,char **envp)
 			if (pid > 0)
 			{
 				wait(&status);
-				command = readline("Quineshell-1.0:");
-				add_history (command);
+				//command = readline("Quineshell-1.0:");
+				//add_history (command);
+				//scanf("%s",command);
+				read_line(command);
 			}
 			else
 				ft_printf("Error Fork\n");

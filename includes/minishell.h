@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/10/23 16:17:53 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/10/29 23:04:42 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,6 @@
 #include "../libft_42/libft.h"
 
 
-# if defined(__APPLE__)
-#  define SO "MACOS"
-
-char **read_line(char *command)
-{
-	command = readline("Quineshell-1.0:");
-	add_history (command);
-}
-# else
-#  define SO "LINUX"
-void read_line(char *command)
-{	
-	scanf("%s",command);
-}
-# endif
-
-
-int		parser(char *command);
-void	signals();
-void	quitsignal(int sig);
-void       executor(char **envp);
-
 typedef struct s_arg {
 	size_t	type;
 	char	*content;
@@ -60,5 +38,13 @@ typedef struct s_general {
 	size_t	nredirections;
 	t_arg	*args;
 }			t_general;
+
+
+int		parser(char *command);
+void	signals();
+void	quitsignal(int sig);
+void	executor(char **envp);
+char	*ft_findpath(char **envp);
+char *read_line(char *command);
 
 # endif	

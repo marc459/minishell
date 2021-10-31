@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:07:10 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/10/28 04:28:18 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/10/28 05:18:47 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,7 @@ void	ft_parse(t_general *general, char *str)
 {
 	ft_comndssize(general, str);
 	general->parse.comnds = malloc(sizeof(char *) * general->parse.comndssize);
-	general->args = malloc(sizeof(t_arg) * general->parse.comndssize);
-	if (general->parse.comnds && general->args)
+	if (general->parse.comnds)
 	{
 		ft_fillcomands(general, str);
 		ft_iniargs(general);

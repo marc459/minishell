@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/10/29 23:04:59 by marcos           ###   ########.fr       */
+/*   Updated: 2021/11/01 14:43:27 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int		main(int argc,char **argv, char **envp)
 	pid_t	pid;
 	char	*command;
 	char *s;
+	t_general g_minishell;
 	
 	int i;
 	
@@ -47,18 +48,20 @@ int		main(int argc,char **argv, char **envp)
 	command = malloc(sizeof(char) * 64);
 	ft_memset(command, '\0', 64);
 	command = read_line(command);
-
+	
 	while (ft_strncmp(command, "exit", ft_strlen(command)))
 	{
 		pid = fork();
 		if (pid == 0)
 		{
 			//lexer
-			parser(command);
+			printf("child\n");
+			provisional_parser(&g_minishell,command);
 			//Parser
 
 			//Executor
-			executor(envp);							
+			
+			executor(&g_minishell,envp,&pid);							
 			execlp(command, command, NULL); 
 			ft_printf("Quineshell: %s: command not found\n",command);
 			free(command);

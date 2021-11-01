@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/01 14:54:26 by marcos           ###   ########.fr       */
+/*   Updated: 2021/11/01 22:04:54 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,25 @@ void       executor(t_general *g_minishell,char **envp,int *pid)
 	
 	while(i < g_minishell->npipes)
 	{
-		pid[0] = fork();
 		pipe(end);
+		pid[0] = fork();
+		
 		if (pid[0] < 0)
 			ft_printf("Error\n");
 		if(pid[0] == 0)
-		{
-			printf("ok\n");
 			ft_child(STDIN_FILENO, &g_minishell->args[i].content,envp, end);
-		}
 		else
-			ft_parent(STDOUT_FILENO, &g_minishell->args[i + 2].content, envp, end);
+		{
+			//waitpid(pid[0],NULL,0);
+			close(end[WRITE_END]);
+			pid[0] = fork();
+			if(pid[0] == 0)
+				ft_child2(STDOUT_FILENO, pid[0], &g_minishell->args[i + 2].content, envp, end);
+			else
+           		close(end[READ_END]);
+			//ft_parent(STDOUT_FILENO, pid[0], &g_minishell->args[i + 2].content, envp, end);
+		}
+			
 		
 		i++;
 	}

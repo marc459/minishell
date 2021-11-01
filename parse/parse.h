@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:11:27 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/10/28 04:14:31 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/10/28 05:22:46 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 typedef struct s_parse
 {
 	char	**comnds;
-	size_t	comand;
 	size_t	comndssize;
+	size_t	comand;
 }			t_parse;
 
 typedef struct s_arg {
@@ -36,6 +36,7 @@ typedef struct s_general {
 	int		dquot;
 	t_parse	parse;
 	t_arg	*args;
+	size_t	argssize;
 }			t_general;
 
 void	leak(void);

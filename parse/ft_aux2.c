@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:11:14 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/10/28 04:27:36 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/02 22:15:33 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_freeall(t_general *g)
 		free(g->parse.comnds[i]);
 	free(g->parse.comnds);
 	i = -1;
-	while (++i < g->parse.comndssize)
+	while (++i < g->argssize)
 		free(g->args[i].content);
 	free(g->args);
 }

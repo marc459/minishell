@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/01 22:14:30 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/02 20:51:42 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	ft_pruveaccess(char *cmd, int fd, char **mycmd, char **envp)
 {
-	if (!access(cmd, R_OK))
+	if (!access(cmd, X_OK))
 	{
 		//dup2(fd, STDOUT_FILENO);
 		//printf("cmd %s");
-		execve(cmd, mycmd, envp);
+		printf("res : %d %s\n", execve(cmd, mycmd, envp),mycmd[1]);
 	}
 	free(cmd);
 }
@@ -48,52 +48,28 @@ void	ft_child2(int fd2, int pid, char **mycmd2, char **envp, int *end)
 	char	*cmd;
 	int		i;
 	char	**paths;
-	//int stdo = dup(STDOUT_FILENO);
+	int stdo = dup(STDOUT_FILENO);
 
 	
 	close(end[WRITE_END]);
 	dup2(end[READ_END], STDIN_FILENO);
 	close(end[READ_END]);
-	execlp("wc","wc",NULL);
-	/*paths = ft_parsepaths(envp);
-	i = -1;
-	while (paths[++i])
-	{
-		cmd = ft_strjoin(paths[i], mycmd2[0]);
-		if (cmd)
-			ft_pruveaccess(cmd, STDIN_FILENO, mycmd2, envp);
-	}
-	//close(fd2);
-	ft_printf("Quineshell: %s: command not found\n",mycmd2[0]);
-	ft_putstr_fd("Error Parent\n",stdo);*/
-	exit (EXIT_FAILURE);
-}
-/*void	ft_parent(int fd2, int pid, char **mycmd2, char **envp, int *end)
-{
-	//wc
-	char	*cmd;
-	int		i;
-	char	**paths;
-	int stdo = dup(STDOUT_FILENO);
-
-	waitpid(pid,NULL,0);
-	close(end[WRITE_END]);
-	dup2(end[READ_END], STDIN_FILENO);
-	close(end[READ_END]);
-	execlp("wc","wc",NULL);
+	//execlp("wc","wc",NULL);
 	paths = ft_parsepaths(envp);
 	i = -1;
 	while (paths[++i])
 	{
 		cmd = ft_strjoin(paths[i], mycmd2[0]);
 		if (cmd)
-			ft_pruveaccess(cmd, STDIN_FILENO, mycmd2, envp);
+			ft_pruveaccess(cmd, stdo, mycmd2, envp);
+			
 	}
 	//close(fd2);
 	ft_printf("Quineshell: %s: command not found\n",mycmd2[0]);
-	ft_putstr_fd("Error Parent\n",stdo);
+	ft_putstr_fd("Error Parent\n",1);
+	ft_printf("Llegue\n");
 	exit (EXIT_FAILURE);
-}*/
+}
 
 void	ft_child(int fd1, char **mycmd1, char **envp, int *end)
 {

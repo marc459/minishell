@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/01 21:29:49 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/03 18:28:06 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,17 @@ typedef struct s_arg {
 	char	*content;
 }			t_arg;
 
+typedef struct s_exec {
+	int	posexec;
+	int pipe[2];
+	int fd[2];
+}				t_exec;
 typedef struct s_general {
 	size_t	npipes;
 	size_t	ncomands;
 	size_t	nredirections;
 	t_arg	*args;
+	t_exec	*exec;
 }			t_general;
 
 
@@ -51,10 +57,10 @@ void	quitsignal(int sig);
 void	executor(t_general *g_minishell,char **envp,int *pid);
 char	*ft_findpath(char **envp);
 char	*read_line(char *command);
-void	ft_pruveaccess(char *cmd, int fd, char **mycmd, char **envp);
+void	ft_pruveaccess(char *cmd, char **mycmd, char **envp);
 void	ft_parent(int fd2,int pid, char **mycmd2, char **envp, int *end);
-void	ft_child(int fd1, char **mycmd1, char **envp, int *end);
+void	ft_child(int *fd, char **mycmd1, char **envp, int *end);
 char	**ft_parsepaths(char **envp);
-void	ft_child2(int fd2, int pid, char **mycmd2, char **envp, int *end);
+void	ft_child2(int *fd, int pid, char **mycmd2, char **envp, int *end);
 
 # endif	

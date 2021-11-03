@@ -6,24 +6,11 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 22:26:09 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/02 21:09:42 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/03 17:17:08 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-/*typedef struct s_arg {
-	size_t	type;
-	char	*content;
-}			t_arg;
-
-typedef struct s_general {
-	size_t	npipes;
-	size_t	ncomands;
-	size_t	nredirections;
-	t_arg	*args;
-}			t_general;*/
-
 
 //Divides command line in (command,file,pipe,expansion)
 int		provisional_parser(t_general *g_minishell,char *command)

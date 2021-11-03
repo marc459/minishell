@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/02 17:12:41 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/03 23:14:29 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		main(int argc,char **argv, char **envp)
 	
 	if(argc > 1)
 		return (-1);
-	signals();
+	//signals();
 	command = malloc(sizeof(char) * 64);
 	ft_memset(command, '0', 64);
 	

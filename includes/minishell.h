@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/03 18:28:06 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/03 22:44:03 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ typedef struct s_exec {
 	int	posexec;
 	int pipe[2];
 	int fd[2];
+	int *fdin;
+	int *fdout;
+	int *closedfd;
+	int pos; // 1 -> first executable 2 - executable beween pipes 3- last executable
 }				t_exec;
 typedef struct s_general {
 	size_t	npipes;
@@ -59,7 +63,7 @@ char	*ft_findpath(char **envp);
 char	*read_line(char *command);
 void	ft_pruveaccess(char *cmd, char **mycmd, char **envp);
 void	ft_parent(int fd2,int pid, char **mycmd2, char **envp, int *end);
-void	ft_child(int *fd, char **mycmd1, char **envp, int *end);
+void	ft_child(int *fdin,int *fdout, char **mycmd1, char **envp, int *stdo);
 char	**ft_parsepaths(char **envp);
 void	ft_child2(int *fd, int pid, char **mycmd2, char **envp, int *end);
 

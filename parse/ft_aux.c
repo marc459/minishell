@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:32:36 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/02 22:10:50 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/03 19:46:14 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	ft_printgeneral(t_general *general)
 {
 	size_t	i;
 
-	i = -1;
 	printf("------------ general struct --------------\n");
 	printf("npipes : %zu\n", general->npipes);
 	printf("ncomands : %zu\n", general->ncomands);
@@ -40,6 +39,10 @@ void	ft_printgeneral(t_general *general)
 	printf("dquot : %d\n", general->dquot);
 	printf("comndssize : %zu\n", general->parse.comndssize);
 	printf("argssize : %zu\n", general->argssize);
+	/* i = -1;
+	while (general->parse.comnds && ++i < general->parse.comndssize)
+		printf("comnds[%zu].type : %s\n", i, general->parse.comnds[i]); */
+	i = -1;
 	while (general->args && ++i < general->argssize)
 	{
 		printf("arg[%zu].type : %zu\n", i, general->args[i].type);

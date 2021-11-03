@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:07:10 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/10/28 05:18:47 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/03 20:48:08 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,12 @@ void	ft_fillcomands(t_general *g, char *str)
 void	ft_parse(t_general *general, char *str)
 {
 	ft_comndssize(general, str);
-	general->parse.comnds = malloc(sizeof(char *) * general->parse.comndssize);
+	general->parse.comnds = calloc(sizeof(char *),
+			(general->parse.comndssize + 1));
 	if (general->parse.comnds)
 	{
 		ft_fillcomands(general, str);
 		ft_iniargs(general);
-	}	
+		ft_refacttypes(general);
+	}
 }

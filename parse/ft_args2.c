@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 23:15:08 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/04 00:02:26 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/04 17:57:44 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,22 +67,36 @@ void	ft_splitcount(t_general *g, size_t *i, size_t *newargs)
 	ft_freedouble(split);
 }
 
-void	ft_splitarg(t_general *g, size_t *i, size_t *j)
+void	ft_splitarg(t_general *g, size_t *i, size_t *j, t_arg *tmp)
 {
 	char	**split;
-	size_t	j;
+	char	*linea;
+	char	*aux;
+	size_t	k;
 
+	g->args[*j].type = tmp[*i].type;
+	g->args[*j].content = ft_strdup(tmp[*i].content);
+	*j += 1;
 	*i += 1;
+	k = -1;
 	split = ft_split(g->args[*i].content, ' ');
 	if (!split)
 		exit(0);
-	j = 0;
-	while (split[j])
-		j++;
-	if (j > 1)
-		*newargs += 3;
-	else
-		*newargs += 2;
+	linea = NULL;
+	while (split[++k])
+	{
+		if (!k)
+		{
+			g->args[*j].type = 4;
+			g->args[*j].content = ft_strdup(split[k]);
+		}
+		else
+		{
+			aux = linea;
+			linea = ft_strjoin(linea, split[k]);
+			free(aux);
+		}
+	}
 	ft_freedouble(split);
 }
 
@@ -98,15 +112,15 @@ void	ft_droprefact(t_general *g)
 		exit(0);
 	i = -1;
 	j = 0;
-	while (++i < g->argssize)
+	while (tmp[++i].content)
 	{
-		if ((g->args[i].type == 1 || g->args[i].type == 2
-				|| g->args[i].type == 7) && (g->args[i + 1].content))
-			ft_splitarg(g, &i, &j);
+		if ((tmp[i].type == 1 || tmp[i].type == 2 || tmp[i].type == 7)
+			&& (tmp[i + 1].content))
+			ft_splitarg(g, &i, &j, tmp);
 		else
 		{
-			g->args[i].type = tmp[j].type;
-			g->args[i].content = ft_strdup(tmp[j++].content);
+			g->args[j].type = tmp[i].type;
+			g->args[j++].content = ft_strdup(tmp[i].content);
 		}
 	}
 	free(tmp);

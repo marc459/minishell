@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 23:15:08 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/04 17:57:44 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/04 21:58:05 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_splitcount(t_general *g, size_t *i, size_t *newargs)
 void	ft_splitarg(t_general *g, size_t *i, size_t *j, t_arg *tmp)
 {
 	char	**split;
-	char	*linea;
+	char	*line;
 	char	*aux;
 	size_t	k;
 
@@ -79,35 +79,45 @@ void	ft_splitarg(t_general *g, size_t *i, size_t *j, t_arg *tmp)
 	*j += 1;
 	*i += 1;
 	k = -1;
-	split = ft_split(g->args[*i].content, ' ');
+	split = ft_split(tmp[*i].content, ' ');
 	if (!split)
 		exit(0);
-	linea = NULL;
+	line = NULL;
 	while (split[++k])
 	{
 		if (!k)
 		{
 			g->args[*j].type = 4;
 			g->args[*j].content = ft_strdup(split[k]);
+			*j += 1;
 		}
 		else
 		{
-			aux = linea;
-			linea = ft_strjoin(linea, split[k]);
+			aux = line;
+			line = ft_strjoin(line, split[k]);
+			free(aux);
+			aux = line;
+			line = ft_strjoin(line, " ");
 			free(aux);
 		}
 	}
+	g->args[*j].type = 3;
+	g->args[*j].content = ft_strdup(line);
+	*j += 1;
+	free(line);
 	ft_freedouble(split);
 }
 
-void	ft_droprefact(t_general *g)
+void	ft_droprefact(t_general *g, size_t newargs)
 {
 	size_t	i;
 	size_t	j;
 	t_arg	*tmp;
 
 	tmp = g->args;
-	g->args = calloc(sizeof(t_arg *), g->argssize + 1);
+	//tmp = ft_copycleanargs(g);
+	g->argssize = newargs;
+	g->args = calloc(sizeof(t_arg), g->argssize + 1);
 	if (!g->args)
 		exit(0);
 	i = -1;
@@ -141,8 +151,7 @@ void	ft_refacttypes(t_general *g)
 		else
 			newargs++;
 	}
-	if (newargs != g->argssize)
+	if (newargs == g->argssize)
 		return ;
-	g->argssize = newargs;
-	ft_droprefact(g);
+	ft_droprefact(g, newargs);
 }

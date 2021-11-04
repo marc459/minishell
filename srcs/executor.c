@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/03 23:53:48 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/04 16:05:07 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void       executor(t_general *g_minishell,char **envp,int *pid)
 		if(pid[0] == 0)
 		{
 			cmd = ft_split(g_minishell->args[g_minishell->exec[i].posexec].content, ' ');
-			printf("cmd[%d]:%s\n",g_minishell->exec[i].posexec,cmd[0]);
+			//printf("cmd[%d]:%s\n",g_minishell->exec[i].posexec,cmd[1]);
 			if(i == 0)
 			{
 				close(g_minishell->exec[i].pipe[READ_END]);

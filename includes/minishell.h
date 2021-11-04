@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/03 22:44:03 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/04 16:13:12 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 #include "../readline/history.h"
 #include "../ft_printf_42/src/printf.h"
 #include "../libft_42/libft.h"
+#include "bashcolors.h"
+
 
 #define READ_END    0
 #define WRITE_END   1

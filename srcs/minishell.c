@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/04 17:13:40 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/04 17:50:06 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,25 @@ int		main(int argc,char **argv, char **envp)
 		return (-1);
 	//signals();
 	command = malloc(sizeof(char) * 64);
-	ft_memset(command, '0', 64);
-	while (ft_strncmp(command, "exit", ft_strlen(command)))
+	ft_memset(command, '\0', 64);
+	while (ft_strncmp(command, "exit", 5))
 	{
 		
 		command = read_line(command);
 		//lexer && parser
-		system("clear");
-		provisional_parser(&g_minishell,command);
+		if(ft_strncmp(command, "exit", 5))
+		{
+			system("clear");
+			provisional_parser(&g_minishell,command);
 
-		//Executor
-		ft_printf("%s< QUINES && MEXIL SHELL >%s\n\n",BCyan,Color_Off);
-		executor(&g_minishell,envp,&pid);
-		ft_printf("%s< REAL BASH >%s\n\n",BCyan,Color_Off);
-		system(command);
+			//Executor
+			ft_printf("%s< QUINES && MEXIL SHELL >%s\n\n",BCyan,Color_Off);
+			executor(&g_minishell,envp,&pid);
+			ft_printf("%s< REAL BASH >%s\n\n",BCyan,Color_Off);
+			system(command);
+		}
 		free(command);
 	}
+	ft_printf("exit\n");
 	return (0);
 }

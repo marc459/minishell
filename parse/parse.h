@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:11:27 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/04 21:29:07 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/05 21:38:26 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ void	ft_iniarg(t_general *g, size_t *j, char *str);
 void	ft_refacttypes(t_general *g);
 void	ft_freedouble(char **split);
 t_arg	*ft_copycleanargs(t_general *g);
+void	ft_freecontent(t_arg *args);
 
 #endif

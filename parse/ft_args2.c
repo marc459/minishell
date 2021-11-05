@@ -6,47 +6,11 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 23:15:08 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/04 21:58:05 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/05 21:38:41 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-
-size_t	ft_contsp(t_general *g, size_t i)
-{
-	size_t	ncomnds;
-
-	ncomnds = 0;
-	while (i < g->parse.comndssize && ft_strlen(g->parse.comnds[i++]) == 1)
-		ncomnds++;
-	return (ncomnds);
-}
-
-void	ft_iniarg(t_general *g, size_t *j, char *str)
-{
-	g->args[*j].content = str;
-	if (ft_strlen(str) == 1)
-	{
-		if (str[0] == '<')
-			g->args[*j].type = 1;
-		if (str[0] == '>')
-			g->args[*j].type = 2;
-		if (str[0] == '|')
-			g->args[*j].type = 5;
-		if (str[0] == ';')
-			g->args[*j].type = 6;
-	}
-	else if (ft_strlen(str) == 2)
-	{
-		if (str[0] == '>')
-			g->args[*j].type = 7;
-		if (str[0] == '<')
-			g->args[*j].type = 8;
-	}
-	else
-		g->args[*j].type = 3;
-	*j += 1;
-}
 
 void	ft_splitcount(t_general *g, size_t *i, size_t *newargs)
 {
@@ -67,21 +31,13 @@ void	ft_splitcount(t_general *g, size_t *i, size_t *newargs)
 	ft_freedouble(split);
 }
 
-void	ft_splitarg(t_general *g, size_t *i, size_t *j, t_arg *tmp)
+char	*ft_joinstring(t_general *g, size_t *j, char **split)
 {
-	char	**split;
-	char	*line;
 	char	*aux;
+	char	*line;
 	size_t	k;
 
-	g->args[*j].type = tmp[*i].type;
-	g->args[*j].content = ft_strdup(tmp[*i].content);
-	*j += 1;
-	*i += 1;
 	k = -1;
-	split = ft_split(tmp[*i].content, ' ');
-	if (!split)
-		exit(0);
 	line = NULL;
 	while (split[++k])
 	{
@@ -101,6 +57,22 @@ void	ft_splitarg(t_general *g, size_t *i, size_t *j, t_arg *tmp)
 			free(aux);
 		}
 	}
+	return (line);
+}
+
+void	ft_splitarg(t_general *g, size_t *i, size_t *j, t_arg *tmp)
+{
+	char	**split;
+	char	*line;
+
+	g->args[*j].type = tmp[*i].type;
+	g->args[*j].content = ft_strdup(tmp[*i].content);
+	*j += 1;
+	*i += 1;
+	split = ft_split(tmp[*i].content, ' ');
+	if (!split)
+		exit(0);
+	line = ft_joinstring(g, j, split);
 	g->args[*j].type = 3;
 	g->args[*j].content = ft_strdup(line);
 	*j += 1;
@@ -114,8 +86,7 @@ void	ft_droprefact(t_general *g, size_t newargs)
 	size_t	j;
 	t_arg	*tmp;
 
-	tmp = g->args;
-	//tmp = ft_copycleanargs(g);
+	tmp = ft_copycleanargs(g);
 	g->argssize = newargs;
 	g->args = calloc(sizeof(t_arg), g->argssize + 1);
 	if (!g->args)
@@ -133,7 +104,7 @@ void	ft_droprefact(t_general *g, size_t newargs)
 			g->args[j++].content = ft_strdup(tmp[i].content);
 		}
 	}
-	free(tmp);
+	ft_freecontent(tmp);
 }
 
 void	ft_refacttypes(t_general *g)

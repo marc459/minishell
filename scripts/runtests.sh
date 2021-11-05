@@ -2,3 +2,4 @@
 #### PARSING TESTS ###
 #echo pepe | > a
 #ls | | wc
+# ls <> a

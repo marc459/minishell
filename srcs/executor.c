@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/04 16:05:07 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/05 19:47:39 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,12 @@ void       executor(t_general *g_minishell,char **envp,int *pid)
 		}
 		i++;
 	}
-	i = 0;
-	x = 0;
 	paths = ft_findpath(envp);
 	if (!paths)
 	{
 		ft_printf("PATH not found.\n");
 		exit (EXIT_FAILURE);
 	}
-	i = 0;
 	i = 0;
 	x = 0;
 	while(i < g_minishell->ncomands)
@@ -112,8 +109,15 @@ void       executor(t_general *g_minishell,char **envp,int *pid)
 			exit (EXIT_FAILURE);
 			
 		}
+		//wait(&a);
+		i++;
+	}
+	i= 0;
+	while(i < g_minishell->ncomands)
+	{
 		wait(&a);
 		i++;
 	}
+		
 	
 }

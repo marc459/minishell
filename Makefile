@@ -21,7 +21,8 @@ PROGRAM_OBJS = $(addprefix $(OBJ_PATH)/,$(PROGRAM_SRCS:.c=.o))
 	
 #FLAGS
 CC = gcc
-CFLAGS =
+CFLAGS = 
+#-fsanitize=address -g3
 # -Wall -Werror -Wextra
 
 ifeq ($(OS),Windows_NT) 
@@ -56,7 +57,7 @@ libft:
 	@make -C libft_42 > /dev/null
 							
 minishell: $(PROGRAM_OBJS)
-	@$(CC)  $(PROGRAM_OBJS) $(LIBFT) $(PRINTF) $(READLINE) $(TERMCAP_LIB) -o $(PROGRAM)
+	@$(CC) $(CFLAGS) $(PROGRAM_OBJS) $(LIBFT) $(PRINTF) $(READLINE) $(TERMCAP_LIB) -o $(PROGRAM)
 								
 clean:
 	@rm -rf $(OBJ_PATH)

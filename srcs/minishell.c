@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/04 17:50:06 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/05 19:34:46 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 	}
 # endif
 
+
 int		main(int argc,char **argv, char **envp)
 {
 	int		status;
@@ -42,28 +43,34 @@ int		main(int argc,char **argv, char **envp)
 	
 	int i;
 	
+	i = 0;
 	if(argc > 1)
 		return (-1);
-	//signals();
+	signals();
 	command = malloc(sizeof(char) * 64);
 	ft_memset(command, '\0', 64);
-	while (ft_strncmp(command, "exit", 5))
+	while (ft_strncmp(command, "exit",4))
 	{
-		
-		command = read_line(command);
-		//lexer && parser
-		if(ft_strncmp(command, "exit", 5))
-		{
-			system("clear");
-			provisional_parser(&g_minishell,command);
-
-			//Executor
-			ft_printf("%s< QUINES && MEXIL SHELL >%s\n\n",BCyan,Color_Off);
-			executor(&g_minishell,envp,&pid);
-			ft_printf("%s< REAL BASH >%s\n\n",BCyan,Color_Off);
-			system(command);
-		}
 		free(command);
+		command = read_line(command);
+		if(ft_strncmp(command, "exit",4))
+		{
+			system("clear"); //
+			//lexer && parser
+			provisional_parser(&g_minishell,command);
+			while(command[i])
+			{
+				if(command[i] == '_')
+					command[i] = ' ';
+				i++;
+			}
+	
+			//Executor
+			ft_printf("%s< QUINES && MEXIL SHELL >%s\n\n",BCyan,Color_Off); //
+			executor(&g_minishell,envp,&pid);
+			ft_printf("%s< REAL BASH >%s\n\n",BCyan,Color_Off); //
+			system(command); //
+		}
 	}
 	ft_printf("exit\n");
 	return (0);

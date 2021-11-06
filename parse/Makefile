@@ -11,22 +11,22 @@
 # **************************************************************************** #
 
 SRCS	=	ft_args3.c ft_args2.c ft_args.c ft_aux2.c ft_aux.c ft_parse.c main.c
-LIBFT	=	libft/libft.a
+LIBFT	=	Libft/libft.a
 OBJS	=	${SRCS:.c=.o}
 NAME	=	parse
-CC		=	gcc
+CC	=	gcc
 CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g3
 #CFLAGS	=	-Wall -Wextra -Werror
-RM		=	rm -rf
+RM	=	rm -rf
 
 all:	${NAME}
 
 ${NAME}: ${OBJS}
-	@make -C libft
+	@make -C Libft
 	${CC} ${CFLAGS} ${OBJS} ${LIBFT} -o ${NAME}
 
 clean:
-	@cd libft ; make fclean
+	@cd Libft ; make fclean
 	${RM} ${OBJS}
 
 fclean: clean

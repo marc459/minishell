@@ -12,7 +12,7 @@
 
 #ifndef PARSE_H
 # define PARSE_H
-# include "libft/libft.h"
+# include "Libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 

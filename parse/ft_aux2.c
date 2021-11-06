@@ -39,7 +39,6 @@ void	ft_freecontent(t_arg *args)
 	size_t	i;
 
 	i = -1;
-	printf("Llegue\n");
 	while (args[++i].content)
 		free(args[i].content);
 	free(args);
@@ -57,15 +56,10 @@ void	ft_freedouble(char **split)
 
 void	ft_freeall(t_general *g)
 {
-	size_t	i;
-
-	/* i = -1;
-	while (++i < g->parse.comndssize)
-		free(g->parse.comnds[i]);
-	free(g->parse.comnds); */
 	ft_freedouble(g->parse.comnds);
-	i = -1;
+	ft_freecontent(g->args);
+	/* i = -1;
 	while (++i < g->argssize)
 		free(g->args[i].content);
-	free(g->args);
+	free(g->args); */
 }

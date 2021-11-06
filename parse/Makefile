@@ -15,15 +15,15 @@ LIBFT	=	libft/libft.a
 OBJS	=	${SRCS:.c=.o}
 NAME	=	parse
 CC		=	gcc
-CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g3
-#CFLAGS	=	-Wall -Wextra -Werror
+#CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS	=	-Wall -Wextra -Werror
 RM		=	rm -rf
 
 all:	${NAME}
 
 ${NAME}: ${OBJS}
 	@make -C libft
-	${CC} ${CFLAGS} ${LIBFT} ${OBJS} -o ${NAME}
+	${CC} ${CFLAGS} ${OBJS} ${LIBFT} -o ${NAME}
 
 clean:
 	@cd libft ; make fclean

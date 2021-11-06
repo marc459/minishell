@@ -17,8 +17,7 @@ void	ft_splitcount(t_general *g, size_t *i, size_t *newargs)
 	char	**split;
 	size_t	j;
 
-	*i += 1;
-	split = ft_split(g->args[*i].content, ' ');
+	split = ft_split(g->args[++*i].content, ' ');
 	if (!split)
 		exit(0);
 	j = 0;
@@ -44,8 +43,7 @@ char	*ft_joinstring(t_general *g, size_t *j, char **split)
 		if (!k)
 		{
 			g->args[*j].type = 4;
-			g->args[*j].content = ft_strdup(split[k]);
-			*j += 1;
+			g->args[(*j)++].content = ft_strdup(split[k]);
 		}
 		else
 		{
@@ -66,16 +64,13 @@ void	ft_splitarg(t_general *g, size_t *i, size_t *j, t_arg *tmp)
 	char	*line;
 
 	g->args[*j].type = tmp[*i].type;
-	g->args[*j].content = ft_strdup(tmp[*i].content);
-	*j += 1;
-	*i += 1;
+	g->args[(*j)++].content = ft_strdup(tmp[(*i)++].content);
 	split = ft_split(tmp[*i].content, ' ');
 	if (!split)
 		exit(0);
 	line = ft_joinstring(g, j, split);
 	g->args[*j].type = 3;
-	g->args[*j].content = ft_strdup(line);
-	*j += 1;
+	g->args[(*j)++].content = ft_strdup(line);
 	free(line);
 	ft_freedouble(split);
 }

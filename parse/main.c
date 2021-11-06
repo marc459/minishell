@@ -19,7 +19,7 @@ int	main(int argc, char *split[])
 	char		*join;
 	char		*aux;
 
-	atexit(leak);
+	//atexit(leak);
 	i = 0;
 	join = ft_strdup(split[i]);
 	while (++i < (size_t)argc)

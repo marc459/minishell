@@ -28,22 +28,21 @@ void	ft_iniarg(t_general *g, size_t *j, char *str)
 	if (ft_strlen(str) == 1)
 	{
 		if (str[0] == '<')
-			g->args[*j].type = 1;
+			g->args[(*j)++].type = 1;
 		if (str[0] == '>')
-			g->args[*j].type = 2;
+			g->args[(*j)++].type = 2;
 		if (str[0] == '|')
-			g->args[*j].type = 5;
+			g->args[(*j)++].type = 5;
 		if (str[0] == ';')
-			g->args[*j].type = 6;
+			g->args[(*j)++].type = 6;
 	}
 	else if (ft_strlen(str) == 2)
 	{
 		if (str[0] == '>')
-			g->args[*j].type = 7;
+			g->args[(*j)++].type = 7;
 		if (str[0] == '<')
-			g->args[*j].type = 8;
+			g->args[(*j)++].type = 8;
 	}
 	else
-		g->args[*j].type = 3;
-	*j += 1;
+		g->args[(*j)++].type = 3;
 }

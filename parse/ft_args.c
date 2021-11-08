@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:05:23 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/02 23:19:40 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/08 19:48:35 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	ft_dropargs(t_general *g)
 void	ft_iniargs(t_general *g)
 {
 	ft_argssize(g);
-	g->args = malloc(sizeof(t_arg) * g->argssize);
+	g->args = calloc(sizeof(t_arg), (g->argssize + 1));
 	if (g->args)
 		ft_dropargs(g);
 }

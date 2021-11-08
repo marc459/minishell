@@ -6,7 +6,7 @@
 #    By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/18 15:15:09 by emgarcia          #+#    #+#              #
-#    Updated: 2021/11/08 17:50:52 by emgarcia         ###   ########.fr        #
+#    Updated: 2021/11/08 19:51:18 by emgarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,9 +25,9 @@ ${NAME}: ${OBJS}
 	${CC} ${CFLAGS} ${OBJS} ${LIBFT} -o ${NAME}
 
 submodule:
-	git submodule init
-	git submodule update --remote
-	make -C Libft
+	@git submodule init
+	@git submodule update --remote
+	@make -C Libft
 
 clean:
 	@cd Libft ; make fclean

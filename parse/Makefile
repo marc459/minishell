@@ -6,7 +6,7 @@
 #    By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/18 15:15:09 by emgarcia          #+#    #+#              #
-#    Updated: 2021/11/05 21:39:23 by emgarcia         ###   ########.fr        #
+#    Updated: 2021/11/08 16:56:37 by emgarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,15 @@ CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g3
 #CFLAGS	=	-Wall -Wextra -Werror
 RM	=	rm -rf
 
-all:	${NAME}
+all: submodule ${NAME}
 
 ${NAME}: ${OBJS}
 	@make -C Libft
 	${CC} ${CFLAGS} ${OBJS} ${LIBFT} -o ${NAME}
+
+submodule:
+	@git submodule init
+	@git submodule update --remote
 
 clean:
 	@cd Libft ; make fclean

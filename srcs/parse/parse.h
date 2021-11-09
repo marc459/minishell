@@ -6,13 +6,13 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:11:27 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/05 21:38:26 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/09 18:42:44 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
-# include "Libft/libft.h"
+# include "../../mergeLibft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 

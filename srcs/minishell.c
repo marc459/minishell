@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/05 19:34:46 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/09 19:42:23 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,14 @@
 		return(command);
 	}
 # endif
-
+void	hola()
+{
+	system("leaks minishell");
+}
 
 int		main(int argc,char **argv, char **envp)
 {
+	//atexit(hola);
 	int		status;
 	pid_t	pid;
 	char	*command;
@@ -53,8 +57,9 @@ int		main(int argc,char **argv, char **envp)
 	{
 		free(command);
 		command = read_line(command);
-		if(ft_strncmp(command, "exit",4))
+		if(ft_strncmp(command, "exit",4) && ft_strncmp(command, "",1))
 		{
+			
 			system("clear"); //
 			//lexer && parser
 			provisional_parser(&g_minishell,command);
@@ -67,11 +72,12 @@ int		main(int argc,char **argv, char **envp)
 	
 			//Executor
 			ft_printf("%s< QUINES && MEXIL SHELL >%s\n\n",BCyan,Color_Off); //
-			executor(&g_minishell,envp,&pid);
+			ft_executor(&g_minishell,envp,&pid);
 			ft_printf("%s< REAL BASH >%s\n\n",BCyan,Color_Off); //
 			system(command); //
 		}
 	}
+	free(command);
 	ft_printf("exit\n");
 	return (0);
 }

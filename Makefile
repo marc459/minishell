@@ -21,8 +21,7 @@ PROGRAM_OBJS = $(addprefix $(OBJ_PATH)/,$(PROGRAM_SRCS:.c=.o))
 	
 #FLAGS
 CC = gcc
-CFLAGS = 
-#-fsanitize=address -g3
+CFLAGS = -g3 -fsanitize=address
 # -Wall -Werror -Wextra
 
 ifeq ($(OS),Windows_NT) 

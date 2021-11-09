@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/04 16:13:12 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/09 19:15:53 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_general {
 int		provisional_parser(t_general *g_minishell,char *command);
 void	signals();
 void	quitsignal(int sig);
-void	executor(t_general *g_minishell,char **envp,int *pid);
+void	ft_executor(t_general *g_minishell,char **envp,int *pid);
 char	*ft_findpath(char **envp);
 char	*read_line(char *command);
 void	ft_pruveaccess(char *cmd, char **mycmd, char **envp);

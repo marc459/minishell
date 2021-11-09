@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/09 19:42:12 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/09 22:22:15 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ void       ft_executor(t_general *g_minishell, char **envp, int *pid)
 	char *paths;
 	int i;
 	int x;
-	int	end[2];
 	char **cmd;
 	int a;
+	
+	
 	int stdo = dup(STDOUT_FILENO);
-
 	i = 0;
 	x = 0;
 	g_minishell->exec = calloc(sizeof(t_exec), (g_minishell->ncomands + 1));
@@ -51,6 +51,7 @@ void       ft_executor(t_general *g_minishell, char **envp, int *pid)
 		}
 		i++;
 	}
+	
 	paths = ft_findpath(envp);
 	if (!paths)
 	{
@@ -59,6 +60,7 @@ void       ft_executor(t_general *g_minishell, char **envp, int *pid)
 	}
 	i = 0;
 	x = 0;
+	
 	while(i < g_minishell->ncomands)
 	{
 		if(i == 1)
@@ -72,6 +74,7 @@ void       ft_executor(t_general *g_minishell, char **envp, int *pid)
 		{
 			pipe(g_minishell->exec[i].pipe);
 		}
+		
 		pid[0] = fork();
 		
 		
@@ -99,7 +102,7 @@ void       ft_executor(t_general *g_minishell, char **envp, int *pid)
 				close(g_minishell->exec[i].pipe[WRITE_END]);
 			}
 			ft_child(g_minishell->exec[i].fdin, g_minishell->exec[i].fdout, cmd,envp, &stdo);
-			//ft_freebidstr(cmd);
+			ft_freebidstr(cmd);
 			
 			exit (EXIT_FAILURE);
 			
@@ -113,6 +116,5 @@ void       ft_executor(t_general *g_minishell, char **envp, int *pid)
 		wait(&a);
 		i++;
 	}
-		
-	
+	free(g_minishell->exec);
 }

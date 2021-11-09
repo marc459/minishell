@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/09 19:42:23 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/09 22:34:46 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,11 @@ void	hola()
 {
 	system("leaks minishell");
 }
-
+void	free_gminishell(t_general *g_minishell)
+{
+	free(g_minishell->args);
+	
+}
 int		main(int argc,char **argv, char **envp)
 {
 	//atexit(hola);
@@ -44,10 +48,11 @@ int		main(int argc,char **argv, char **envp)
 	char	*command;
 	char	*s;
 	t_general g_minishell;
+	char **comands;
 	
 	int i;
 	
-	i = 0;
+	
 	if(argc > 1)
 		return (-1);
 	signals();
@@ -55,29 +60,36 @@ int		main(int argc,char **argv, char **envp)
 	ft_memset(command, '\0', 64);
 	while (ft_strncmp(command, "exit",4))
 	{
+		i = 0;
 		free(command);
 		command = read_line(command);
 		if(ft_strncmp(command, "exit",4) && ft_strncmp(command, "",1))
 		{
-			
-			system("clear"); //
+			//system("clear"); //
 			//lexer && parser
-			provisional_parser(&g_minishell,command);
+			comands = provisional_parser(&g_minishell,command);
+			//system("leaks minishell");
 			while(command[i])
 			{
 				if(command[i] == '_')
 					command[i] = ' ';
 				i++;
 			}
-	
+			
 			//Executor
-			ft_printf("%s< QUINES && MEXIL SHELL >%s\n\n",BCyan,Color_Off); //
+			printf("%s< QUINES && MEXIL SHELL >%s\n\n",BCyan,Color_Off); //
+			
 			ft_executor(&g_minishell,envp,&pid);
-			ft_printf("%s< REAL BASH >%s\n\n",BCyan,Color_Off); //
-			system(command); //
+			printf("%s< REAL BASH >%s\n\n",BCyan,Color_Off); //	
+			//system(command); //
+			ft_freebidstr(comands);
+			free_gminishell(&g_minishell);
 		}
 	}
 	free(command);
 	ft_printf("exit\n");
+	//system("leaks minishell");
+	
+	
 	return (0);
 }

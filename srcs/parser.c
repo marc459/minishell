@@ -6,14 +6,14 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 22:26:09 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/09 18:21:35 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/09 22:09:40 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 //Divides command line in (command,file,pipe,expansion)
-int		provisional_parser(t_general *g_minishell,char *command)
+char **provisional_parser(t_general *g_minishell,char *command)
 {
 	int i,x,y,pos;
 	char **comands;
@@ -74,6 +74,8 @@ int		provisional_parser(t_general *g_minishell,char *command)
 		printf("\t  type: %zu\n",g_minishell->args[i].type);
 		i++;
 	}*/
+	//ft_freebidstr(comands);
+	
 
-	return(1);
+	return(comands);
 }

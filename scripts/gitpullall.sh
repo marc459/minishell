@@ -6,7 +6,7 @@ for branch in `git branch -a | grep remotes | grep -v HEAD`; do
       echo "-- ${branchaux##*/}";
       echo "-----------------------------------------------------------------";
       git branch --track ${branchaux##*/} $branchaux;
-      git pull origin ${branchaux##*/};
+      git fetch origin ${branchaux##*/};
       echo "  ";
     fi
 done

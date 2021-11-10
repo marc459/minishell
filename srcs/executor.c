@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/01 22:04:54 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/09 22:22:15 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,44 +29,92 @@ char	*ft_findpath(char **envp)
 	return (NULL);
 }
 
-void       executor(t_general *g_minishell,char **envp,int *pid)
+void       ft_executor(t_general *g_minishell, char **envp, int *pid)
 {
 	char *paths;
 	int i;
-	int		end[2];
-
+	int x;
+	char **cmd;
+	int a;
+	
+	
+	int stdo = dup(STDOUT_FILENO);
 	i = 0;
-	//comprobar la existencia de PATHS
+	x = 0;
+	g_minishell->exec = calloc(sizeof(t_exec), (g_minishell->ncomands + 1));
+	while(i < (g_minishell->ncomands + g_minishell->npipes))
+	{
+		if(g_minishell->args[i].type == 3)
+		{
+			g_minishell->exec[x].posexec = i;
+			x++;
+		}
+		i++;
+	}
+	
 	paths = ft_findpath(envp);
 	if (!paths)
 	{
 		ft_printf("PATH not found.\n");
 		exit (EXIT_FAILURE);
 	}
+	i = 0;
+	x = 0;
 	
-	while(i < g_minishell->npipes)
+	while(i < g_minishell->ncomands)
 	{
-		pipe(end);
+		if(i == 1)
+			close(g_minishell->exec[i - 1].pipe[WRITE_END]);
+		if(i > 1)
+		{
+			close(g_minishell->exec[i - 2].pipe[READ_END]);
+			close(g_minishell->exec[i - 1].pipe[WRITE_END]);
+		}
+		if(i < g_minishell->npipes)
+		{
+			pipe(g_minishell->exec[i].pipe);
+		}
+		
 		pid[0] = fork();
+		
 		
 		if (pid[0] < 0)
 			ft_printf("Error\n");
-		if(pid[0] == 0)
-			ft_child(STDIN_FILENO, &g_minishell->args[i].content,envp, end);
-		else
+		else if(pid[0] == 0)
 		{
-			//waitpid(pid[0],NULL,0);
-			close(end[WRITE_END]);
-			pid[0] = fork();
-			if(pid[0] == 0)
-				ft_child2(STDOUT_FILENO, pid[0], &g_minishell->args[i + 2].content, envp, end);
+			cmd = ft_split(g_minishell->args[g_minishell->exec[i].posexec].content, ' ');
+			if(i == 0)
+			{
+				close(g_minishell->exec[i].pipe[READ_END]);
+				dup2(g_minishell->exec[i].pipe[WRITE_END],STDOUT_FILENO);
+				close(g_minishell->exec[i].pipe[WRITE_END]);
+			}
+			else if(i == (g_minishell->ncomands - 1))
+			{
+				dup2(g_minishell->exec[i - 1].pipe[READ_END], STDIN_FILENO);
+				close(g_minishell->exec[i - 1].pipe[READ_END]);	
+			}
 			else
-           		close(end[READ_END]);
-			//ft_parent(STDOUT_FILENO, pid[0], &g_minishell->args[i + 2].content, envp, end);
-		}
+			{
+				close(g_minishell->exec[i].pipe[READ_END]);
+				dup2(g_minishell->exec[i - 1].pipe[READ_END],STDIN_FILENO);
+				dup2(g_minishell->exec[i].pipe[WRITE_END],STDOUT_FILENO);
+				close(g_minishell->exec[i].pipe[WRITE_END]);
+			}
+			ft_child(g_minishell->exec[i].fdin, g_minishell->exec[i].fdout, cmd,envp, &stdo);
+			ft_freebidstr(cmd);
 			
+			exit (EXIT_FAILURE);
+			
+		}
 		
 		i++;
 	}
-	
+	i= 0;
+	while(i < g_minishell->ncomands)
+	{
+		wait(&a);
+		i++;
+	}
+	free(g_minishell->exec);
 }

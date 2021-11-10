@@ -4,3 +4,6 @@
 [submodule "ft_printf_42"]
 	path = ft_printf_42
 	url = https://github.com/marc459/ft_printf_42.git
+[submodule "parse/Libft"]
+	path = parse/Libft
+	url = git@github.com:Mexil77/Libft.git

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/09 22:34:46 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/10 14:29:06 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,14 @@
 	#	define SO "LINUX"
 	char *read_line(char *command)
 	{	
-		printf("Quineshell-1.0:");
-		scanf("%s",command);
+		
+		//scanf("%s",command);
+		//get_next_line(&command);
+		ft_putstr("Quineshell-1.0:");
+		read(0,command,64);
+		
+		//command[2]= '\0';
+		
 		return(command);
 	}
 # endif
@@ -55,14 +61,14 @@ int		main(int argc,char **argv, char **envp)
 	
 	if(argc > 1)
 		return (-1);
-	signals();
+	//signals();
 	command = malloc(sizeof(char) * 64);
 	ft_memset(command, '\0', 64);
 	while (ft_strncmp(command, "exit",4))
 	{
 		i = 0;
-		free(command);
-		command = read_line(command);
+		//free(command);
+		read_line(command);
 		if(ft_strncmp(command, "exit",4) && ft_strncmp(command, "",1))
 		{
 			//system("clear"); //

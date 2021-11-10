@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/10/23 16:17:53 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/10 14:55:03 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,52 @@
 #include <sys/types.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include "../readline/readline.h"
 #include "../readline/history.h"
 #include "../ft_printf_42/src/printf.h"
 #include "../libft_42/libft.h"
+#include "bashcolors.h"
 
 
-int		parser(char *command);
-void	signals();
-void	quitsignal(int sig);
-void       executor(char **envp);
+#define READ_END    0
+#define WRITE_END   1
+
 
 typedef struct s_arg {
 	size_t	type;
 	char	*content;
 }			t_arg;
 
+typedef struct s_exec {
+	int	posexec;
+	int pipe[2];
+	int fd[2];
+	int *fdin;
+	int *fdout;
+	int *closedfd;
+	int pos; // 1 -> first executable 2 - executable beween pipes 3- last executable
+}				t_exec;
 typedef struct s_general {
 	size_t	npipes;
 	size_t	ncomands;
 	size_t	nredirections;
 	t_arg	*args;
+	t_exec	*exec;
 }			t_general;
 
-t_minishell g_minishell;
 
+char **provisional_parser(t_general *g_minishell,char *command);
+void	signals();
+void	quitsignal(int sig);
+void	ft_executor(t_general *g_minishell,char **envp,int *pid);
+char	*ft_findpath(char **envp);
+char	*read_line(char *command);
+void	ft_pruveaccess(char *cmd, char **mycmd, char **envp);
+void	ft_parent(int fd2,int pid, char **mycmd2, char **envp, int *end);
+void	ft_child(int *fdin,int *fdout, char **mycmd1, char **envp, int *stdo);
+char	**ft_parsepaths(char **envp);
+void	ft_child2(int *fd, int pid, char **mycmd2, char **envp, int *end);
 
 # endif	

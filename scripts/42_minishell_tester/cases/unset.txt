@@ -1,0 +1,38 @@
+unset
+export TEST=100 ; echo $TEST ; unset TEST
+unset doesntexist
+unset PWD
+unset PWD ; echo $PWD
+unset OLDPWD ; echo $PWD
+unset PATH ; ls
+unset PATH ; echo "something"
+unset PATH ; bash
+unset TES\\\\T
+unset TES;T
+unset TES.T
+unset TES+T
+unset TES=T
+unset TES}T
+unset TES{T
+unset TES-T
+unset -TEST
+unset _TEST
+unset TES_T
+unset TEST_
+unset TE*ST
+unset TES#T
+unset TES@T
+unset TES!T
+unset TES$?T
+unset ============
+unset +++++++
+unset ________
+unset export
+unset echo
+unset pwd
+unset cd
+unset unset
+unset sudo
+unset TES^T
+unset TES!T
+unset TES\~T

@@ -14,16 +14,29 @@ SRC_PATH = ./srcs
 INCLUDES = -I ./includes -I ./readline -I ./readline/examples
 
 #SRCS
-PROGRAM_SRCS = minishell.c parser.c signals.c executor.c
+PROGRAM_SRCS = minishell.c parser.c signals.c executor.c process.c
 
 #OBJS
 PROGRAM_OBJS = $(addprefix $(OBJ_PATH)/,$(PROGRAM_SRCS:.c=.o))
 	
 #FLAGS
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
-TERMCAP_LIB = -ltermcap
+CFLAGS =  
+#-g3 -fsanitize=address
+# -Wall -Werror -Wextra
 
+ifeq ($(OS),Windows_NT) 
+ detected_OS := Windows
+else
+ detected_OS := $(shell sh -c 'uname 2>/dev/null || echo Unknown')
+endif
+
+ifeq ($(detected_OS),Darwin)
+ TERMCAP_LIB = -ltermcap
+endif
+ifeq ($(detected_OS),Linux)
+ TERMCAP_LIB =
+endif
 	
 #INSTRUCTIONS
 all: submodule ft_printf libft minishell
@@ -44,7 +57,7 @@ libft:
 	@make -C libft_42 > /dev/null
 							
 minishell: $(PROGRAM_OBJS)
-	@$(CC)  $(PROGRAM_OBJS) $(LIBFT) $(PRINTF) $(READLINE) $(TERMCAP_LIB) -o $(PROGRAM)
+	@$(CC) $(CFLAGS) $(PROGRAM_OBJS) $(LIBFT) $(PRINTF) $(READLINE) $(TERMCAP_LIB) -o $(PROGRAM)
 								
 clean:
 	@rm -rf $(OBJ_PATH)

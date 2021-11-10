@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/09 22:22:15 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/10 19:33:06 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ void       ft_executor(t_general *g_minishell, char **envp, int *pid)
 	int x;
 	char **cmd;
 	int a;
+	int stdo;
+	int stdi;
 	
-	
-	int stdo = dup(STDOUT_FILENO);
+	stdo = dup(STDOUT_FILENO);
+	stdi = dup(STDIN_FILENO);
 	i = 0;
 	x = 0;
 	g_minishell->exec = calloc(sizeof(t_exec), (g_minishell->ncomands + 1));
@@ -85,9 +87,11 @@ void       ft_executor(t_general *g_minishell, char **envp, int *pid)
 			cmd = ft_split(g_minishell->args[g_minishell->exec[i].posexec].content, ' ');
 			if(i == 0)
 			{
+				
 				close(g_minishell->exec[i].pipe[READ_END]);
 				dup2(g_minishell->exec[i].pipe[WRITE_END],STDOUT_FILENO);
 				close(g_minishell->exec[i].pipe[WRITE_END]);
+				dup2(stdi, STDIN_FILENO);
 			}
 			else if(i == (g_minishell->ncomands - 1))
 			{
@@ -101,13 +105,11 @@ void       ft_executor(t_general *g_minishell, char **envp, int *pid)
 				dup2(g_minishell->exec[i].pipe[WRITE_END],STDOUT_FILENO);
 				close(g_minishell->exec[i].pipe[WRITE_END]);
 			}
-			ft_child(g_minishell->exec[i].fdin, g_minishell->exec[i].fdout, cmd,envp, &stdo);
+			ft_child(cmd,envp,&stdi, &stdo);
 			ft_freebidstr(cmd);
 			
 			exit (EXIT_FAILURE);
-			
 		}
-		
 		i++;
 	}
 	i= 0;

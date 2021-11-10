@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/09 22:09:45 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/10 19:24:54 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*ft_findpath(char **envp);
 char	*read_line(char *command);
 void	ft_pruveaccess(char *cmd, char **mycmd, char **envp);
 void	ft_parent(int fd2,int pid, char **mycmd2, char **envp, int *end);
-void	ft_child(int *fdin,int *fdout, char **mycmd1, char **envp, int *stdo);
+void	ft_child(char **mycmd1, char **envp,int *stdi, int *stdo);
 char	**ft_parsepaths(char **envp);
 void	ft_child2(int *fd, int pid, char **mycmd2, char **envp, int *end);
 

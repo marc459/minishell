@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/04 17:13:34 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/10 19:31:25 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	**ft_parsepaths(char **envp)
 	return (spaths);
 }
 
-void	ft_child(int *fdin,int *fdout, char **mycmd1, char **envp, int *stdo)
+void	ft_child(char **mycmd1, char **envp,int *stdi, int *stdo)
 {
 	//ls
 	char	*cmd;
@@ -54,7 +54,9 @@ void	ft_child(int *fdin,int *fdout, char **mycmd1, char **envp, int *stdo)
 	{
 		cmd = ft_strjoin(paths[i], mycmd1[0]);
 		if (cmd)
+		{
 			ft_pruveaccess(cmd, mycmd1, envp);	
+		}
 	}
 	
 	ft_printf("Quineshell: %s: command not found\n",mycmd1[0]);

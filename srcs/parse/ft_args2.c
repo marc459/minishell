@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_args2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 23:15:08 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/08 19:47:46 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/11 13:41:58 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include <minishell.h>
 
 void	ft_splitcount(t_general *g, size_t *i, size_t *newargs)
 {

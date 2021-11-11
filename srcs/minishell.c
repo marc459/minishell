@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/10 15:09:24 by marcos           ###   ########.fr       */
+/*   Updated: 2021/11/11 14:44:09 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,21 @@
 	#	define SO "LINUX"
 	char *read_line(char *command)
 	{	
-		
+		int i;
+		i= 0;
 		//scanf("%s",command);
 		//get_next_line(&command);
 		ft_putstr("Quineshell-1.0:");
 		read(0,command,64);
+		while(command[i])
+		{
+			if(command[i]== 10)
+			{
+				command[i] = '\0';
+			}
+			i++;
+		}
+		
 		
 		//command[2]= '\0';
 		
@@ -48,7 +58,6 @@ void	free_gminishell(t_general *g_minishell)
 }
 int		main(int argc,char **argv, char **envp)
 {
-	//atexit(hola);
 	int		status;
 	pid_t	pid;
 	char	*command;
@@ -73,14 +82,13 @@ int		main(int argc,char **argv, char **envp)
 		{
 			//system("clear"); //
 			//lexer && parser
-			comands = provisional_parser(&g_minishell,command);
+			//comands = provisional_parser(&g_minishell,command);
+			ft_inigeneral(&g_minishell);
+			g_minishell.ncomands = 2;
+			g_minishell.npipes = 1;
+			ft_parse(&g_minishell,command);
+			ft_printgeneral(&g_minishell);
 			//system("leaks minishell");
-			while(command[i])
-			{
-				if(command[i] == '_')
-					command[i] = ' ';
-				i++;
-			}
 			
 			//Executor
 			printf("%s< QUINES && MEXIL SHELL >%s\n\n",BCyan,Color_Off); //
@@ -88,8 +96,9 @@ int		main(int argc,char **argv, char **envp)
 			ft_executor(&g_minishell,envp,&pid);
 			printf("%s< REAL BASH >%s\n\n",BCyan,Color_Off); //	
 			//system(command); //
-			ft_freebidstr(comands);
-			free_gminishell(&g_minishell);
+			//ft_freebidstr(comands);
+			//free_gminishell(&g_minishell);
+			ft_freeall(&g_minishell);
 		}
 	}
 	free(command);

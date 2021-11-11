@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/11 13:42:48 by marcos           ###   ########.fr       */
+/*   Updated: 2021/11/11 13:57:48 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,8 @@ void	ft_refacttypes(t_general *g);
 void	ft_freedouble(char **split);
 t_arg	*ft_copycleanargs(t_general *g);
 void	ft_freecontent(t_arg *args);
+char	*ft_cutstr(char *str);
+size_t	ft_countcut(char *str);
+size_t	ft_findchar(char *str, char c);
 
 # endif	

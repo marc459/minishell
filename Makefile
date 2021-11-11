@@ -14,7 +14,9 @@ SRC_PATH = ./srcs
 INCLUDES = -I ./includes -I ./readline -I ./readline/examples
 
 #SRCS
-PROGRAM_SRCS = minishell.c parser.c signals.c executor.c process.c
+PROGRAM_SRCS = minishell.c parser.c signals.c executor.c process.c \
+				parse/ft_args.c parse/ft_args2.c parse/ft_args3.c \
+				parse/ft_aux2.c parse/ft_parse.c
 
 #OBJS
 PROGRAM_OBJS = $(addprefix $(OBJ_PATH)/,$(PROGRAM_SRCS:.c=.o))
@@ -43,7 +45,7 @@ all: submodule ft_printf libft minishell
 	
 #EVERY TIME A .O IS CALLED AS AN INSTRUCTION THIS WILL BE CREATED IN OBJ_PATH
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
-	@mkdir -p $(OBJ_PATH) 2> /dev/null || true
+	@mkdir -p $(OBJ_PATH)/parse 2> /dev/null || true
 	@$(CC) $(INCLUDES) -o $@ -c $^
 			
 submodule:

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:11:14 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/08 19:45:07 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/11 13:42:07 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include <minishell.h>
 
 t_arg	*ft_copycleanargs(t_general *g)
 {

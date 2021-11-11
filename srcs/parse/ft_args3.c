@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_args3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:12:27 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/05 21:12:51 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/11 13:42:04 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include <minishell.h>
 
 size_t	ft_contsp(t_general *g, size_t i)
 {

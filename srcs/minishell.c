@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/11 14:41:30 by marcos           ###   ########.fr       */
+/*   Updated: 2021/11/11 14:44:09 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,20 @@
 	#	define SO "LINUX"
 	char *read_line(char *command)
 	{	
-		
+		int i;
+		i= 0;
 		//scanf("%s",command);
 		//get_next_line(&command);
 		ft_putstr("Quineshell-1.0:");
 		read(0,command,64);
+		while(command[i])
+		{
+			if(command[i]== 10)
+			{
+				command[i] = '\0';
+			}
+			i++;
+		}
 		
 		
 		//command[2]= '\0';

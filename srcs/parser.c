@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 22:26:09 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/09 22:09:40 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/10 22:17:37 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,17 @@ char **provisional_parser(t_general *g_minishell,char *command)
 	{
 		if(command[i] == '|')
 			g_minishell->npipes++;
+		if(command[i] == '>')
+			g_minishell->nredirections += 2;
+		if(command[i] == '<')
+			g_minishell->nredirections += 2;
 		i++;
 	}
 	i = 0;
 	g_minishell->ncomands = g_minishell->npipes + 1;
-	g_minishell->args = malloc(sizeof(t_arg) * (g_minishell->ncomands + g_minishell->npipes));
-	while(i < g_minishell->ncomands)
+	g_minishell->args = malloc(sizeof(t_arg) * (g_minishell->ncomands + g_minishell->npipes + g_minishell->nredirections));
+	printf("nargs%ld\n",g_minishell->ncomands + g_minishell->npipes + g_minishell->nredirections);
+	while(pos < g_minishell->ncomands + g_minishell->npipes + g_minishell->nredirections)
 	{
 		while(comands[pos][y])
 		{
@@ -49,18 +54,20 @@ char **provisional_parser(t_general *g_minishell,char *command)
 			y++;
 		}
 		g_minishell->args[pos].content = comands[pos];
-		g_minishell->args[pos].type = 3;
+		//g_minishell->args[pos].type = 3;
 		pos++;
-		if(x < g_minishell->ncomands)
+		if(x < g_minishell->nredirections)
 		{
-			
 			g_minishell->args[pos].content = comands[pos];
-			g_minishell->args[pos].type = 5;
+			//g_minishell->args[pos].type = 1;
 			x++;
 			pos++;
 		}
 		i++;	
 	}
+	g_minishell->args[0].type = 1;
+	g_minishell->args[1].type = 4;
+	g_minishell->args[2].type = 3;
 
 	i = 0;
 	/*printf("G_MINISHELL\n");

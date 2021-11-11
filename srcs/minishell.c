@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/11 18:07:46 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/11 18:09:10 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,9 @@
 	char *read_line(char *command)
 	{	
 		int i;
+
 		i= 0;
 		//scanf("%s",command);
-		//get_next_line(&command);
-		ft_putstr("Quineshell-1.0:");
-		read(0,command,64);
 		while(command[i])
 		{
 			if(command[i]== 10)
@@ -40,10 +38,7 @@
 			}
 			i++;
 		}
-		
-		
 		//command[2]= '\0';
-		
 		return(command);
 	}
 # endif

@@ -54,6 +54,6 @@ void	ft_iniarg(t_general *g, size_t *j, char *str);
 void	ft_refacttypes(t_general *g);
 void	ft_freedouble(char **split);
 t_arg	*ft_copycleanargs(t_general *g);
-void	ft_freecontent(t_arg *args);
+void	ft_freecontent(t_arg *args, size_t argssize);
 
 #endif

@@ -68,7 +68,7 @@ void	ft_splitarg(t_general *g, size_t *i, size_t *j, t_arg *tmp)
 	split = ft_split(tmp[*i].content, ' ');
 	if (!split)
 		exit(0);
-	printf("split[0] : %s\n", split[0]);
+	line = ft_joinstring(g, j, split);
 	if (line)
 	{
 		g->args[*j].type = 3;

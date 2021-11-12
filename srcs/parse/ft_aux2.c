@@ -59,3 +59,19 @@ void	ft_freeall(t_general *g)
 	ft_freedouble(g->parse.comnds);
 	ft_freecontent(g->args, g->argssize);
 }
+
+void	ft_countthings(t_general *g)
+{
+	size_t	i;
+
+	i = -1;
+	while (++i < g->argssize)
+	{
+		if (g->args[i].type == 1 || g->args[i].type == 2)
+			g->nredirections++;
+		if (g->args[i].type == 3)
+			g->ncomands++;
+		if (g->args[i].type == 5)
+			g->npipes++;
+	}
+}

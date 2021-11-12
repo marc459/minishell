@@ -107,4 +107,5 @@ void	ft_parse(t_general *general, char *str)
 		ft_iniargs(general);
 		ft_refacttypes(general);
 	}
+	ft_countthings(general);
 }

@@ -55,5 +55,6 @@ void	ft_refacttypes(t_general *g);
 void	ft_freedouble(char **split);
 t_arg	*ft_copycleanargs(t_general *g);
 void	ft_freecontent(t_arg *args, size_t argssize);
+void	ft_countthings(t_general *g);
 
 #endif

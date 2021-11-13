@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/11 16:59:41 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/11 18:32:46 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		main(int argc,char **argv, char **envp)
 	{
 		i = 0;
 		//free(command);
-		read_line(command);
+		command = read_line(command);
 		if(ft_strncmp(command, "exit",4) && ft_strncmp(command, "",1))
 		{
 			//system("clear"); //

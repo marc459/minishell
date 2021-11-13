@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   ft_freebidstr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 22:12:07 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/13 22:01:11 by msantos-         ###   ########.fr       */
+/*   Created: 2021/11/13 21:29:39 by msantos-          #+#    #+#             */
+/*   Updated: 2021/11/13 21:29:46 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "libft.h"
 
-void	quitsignal(int sig)
+void	ft_freebidstr(char **s)
 {
-	printf("\nQuineshell-1.0:");
-}
-void	signals()
-{
-	//signal(SIGQUIT, &quitsignal);
-	//signal(SIGKILL, &quitsignal);
-	signal(SIGINT, &quitsignal); //// 5 - Ctrl + C
-	//signal(SIGTRAP, &quitsignal); // 5 - Ctrl + Z
+	int	i;
+
+	i = 0;
+	while (s[i] != NULL)
+	{
+		free(s[i]);
+		i++;
+	}
+	free(s);
 }

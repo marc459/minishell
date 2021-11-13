@@ -6,7 +6,11 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/11/11 18:32:46 by msantos-         ###   ########.fr       */
+=======
+/*   Updated: 2021/11/13 22:00:51 by msantos-         ###   ########.fr       */
+>>>>>>> development
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,21 +72,24 @@ int		main(int argc,char **argv, char **envp)
 	//signals();
 	command = malloc(sizeof(char) * 64);
 	ft_memset(command, '\0', 64);
+	
+	ft_inigeneral(&g_minishell);
+	
 	while (ft_strncmp(command, "exit",4))
 	{
 		i = 0;
 		//free(command);
 		command = read_line(command);
-		if(ft_strncmp(command, "exit",4) && ft_strncmp(command, "",1))
-		{
+		//if(ft_strncmp(command, "exit",4) && ft_strncmp(command, "",1))
+		//{
 			//system("clear"); //
 			//lexer && parser
 			//comands = provisional_parser(&g_minishell,command);
-			ft_inigeneral(&g_minishell);
-			g_minishell.ncomands = 2;
-			g_minishell.npipes = 1;
+			
 			ft_parse(&g_minishell,command);
+			//printf("Llegue\n");
 			ft_printgeneral(&g_minishell);
+			
 			//system("leaks minishell");
 			
 			//Executor
@@ -94,10 +101,10 @@ int		main(int argc,char **argv, char **envp)
 			//ft_freebidstr(comands);
 			//free_gminishell(&g_minishell);
 			ft_freeall(&g_minishell);
-		}
+		//}
 	}
 	free(command);
-	ft_printf("exit\n");
+	printf("exit\n");
 	//system("leaks minishell");
 	
 	

@@ -69,9 +69,12 @@ void	ft_splitarg(t_general *g, size_t *i, size_t *j, t_arg *tmp)
 	if (!split)
 		exit(0);
 	line = ft_joinstring(g, j, split);
-	g->args[*j].type = 3;
-	g->args[(*j)++].content = ft_strdup(line);
-	free(line);
+	if (line)
+	{
+		g->args[*j].type = 3;
+		g->args[(*j)++].content = ft_strdup(line);
+		free(line);
+	}
 	ft_freedouble(split);
 }
 
@@ -83,7 +86,7 @@ void	ft_droprefact(t_general *g, size_t newargs)
 
 	tmp = ft_copycleanargs(g);
 	g->argssize = newargs;
-	g->args = calloc(sizeof(t_arg), g->argssize + 1);
+	g->args = calloc(sizeof(t_arg), g->argssize);
 	if (!g->args)
 		exit(0);
 	i = -1;
@@ -99,7 +102,7 @@ void	ft_droprefact(t_general *g, size_t newargs)
 			g->args[j++].content = ft_strdup(tmp[i].content);
 		}
 	}
-	ft_freecontent(tmp);
+	ft_freecontent(tmp, g->argssize);
 }
 
 void	ft_refacttypes(t_general *g)
@@ -117,7 +120,7 @@ void	ft_refacttypes(t_general *g)
 		else
 			newargs++;
 	}
-	if (newargs == g->argssize)
-		return ;
+	/* if (newargs == g->argssize)
+		return ; */
 	ft_droprefact(g, newargs);
 }

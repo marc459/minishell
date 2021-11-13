@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/11/10 20:20:46 by marcos           ###   ########.fr       */
-=======
-/*   Updated: 2021/11/11 13:57:48 by marcos           ###   ########.fr       */
->>>>>>> development
+/*   Updated: 2021/11/13 22:09:03 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +26,7 @@
 # include <fcntl.h>
 #include "../readline/readline.h"
 #include "../readline/history.h"
-#include "../ft_printf_42/src/printf.h"
-#include "../libft_42/libft.h"
+#include "../libft/libft.h"
 #include "bashcolors.h"
 
 
@@ -97,7 +92,8 @@ void	ft_iniarg(t_general *g, size_t *j, char *str);
 void	ft_refacttypes(t_general *g);
 void	ft_freedouble(char **split);
 t_arg	*ft_copycleanargs(t_general *g);
-void	ft_freecontent(t_arg *args);
+void	ft_freecontent(t_arg *args, size_t argssize);
+void	ft_countthings(t_general *g);
 char	*ft_cutstr(char *str);
 size_t	ft_countcut(char *str);
 size_t	ft_findchar(char *str, char c);

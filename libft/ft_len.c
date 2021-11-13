@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   ft_len.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 22:12:07 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/13 22:01:11 by msantos-         ###   ########.fr       */
+/*   Created: 2020/01/30 17:54:18 by msantos-          #+#    #+#             */
+/*   Updated: 2021/06/09 17:13:05 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "libft.h"
 
-void	quitsignal(int sig)
+int	ft_len(long nb)
 {
-	printf("\nQuineshell-1.0:");
-}
-void	signals()
-{
-	//signal(SIGQUIT, &quitsignal);
-	//signal(SIGKILL, &quitsignal);
-	signal(SIGINT, &quitsignal); //// 5 - Ctrl + C
-	//signal(SIGTRAP, &quitsignal); // 5 - Ctrl + Z
+	int	len;
+
+	len = 0;
+	if (nb < 0)
+	{
+		nb = nb * -1;
+		len++;
+	}
+	while (nb > 0)
+	{
+		nb = nb / 10;
+		len++;
+	}
+	return (len);
 }

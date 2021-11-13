@@ -6,11 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/11/11 18:32:46 by msantos-         ###   ########.fr       */
-=======
-/*   Updated: 2021/11/13 22:00:51 by msantos-         ###   ########.fr       */
->>>>>>> development
+/*   Updated: 2021/11/13 23:18:07 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,30 +58,24 @@ int		main(int argc,char **argv, char **envp)
 	char	*command;
 	char	*s;
 	t_general g_minishell;
-	char **comands;
-	
-	int i;
-	
 	
 	if(argc > 1)
 		return (-1);
-	//signals();
+	signals();
 	command = malloc(sizeof(char) * 64);
 	ft_memset(command, '\0', 64);
 	
-	ft_inigeneral(&g_minishell);
 	
-	while (ft_strncmp(command, "exit",4))
+	
+	while (ft_strncmp(command, "exit",5))
 	{
-		i = 0;
-		//free(command);
+		free(command);
 		command = read_line(command);
-		//if(ft_strncmp(command, "exit",4) && ft_strncmp(command, "",1))
-		//{
-			//system("clear"); //
+		ft_inigeneral(&g_minishell);
+		if(ft_strncmp(command, "exit",5) && ft_strncmp(command, "",1))
+		{
+			system("clear"); //
 			//lexer && parser
-			//comands = provisional_parser(&g_minishell,command);
-			
 			ft_parse(&g_minishell,command);
 			//printf("Llegue\n");
 			ft_printgeneral(&g_minishell);
@@ -97,16 +87,13 @@ int		main(int argc,char **argv, char **envp)
 			
 			ft_executor(&g_minishell,envp,&pid);
 			printf("%s< REAL BASH >%s\n\n",BCyan,Color_Off); //	
-			//system(command); //
-			//ft_freebidstr(comands);
+			system(command); //
 			//free_gminishell(&g_minishell);
 			ft_freeall(&g_minishell);
-		//}
+		}
 	}
 	free(command);
 	printf("exit\n");
-	//system("leaks minishell");
-	
-	
+
 	return (0);
 }

@@ -34,12 +34,12 @@ t_arg	*ft_copycleanargs(t_general *g)
 	return (tmp);
 }
 
-void	ft_freecontent(t_arg *args)
+void	ft_freecontent(t_arg *args, size_t argssize)
 {
 	size_t	i;
 
 	i = -1;
-	while (args[++i].content)
+	while (++i < argssize)
 		free(args[i].content);
 	free(args);
 }
@@ -57,5 +57,21 @@ void	ft_freedouble(char **split)
 void	ft_freeall(t_general *g)
 {
 	ft_freedouble(g->parse.comnds);
-	ft_freecontent(g->args);
+	ft_freecontent(g->args, g->argssize);
+}
+
+void	ft_countthings(t_general *g)
+{
+	size_t	i;
+
+	i = -1;
+	while (++i < g->argssize)
+	{
+		if (g->args[i].type == 1 || g->args[i].type == 2)
+			g->nredirections++;
+		else if (g->args[i].type == 3)
+			g->ncomands++;
+		else if (g->args[i].type == 5)
+			g->npipes++;
+	}
 }

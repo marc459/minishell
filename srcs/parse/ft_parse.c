@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:07:10 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/11 17:35:28 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/13 19:54:30 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,14 +109,5 @@ void	ft_parse(t_general *general, char *str)
 		ft_iniargs(general);
 		ft_refacttypes(general);
 	}
-	i = -1;
-	while (general->args[++i].content)
-	{
-		if (general->args[i].type == 1 || general->args[i].type == 2)
-			general->nredirections++;
-		else if (general->args[i].type == 3)
-			general->ncomands++;
-		else if (general->args[i].type == 5)
-			general->npipes++;
-	}
+	ft_countthings(general);
 }

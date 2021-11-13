@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/10 22:21:24 by marcos           ###   ########.fr       */
+/*   Updated: 2021/11/13 21:18:28 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void       ft_executor(t_general *g_minishell, char **envp, int *pid)
 			{
 				dup2(g_minishell->exec[i - 1].pipe[READ_END], STDIN_FILENO);
 				close(g_minishell->exec[i - 1].pipe[READ_END]);
-				dup2(g_minishell->fdout, STDIN_FILENO);
+				dup2(g_minishell->fdout, STDOUT_FILENO);
 			}
 			else
 			{

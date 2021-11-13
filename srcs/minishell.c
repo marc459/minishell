@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/11 18:09:10 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/13 21:14:16 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ int		main(int argc,char **argv, char **envp)
 	while (ft_strncmp(command, "exit",4))
 	{
 		i = 0;
-		//free(command);
+		free(command);
 		command = read_line(command);
 		//command = ft_strdup("ls");
-		/*if(ft_strncmp(command, "exit",4) && ft_strncmp(command, "",1))
-		{*/
+		//if(ft_strncmp(command, "exit",4) && ft_strncmp(command, "",1))
+		//{
 			//system("clear"); //
 			//lexer && parser
 			//comands = provisional_parser(&g_minishell,command);

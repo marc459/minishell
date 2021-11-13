@@ -6,15 +6,14 @@
     "configurations": [
         {
             "name": "(lldb) Launch",
-            "type": "cppdbg",
+            "type": "lldb",
             "request": "launch",
             "program": "${workspaceFolder}/minishell",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${fileDirname}",
-            "environment": [],
-            "externalConsole": true,
-            "MIMode": "lldb"
+            "args": [
+                "-c",
+                "\"echo hola\""
+            ],
+            "cwd": "${fileDirname}"
         }
     ]
 }

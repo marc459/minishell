@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:32:36 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/11 13:57:17 by marcos           ###   ########.fr       */
+/*   Updated: 2021/11/13 21:37:05 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,61 +68,4 @@ void	ft_inigeneral(t_general *general)
 void	leak(void)
 {
 	system("leaks parse");
-}
-
-
-size_t	ft_findchar(char *str, char c)
-{
-	size_t	i;
-
-	i = -1;
-	if (!str)
-		return (0);
-	while (str[++i])
-		if (str[i] == c)
-			return (1);
-	return (0);
-}
-
-size_t	ft_countcut(char *str)
-{
-	size_t	i;
-	size_t	before;
-
-	if (!str)
-		return (0);
-	i = -1;
-	before = 1;
-	while (str[++i] && before)
-	{
-		if (str[i] == '\n')
-			before--;
-	}
-	return (i);
-}
-
-char	*ft_cutstr(char *str)
-{
-	char	*cut;
-	size_t	sizecut;
-	size_t	i;
-
-	cut = malloc(sizeof(char) * (ft_countcut(str) + 1));
-	if (!cut)
-		return (NULL);
-	i = -1;
-	while (str[++i])
-		if (i < ft_countcut(str))
-			cut[i] = str[i];
-	cut[ft_countcut(str)] = '\0';
-	sizecut = ft_countcut(str);
-	i = 0;
-	while (str[sizecut + i])
-	{
-		str[i] = str[sizecut + i];
-		i++;
-	}
-	while (str[i])
-		str[i++] = '\0';
-	return (cut);
 }

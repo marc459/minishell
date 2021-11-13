@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/13 21:18:28 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/13 21:44:58 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void       ft_executor(t_general *g_minishell, char **envp, int *pid)
 	paths = ft_findpath(envp);
 	if (!paths)
 	{
-		ft_printf("PATH not found.\n");
+		printf("PATH not found.\n");
 		exit (EXIT_FAILURE);
 	}
 	i = 0;
@@ -90,7 +90,7 @@ void       ft_executor(t_general *g_minishell, char **envp, int *pid)
 		
 		
 		if (pid[0] < 0)
-			ft_printf("Error\n");
+			printf("Error\n");
 		else if(pid[0] == 0)
 		{
 			cmd = ft_split(g_minishell->args[g_minishell->exec[i].posexec].content, ' ');

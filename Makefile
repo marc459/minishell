@@ -2,16 +2,16 @@
 PROGRAM = minishell
 
 #LIBS
-LIBFT = libft_42/libft.a
-PRINTF = ft_printf_42/libftprintf.a
-READLINE = readline/libreadline.a
-#readline/libhistory.a 
-LIBS = $(LIBFT) $(PRINTF)
+LIBFT = libft.a
+READLINE = readline/libreadline.a readline/libhistory.a 
+
 
 #PATHS
 OBJ_PATH = ./objs
 SRC_PATH = ./srcs
+LIBFT_PATH = ./libft
 INCLUDES = -I ./includes -I ./readline -I ./readline/examples
+LIBS = $(LIBFT_PATH)/$(LIBFT) $(READLINE)
 
 #SRCS
 PROGRAM_SRCS = minishell.c parser.c signals.c executor.c process.c \
@@ -40,7 +40,7 @@ ifeq ($(detected_OS),Linux)
 endif
 	
 #INSTRUCTIONS
-all: submodule ft_printf libft minishell
+all: libftt minishell
 	
 #EVERY TIME A .O IS CALLED AS AN INSTRUCTION THIS WILL BE CREATED IN OBJ_PATH
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
@@ -50,22 +50,19 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 submodule:
 	@git submodule init
 	@git submodule update --remote
-					
-#CHECKS THE EXISTANCE OF AN COMPILING FTPRINTF LIBRARY 
-ft_printf:
-	@make -C ft_printf_42  > /dev/null
-libft:
-	@make -C libft_42 > /dev/null
+
+libftt:
+	@make -C $(LIBFT_PATH)
 							
 minishell: $(PROGRAM_OBJS)
-	@$(CC) $(CFLAGS) $(PROGRAM_OBJS) $(LIBFT) $(PRINTF) $(READLINE) $(TERMCAP_LIB) -o $(PROGRAM)
+	
+	@$(CC) $(CFLAGS) $(PROGRAM_OBJS)  $(LIBS) $(TERMCAP_LIB) -o $(PROGRAM)
 								
 clean:
 	@rm -rf $(OBJ_PATH)
 									
 fclean: clean
-	@rm -rf $(PROGRAM) $(CLIENT)
-	@make fclean -C ft_printf_42 > /dev/null
-	@make fclean -C libft_42 > /dev/null
+	@rm -rf $(PROGRAM)
+	@make fclean -C $(LIBFT_PATH) > /dev/null
 												
 re: fclean all

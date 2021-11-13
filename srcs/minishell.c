@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/13 21:14:16 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/13 22:00:51 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int		main(int argc,char **argv, char **envp)
 		//}
 	}
 	free(command);
-	ft_printf("exit\n");
+	printf("exit\n");
 	//system("leaks minishell");
 	
 	

@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 # User settings
 # ------------------------------------------------------------------------------
-readonly MINISHELL_DIR="../"
+readonly MINISHELL_DIR="../../"
 readonly MINISHELL_EXE="minishell"
 # If you launch this script with -c option, MINISHELL_PROMPT is ignored
 readonly MINISHELL_PROMPT="minishell $ "
@@ -18,7 +18,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     SED_STRING=""
 fi
 
-source scripts/helper.sh
+source ./scripts/helper.sh
 
 build_executable () {
 	make -C "${MINISHELL_DIR}"

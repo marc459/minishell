@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/10 22:14:12 by marcos           ###   ########.fr       */
+/*   Updated: 2021/11/13 23:22:51 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,10 @@ char	**ft_parsepaths(char **envp)
 
 void	ft_child(char **mycmd1, char **envp,int *stdi, int *stdo)
 {
-	//ls
 	char	*cmd;
 	size_t	i;
 	char	**paths;
 	
-	printf("cmd: %s",mycmd1[0]);
 	paths = ft_parsepaths(envp);
 	i = -1;
 	while (paths[++i])
@@ -58,8 +56,8 @@ void	ft_child(char **mycmd1, char **envp,int *stdi, int *stdo)
 			ft_pruveaccess(cmd, mycmd1, envp);	
 		}
 	}
-	
-	printf("Quineshell: %s: command not found\n",mycmd1[0]);
-	ft_putstr_fd("Error Child2\n",*stdo);
+	ft_putstr_fd("Quineshell: ",*stdo);
+	ft_putstr_fd(mycmd1[0],*stdo);
+	ft_putstr_fd(" command not found\n",*stdo);
 	
 }

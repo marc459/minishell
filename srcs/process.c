@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/13 23:22:51 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/15 22:13:21 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_pruveaccess(char *cmd, char **mycmd, char **envp)
 {
 	if (!access(cmd, X_OK))
 	{
+		
 		execve(cmd, mycmd, envp);
 	}
 	free(cmd);

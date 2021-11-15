@@ -6,12 +6,11 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/15 19:28:11 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/15 21:07:32 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
 
 # if defined(__APPLE__)
 	#	define SO "MACOS"
@@ -53,13 +52,37 @@ void	free_gminishell(t_general *g_minishell)
 	free(g_minishell->args);
 }
 
-int	main(int argc, char **argv)
+void	ft_prompt(t_general *g_m, char **environ)
 {
-	int			status;
 	pid_t		pid;
 	char		*command;
-	char		*s;
+
+	command = calloc(sizeof(char), 64);
+	command = read_line(command);
+	while (ft_strncmp(command, "exit", 5))
+	{
+		ft_inigeneral(g_m);
+		if (ft_strncmp(command, "exit", 5) && ft_strncmp(command, "", 1))
+		{
+			system("clear");
+			ft_parse(g_m, command);
+			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCyan, Color_Off);
+			ft_executor(g_m, environ, &pid);
+			printf("%s< REAL BASH >%s\n\n", BCyan, Color_Off);
+			system(command);
+			ft_freeall(g_m);
+		}
+		free(command);
+		command = read_line(command);
+	}
+	free(command);
+}
+
+int	main(int argc, char **argv)
+{
 	extern char	**environ;
+	pid_t		pid;
+	int			status;
 	t_general	g_minishell;
 
 	if (argc >= 3 && !ft_strncmp(argv[1], "-c", 3))
@@ -77,26 +100,7 @@ int	main(int argc, char **argv)
 	if (argc > 1)
 		return (-1);
 	signals();
-	command = calloc(sizeof(char), 64);
-	command = read_line(command);
-	while (ft_strncmp(command, "exit", 5))
-	{
-		ft_inigeneral(&g_minishell);
-		if (ft_strncmp(command, "exit", 5) && ft_strncmp(command, "", 1))
-		{
-			system("clear");
-			ft_parse(&g_minishell, command);
-			ft_printgeneral(&g_minishell);
-			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCyan, Color_Off);
-			ft_executor(&g_minishell, environ, &pid);
-			printf("%s< REAL BASH >%s\n\n", BCyan, Color_Off);
-			system(command);
-			ft_freeall(&g_minishell);
-		}
-		free(command);
-		command = read_line(command);
-	}
-	free(command);
+	ft_prompt(&g_minishell, environ);
 	printf("exit\n");
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/14 00:09:17 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/15 19:28:11 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,69 +42,61 @@
 		return(command);
 	}
 # endif
-void	hola()
+
+void	hola(void)
 {
 	system("leaks minishell");
 }
+
 void	free_gminishell(t_general *g_minishell)
 {
 	free(g_minishell->args);
-	
 }
-int		main(int argc,char **argv, char **envp)
+
+int	main(int argc, char **argv)
 {
-	int		status;
-	pid_t	pid;
-	char	*command;
-	char	*s;
-	t_general g_minishell;
+	int			status;
+	pid_t		pid;
+	char		*command;
+	char		*s;
+	extern char	**environ;
+	t_general	g_minishell;
 
 	if (argc >= 3 && !ft_strncmp(argv[1], "-c", 3))
 	{
 		ft_inigeneral(&g_minishell);
-		if(ft_strncmp(argv[2], "exit",5) && ft_strncmp(argv[2], "",1))
+		if (ft_strncmp(argv[2], "exit", 5) && ft_strncmp(argv[2], "", 1))
 		{
-			ft_parse(&g_minishell,argv[2]);
-			ft_executor(&g_minishell,envp,&pid);
+			ft_parse(&g_minishell, argv[2]);
+			ft_executor(&g_minishell, environ, &pid);
+			ft_printgeneral(&g_minishell);
 			ft_freeall(&g_minishell);
 		}
 		return (0);
 	}
-
-	if(argc > 1)
+	if (argc > 1)
 		return (-1);
-	
 	signals();
 	command = calloc(sizeof(char), 64);
 	command = read_line(command);
-
-	while (ft_strncmp(command, "exit",5))
+	while (ft_strncmp(command, "exit", 5))
 	{
-		free(command);
-		command = read_line(command);
 		ft_inigeneral(&g_minishell);
-		if(ft_strncmp(command, "exit",5) && ft_strncmp(command, "",1))
+		if (ft_strncmp(command, "exit", 5) && ft_strncmp(command, "", 1))
 		{
-			system("clear"); //
-			//lexer && parser
-			ft_parse(&g_minishell,command);
-			//printf("Llegue\n");
+			system("clear");
+			ft_parse(&g_minishell, command);
 			ft_printgeneral(&g_minishell);
-			
-			//system("leaks minishell");
-			
-			//Executor
-			printf("%s< QUINES && MEXIL SHELL >%s\n\n",BCyan,Color_Off); //
-			
-			ft_executor(&g_minishell,envp,&pid);
-			printf("%s< REAL BASH >%s\n\n",BCyan,Color_Off); //	
-			system(command); //
-			//free_gminishell(&g_minishell);
+			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCyan, Color_Off);
+			ft_executor(&g_minishell, environ, &pid);
+			printf("%s< REAL BASH >%s\n\n", BCyan, Color_Off);
+			system(command);
 			ft_freeall(&g_minishell);
 		}
+		free(command);
+		command = read_line(command);
 	}
 	free(command);
 	printf("exit\n");
-
 	return (0);
 }

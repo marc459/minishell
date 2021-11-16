@@ -6,41 +6,40 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/15 21:07:32 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/16 18:25:35 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-# if defined(__APPLE__)
-	#	define SO "MACOS"
+#if defined(__APPLE__)
+# define SO "MACOS"
 
-	char *read_line(char *command)
+char	*read_line(char *command)
+{
+	command = readline("Quineshell-1.0:");
+	add_history (command);
+	return (command);
+}
+#else
+# define SO "LINUX"
+
+char	*read_line(char *command)
+{
+	int	i;
+
+	i = 0;
+	while (command[i])
 	{
-		command = readline("Quineshell-1.0:");
-		add_history (command);
-		return(command);
-	}
-# else
-	#	define SO "LINUX"
-	char *read_line(char *command)
-	{	
-		int i;
-
-		i= 0;
-		//scanf("%s",command);
-		while(command[i])
+		if (command[i] == 10)
 		{
-			if(command[i]== 10)
-			{
-				command[i] = '\0';
-			}
-			i++;
+			command[i] = '\0';
 		}
-		//command[2]= '\0';
-		return(command);
+		i++;
 	}
-# endif
+	return (command);
+}
+#endif
 
 void	hola(void)
 {

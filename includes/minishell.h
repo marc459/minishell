@@ -51,7 +51,7 @@ typedef struct s_parse
 
 typedef struct s_general {
 	size_t	npipes;
-	size_t	ncomands;
+	size_t	nexecutables;
 	size_t	nredirections;
 	t_arg	*args;
 	t_exec	*exec;
@@ -69,11 +69,12 @@ void	quitsignal(int sig);
 void	ft_executor(t_general *g_minishell, char **envp, int *pid);
 char	*ft_findpath(char **envp);
 char	*read_line(char *command);
-void	ft_pruveaccess(char *cmd, char **mycmd, char **envp);
-void	ft_parent(int fd2, int pid, char **mycmd2, char **envp, int *end);
-void	ft_child(char **mycmd1, char **envp, int *stdi, int *stdo);
+void	ft_child(char **fullcmd, char **envp, int *stdo);
 char	**ft_parsepaths(char **envp);
-void	ft_child2(int *fd, int pid, char **mycmd2, char **envp, int *end);
+void	define_fds(t_general *g_mini);
+void	administratepipe(int i, t_general *g_mini);
+void	administratestds(int i, t_general *g_mini);
+void	waitforthem(int *childpid, int nchilds);
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);

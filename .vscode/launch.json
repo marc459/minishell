@@ -10,10 +10,9 @@
             "request": "launch",
             "program": "${workspaceFolder}/minishell",
             "args": [
-                "-c",
-                "\"echo hola\""
             ],
-            "cwd": "${fileDirname}"
+            "cwd": "${fileDirname}",
+            "preLaunchTask": "No env"
         }
     ]
 }

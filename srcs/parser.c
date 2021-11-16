@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 22:26:09 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/10 22:17:37 by marcos           ###   ########.fr       */
+/*   Updated: 2021/11/16 15:41:46 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char **provisional_parser(t_general *g_minishell,char *command)
 	
 	// ls | wc
 	g_minishell->npipes = 0;
-	g_minishell->ncomands = 0;
+	g_minishell->nexecutables = 0;
 	g_minishell->nredirections = 0;
 	comands = ft_split(command, ' ');
 
@@ -42,10 +42,10 @@ char **provisional_parser(t_general *g_minishell,char *command)
 		i++;
 	}
 	i = 0;
-	g_minishell->ncomands = g_minishell->npipes + 1;
-	g_minishell->args = malloc(sizeof(t_arg) * (g_minishell->ncomands + g_minishell->npipes + g_minishell->nredirections));
-	printf("nargs%ld\n",g_minishell->ncomands + g_minishell->npipes + g_minishell->nredirections);
-	while(pos < g_minishell->ncomands + g_minishell->npipes + g_minishell->nredirections)
+	g_minishell->nexecutables = g_minishell->npipes + 1;
+	g_minishell->args = malloc(sizeof(t_arg) * (g_minishell->nexecutables + g_minishell->npipes + g_minishell->nredirections));
+	printf("nargs%ld\n",g_minishell->nexecutables + g_minishell->npipes + g_minishell->nredirections);
+	while(pos < g_minishell->nexecutables + g_minishell->npipes + g_minishell->nredirections)
 	{
 		while(comands[pos][y])
 		{
@@ -72,9 +72,9 @@ char **provisional_parser(t_general *g_minishell,char *command)
 	i = 0;
 	/*printf("G_MINISHELL\n");
 	printf("  n_pipes: %zu\n",g_minishell->npipes);
-	printf("  n_comands: %zu\n",g_minishell->ncomands);
+	printf("  n_comands: %zu\n",g_minishell->nexecutables);
 	printf("  n_redireccions: %zu\n\n",g_minishell->nredirections);
-	while(i < (g_minishell->ncomands + g_minishell->npipes))
+	while(i < (g_minishell->nexecutables + g_minishell->npipes))
 	{
 		printf("\tCMD\n");
 		printf("\t  content: %s\n",g_minishell->args[i].content);

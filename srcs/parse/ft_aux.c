@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:32:36 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/13 21:37:05 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/16 15:42:24 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_printgeneral(t_general *general)
 
 	printf("------------ general struct --------------\n");
 	printf("npipes : %zu\n", general->npipes);
-	printf("ncomands : %zu\n", general->ncomands);
+	printf("ncomands : %zu\n", general->nexecutables);
 	printf("nredirections : %zu\n", general->nredirections);
 	printf("quot : %d\n", general->quot);
 	printf("dquot : %d\n", general->dquot);
@@ -54,7 +54,7 @@ void	ft_printgeneral(t_general *general)
 void	ft_inigeneral(t_general *general)
 {
 	general->npipes = 0;
-	general->ncomands = 0;
+	general->nexecutables = 0;
 	general->nredirections = 0;
 	general->quot = 1;
 	general->dquot = 1;

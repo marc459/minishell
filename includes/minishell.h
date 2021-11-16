@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/16 15:37:52 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/16 15:47:46 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	**ft_parsepaths(char **envp);
 void	define_fds(t_general *g_mini);
 void	administratepipe(int i, t_general *g_mini);
 void	administratestds(int i, t_general *g_mini);
-void	waitforthem(int childpid, int nchilds);
+void	waitforthem(int *childpid, int nchilds);
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);

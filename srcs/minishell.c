@@ -6,12 +6,11 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/16 15:37:25 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/16 15:48:16 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
 
 # if defined(__APPLE__)
 	#	define SO "MACOS"
@@ -88,12 +87,9 @@ int		main(int argc,char **argv, char **envp)
 			ft_parse(&g_minishell,command);
 			//printf("Llegue\n");
 			ft_printgeneral(&g_minishell);
-			
 			//system("leaks minishell");
-			
 			//Executor
 			printf("%s< QUINES && MEXIL SHELL >%s\n\n",BCyan,Color_Off); //
-			
 			ft_executor(&g_minishell,envp,&pid);
 			printf("%s< REAL BASH >%s\n\n",BCyan,Color_Off); //	
 			//system(command); //

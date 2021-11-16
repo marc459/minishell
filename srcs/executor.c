@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/16 15:36:13 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/16 15:47:36 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	administratepipe(int i, t_general *g_mini)
 		pipe(g_mini->exec[i].pipe);
 }
 
-void	waitforthem(int childpid, int nchilds)
+void	waitforthem(int *childpid, int nchilds)
 {
 	int	i;
 

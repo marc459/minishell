@@ -6,33 +6,31 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/13 22:09:03 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/16 15:37:52 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef MINISHELL_H
+#	ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <signal.h>
-#include <math.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+# include <signal.h>
+# include <math.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <sys/types.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include <sys/uio.h>
 # include <fcntl.h>
-#include "../readline/readline.h"
-#include "../readline/history.h"
-#include "../libft/libft.h"
-#include "bashcolors.h"
+# include "../readline/readline.h"
+# include "../readline/history.h"
+# include "../libft/libft.h"
+# include "bashcolors.h"
 
-
-#define READ_END    0
-#define WRITE_END   1
-
+# define READ_END    0
+# define WRITE_END   1
 
 typedef struct s_arg {
 	size_t	type;
@@ -41,7 +39,7 @@ typedef struct s_arg {
 
 typedef struct s_exec {
 	int	posexec;
-	int pipe[2];
+	int	pipe[2];
 }				t_exec;
 
 typedef struct s_parse
@@ -53,7 +51,7 @@ typedef struct s_parse
 
 typedef struct s_general {
 	size_t	npipes;
-	size_t	ncomands;
+	size_t	nexecutables;
 	size_t	nredirections;
 	t_arg	*args;
 	t_exec	*exec;
@@ -65,18 +63,18 @@ typedef struct s_general {
 	size_t	argssize;
 }			t_general;
 
-
-char **provisional_parser(t_general *g_minishell,char *command);
-void	signals();
+char	**provisional_parser(t_general *g_minishell, char *command);
+void	signals(void);
 void	quitsignal(int sig);
-void	ft_executor(t_general *g_minishell,char **envp,int *pid);
+void	ft_executor(t_general *g_minishell, char **envp, int *pid);
 char	*ft_findpath(char **envp);
 char	*read_line(char *command);
-void	ft_pruveaccess(char *cmd, char **mycmd, char **envp);
-void	ft_parent(int fd2,int pid, char **mycmd2, char **envp, int *end);
-void	ft_child(char **mycmd1, char **envp,int *stdi, int *stdo);
+void	ft_child(char **fullcmd, char **envp, int *stdo);
 char	**ft_parsepaths(char **envp);
-void	ft_child2(int *fd, int pid, char **mycmd2, char **envp, int *end);
+void	define_fds(t_general *g_mini);
+void	administratepipe(int i, t_general *g_mini);
+void	administratestds(int i, t_general *g_mini);
+void	waitforthem(int childpid, int nchilds);
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);
@@ -98,4 +96,4 @@ char	*ft_cutstr(char *str);
 size_t	ft_countcut(char *str);
 size_t	ft_findchar(char *str, char c);
 
-# endif	
+#	endif	

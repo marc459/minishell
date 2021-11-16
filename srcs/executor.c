@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/15 22:31:07 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/16 15:36:13 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,16 @@ char	*ft_findpath(char **envp)
 	return (NULL);
 }
 
-void	ft_executor(t_general *g_mini, char **envp, int *pid)
+void	define_fds(t_general *g_mini)
 {
-	char	*paths;
-	int		i;
-	int		x;
-	char	**cmd;
-	int		a;
-	int		stdo;
-	int		stdi;
-	
-	g_mini->fdout = dup(STDOUT_FILENO);
-	g_mini->fdin = dup(STDIN_FILENO);
+	int	i;
+	int	x;
+
 	i = 0;
 	x = 0;
-	g_mini->exec = calloc(sizeof(t_exec), (g_mini->ncomands + 1));
-	while (i < (g_mini->ncomands + g_mini->npipes + g_mini->nredirections))
+	g_mini->fdout = dup(STDOUT_FILENO);
+	g_mini->fdin = dup(STDIN_FILENO);
+	while (i < (g_mini->nexecutables + g_mini->npipes + g_mini->nredirections))
 	{
 		if (g_mini->args[i].type == 3)
 		{
@@ -52,67 +46,61 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 		else if (g_mini->args[i].type == 1)
 			g_mini->fdin = open(g_mini->args[i + 1].content, O_RDONLY);
 		else if (g_mini->args[i].type == 2)
-			g_mini->fdout = open(g_mini->args[i + 1].content, O_CREAT | O_RDWR | O_TRUNC, 0755);
+			g_mini->fdout = open(g_mini->args[i + 1].content,
+					O_CREAT | O_RDWR | O_TRUNC, 0755);
 		i++;
 	}
-	paths = ft_findpath(envp);
-	if (!paths)
+}
+
+void	administratepipe(int i, t_general *g_mini)
+{
+	if (i == 1)
+		close(g_mini->exec[i - 1].pipe[WRITE_END]);
+	if (i > 1)
 	{
-		printf("PATH not found.\n");
-		exit (EXIT_FAILURE);
+		close(g_mini->exec[i - 2].pipe[READ_END]);
+		close(g_mini->exec[i - 1].pipe[WRITE_END]);
 	}
+	if (i < g_mini->npipes)
+		pipe(g_mini->exec[i].pipe);
+}
+
+void	waitforthem(int childpid, int nchilds)
+{
+	int	i;
+
 	i = 0;
-	x = 0;
-	while (i < g_mini->ncomands)
+	while (i < nchilds)
 	{
-		if (i == 1)
-			close(g_mini->exec[i - 1].pipe[WRITE_END]);
-		if (i > 1)
-		{
-			close(g_mini->exec[i - 2].pipe[READ_END]);
-			close(g_mini->exec[i - 1].pipe[WRITE_END]);
-		}
-		if (i < g_mini->npipes)
-			pipe(g_mini->exec[i].pipe);
+		wait(childpid);
+		i++;
+	}
+}
+
+void	ft_executor(t_general *g_mini, char **envp, int *pid)
+{
+	int		i;
+	char	**cmd;
+
+	i = 0;
+	g_mini->exec = calloc(sizeof(t_exec), (g_mini->nexecutables + 1));
+	define_fds(g_mini);
+	while (i < g_mini->nexecutables)
+	{
+		administratepipe(i, g_mini);
 		pid[0] = fork();
-		if (pid[0] < 0)
-			printf("Error\n");
-		else if (pid[0] == 0)
+		if (pid[0] == 0)
 		{
 			cmd = ft_split(g_mini->args[g_mini->exec[i].posexec].content, ' ');
-			if (i == 0)
-			{
-				if(g_mini->npipes > 0)
-					g_mini->fdout = g_mini->exec[i].pipe[WRITE_END];
-				close(g_mini->exec[i].pipe[READ_END]);
-				dup2(g_mini->fdout, STDOUT_FILENO);
-				close(g_mini->exec[i].pipe[WRITE_END]);
-				dup2(g_mini->fdin, STDIN_FILENO);
-			}
-			else if (i == (g_mini->ncomands - 1))
-			{
-				dup2(g_mini->exec[i - 1].pipe[READ_END], STDIN_FILENO);
-				close(g_mini->exec[i - 1].pipe[READ_END]);
-				dup2(g_mini->fdout, STDOUT_FILENO);
-			}
-			else
-			{
-				close(g_mini->exec[i].pipe[READ_END]);
-				dup2(g_mini->exec[i - 1].pipe[READ_END], STDIN_FILENO);
-				dup2(g_mini->exec[i].pipe[WRITE_END], STDOUT_FILENO);
-				close(g_mini->exec[i].pipe[WRITE_END]);
-			}
-			ft_child(cmd, envp, &g_mini->fdin, &g_mini->fdout);
+			administratestds(i, g_mini);
+			ft_child(cmd, envp, &g_mini->fdout);
 			ft_freebidstr(cmd);
 			exit (EXIT_FAILURE);
 		}
+		else if (pid[0] < 0)
+			printf("Error");
 		i++;
 	}
-	i = 0;
-	while (i < g_mini->ncomands)
-	{
-		wait(&a);
-		i++;
-	}
+	waitforthem(&i, g_mini->nexecutables);
 	free(g_mini->exec);
 }

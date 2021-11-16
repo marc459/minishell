@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/15 20:14:05 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/16 15:37:25 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	hola()
 void	free_gminishell(t_general *g_minishell)
 {
 	free(g_minishell->args);
-	
 }
 int		main(int argc,char **argv, char **envp)
 {

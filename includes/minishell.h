@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/15 18:40:26 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/17 16:23:30 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ void	ft_countthings(t_general *g);
 char	*ft_cutstr(char *str);
 size_t	ft_countcut(char *str);
 size_t	ft_findchar(char *str, char c);
+int		str_isnumber(char *str);
 
 #endif

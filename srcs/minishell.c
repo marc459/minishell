@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/16 18:25:35 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/17 16:39:38 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,27 @@ void	free_gminishell(t_general *g_minishell)
 	free(g_minishell->args);
 }
 
+void	exit_error(char *command)
+{
+	char **freespaces;
+	freespaces = ft_split(command,' ');
+	if(freespaces[1] && (!str_isnumber(freespaces[1]) || ft_bidstrlen(freespaces) > 2))
+		printf("minishell: exit: 00-99: numeric argument required\n");
+}
+
 void	ft_prompt(t_general *g_m, char **environ)
 {
 	pid_t		pid;
 	char		*command;
 
 	command = calloc(sizeof(char), 64);
-	command = read_line(command);
-	while (ft_strncmp(command, "exit", 5))
+	
+	while (ft_strncmp(command, "exit", 4))
 	{
 		ft_inigeneral(g_m);
-		if (ft_strncmp(command, "exit", 5) && ft_strncmp(command, "", 1))
+		free(command);
+		command = read_line(command);
+		if (ft_strncmp(command, "exit", 4) && ft_strncmp(command, "", 1))
 		{
 			system("clear");
 			ft_parse(g_m, command);
@@ -71,12 +81,27 @@ void	ft_prompt(t_general *g_m, char **environ)
 			system(command);
 			ft_freeall(g_m);
 		}
-		free(command);
-		command = read_line(command);
+		else
+			exit_error(command);
 	}
 	free(command);
 }
 
+void	runcflag(t_general	g_minishell, char **environ, char **argv, int pid)
+{
+	if (ft_bidstrlen(argv) >= 3 && !ft_strncmp(argv[1], "-c", 3))
+	{
+		ft_inigeneral(&g_minishell);
+		if (ft_strncmp(argv[2], "exit", 5) && ft_strncmp(argv[2], "", 1))
+		{
+			ft_parse(&g_minishell, argv[2]);
+			ft_executor(&g_minishell, environ, &pid);
+			ft_freeall(&g_minishell);
+		}
+		exit (0);
+	}
+	
+}
 int	main(int argc, char **argv)
 {
 	extern char	**environ;
@@ -84,20 +109,7 @@ int	main(int argc, char **argv)
 	int			status;
 	t_general	g_minishell;
 
-	if (argc >= 3 && !ft_strncmp(argv[1], "-c", 3))
-	{
-		ft_inigeneral(&g_minishell);
-		if (ft_strncmp(argv[2], "exit", 5) && ft_strncmp(argv[2], "", 1))
-		{
-			ft_parse(&g_minishell, argv[2]);
-			ft_executor(&g_minishell, environ, &pid);
-			ft_printgeneral(&g_minishell);
-			ft_freeall(&g_minishell);
-		}
-		return (0);
-	}
-	if (argc > 1)
-		return (-1);
+	runcflag(g_minishell, environ, argv, pid);
 	signals();
 	ft_prompt(&g_minishell, environ);
 	printf("exit\n");

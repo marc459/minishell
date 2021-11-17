@@ -16,7 +16,8 @@ LIBS = $(LIBFT_PATH)/$(LIBFT) $(READLINE)
 #SRCS
 PROGRAM_SRCS = minishell.c parser.c signals.c executor.c executor2.c \
 				parse/ft_args.c parse/ft_args2.c parse/ft_args3.c \
-				parse/ft_aux.c parse/ft_aux2.c parse/ft_parse.c
+				parse/ft_aux.c parse/ft_aux2.c parse/ft_parse.c \
+				utils.c
 
 #OBJS
 PROGRAM_OBJS = $(addprefix $(OBJ_PATH)/,$(PROGRAM_SRCS:.c=.o))

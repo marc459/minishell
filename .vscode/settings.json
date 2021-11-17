@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.sol": "javascript",
         "__bit_reference": "c",
         "__hash_table": "c",
         "__split_buffer": "c",
@@ -10,6 +11,7 @@
         "string": "c",
         "string_view": "c",
         "unordered_map": "c",
-        "vector": "c"
+        "vector": "c",
+        "sstream": "c"
     }
 }

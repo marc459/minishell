@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/16 15:47:46 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/17 14:01:52 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ void	ft_countthings(t_general *g);
 char	*ft_cutstr(char *str);
 size_t	ft_countcut(char *str);
 size_t	ft_findchar(char *str, char c);
+int		str_isnumber(char *str);
 
 #	endif	

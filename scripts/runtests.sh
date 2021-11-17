@@ -7,4 +7,4 @@
 # w c
 #a
 cd `find . -name "42_minishell_tester"`
-bash grademe.sh -c
+bash grademe.sh -c exit

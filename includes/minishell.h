@@ -6,11 +6,11 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/17 14:01:52 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/17 16:23:30 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#	ifndef MINISHELL_H
+#ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include <signal.h>
@@ -97,4 +97,4 @@ size_t	ft_countcut(char *str);
 size_t	ft_findchar(char *str, char c);
 int		str_isnumber(char *str);
 
-#	endif	
+#endif

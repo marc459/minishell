@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/17 16:39:38 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/17 17:01:08 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,13 @@ char	*read_line(char *command)
 }
 #endif
 
-void	hola(void)
-{
-	system("leaks minishell");
-}
-
-void	free_gminishell(t_general *g_minishell)
-{
-	free(g_minishell->args);
-}
-
 void	exit_error(char *command)
 {
-	char **freespaces;
-	freespaces = ft_split(command,' ');
-	if(freespaces[1] && (!str_isnumber(freespaces[1]) || ft_bidstrlen(freespaces) > 2))
+	char	**freespaces;
+
+	freespaces = ft_split(command, ' ');
+	if (freespaces[1] && (!str_isnumber(freespaces[1])
+			|| ft_bidstrlen(freespaces) > 2))
 		printf("minishell: exit: 00-99: numeric argument required\n");
 }
 
@@ -65,7 +57,6 @@ void	ft_prompt(t_general *g_m, char **environ)
 	char		*command;
 
 	command = calloc(sizeof(char), 64);
-	
 	while (ft_strncmp(command, "exit", 4))
 	{
 		ft_inigeneral(g_m);
@@ -87,21 +78,6 @@ void	ft_prompt(t_general *g_m, char **environ)
 	free(command);
 }
 
-void	runcflag(t_general	g_minishell, char **environ, char **argv, int pid)
-{
-	if (ft_bidstrlen(argv) >= 3 && !ft_strncmp(argv[1], "-c", 3))
-	{
-		ft_inigeneral(&g_minishell);
-		if (ft_strncmp(argv[2], "exit", 5) && ft_strncmp(argv[2], "", 1))
-		{
-			ft_parse(&g_minishell, argv[2]);
-			ft_executor(&g_minishell, environ, &pid);
-			ft_freeall(&g_minishell);
-		}
-		exit (0);
-	}
-	
-}
 int	main(int argc, char **argv)
 {
 	extern char	**environ;

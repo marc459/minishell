@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_args2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 23:15:08 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/11 13:41:58 by marcos           ###   ########.fr       */
+/*   Updated: 2021/11/17 17:01:56 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,5 @@ void	ft_refacttypes(t_general *g)
 		else
 			newargs++;
 	}
-	/* if (newargs == g->argssize)
-		return ; */
 	ft_droprefact(g, newargs);
 }

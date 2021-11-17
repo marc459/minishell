@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:57:21 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/17 14:35:19 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/17 17:01:17 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,38 @@ int	str_isnumber(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (!(str[i] >= '0' && str[i] <= '9') && str[i] != '-')
+		if (!(str[i] >= '0' && str[i] <= '9') && str[i] != '-' && str[i] != '+')
 			return (0);
-		/*else if (str[i] == '-' && !(str[i + 1] >= '0' && str[i + 1] <= '9'))
-			return (0);*/
+		else if (str[i] == '-' && !(str[i + 1] >= '0' && str[i + 1] <= '9'))
+			return (0);
+		else if (str[i] == '+' && !(str[i + 1] >= '0' && str[i + 1] <= '9'))
+			return (0);
 		i++;
 	}
 	return (1);
+}
+
+void	leakatexit(void)
+{
+	system("leaks minishell");
+}
+
+void	free_gminishell(t_general *g_minishell)
+{
+	free(g_minishell->args);
+}
+
+void	runcflag(t_general	g_minishell, char **environ, char **argv, int pid)
+{
+	if (ft_bidstrlen(argv) >= 3 && !ft_strncmp(argv[1], "-c", 3))
+	{
+		ft_inigeneral(&g_minishell);
+		if (ft_strncmp(argv[2], "exit", 5) && ft_strncmp(argv[2], "", 1))
+		{
+			ft_parse(&g_minishell, argv[2]);
+			ft_executor(&g_minishell, environ, &pid);
+			ft_freeall(&g_minishell);
+		}
+		exit (0);
+	}
 }

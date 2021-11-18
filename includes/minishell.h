@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/18 16:19:34 by marcos           ###   ########.fr       */
+/*   Updated: 2021/11/18 17:06:53 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct s_general {
 	size_t	argssize;
 }			t_general;
 
-char	**provisional_parser(t_general *g_minishell, char *command);
 void	signals(void);
 void	quitsignal(int sig);
 void	ft_executor(t_general *g_minishell, char **envp, int *pid);
@@ -77,6 +76,8 @@ void	define_fds(t_general *g_mini);
 void	administratepipe(int i, t_general *g_mini);
 void	administratestds(int i, t_general *g_mini);
 void	waitforthem(int *childpid, int nchilds);
+void	leakatexit(void);
+void	runcflag(t_general	g_minishell, char **environ, char **argv, int pid);
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);
@@ -98,5 +99,6 @@ char	*ft_cutstr(char *str);
 size_t	ft_countcut(char *str);
 size_t	ft_findchar(char *str, char c);
 int		str_isnumber(char *str);
+void	free_gminishell(t_general *g_minishell);
 
 #endif

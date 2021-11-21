@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/17 17:00:08 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/21 15:45:12 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ size_t	ft_countcut(char *str);
 size_t	ft_findchar(char *str, char c);
 int		str_isnumber(char *str);
 void	free_gminishell(t_general *g_minishell);
+void	ft_refactquotes(t_general *g);
 
 #endif

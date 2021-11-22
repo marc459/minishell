@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 13:29:50 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/13 22:01:53 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/22 16:56:22 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include "get_next_line/get_next_line.h"
+# include <limits.h>
 
 typedef struct s_list
 {
@@ -69,6 +70,10 @@ int		ft_intlen(const long int value);
 char	*ft_itoa_without_minus(long int n);
 int		ft_len(long nb);
 void	ft_freebidstr(char **s);
+char	*ft_splitjoin(char	**split, char cjoin);
+int		ft_getposition(char	*str, char c);
+char	*ft_trimchar(char *str, char c);
+char	*ft_revtrimchar(char *str, char c);
 
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
@@ -79,6 +84,5 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-
 
 #endif

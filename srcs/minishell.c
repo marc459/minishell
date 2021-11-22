@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/22 20:10:00 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/22 20:26:42 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 char	*read_line(char *command)
 {
+	free(command);
 	command = readline("Quineshell-1.0:");
 	add_history (command);
 	return (command);
@@ -29,6 +30,10 @@ char	*read_line(char *command)
 	int	i;
 
 	i = 0;
+	ft_putstr_fd("Quineshell-1.0:",1);
+	//scanf("%s");
+	read(0,command,64);
+	printf("faf\n");
 	while (command[i])
 	{
 		if (command[i] == 10)
@@ -37,6 +42,7 @@ char	*read_line(char *command)
 		}
 		i++;
 	}
+	printf("cmd:%s;\n",command);
 	return (command);
 }
 #endif
@@ -70,53 +76,34 @@ void	ft_prompt(t_general *g_m, char **environ)
 	pid_t		pid;
 	char		*command;
 
-	command = calloc(sizeof(char), 64);
+	command = ft_calloc(sizeof(char), 64);
 	while (ft_strncmp(command, "exit", 4))
 	{
 		ft_inigeneral(g_m);
-		free(command);
 		command = read_line(command);
 		if (ft_strncmp(command, "exit", 4) && ft_strncmp(command, "", 1))
 		{
-			system("clear");
+			//system("clear");
 			ft_parse(g_m, command);
 			ft_printgeneral(g_m);
 			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCyan, Color_Off);
 			ft_executor(g_m, environ, &pid);
 			printf("%s< REAL BASH >%s\n\n", BCyan, Color_Off);
-			system(command);
-			ft_freeall(g_m);
+			//system(command);
 		}
 		else
 			exit_error(&command);
 	}
-	free(command);
 }
 
-void	runcflag(t_general	g_minishell, char **environ, char **argv, int pid)
-{
-	if (ft_bidstrlen(argv) >= 3 && !ft_strncmp(argv[1], "-c", 3))
-	{
-		ft_inigeneral(&g_minishell);
-		if (ft_strncmp(argv[2], "exit", 5) && ft_strncmp(argv[2], "", 1))
-		{
-			ft_parse(&g_minishell, argv[2]);
-			ft_executor(&g_minishell, environ, &pid);
-			ft_freeall(&g_minishell);
-		}
-		exit (0);
-	}
-	
-}
 int	main(int argc, char **argv)
 {
 	extern char	**environ;
 	pid_t		pid;
-	int			status;
 	t_general	g_minishell;
 
 	runcflag(g_minishell, environ, argv, pid);
-	signals();
+	//signals();
 	ft_prompt(&g_minishell, environ);
 	printf("exit\n");
 	return (0);

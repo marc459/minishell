@@ -14,7 +14,7 @@ INCLUDES = -I ./includes -I ./readline -I ./readline/examples
 LIBS = $(LIBFT_PATH)/$(LIBFT) $(READLINE)
 
 #SRCS
-PROGRAM_SRCS = minishell.c parser.c signals.c executor.c executor2.c \
+PROGRAM_SRCS = minishell.c signals.c executor.c executor2.c \
 				parse/ft_args.c parse/ft_args2.c parse/ft_args3.c \
 				parse/ft_aux.c parse/ft_aux2.c parse/ft_parse.c \
 				utils.c
@@ -24,7 +24,8 @@ PROGRAM_OBJS = $(addprefix $(OBJ_PATH)/,$(PROGRAM_SRCS:.c=.o))
 	
 #FLAGS
 CC = gcc
-CFLAGS =  -g3 -fsanitize=address -Wall -Werror -Wextra
+CFLAGS =  -g 
+#-g3 -fsanitize=address -Wall -Werror -Wextra
 
 ifeq ($(OS),Windows_NT) 
  detected_OS := Windows

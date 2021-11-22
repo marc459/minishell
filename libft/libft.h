@@ -6,13 +6,14 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 13:29:50 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/22 00:32:57 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/22 16:56:22 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include "get_next_line/get_next_line.h"
+# include <limits.h>
 
 typedef struct s_list
 {

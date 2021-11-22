@@ -2,56 +2,67 @@
 PROGRAM = minishell
 
 #LIBS
-LIBFT = libft_42/libft.a
-PRINTF = ft_printf_42/libftprintf.a
-READLINE = readline/libreadline.a
-#readline/libhistory.a 
-LIBS = $(LIBFT) $(PRINTF)
+LIBFT = libft.a
+READLINE = readline/libreadline.a readline/libhistory.a 
+
 
 #PATHS
 OBJ_PATH = ./objs
 SRC_PATH = ./srcs
+LIBFT_PATH = ./libft
 INCLUDES = -I ./includes -I ./readline -I ./readline/examples
+LIBS = $(LIBFT_PATH)/$(LIBFT) $(READLINE)
 
 #SRCS
-PROGRAM_SRCS = minishell.c parser.c signals.c
+PROGRAM_SRCS = minishell.c signals.c executor.c executor2.c \
+				parse/ft_args.c parse/ft_args2.c parse/ft_args3.c \
+				parse/ft_aux.c parse/ft_aux2.c parse/ft_parse.c \
+				utils.c
 
 #OBJS
 PROGRAM_OBJS = $(addprefix $(OBJ_PATH)/,$(PROGRAM_SRCS:.c=.o))
 	
 #FLAGS
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
-TERMCAP_LIB = -ltermcap
+CFLAGS =  -g3 -fsanitize=address -Wall -Werror -Wextra
 
+ifeq ($(OS),Windows_NT) 
+ detected_OS := Windows
+else
+ detected_OS := $(shell sh -c 'uname 2>/dev/null || echo Unknown')
+endif
+
+ifeq ($(detected_OS),Darwin)
+ TERMCAP_LIB = -ltermcap
+endif
+ifeq ($(detected_OS),Linux)
+ TERMCAP_LIB =
+endif
 	
 #INSTRUCTIONS
-all: submodule ft_printf libft minishell
+all: libftt minishell
 	
 #EVERY TIME A .O IS CALLED AS AN INSTRUCTION THIS WILL BE CREATED IN OBJ_PATH
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
-	@mkdir -p $(OBJ_PATH) 2> /dev/null || true
+	@mkdir -p $(OBJ_PATH)/parse 2> /dev/null || true
 	@$(CC) $(INCLUDES) -o $@ -c $^
 			
 submodule:
 	@git submodule init
 	@git submodule update --remote
-					
-#CHECKS THE EXISTANCE OF AN COMPILING FTPRINTF LIBRARY 
-ft_printf:
-	@make -C ft_printf_42  > /dev/null
-libft:
-	@make -C libft_42 > /dev/null
+
+libftt:
+	@make -C $(LIBFT_PATH)
 							
 minishell: $(PROGRAM_OBJS)
-	@$(CC)  $(PROGRAM_OBJS) $(LIBFT) $(PRINTF) $(READLINE) $(TERMCAP_LIB) -o $(PROGRAM)
+	
+	@$(CC) $(CFLAGS) $(PROGRAM_OBJS)  $(LIBS) $(TERMCAP_LIB) -o $(PROGRAM)
 								
 clean:
 	@rm -rf $(OBJ_PATH)
 									
 fclean: clean
-	@rm -rf $(PROGRAM) $(CLIENT)
-	@make fclean -C ft_printf_42 > /dev/null
-	@make fclean -C libft_42 > /dev/null
+	@rm -rf $(PROGRAM)
+	@make fclean -C $(LIBFT_PATH) > /dev/null
 												
 re: fclean all

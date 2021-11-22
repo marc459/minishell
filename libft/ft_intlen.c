@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   ft_intlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 22:12:07 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/17 17:00:46 by msantos-         ###   ########.fr       */
+/*   Created: 2020/01/28 16:28:12 by msantos-          #+#    #+#             */
+/*   Updated: 2021/06/09 16:54:43 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "libft.h"
 
-void	quitsignal(int sig)
+int	ft_intlen(const long int value)
 {
-	printf("\nQuineshell-1.0:");
-}
+	long int	l;
+	long int	cpy;
 
-void	signals(void)
-{
-	signal(SIGINT, &quitsignal);
+	cpy = value;
+	l = !cpy;
+	while (cpy)
+	{
+		l++;
+		cpy = cpy / 10;
+	}
+	return (l);
 }

@@ -1,0 +1,31 @@
+ls -la > file ; cat file
+ifconfig | grep "192.168" > file ; cat file
+echo text > file text2 > file1 ; cat file file1
+echo text > file ; cat file
+echo text > file ; cat file
+echo text > $PWD/file text2 ; cat $PWD/file
+echo text$USER > file $USER ; cat file
+echo "text"$USER > file ; cat file
+echo $USER"text""'$USER'""$USER" > file >> file2 $USER ; cat file file2
+echo '$USER'"123$USER123""text" > file ; cat file
+echo "text" > file >> file1 ; cat file file1
+echo "text" > file text2 ; cat file
+echo "text" > file text ; cat file
+echo "text" > file ; cat file
+echo "text" > file ; cat file ; rm -f file
+echo text$USER > file $USER ; cat file ; rm -f file
+echo "text"$USER > file ; cat file ; rm -f file
+echo $USER"text""'$USER'""$USER" > file >> file2 $USER ; cat file file2 ; rm -f file file2
+echo '$USER'"123$USER123""text" > file ; cat file ; rm -f file
+echo "text" > file >> file1 ; cat file file1 ; rm -f file file1
+echo $USER  $USER7777"text"$USER $USER9999 > file $USER $USER9999 ; cat file ; rm -f file
+echo $USER  $USER7777"text"$USER $USER9999 > file $USER $USER9999 ; cat file
+echo something > > file ; cat < file
+echo something > file ; cat file
+echo something > file ; >> file ls -la ; cat file
+> file echo something ; cat file
+> file cat test.sh
+cat < README.md
+cat < README.md test.sh
+cat < README.md | wc -l | xargs
+cat < README.md > file ; cat file | wc -l | xargs > file1 ; cat file1

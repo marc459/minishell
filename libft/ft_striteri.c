@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 22:12:07 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/17 17:00:46 by msantos-         ###   ########.fr       */
+/*   Created: 2021/08/02 16:58:30 by emgarcia          #+#    #+#             */
+/*   Updated: 2021/08/08 16:15:15 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "libft.h"
 
-void	quitsignal(int sig)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	printf("\nQuineshell-1.0:");
-}
+	size_t	i;
+	size_t	len;
 
-void	signals(void)
-{
-	signal(SIGINT, &quitsignal);
+	if (s)
+	{
+		i = -1;
+		len = ft_strlen(s);
+		while (++i < len)
+		{
+			f (i, s);
+			s++;
+		}
+	}
 }

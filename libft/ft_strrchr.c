@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/06 22:26:09 by msantos-          #+#    #+#             */
-/*   Updated: 2021/10/12 20:16:16 by msantos-         ###   ########.fr       */
+/*   Created: 2021/07/29 15:28:03 by emgarcia          #+#    #+#             */
+/*   Updated: 2021/08/08 21:17:15 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "libft.h"
 
-//Divides command line in (command,file,pipe,expansion)
-int		parser(char *command)
+char	*ft_strrchr(const char *s, int c)
 {
-	char	**commands;
-	int i;
+	char	*aux;
 
-	i = 0;
-	commands = ft_split(command,' ');
-	while(commands[i])
+	if (c > 256)
+		c %= 256;
+	aux = NULL;
+	while (*s != '\0')
 	{
-		ft_printf("%s\n",commands[i]);
-		i++;
+		if (*s == c)
+			aux = (char *)s;
+		s++;
 	}
-	return(1);
+	if (*s == c)
+		aux = (char *)s;
+	return (aux);
 }

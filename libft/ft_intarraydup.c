@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   ft_intarraydup.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 22:12:07 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/17 17:00:46 by msantos-         ###   ########.fr       */
+/*   Created: 2021/05/28 10:27:40 by msantos-          #+#    #+#             */
+/*   Updated: 2021/11/08 20:41:14 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "libft.h"
 
-void	quitsignal(int sig)
+int	*ft_intarraydup(int *n1)
 {
-	printf("\nQuineshell-1.0:");
-}
+	int	i;
+	int	*ret;
 
-void	signals(void)
-{
-	signal(SIGINT, &quitsignal);
+	i = ft_len((long)n1);
+	if (!i)
+		return (NULL);
+	ret = (int *)malloc(sizeof(int) * i);
+	if (!ret)
+		return (NULL);
+	ft_memcpy(ret, n1, i);
+	return (ret);
 }

@@ -1,0 +1,17 @@
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==97458==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x00010702e291 bp 0x7ffee8bd5630 sp 0x7ffee8bd5630 T0)
+==97458==The signal is caused by a READ memory access.
+==97458==Hint: address points to the zero page.
+    #0 0x10702e290 in ft_strncmp (minishell:x86_64+0x100004290)
+    #1 0x10702b65a in main (minishell:x86_64+0x10000165a)
+    #2 0x7fff692cb3d4 in start (libdyld.dylib:x86_64+0x163d4)
+
+==97458==Register values:
+rax = 0x0000000000000000  rbx = 0x0000000000000000  rcx = 0x0000000000000000  rdx = 0x0000000000000000  
+rdi = 0x0000000000000000  rsi = 0x0000000000000000  rbp = 0x00007ffee8bd5630  rsp = 0x00007ffee8bd5630  
+ r8 = 0x0000200000000000   r9 = 0x00000fffffffffff  r10 = 0x0000000000000000  r11 = 0xffffffffffffffff  
+r12 = 0x0000000000000000  r13 = 0x0000000000000000  r14 = 0x0000000000000000  r15 = 0x0000000000000000  
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV (minishell:x86_64+0x100004290) in ft_strncmp
+==97458==ABORTING

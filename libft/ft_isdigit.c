@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 22:12:07 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/17 17:00:46 by msantos-         ###   ########.fr       */
+/*   Created: 2021/07/28 14:13:56 by emgarcia          #+#    #+#             */
+/*   Updated: 2021/07/29 19:06:47 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "libft.h"
 
-void	quitsignal(int sig)
+int	ft_isdigit(int c)
 {
-	printf("\nQuineshell-1.0:");
-}
-
-void	signals(void)
-{
-	signal(SIGINT, &quitsignal);
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
 }

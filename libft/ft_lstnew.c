@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 22:12:07 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/17 17:00:46 by msantos-         ###   ########.fr       */
+/*   Created: 2021/08/06 19:30:54 by emgarcia          #+#    #+#             */
+/*   Updated: 2021/08/07 21:04:28 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "libft.h"
 
-void	quitsignal(int sig)
+t_list	*ft_lstnew(void *content)
 {
-	printf("\nQuineshell-1.0:");
-}
+	t_list	*el_list;
 
-void	signals(void)
-{
-	signal(SIGINT, &quitsignal);
+	el_list = (t_list *)malloc(sizeof(t_list));
+	if (el_list == NULL)
+		return (NULL);
+	el_list->content = content;
+	el_list->next = NULL;
+	return (el_list);
 }

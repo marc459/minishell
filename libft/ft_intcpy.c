@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   ft_intcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 22:12:07 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/17 17:00:46 by msantos-         ###   ########.fr       */
+/*   Created: 2021/06/10 20:01:27 by msantos-          #+#    #+#             */
+/*   Updated: 2021/06/10 20:11:22 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "libft.h"
 
-void	quitsignal(int sig)
+void	*ft_intcpy(int *dst, int *src, size_t n)
 {
-	printf("\nQuineshell-1.0:");
-}
+	size_t	i;
+	int		*src_c;
+	int		*dst_c;
 
-void	signals(void)
-{
-	signal(SIGINT, &quitsignal);
+	src_c = src;
+	dst_c = dst;
+	i = 0;
+	if (!n || dst == src)
+		return (dst);
+	while (i < n)
+	{
+		dst_c[i] = src_c[i];
+		i++;
+	}
+	return (dst);
 }

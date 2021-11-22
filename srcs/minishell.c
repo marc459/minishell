@@ -1,67 +1,93 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
+/*   Updated: 2021/11/17 17:01:08 by msantos-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <minishell.h>
 
-char *stripwhite (char *string)
+#if defined(__APPLE__)
+# define SO "MACOS"
+
+char	*read_line(char *command)
 {
-	register char *s, *t;
-
-	for (s = string; *s == ' '; s++)
-	;
-
-	if (*s == 0)
-		return (s);
-
-	t = s + strlen (s) - 1;
-	while (t > s && *t == ' ')
-	t--;
-	*++t = '\0';
-
-	return s;
-}
-
-int		main(int argc,char **argv, char **env)
-{
-	int status;
-	pid_t	pid;
-	char	*command;
-	char *s;
-	
-
-	if(argc > 1)
-		return (-1);
-	signals();
-	command = malloc(sizeof(char) * 64);
-	ft_memset(command, '\0', 64);
 	command = readline("Quineshell-1.0:");
 	add_history (command);
+	return (command);
+}
+#else
+# define SO "LINUX"
 
-	while (ft_strncmp(command, "exit", ft_strlen(command)))
+char	*read_line(char *command)
+{
+	int	i;
+
+	i = 0;
+	while (command[i])
 	{
-		pid = fork();
-		if (pid == 0)
+		if (command[i] == 10)
 		{
-			//lexer
-			parser(command);
-			//Parser
+			command[i] = '\0';
+		}
+		i++;
+	}
+	return (command);
+}
+#endif
 
-			//Executor
-							
-			execlp(command, command, NULL); 
-			ft_printf("Quineshell: %s: command not found\n",command);
-			free(command);
-			exit(0);
+void	exit_error(char *command)
+{
+	char	**freespaces;
+
+	freespaces = ft_split(command, ' ');
+	if (freespaces[1] && (!str_isnumber(freespaces[1])
+			|| ft_bidstrlen(freespaces) > 2))
+		printf("minishell: exit: 00-99: numeric argument required\n");
+}
+
+void	ft_prompt(t_general *g_m, char **environ)
+{
+	pid_t		pid;
+	char		*command;
+
+	command = calloc(sizeof(char), 64);
+	while (ft_strncmp(command, "exit", 4))
+	{
+		ft_inigeneral(g_m);
+		free(command);
+		command = read_line(command);
+		if (ft_strncmp(command, "exit", 4) && ft_strncmp(command, "", 1))
+		{
+			system("clear");
+			ft_parse(g_m, command);
+			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCyan, Color_Off);
+			ft_executor(g_m, environ, &pid);
+			printf("%s< REAL BASH >%s\n\n", BCyan, Color_Off);
+			system(command);
+			ft_freeall(g_m);
 		}
 		else
-		{
-			if (pid > 0)
-			{
-				wait(&status);
-				command = readline("Quineshell-1.0:");
-				add_history (command);
-			}
-			else
-				ft_printf("Error Fork\n");
-		}
+			exit_error(command);
 	}
+	free(command);
+}
+
+int	main(int argc, char **argv)
+{
+	extern char	**environ;
+	pid_t		pid;
+	int			status;
+	t_general	g_minishell;
+
+	runcflag(g_minishell, environ, argv, pid);
+	signals();
+	ft_prompt(&g_minishell, environ);
+	printf("exit\n");
 	return (0);
 }

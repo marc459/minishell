@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   ft_bintodec.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 22:12:07 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/17 17:00:46 by msantos-         ###   ########.fr       */
+/*   Created: 2021/07/15 15:54:18 by msantos-          #+#    #+#             */
+/*   Updated: 2021/07/15 15:56:51 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "libft.h"
 
-void	quitsignal(int sig)
+int	ft_bintodec(long long n)
 {
-	printf("\nQuineshell-1.0:");
-}
+	int	dec;
+	int	i;
+	int	rem;
+	int	poww;
 
-void	signals(void)
-{
-	signal(SIGINT, &quitsignal);
+	i = 0;
+	dec = 0;
+	poww = 1;
+	while (n != 0)
+	{
+		rem = n % 10;
+		n /= 10;
+		dec += rem * poww;
+		poww = 2 * poww;
+		++i;
+	}
+	return (dec);
 }

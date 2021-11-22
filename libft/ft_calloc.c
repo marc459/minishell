@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 22:12:07 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/17 17:00:46 by msantos-         ###   ########.fr       */
+/*   Created: 2021/07/29 17:47:43 by emgarcia          #+#    #+#             */
+/*   Updated: 2021/08/03 20:34:22 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "libft.h"
 
-void	quitsignal(int sig)
+void	*ft_calloc(size_t count, size_t size)
 {
-	printf("\nQuineshell-1.0:");
-}
+	void	*final;
 
-void	signals(void)
-{
-	signal(SIGINT, &quitsignal);
+	final = malloc(count * size);
+	if (final == NULL)
+		return (final);
+	ft_bzero(final, size * count);
+	return (final);
 }

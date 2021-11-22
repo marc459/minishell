@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 22:12:07 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/17 17:00:46 by msantos-         ###   ########.fr       */
+/*   Created: 2021/07/29 12:20:50 by emgarcia          #+#    #+#             */
+/*   Updated: 2021/08/14 20:36:10 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "libft.h"
 
-void	quitsignal(int sig)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	printf("\nQuineshell-1.0:");
-}
+	size_t	i;
 
-void	signals(void)
-{
-	signal(SIGINT, &quitsignal);
+	i = -1;
+	while (++i < len)
+		((char *)b)[i] = c;
+	return (b);
 }

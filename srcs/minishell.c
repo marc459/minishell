@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/17 16:39:38 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/22 19:59:46 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,18 @@ void	free_gminishell(t_general *g_minishell)
 	free(g_minishell->args);
 }
 
-void	exit_error(char *command)
+void	exit_error(char **command)
 {
 	char **freespaces;
-	freespaces = ft_split(command,' ');
-	if(freespaces[1] && (!str_isnumber(freespaces[1]) || ft_bidstrlen(freespaces) > 2))
+	freespaces = ft_split(*command,' ');
+	if(freespaces[1] && !str_isnumber(freespaces[1]))
 		printf("minishell: exit: 00-99: numeric argument required\n");
+	else if(ft_bidstrlen(freespaces) > 2)
+	{
+		printf("minishell: exit: too many arguments\n");
+		*command =ft_strdup("noexit");
+	}
+		
 }
 
 void	ft_prompt(t_general *g_m, char **environ)
@@ -65,7 +71,6 @@ void	ft_prompt(t_general *g_m, char **environ)
 	char		*command;
 
 	command = calloc(sizeof(char), 64);
-	
 	while (ft_strncmp(command, "exit", 4))
 	{
 		ft_inigeneral(g_m);
@@ -82,7 +87,7 @@ void	ft_prompt(t_general *g_m, char **environ)
 			ft_freeall(g_m);
 		}
 		else
-			exit_error(command);
+			exit_error(&command);
 	}
 	free(command);
 }

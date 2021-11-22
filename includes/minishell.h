@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/18 17:06:53 by marcos           ###   ########.fr       */
+/*   Updated: 2021/11/22 21:07:59 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ typedef struct s_parse
 	size_t	comndssize;
 	size_t	comand;
 }			t_parse;
+
+typedef struct s_env
+{
+	char	*envvar;
+	char	*content;
+	struct s_env *next;
+}			t_env;
 
 typedef struct s_general {
 	size_t	npipes;

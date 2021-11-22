@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/22 20:28:45 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/22 22:52:16 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 char	*read_line(char *command)
 {
-	free(command);
+	//free(command);
 	command = readline("Quineshell-1.0:");
 	add_history (command);
 	return (command);
@@ -63,13 +63,37 @@ void	exit_error(char **command)
 		printf("minishell: exit: too many arguments\n");
 		*command =ft_strdup("noexit");
 	}
+	free(freespaces);
 		
+}
+void	checkquotes(t_general *g_m, char *command)
+{
+	char		*tmp;
+	char		*tmp2;
+
+	tmp2 = ft_calloc(sizeof(char), 64);
+	while(g_m->dquot == -1 || g_m->quot == -1)
+	{
+		free(tmp2);
+		free_gminishell(g_m);
+		ft_inigeneral(g_m);
+		tmp = readline(">");
+		tmp2 = ft_strjoin(command, tmp);
+		ft_parse(g_m, tmp2);
+		ft_printgeneral(g_m);
+		
+	}
+	add_history (tmp2);
+	free(tmp2);
+	
+	
 }
 
 void	ft_prompt(t_general *g_m, char **environ)
 {
 	pid_t		pid;
 	char		*command;
+	
 
 	command = ft_calloc(sizeof(char), 64);
 	while (ft_strncmp(command, "exit", 4))
@@ -80,7 +104,8 @@ void	ft_prompt(t_general *g_m, char **environ)
 		{
 			//system("clear");
 			ft_parse(g_m, command);
-			ft_printgeneral(g_m);
+			checkquotes(g_m, command);
+			
 			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCyan, Color_Off);
 			ft_executor(g_m, environ, &pid);
 			printf("%s< REAL BASH >%s\n\n", BCyan, Color_Off);
@@ -88,6 +113,7 @@ void	ft_prompt(t_general *g_m, char **environ)
 		}
 		else
 			exit_error(&command);
+		free_gminishell(g_m);
 	}
 }
 

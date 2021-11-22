@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/22 20:26:42 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/22 20:28:45 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,6 @@ char	*read_line(char *command)
 void	hola(void)
 {
 	system("leaks minishell");
-}
-
-void	free_gminishell(t_general *g_minishell)
-{
-	free(g_minishell->args);
 }
 
 void	exit_error(char **command)

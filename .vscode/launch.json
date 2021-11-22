@@ -13,6 +13,44 @@
             ],
             "cwd": "${fileDirname}",
             "preLaunchTask": "No env"
-        }
+        },
+        {
+			"name": "(gdb) Child fork",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/minishell",
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "gdb",
+			"setupCommands": [
+				{
+					"description": "Habilitar la impresión con sangría para gdb",
+					"text": "-gdb-set follow-fork-mode child",
+					"ignoreFailures": true
+				}
+			],
+            "args": [],
+		},
+		{
+			"name": "(gdb) Parent Fork",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/minishell",
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "gdb",
+			"setupCommands": [
+				{
+					"description": "Habilitar la impresión con sangría para gdb",
+					"text": "-gdb-set follow-fork-mode parent",
+					"ignoreFailures": true
+				}
+			],
+            "args": [],
+		}
     ]
 }

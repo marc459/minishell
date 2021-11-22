@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:11:14 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/21 15:13:06 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/18 16:20:15 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,7 @@ void	ft_countthings(t_general *g)
 			g->nexecutables++;
 		else if (g->args[i].type == 5)
 			g->npipes++;
+		else if (g->args[i].type == 6)
+			g->nsemicolons++;
 	}
 }

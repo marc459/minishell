@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_args3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:12:27 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/11 13:42:04 by marcos           ###   ########.fr       */
+/*   Updated: 2021/11/22 16:56:57 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,41 @@ void	ft_iniarg(t_general *g, size_t *j, char *str)
 	}
 	else
 		g->args[(*j)++].type = 3;
+}
+
+void	ft_dropquotes(t_general *g, size_t i)
+{
+	size_t	j;
+	size_t	k;
+	char	*aux;
+	char	*str;
+
+	j = -1;
+	k = 0;
+	aux = g->args[i].content;
+	if (ft_getposition(aux, '\"') < ft_getposition(aux, '\''))
+	{
+		str = ft_trimchar(aux, '\"');
+		aux = str;
+		str = ft_revtrimchar(str, '\"');
+	}
+	else if (ft_getposition(aux, '\"') > ft_getposition(aux, '\''))
+	{
+		str = ft_trimchar(aux, '\'');
+		aux = str;
+		str = ft_revtrimchar(str, '\'');
+	}
+	free (aux);
+	g->args[i].content = str;
+}
+
+void	ft_refactquotes(t_general *g)
+{
+	size_t	i;
+
+	i = -1;
+	while (++i < g->argssize)
+		if (ft_findchar(g->args[i].content, '\"')
+			|| ft_findchar(g->args[i].content, '\''))
+			ft_dropquotes(g, i);
 }

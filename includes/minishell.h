@@ -100,5 +100,6 @@ size_t	ft_countcut(char *str);
 size_t	ft_findchar(char *str, char c);
 int		str_isnumber(char *str);
 void	free_gminishell(t_general *g_minishell);
+void	ft_refactquotes(t_general *g);
 
 #endif

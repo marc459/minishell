@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/22 19:59:46 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/22 20:10:00 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	ft_prompt(t_general *g_m, char **environ)
 		{
 			system("clear");
 			ft_parse(g_m, command);
+			ft_printgeneral(g_m);
 			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCyan, Color_Off);
 			ft_executor(g_m, environ, &pid);
 			printf("%s< REAL BASH >%s\n\n", BCyan, Color_Off);

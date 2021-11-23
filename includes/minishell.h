@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/22 21:07:59 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/23 18:01:04 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	administratestds(int i, t_general *g_mini);
 void	waitforthem(int *childpid, int nchilds);
 void	leakatexit(void);
 void	runcflag(t_general	g_minishell, char **environ, char **argv, int pid);
+t_env	*ft_envnew(void *content);
+void	ft_envadd_back(t_env **lst, t_env *new);
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);

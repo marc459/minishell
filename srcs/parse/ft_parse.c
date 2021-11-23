@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:07:10 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/22 17:02:48 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/22 21:53:59 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,6 @@ void	ft_parse(t_general *general, char *str)
 		ft_refacttypes(general);
 	}
 	ft_refactquotes(general);
+	ft_expvar(general);
 	ft_countthings(general);
 }

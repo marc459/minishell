@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/16 15:47:36 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/22 20:18:25 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	define_fds(t_general *g_mini)
 	x = 0;
 	g_mini->fdout = dup(STDOUT_FILENO);
 	g_mini->fdin = dup(STDIN_FILENO);
-	while (i < (g_mini->nexecutables + g_mini->npipes + g_mini->nredirections))
+	g_mini->ncommands = g_mini->nexecutables + g_mini->npipes + (g_mini->nredirections * 2) + g_mini->nsemicolons;
+	while (i < (g_mini->ncommands))
 	{
 		if (g_mini->args[i].type == 3)
 		{

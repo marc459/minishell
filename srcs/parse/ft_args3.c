@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:12:27 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/22 16:56:57 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/23 14:17:01 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,22 +53,18 @@ void	ft_dropquotes(t_general *g, size_t i)
 	size_t	k;
 	char	*aux;
 	char	*str;
+	char	kquote;
 
 	j = -1;
 	k = 0;
 	aux = g->args[i].content;
 	if (ft_getposition(aux, '\"') < ft_getposition(aux, '\''))
-	{
-		str = ft_trimchar(aux, '\"');
-		aux = str;
-		str = ft_revtrimchar(str, '\"');
-	}
+		kquote = '\"';
 	else if (ft_getposition(aux, '\"') > ft_getposition(aux, '\''))
-	{
-		str = ft_trimchar(aux, '\'');
-		aux = str;
-		str = ft_revtrimchar(str, '\'');
-	}
+		kquote = '\'';
+	str = ft_trimchar(aux, kquote);
+	aux = str;
+	str = ft_revtrimchar(str, kquote);
 	free (aux);
 	g->args[i].content = str;
 }

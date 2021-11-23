@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/22 20:18:25 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/22 22:31:21 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,18 +88,32 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 	define_fds(g_mini);
 	while (i < g_mini->nexecutables)
 	{
+		
+		
 		administratepipe(i, g_mini);
 		pid[0] = fork();
 		if (pid[0] == 0)
 		{
 			cmd = ft_split(g_mini->args[g_mini->exec[i].posexec].content, ' ');
 			administratestds(i, g_mini);
-			ft_child(cmd, envp, &g_mini->fdout);
+			if(!ft_strncmp(cmd[0], "pwd", 3) || !ft_strncmp(cmd[0], "export", 6) 
+			|| !ft_strncmp(cmd[0], "unset", 4) || !ft_strncmp(cmd[0], "cd", 2)
+			|| !ft_strncmp(cmd[0], "env", 3)
+			|| (!ft_strncmp(cmd[0], "echo", 4) && !ft_strncmp(cmd[1], "-n", 2)))
+			{
+				printf("Builtin detected\n");
+			}
+			else
+			{
+				ft_child(cmd, envp, &g_mini->fdout);
+			}
 			ft_freebidstr(cmd);
 			exit (EXIT_FAILURE);
 		}
 		else if (pid[0] < 0)
 			printf("Error");
+	
+		
 		i++;
 	}
 	waitforthem(&i, g_mini->nexecutables);

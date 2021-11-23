@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/23 18:01:04 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/23 19:07:24 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_general {
 	int		dquot;
 	t_parse	parse;
 	size_t	argssize;
+	t_env	**varenvs;
 }			t_general;
 
 void	signals(void);
@@ -110,5 +111,6 @@ size_t	ft_findchar(char *str, char c);
 int		str_isnumber(char *str);
 void	free_gminishell(t_general *g_minishell);
 void	ft_refactquotes(t_general *g);
+void	ft_expvar(t_general *g);
 
 #endif

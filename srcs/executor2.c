@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/16 15:36:59 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/23 20:00:41 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,12 @@ void	ft_child(char **fullcmd, char **envp, int *stdo)
 	ft_putstr_fd("Quineshell: ",*stdo);
 	ft_putstr_fd(fullcmd[0],*stdo);
 	ft_putstr_fd(" command not found\n",*stdo);
+}
+
+void	ft_parsebuiltin(char **cmd)
+{
+	if(!ft_strncmp(cmd[0], "export", 6))
+	{
+		
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/23 19:07:24 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/23 23:04:05 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct s_general {
 	int		dquot;
 	t_parse	parse;
 	size_t	argssize;
-	t_env	**varenvs;
+	t_env	*varenvs;
 }			t_general;
 
 void	signals(void);
@@ -86,8 +86,11 @@ void	administratestds(int i, t_general *g_mini);
 void	waitforthem(int *childpid, int nchilds);
 void	leakatexit(void);
 void	runcflag(t_general	g_minishell, char **environ, char **argv, int pid);
-t_env	*ft_envnew(void *content);
+t_env	*ft_envnew(char	*envvar,char *content);
 void	ft_envadd_back(t_env **lst, t_env *new);
+t_env	*ft_envlast(t_env *lst);
+void	ft_printenv(t_env *lst);
+void	ft_orderenv(t_env **lst);
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);

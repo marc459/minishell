@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/22 21:54:09 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/24 13:55:04 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ typedef struct s_parse
 	size_t	comand;
 }			t_parse;
 
+typedef struct s_env
+{
+	char	*envvar;
+	char	*content;
+	struct s_env *next;
+}			t_env;
+
 typedef struct s_general {
 	size_t	npipes;
 	size_t	nexecutables;
@@ -63,6 +70,7 @@ typedef struct s_general {
 	int		dquot;
 	t_parse	parse;
 	size_t	argssize;
+	t_env	*varenvs;
 }			t_general;
 
 void	signals(void);
@@ -78,6 +86,14 @@ void	administratestds(int i, t_general *g_mini);
 void	waitforthem(int *childpid, int nchilds);
 void	leakatexit(void);
 void	runcflag(t_general	g_minishell, char **environ, char **argv, int pid);
+t_env	*ft_envnew(char	*envvar,char *content);
+void	ft_envadd_back(t_env **lst, t_env *new);
+t_env	*ft_envlast(t_env *lst);
+void	ft_printenv(t_env *lst);
+void	ft_orderenv(t_env **lst);
+void	bubbleSort(t_env *start);
+void	swap(t_env **node);
+int	ft_envsize(t_env *lst);
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);

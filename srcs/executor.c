@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/22 22:31:21 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/23 22:03:25 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 			|| (!ft_strncmp(cmd[0], "echo", 4) && !ft_strncmp(cmd[1], "-n", 2)))
 			{
 				printf("Builtin detected\n");
+				//ft_parsebuiltin(cmd);
 			}
 			else
 			{

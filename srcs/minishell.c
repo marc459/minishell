@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/22 22:52:16 by msantos-         ###   ########.fr       */
-/*   Updated: 2021/11/22 21:58:22 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/24 13:28:26 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include <minishell.h>
 
@@ -110,7 +110,7 @@ void	ft_prompt(t_general *g_m, char **environ)
 			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCyan, Color_Off);
 			ft_executor(g_m, environ, &pid);
 			printf("%s< REAL BASH >%s\n\n", BCyan, Color_Off);
-			//system(command);
+			system(command);
 		}
 		else
 			exit_error(&command);
@@ -118,12 +118,39 @@ void	ft_prompt(t_general *g_m, char **environ)
 	}
 }
 
+void	ft_saveenv(t_general *g_minishell,char **environ)
+{
+	int i;
+	char **keyvalue;
+
+	i = 0;
+	keyvalue = ft_split(environ[i], '=');
+	g_minishell->varenvs = ft_envnew(keyvalue[0], keyvalue[1]);
+	free(keyvalue);
+	i++;
+	while(i < (ft_bidstrlen(environ) - 1))
+	{
+		keyvalue = ft_split(environ[i], '=');
+		ft_envadd_back(&g_minishell->varenvs,ft_envnew(keyvalue[0], keyvalue[1]));
+		free(keyvalue);
+		
+		i++;
+	}
+	bubbleSort(g_minishell->varenvs);
+	ft_printenv(g_minishell->varenvs);
+}
+
+
 int	main(int argc, char **argv)
 {
+	/*char a[80] = "a";
+	char b[80] = "z";
+	printf("%d\n",ft_strncmp(a, b, ft_strlen(a)));*/
 	extern char	**environ;
 	pid_t		pid;
 	t_general	g_minishell;
 
+	ft_saveenv(&g_minishell, environ);
 	runcflag(g_minishell, environ, argv, pid);
 	//signals();
 	ft_prompt(&g_minishell, environ);

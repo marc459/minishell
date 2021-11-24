@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/23 23:04:05 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/24 13:55:04 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ void	ft_envadd_back(t_env **lst, t_env *new);
 t_env	*ft_envlast(t_env *lst);
 void	ft_printenv(t_env *lst);
 void	ft_orderenv(t_env **lst);
+void	bubbleSort(t_env *start);
+void	swap(t_env **node);
+int	ft_envsize(t_env *lst);
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);

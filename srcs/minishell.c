@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/23 23:05:46 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/24 13:28:26 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void	ft_saveenv(t_general *g_minishell,char **environ)
 		
 		i++;
 	}
-	ft_orderenv(&g_minishell->varenvs);
+	bubbleSort(g_minishell->varenvs);
 	ft_printenv(g_minishell->varenvs);
 }
 

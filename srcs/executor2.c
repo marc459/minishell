@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/23 20:00:41 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/24 18:06:36 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ void	ft_child(char **fullcmd, char **envp, int *stdo)
 	ft_putstr_fd(" command not found\n",*stdo);
 }
 
-void	ft_parsebuiltin(char **cmd)
+void	ft_parsebuiltin(t_general *g_mini,char **cmd)
 {
-	if(!ft_strncmp(cmd[0], "export", 6))
+	if(!ft_strncmp(cmd[0], "export", 7) && ft_bidstrlen(cmd) == 1)
 	{
-		
+		ft_printenv(g_mini->varenvs);
 	}
 }

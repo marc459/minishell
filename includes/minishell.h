@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/24 13:55:04 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/24 18:32:56 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_env
 	char	*envvar;
 	char	*content;
 	struct s_env *next;
+	struct s_env *back;
 }			t_env;
 
 typedef struct s_general {
@@ -93,7 +94,8 @@ void	ft_printenv(t_env *lst);
 void	ft_orderenv(t_env **lst);
 void	bubbleSort(t_env *start);
 void	swap(t_env **node);
-int	ft_envsize(t_env *lst);
+int		ft_envsize(t_env *lst);
+void	ft_parsebuiltin(t_general *g_mini,char **cmd);
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);

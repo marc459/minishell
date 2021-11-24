@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/23 22:03:25 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/24 17:58:00 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,6 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 	define_fds(g_mini);
 	while (i < g_mini->nexecutables)
 	{
-		
-		
 		administratepipe(i, g_mini);
 		pid[0] = fork();
 		if (pid[0] == 0)
@@ -101,8 +99,8 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 			|| !ft_strncmp(cmd[0], "env", 3)
 			|| (!ft_strncmp(cmd[0], "echo", 4) && !ft_strncmp(cmd[1], "-n", 2)))
 			{
-				printf("Builtin detected\n");
-				//ft_parsebuiltin(cmd);
+				//printf("Builtin detected\n");
+				ft_parsebuiltin(g_mini, cmd);
 			}
 			else
 			{

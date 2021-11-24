@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 17:58:01 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/24 14:14:26 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/24 18:53:24 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_env	*ft_envnew(char	*envvar,char *content)
 	el_list->envvar = envvar;
 	
 	el_list->next = NULL;
+	el_list->back = NULL;
 	
 	return (el_list);
 }
@@ -51,6 +52,7 @@ void	ft_envadd_back(t_env **lst, t_env *new)
 		{
 			check = ft_envlast(*lst);
 			check->next = new;
+			new->back = check;
 		}
 		else
 			*lst = new;
@@ -64,26 +66,6 @@ void	ft_printenv(t_env *lst)
 		printf("%s=%s\n",lst->envvar, lst->content);
 		lst = lst->next;
 	}
-}
-void	ft_orderenv(t_env **lst)
-{
-	/*t_env *firstenvar;
-	t_env *beforeenvar;
-	int i;
-
-	firstenvar = lst[0];
-	beforeenvar = lst[0];
-	*lst = lst[0]->next;
-	while (*lst)
-	{
-		if(ft_strncmp(firstenvar->envvar, lst[0]->envvar, ft_strlen(firstenvar)) > 0) //lst[0]->envvar goes first
-		{
-			printf("move to first position\n");
-			//lst[0] = firstenvar->envvar;
-			break ;
-		}
-		*lst = lst[0]->next;
-	}*/
 }
 
 int	ft_envsize(t_env *lst)
@@ -99,29 +81,20 @@ int	ft_envsize(t_env *lst)
 	return (i);
 }
 
-
-void swap(t_env **node)
-{
-    t_env	*tmp;
-
-	if (!(ft_envsize(*node) < 2))
-	{
-		tmp = *node;
-		*node = (*node)->next;
-		tmp->next = (*node)->next;
-		(*node)->next = tmp;
-	}
-}
-
 void swap2(t_env *a, t_env *b)
 {
     char *temp = a->envvar;
     a->envvar = b->envvar;
     b->envvar = temp;
 
-	//t_env *temp = a->next;
-    //b->next = a;
-	//a->next = b->next;
+	/*t_env *bn = b->next;
+	t_env *bb = b->back;
+	t_env *an = a->next;
+	t_env *ab = a->back;
+    b->next = a;
+	b->back = ab;
+	a->next = bn;
+	a->back = b;*/
 }
 
 void bubbleSort(t_env *start)

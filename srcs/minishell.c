@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/24 13:28:26 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/11/24 18:07:27 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ char	*read_line(char *command)
 	ft_putstr_fd("Quineshell-1.0:",1);
 	//scanf("%s");
 	read(0,command,64);
-	printf("faf\n");
 	while (command[i])
 	{
 		if (command[i] == 10)
@@ -43,7 +42,6 @@ char	*read_line(char *command)
 		}
 		i++;
 	}
-	printf("cmd:%s;\n",command);
 	return (command);
 }
 #endif
@@ -78,13 +76,13 @@ void	checkquotes(t_general *g_m, char *command)
 		free(tmp2);
 		free_gminishell(g_m);
 		ft_inigeneral(g_m);
-		tmp = readline(">");
+		//tmp = readline(">");
 		tmp2 = ft_strjoin(command, tmp);
 		ft_parse(g_m, tmp2);
 		ft_printgeneral(g_m);
 		
 	}
-	add_history (tmp2);
+	//add_history (tmp2);
 	free(tmp2);
 	
 	
@@ -137,7 +135,6 @@ void	ft_saveenv(t_general *g_minishell,char **environ)
 		i++;
 	}
 	bubbleSort(g_minishell->varenvs);
-	ft_printenv(g_minishell->varenvs);
 }
 
 

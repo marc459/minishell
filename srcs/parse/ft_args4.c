@@ -6,60 +6,68 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 21:01:26 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/23 16:47:58 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/24 03:23:35 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	*ft_joinenv(char *str)
+char	*ft_getenv(char *str, size_t *last, size_t *j)
+{
+	size_t	i;
+	char	*env;
+	char	aux2;
+
+	i = 0;
+	env = NULL;
+	str++;
+	*last += 1;
+	*j += 1;
+	while (str[i] && str[i] != ' ' && str[i] != '\'' && str[i] != '\"')
+	{
+		*last += 1;
+		*j += 1;
+		i++;
+	}
+	env = ft_substr(str, 0, i);
+	return (ft_strdup(getenv(env)));
+}
+
+void	ft_joinenv(char **str)
 {
 	char	*aux;
-	char	*aux2;
-	char	*aux3;
-	char	*final;
+	char	*line;
+	size_t	j;
+	size_t	last;
 
-	aux = ft_strdup(str);
-	aux += (ft_getposition(str, '$') + 1);
-	aux2 = aux;
-	if (ft_findchar(aux, '\''))
-		aux = ft_revtrimchar(aux, '\'');
-	final = ft_substr(str, 0, ft_getposition(str, '$'));
-	aux3 = final;
-	final = ft_strjoin(final, getenv(aux));
-	free (aux3);
-	if (ft_findchar(aux2, '\''))
+	last = 0;
+	j = -1;
+	while (str[0][++j])
 	{
-		aux3 = final;
-		final = ft_strjoin(final, "\'");
-		free (aux3);
+		if (str[0][j] == '$')
+		{
+			line = ft_substr(str[0], last, j);
+			last = j;
+			aux = line;
+			line = ft_strjoin(line, ft_getenv(&str[0][j], &last, &j));
+			free (aux);
+		}
 	}
-	aux2 -= (ft_getposition(str, '$') + 1);
-	free (aux2);
-	return (final);
+	aux = line;
+	line = ft_strjoin(line, ft_substr(str[0], last, j));
+	free (aux);
+	free(str[0]);
+	str[0] = line;
 }
 
 void	ft_expand(t_general *g, size_t i)
 {
-	char	**split;
-	char	*aux;
-	char	*str;
-	size_t	j;
+	char	*aux2;
 
-	split = ft_split(g->args[i].content, ' ');
-	j = -1;
-	while (split[++j])
-	{
-		if (ft_findchar(split[j], '$') && ft_findchar(split[j], '\''))
-		{
-			aux = split[j];
-			split[j] = ft_joinenv(split[j]);
-			free (aux);
-		}
-	}
-	free(g->args[i].content);
-	g->args[i].content = ft_splitjoin(split, ' ');
-	ft_freedouble(split);
+	aux2 = g->args[i].content;
+	if ((ft_getposition(aux2, '\"') < ft_getposition(aux2, '\''))
+		|| (ft_getposition(aux2, '\"') == ft_getposition(aux2, '\'')))
+		ft_joinenv(&g->args[i].content);
 }
 
 void	ft_expvar(t_general *g)

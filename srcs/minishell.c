@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/23 19:04:39 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/25 10:36:56 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	ft_prompt(t_general *g_m, char **environ)
 {
 	pid_t		pid;
 	char		*command;
+	char		*buf;
 
 	command = ft_calloc(sizeof(char), 64);
 	while (ft_strncmp(command, "exit", 4))

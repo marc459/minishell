@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 03:57:11 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/25 11:35:20 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/25 17:19:30 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,18 @@ void	ft_cd(char	***env, char *path)
 	char	*pwdbuf;
 	char	*auxpath;
 
-	auxpath = ft_strdup(env[0][ft_getpathpos(*env)]);
-	env[0][ft_getoldpathpos(env[0])] = auxpath;
-	chdir(path);
-	pwdbuf = calloc(sizeof(char), (PATH_MAX + 1));
-	getcwd(pwdbuf, PATH_MAX);
-	*env[ft_getpathpos(*env)] = pwdbuf;
-	free (pwdbuf);
-	free (auxpath);
+	if (!chdir(path))
+	{
+		free (env[0][ft_getoldpathpos(env[0])]);
+		auxpath = ft_strjoin("OLD", env[0][ft_getpathpos(env[0])]);
+		env[0][ft_getoldpathpos(env[0])] = ft_strdup(auxpath);
+		free (auxpath);
+		pwdbuf = calloc(sizeof(char), (PATH_MAX + 1));
+		getcwd(pwdbuf, PATH_MAX);
+		free (env[0][ft_getpathpos(env[0])]);
+		env[0][ft_getpathpos(env[0])] = ft_strjoin("PWD=", pwdbuf);
+		free (pwdbuf);
+	}
+	else
+		printf("cd: no such file or directory: %s\n", path);
 }

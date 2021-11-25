@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/25 10:36:56 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/25 17:03:08 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,10 @@ void	ft_prompt(t_general *g_m, char **environ)
 	pid_t		pid;
 	char		*command;
 	char		*buf;
+	char		**ownenv;
 
 	command = ft_calloc(sizeof(char), 64);
+	ownenv = ft_ownenv(environ);
 	while (ft_strncmp(command, "exit", 4))
 	{
 		ft_inigeneral(g_m);
@@ -105,9 +107,9 @@ void	ft_prompt(t_general *g_m, char **environ)
 			ft_parse(g_m, command);
 			checkquotes(g_m, command);
 			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCyan, Color_Off);
-			ft_executor(g_m, environ, &pid);
-			printf("%s< REAL BASH >%s\n\n", BCyan, Color_Off);
-			system(command);
+			ft_executor(g_m, ownenv, &pid);
+			//printf("%s< REAL BASH >%s\n\n", BCyan, Color_Off);
+			//system(command);
 		}
 		else
 			exit_error(&command);

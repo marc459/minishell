@@ -6,7 +6,7 @@
 #    By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/01 13:26:03 by emgarcia          #+#    #+#              #
-#    Updated: 2021/11/22 16:36:09 by emgarcia         ###   ########.fr        #
+#    Updated: 2021/11/24 23:23:19 by emgarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,8 @@ SRCS	=	ft_strtrim.c	\
 			ft_splitjoin.c	\
 			ft_getposition.c	\
 			ft_trimchar.c	\
-			ft_revtrimchar.c
+			ft_revtrimchar.c	\
+			ft_splitlen.c
 SRCS_B	= ft_lstmap.c ft_lstiter.c ft_lstclear.c ft_lstdelone.c ft_lstadd_back.c ft_lstlast.c ft_lstsize.c ft_lstadd_front.c ft_lstnew.c
 OBJS	= ${SRCS:.c=.o}
 OBJS_B	= ${SRCS_B:.c=.o}

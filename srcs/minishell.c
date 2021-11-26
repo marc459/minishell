@@ -6,10 +6,10 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/22 22:52:16 by msantos-         ###   ########.fr       */
-/*   Updated: 2021/11/22 21:58:22 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/25 17:03:08 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include <minishell.h>
 
@@ -55,25 +55,26 @@ void	hola(void)
 
 void	exit_error(char **command)
 {
-	char **freespaces;
-	freespaces = ft_split(*command,' ');
-	if(freespaces[1] && !str_isnumber(freespaces[1]))
+	char	**freespaces;
+
+	freespaces = ft_split(*command, ' ');
+	if (freespaces[1] && !str_isnumber(freespaces[1]))
 		printf("minishell: exit: 00-99: numeric argument required\n");
-	else if(ft_bidstrlen(freespaces) > 2)
+	else if (ft_bidstrlen(freespaces) > 2)
 	{
 		printf("minishell: exit: too many arguments\n");
-		*command =ft_strdup("noexit");
+		*command = ft_strdup("noexit");
 	}
 	free(freespaces);
-		
 }
+
 void	checkquotes(t_general *g_m, char *command)
 {
 	char		*tmp;
 	char		*tmp2;
 
 	tmp2 = ft_calloc(sizeof(char), 64);
-	while(g_m->dquot == -1 || g_m->quot == -1)
+	while (g_m->dquot == -1 || g_m->quot == -1)
 	{
 		free(tmp2);
 		free_gminishell(g_m);
@@ -82,34 +83,32 @@ void	checkquotes(t_general *g_m, char *command)
 		tmp2 = ft_strjoin(command, tmp);
 		ft_parse(g_m, tmp2);
 		ft_printgeneral(g_m);
-		
 	}
 	add_history (tmp2);
 	free(tmp2);
-	
-	
 }
 
 void	ft_prompt(t_general *g_m, char **environ)
 {
 	pid_t		pid;
 	char		*command;
-	
+	char		*buf;
+	char		**ownenv;
 
 	command = ft_calloc(sizeof(char), 64);
+	ownenv = ft_ownenv(environ);
 	while (ft_strncmp(command, "exit", 4))
 	{
 		ft_inigeneral(g_m);
 		command = read_line(command);
 		if (ft_strncmp(command, "exit", 4) && ft_strncmp(command, "", 1))
 		{
-			//system("clear");
+			system("clear");
 			ft_parse(g_m, command);
 			checkquotes(g_m, command);
-			
 			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCyan, Color_Off);
-			ft_executor(g_m, environ, &pid);
-			printf("%s< REAL BASH >%s\n\n", BCyan, Color_Off);
+			ft_executor(g_m, ownenv, &pid);
+			//printf("%s< REAL BASH >%s\n\n", BCyan, Color_Off);
 			//system(command);
 		}
 		else
@@ -125,7 +124,7 @@ int	main(int argc, char **argv)
 	t_general	g_minishell;
 
 	runcflag(g_minishell, environ, argv, pid);
-	//signals();
+	signals();
 	ft_prompt(&g_minishell, environ);
 	printf("exit\n");
 	return (0);

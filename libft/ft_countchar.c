@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_trimchar.c                                      :+:      :+:    :+:   */
+/*   ft_countchar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 00:30:48 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/29 12:54:29 by emgarcia         ###   ########.fr       */
+/*   Created: 2021/11/29 13:08:11 by emgarcia          #+#    #+#             */
+/*   Updated: 2021/11/29 13:56:06 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_trimchar(char **str, char c)
+size_t	ft_countchar(char *str, char c)
 {
-	char	*final;
 	size_t	i;
-	size_t	j;
-	size_t	trimed;
+	size_t	count;
 
-	final = calloc(sizeof(char), ft_strlen(str[0]));
-	if (!str[0] || !final)
-		return ;
+	if (!str)
+		return (0);
 	i = -1;
-	j = 0;
-	trimed = 0;
-	while (str[0][++i])
-	{
-		if ((str[0][i] != c) || (str[0][i] == c && trimed))
-			final[j++] = str[0][i];
-		else if (str[0][i] == c && !trimed)
-			trimed = 1;
-	}
-	free(str[0]);
-	str[0] = final;
+	count = 0;
+	while (str[++i])
+		if (str[i] == c)
+			count++;
+	return (count);
 }

@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:07:10 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/23 19:56:22 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/29 11:49:52 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	ft_comndssize(t_general *g, char *str)
 		else if (g->parse.comand)
 			ft_pcont(g, 0);
 	}
+	g->quot = 1;
+	g->dquot = 1;
 }
 
 char	*ft_joincomnd(char **split, size_t *i, size_t size)
@@ -103,12 +105,12 @@ void	ft_parse(t_general *general, char *str)
 	ft_comndssize(general, str);
 	general->parse.comnds = calloc(sizeof(char *),
 			(general->parse.comndssize + 1));
-	if (general->parse.comnds)
-	{
-		ft_fillcomands(general, str);
-		ft_iniargs(general);
-		ft_refacttypes(general);
-	}
+	if (!general->parse.comnds)
+		return ;
+	ft_fillcomands(general, str);
+	ft_checkquotes(general);
+	ft_iniargs(general);
+	ft_refacttypes(general);
 	ft_expvar(general);
 	ft_refactquotes(general);
 	ft_countthings(general);

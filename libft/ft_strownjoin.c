@@ -1,37 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_trimchar.c                                      :+:      :+:    :+:   */
+/*   ft_strownjoin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 00:30:48 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/29 12:54:29 by emgarcia         ###   ########.fr       */
+/*   Created: 2021/11/29 13:40:05 by emgarcia          #+#    #+#             */
+/*   Updated: 2021/11/30 13:49:37 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_trimchar(char **str, char c)
+void	ft_strownjoin(char **s1, char *s2)
 {
-	char	*final;
 	size_t	i;
 	size_t	j;
-	size_t	trimed;
+	char	*final;
 
-	final = calloc(sizeof(char), ft_strlen(str[0]));
-	if (!str[0] || !final)
-		return ;
+	if (!s1[0] && !s2)
+		;
 	i = -1;
-	j = 0;
-	trimed = 0;
-	while (str[0][++i])
-	{
-		if ((str[0][i] != c) || (str[0][i] == c && trimed))
-			final[j++] = str[0][i];
-		else if (str[0][i] == c && !trimed)
-			trimed = 1;
-	}
-	free(str[0]);
-	str[0] = final;
+	j = -1;
+	final = (char *)malloc(sizeof(char) * (ft_strlen(*s1) + ft_strlen(s2) + 1));
+	if (final == NULL)
+		;
+	if (!s1[0])
+		i = 0;
+	while (s1[0] && s1[0][++i] != '\0')
+		final[i] = s1[0][i];
+	if (!s2)
+		j = 0;
+	while (s2 && s2[++j] != '\0')
+		final[i + j] = s2[j];
+	final[i + j] = '\0';
+	if (s1[0])
+		free (s1[0]);
+	s1[0] = final;
 }

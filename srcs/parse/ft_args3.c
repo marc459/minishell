@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:12:27 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/23 14:17:01 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/30 14:18:55 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,25 +47,40 @@ void	ft_iniarg(t_general *g, size_t *j, char *str)
 		g->args[(*j)++].type = 3;
 }
 
-void	ft_dropquotes(t_general *g, size_t i)
+char	*ft_dropquotes(t_general *g, char *str)
 {
-	size_t	j;
-	size_t	k;
-	char	*aux;
-	char	*str;
-	char	kquote;
+	size_t	ultima;
+	size_t	i;
+	char	*tmp;
 
-	j = -1;
-	k = 0;
-	aux = g->args[i].content;
-	if (ft_getposition(aux, '\"') < ft_getposition(aux, '\''))
-		kquote = '\"';
-	else if (ft_getposition(aux, '\"') > ft_getposition(aux, '\''))
-		kquote = '\'';
-	str = ft_trimchar(aux, kquote);
-	aux = str;
-	str = ft_revtrimchar(str, kquote);
-	free (aux);
+	i = -1;
+	tmp = NULL;
+	ultima = 0;
+	while (str[++i])
+	{
+		if ((str[i] == '\"' && g->quot > 0) || (str[i] == '\"' && g->dquot < 0)
+			|| (str[i] == '\'' && g->dquot > 0)
+			|| (str[i] == '\'' && g->quot < 0))
+		{
+			ft_strownjoin(&tmp, ft_substr(str, ultima, i - ultima));
+			ultima = i + 1;
+			if (str[i] == '\"')
+				g->dquot = -g->dquot;
+			else if (str[i] == '\'')
+				g->quot = -g->quot;
+		}
+	}
+	if (ultima < i)
+		ft_strownjoin(&tmp, ft_substr(str, ultima, i - ultima));
+	return (tmp);
+}
+
+void	ft_findquotes(t_general *g, size_t i)
+{
+	char	*str;
+
+	str = ft_dropquotes(g, g->args[i].content);
+	free (g->args[i].content);
 	g->args[i].content = str;
 }
 
@@ -77,5 +92,5 @@ void	ft_refactquotes(t_general *g)
 	while (++i < g->argssize)
 		if (ft_findchar(g->args[i].content, '\"')
 			|| ft_findchar(g->args[i].content, '\''))
-			ft_dropquotes(g, i);
+			ft_findquotes(g, i);
 }

@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_trimchar.c                                      :+:      :+:    :+:   */
+/*   ft_trimallchar.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 00:30:48 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/29 12:54:29 by emgarcia         ###   ########.fr       */
+/*   Created: 2021/11/29 13:05:49 by emgarcia          #+#    #+#             */
+/*   Updated: 2021/11/29 13:55:43 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_trimchar(char **str, char c)
+void	ft_trimallchar(char **str, char c)
 {
-	char	*final;
 	size_t	i;
 	size_t	j;
-	size_t	trimed;
+	char	*final;
 
-	final = calloc(sizeof(char), ft_strlen(str[0]));
+	final = calloc(sizeof(char), ft_strlen(*str) - ft_countchar(*str, c) + 1);
 	if (!str[0] || !final)
 		return ;
 	i = -1;
 	j = 0;
-	trimed = 0;
 	while (str[0][++i])
-	{
-		if ((str[0][i] != c) || (str[0][i] == c && trimed))
+		if (str[0][i] != c)
 			final[j++] = str[0][i];
-		else if (str[0][i] == c && !trimed)
-			trimed = 1;
-	}
-	free(str[0]);
+	free (str[0]);
 	str[0] = final;
 }

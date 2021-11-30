@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:32:36 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/18 16:19:53 by marcos           ###   ########.fr       */
+/*   Updated: 2021/11/29 10:27:03 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,6 @@ void	ft_printgeneral(t_general *general)
 	printf("dquot : %d\n", general->dquot);
 	printf("comndssize : %zu\n", general->parse.comndssize);
 	printf("argssize : %zu\n", general->argssize);
-	/* i = -1;
-	while (general->parse.comnds && ++i < general->parse.comndssize)
-		printf("comnds[%zu].type : %s\n", i, general->parse.comnds[i]); */
 	i = -1;
 	while (general->args && ++i < general->argssize)
 	{

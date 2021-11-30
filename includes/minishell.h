@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/25 17:02:16 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/29 11:12:33 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ void	ft_refactquotes(t_general *g);
 void	ft_expvar(t_general *g);
 void	ft_cd(char	***env, char *path);
 char	**ft_ownenv(char **environ);
+void	ft_checkquotes(t_general *g);
 
 #endif

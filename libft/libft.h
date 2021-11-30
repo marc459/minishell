@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 13:29:50 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/24 23:22:55 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/29 13:43:39 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,12 @@ int		ft_len(long nb);
 void	ft_freebidstr(char **s);
 char	*ft_splitjoin(char	**split, char cjoin);
 size_t	ft_getposition(char	*str, char c);
-char	*ft_trimchar(char *str, char c);
-char	*ft_revtrimchar(char *str, char c);
+void	ft_trimchar(char **str, char c);
+void	ft_revtrimchar(char **str, char c);
 size_t	ft_splitlen(char **split);
+void	ft_trimallchar(char **str, char c);
+size_t	ft_countchar(char *str, char c);
+void	ft_strownjoin(char **s1, char *s2);
 
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);

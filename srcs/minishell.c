@@ -6,10 +6,9 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/25 17:03:08 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/29 12:12:48 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include <minishell.h>
 
@@ -103,9 +102,9 @@ void	ft_prompt(t_general *g_m, char **environ)
 		command = read_line(command);
 		if (ft_strncmp(command, "exit", 4) && ft_strncmp(command, "", 1))
 		{
-			system("clear");
+			//system("clear");
 			ft_parse(g_m, command);
-			checkquotes(g_m, command);
+			//checkquotes(g_m, command);
 			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCyan, Color_Off);
 			ft_executor(g_m, ownenv, &pid);
 			//printf("%s< REAL BASH >%s\n\n", BCyan, Color_Off);

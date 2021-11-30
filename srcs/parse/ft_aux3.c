@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:53:31 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/30 13:25:08 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/11/30 16:16:21 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,45 +36,3 @@ void	ft_checkquotes(t_general *g)
 	free (g->parse.comnds[g->parse.comndssize - 1]);
 	g->parse.comnds[g->parse.comndssize - 1] = last;
 }
-/* void	ft_checkquotes(t_general *g)
-{
-	char	*last;
-	char	*tmp;
-	char	*aux;
-	size_t	i;
-	size_t	ultima;
-
-	last = ft_strdup(g->parse.comnds[g->parse.comndssize - 1]);
-	while (g->dquot == -1 || g->quot == -1)
-	{
-		tmp = readline(">");
-		i = -1;
-		ultima = 0;
-		while (tmp[++i])
-		{
-			if (tmp[i] == '\'')
-			{
-				if ((g->quot < 0))
-				{
-					ft_strownjoin(&last, ft_substr(tmp, ultima, i - ultima));
-					ultima = i;
-				}
-				g->quot = -g->quot;
-			}
-			else if (tmp[i] == '\"')
-			{
-				if (g->dquot < 0)
-				{
-					ft_strownjoin(&last, ft_substr(tmp, ultima, i - ultima));
-					ultima = i;
-				}
-				g->dquot = -g->dquot;
-			}
-		}
-		if (ultima < i)
-			ft_strownjoin(&last, ft_substr(tmp, ultima, i - ultima));
-	}
-	//printf("last : %s\n", last);
-	free (g->parse.comnds[g->parse.comndssize - 1]);
-	g->parse.comnds[g->parse.comndssize - 1] = last;
-} */

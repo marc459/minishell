@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/29 12:08:44 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/01 15:03:38 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 				printf("Error");
 		}
 		i++;
+		ft_freebidstr(cmd);
 	}
 	waitforthem(&i, g_mini->nexecutables);
 	free(g_mini->exec);

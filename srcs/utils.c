@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:57:21 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/17 17:01:17 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/01 15:05:46 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,18 @@ void	leakatexit(void)
 
 void	free_gminishell(t_general *g_minishell)
 {
+	int i;
+
+	i = 0;
+	while (i < (g_minishell->ncommands))
+	{
+		free(g_minishell->args[i].content);
+		i++;
+	}
+		
 	free(g_minishell->args);
+	
+	ft_freebidstr(g_minishell->parse.comnds);
 }
 
 void	runcflag(t_general	g_minishell, char **environ, char **argv, int pid)

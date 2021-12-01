@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/01 13:20:43 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/01 15:33:47 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	exit_error(char **command)
 		printf("minishell: exit: too many arguments\n");
 		*command = ft_strdup("noexit");
 	}
-	free(freespaces);
+	ft_freebidstr(freespaces);
 }
 
 void	ft_prompt(t_general *g_m, char **environ)
@@ -77,13 +77,16 @@ void	ft_prompt(t_general *g_m, char **environ)
 	char		*buf;
 	char		**ownenv;
 
-	command = ft_calloc(sizeof(char), 64);
 	ownenv = ft_ownenv(environ);
-	while (ft_strncmp(command, "exit", 4))
+	command = ft_calloc(sizeof(char), 64);
+	while (!(command[0] == 'e' && command[1] == 'x' && command[2] == 'i' &&
+	command[3] == 't'))
 	{
 		ft_inigeneral(g_m);
+		free(command);
 		command = read_line("Minishell1-1.0:");
-		if (ft_strncmp(command, "exit", 4) && ft_strncmp(command, "", 1))
+		if (!(command[0] == 'e' && command[1] == 'x' && command[2] == 'i' &&
+	command[3] == 't'))
 		{
 			//system("clear");
 			ft_parse(g_m, command);
@@ -91,11 +94,14 @@ void	ft_prompt(t_general *g_m, char **environ)
 			ft_executor(g_m, ownenv, &pid);
 			//printf("%s< REAL BASH >%s\n\n", BCyan, Color_Off);
 			//system(command);
+			free_gminishell(g_m);
 		}
 		else
 			exit_error(&command);
-		free_gminishell(g_m);
+		
 	}
+	free(command);
+	ft_freebidstr(ownenv);
 }
 
 int	main(int argc, char **argv)

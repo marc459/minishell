@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/01 15:33:47 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/01 17:42:06 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,11 @@ void	exit_error(char **command)
 		printf("minishell: exit: too many arguments\n");
 		*command = ft_strdup("noexit");
 	}
+	else if (ft_bidstrlen(freespaces) == 1 && (command[0][4] != '\0' && command[0][4] != ' '))
+	{
+		printf("minishell: %s: command not found\n",command[0]);
+		*command = ft_strdup("noexit");
+	}
 	ft_freebidstr(freespaces);
 }
 
@@ -79,16 +84,13 @@ void	ft_prompt(t_general *g_m, char **environ)
 
 	ownenv = ft_ownenv(environ);
 	command = ft_calloc(sizeof(char), 64);
-	while (!(command[0] == 'e' && command[1] == 'x' && command[2] == 'i' &&
-	command[3] == 't'))
+	while (ft_strncmp(command,"exit",4))
 	{
 		ft_inigeneral(g_m);
 		free(command);
 		command = read_line("Minishell1-1.0:");
-		if (!(command[0] == 'e' && command[1] == 'x' && command[2] == 'i' &&
-	command[3] == 't'))
+		if (ft_strncmp(command,"exit",4))
 		{
-			//system("clear");
 			ft_parse(g_m, command);
 			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCyan, Color_Off);
 			ft_executor(g_m, ownenv, &pid);
@@ -98,7 +100,6 @@ void	ft_prompt(t_general *g_m, char **environ)
 		}
 		else
 			exit_error(&command);
-		
 	}
 	free(command);
 	ft_freebidstr(ownenv);

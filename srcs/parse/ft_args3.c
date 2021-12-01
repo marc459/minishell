@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_args3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:12:27 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/30 14:18:55 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/01 17:55:29 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	*ft_dropquotes(t_general *g, char *str)
 	size_t	ultima;
 	size_t	i;
 	char	*tmp;
+	char	*substr;
 
 	i = -1;
 	tmp = NULL;
@@ -62,7 +63,9 @@ char	*ft_dropquotes(t_general *g, char *str)
 			|| (str[i] == '\'' && g->dquot > 0)
 			|| (str[i] == '\'' && g->quot < 0))
 		{
-			ft_strownjoin(&tmp, ft_substr(str, ultima, i - ultima));
+			substr = ft_substr(str, ultima, i - ultima);
+			ft_strownjoin(&tmp, substr);
+			free(substr);
 			ultima = i + 1;
 			if (str[i] == '\"')
 				g->dquot = -g->dquot;
@@ -71,7 +74,10 @@ char	*ft_dropquotes(t_general *g, char *str)
 		}
 	}
 	if (ultima < i)
-		ft_strownjoin(&tmp, ft_substr(str, ultima, i - ultima));
+	{
+		substr = ft_substr(str, ultima, i - ultima);
+		ft_strownjoin(&tmp, substr);
+	}
 	return (tmp);
 }
 

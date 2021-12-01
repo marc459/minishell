@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:53:31 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/30 16:16:21 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/01 12:19:00 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_checkquotes(t_general *g)
 	last = ft_strdup(g->parse.comnds[g->parse.comndssize - 1]);
 	while (g->dquot == -1 || g->quot == -1)
 	{
-		tmp = readline(">");
+		tmp = read_line(">");
 		i = -1;
 		while (tmp[++i])
 		{

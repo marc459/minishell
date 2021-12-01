@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strownjoin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:40:05 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/30 13:49:37 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/01 12:16:50 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	ft_strownjoin(char **s1, char *s2)
 	size_t	j;
 	char	*final;
 
-	if (!s1[0] && !s2)
-		;
+	/*if (!s1[0] && !s2)
+		;*/
 	i = -1;
 	j = -1;
 	final = (char *)malloc(sizeof(char) * (ft_strlen(*s1) + ft_strlen(s2) + 1));
-	if (final == NULL)
-		;
+	/*if (final == NULL)
+		;*/
 	if (!s1[0])
 		i = 0;
 	while (s1[0] && s1[0][++i] != '\0')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/11/30 16:15:18 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/01 13:20:43 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,29 @@
 #if defined(__APPLE__)
 # define SO "MACOS"
 
-char	*read_line(char *command)
+char	*read_line(char *prompt)
 {
+	char *command;
+
+	command = ft_calloc(sizeof(char), 64);
 	//free(command);
-	command = readline("Quineshell-1.0:");
+	command = readline(prompt);
 	add_history (command);
 	return (command);
 }
 #else
 # define SO "LINUX"
 
-char	*read_line(char *command)
+char	*read_line(char *prompt)
 {
 	int	i;
+	char *command;
 
 	i = 0;
-	ft_putstr_fd("Quineshell-1.0:",1);
+	command = ft_calloc(sizeof(char), 64);
+	ft_putstr_fd(prompt,1);
 	//scanf("%s");
 	read(0,command,64);
-	printf("faf\n");
 	while (command[i])
 	{
 		if (command[i] == 10)
@@ -42,7 +46,6 @@ char	*read_line(char *command)
 		}
 		i++;
 	}
-	printf("cmd:%s;\n",command);
 	return (command);
 }
 #endif
@@ -79,7 +82,7 @@ void	ft_prompt(t_general *g_m, char **environ)
 	while (ft_strncmp(command, "exit", 4))
 	{
 		ft_inigeneral(g_m);
-		command = read_line(command);
+		command = read_line("Minishell1-1.0:");
 		if (ft_strncmp(command, "exit", 4) && ft_strncmp(command, "", 1))
 		{
 			//system("clear");
@@ -102,7 +105,7 @@ int	main(int argc, char **argv)
 	t_general	g_minishell;
 
 	runcflag(g_minishell, environ, argv, pid);
-	signals();
+	//signals();
 	ft_prompt(&g_minishell, environ);
 	printf("exit\n");
 	return (0);

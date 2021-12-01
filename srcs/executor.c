@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/01 15:03:38 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/01 18:36:31 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,13 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 		{
 			ft_cd(&envp, cmd[1]);
 			ft_freebidstr(cmd);
+		}
+		else if(!ft_strncmp(cmd[0], "pwd", 3) || !ft_strncmp(cmd[0], "export", 6) 
+		|| !ft_strncmp(cmd[0], "unset", 4) || !ft_strncmp(cmd[0], "env", 3)
+		|| (!ft_strncmp(cmd[0], "echo", 4) && !ft_strncmp(cmd[1], "-n", 2)))
+		{
+			//printf("Builtin detected\n");
+			ft_parsebuiltin(g_mini, cmd);
 		}
 		else
 		{

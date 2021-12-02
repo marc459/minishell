@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 17:58:01 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/02 15:50:37 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/02 21:36:29 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void bubbleSort(t_env *start)
     t_env *lptr = NULL;
   
     if (start == NULL)
-        return;
+        return ;
   
     while(swapped)
     {
@@ -128,35 +128,68 @@ void bubbleSort(t_env *start)
 
 }
 
-void	ft_checkenv(t_env *varenvs, t_env *new)
+void	ft_checkenv(t_env *varenvs, char *keyvar, char *valuevar)
 {
 	int updated;
+	int placed;
 	updated = 0;
 	t_env	*iter;
 
 	iter = varenvs;
+	
 	while (iter)
 	{
-		
-		if(!ft_strncmp(iter->envvar,new->envvar,ft_strlen(iter->envvar)))
+		if(!ft_strncmp(iter->envvar,keyvar,ft_strlen(iter->envvar) + 1))
 		{
-			iter->content = new->content;
+			iter->content = valuevar;
 			updated = 1;
 		}
 		iter = iter->next;
 	}
+	iter = varenvs;
 	if(!updated)
-		ft_envadd_back(&varenvs, new);
+	{
+		t_env *new = ft_envnew(ft_strdup(keyvar), ft_strdup(valuevar));
+		placed = 0;
+		while (iter && !placed)
+		{
+			//printf("iter->envvar: %s\n",iter->envvar);
+			if (ft_strncmp(iter->envvar, keyvar, ft_strlen(keyvar) + 1) > 0)
+            {
+				placed = 1;
+				/*t_env *tmp = iter->next;
+				iter->next = new;
+				new->next = tmp;*/
+
+				/*t_env *tmp = iter;
+				if(tmp->back)
+					tmp->back->next = new;
+				new->next = tmp;*/
+				printf("iter->envvar%s,%sn",iter->envvar, keyvar);
+				
+				iter->back->next = new;
+				printf("SF\n");
+				if(iter->back)
+					new->back = iter->back;
+				else
+					new->back=NULL;
+				iter->back = new;
+				new->next = iter;	
+            }
+			iter = iter->next;
+		}
+		//ft_envadd_back(&varenvs, new);
+	}
+		
 }
 
 void	ft_parsebuiltin(t_general *g_mini,char **cmd)
 {
 	if(!ft_strncmp(cmd[0], "export", 7) && ft_bidstrlen(cmd) == 1)
 	{
-		printf("ENV VARS\n");
 		ft_printenv(g_mini->varenvs);
 	}
-	else if(!ft_strncmp(cmd[0], "export", 7))
+	else if(!ft_strncmp(cmd[0], "export", 6))
 	{
 		char *keyvar;
 		char *valuevar;
@@ -165,10 +198,11 @@ void	ft_parsebuiltin(t_general *g_mini,char **cmd)
 		int y;
 
 		i=1;
-		keyvar = ft_calloc(ft_strlen(cmd[i]),sizeof(char));
-		valuevar = ft_calloc(ft_strlen(cmd[i]),sizeof(char));
+		
 		while(cmd[i])
 		{
+			keyvar = ft_calloc(ft_strlen(cmd[i]),sizeof(char));
+			valuevar = ft_calloc(ft_strlen(cmd[i]),sizeof(char));
 			x = 0;
 			y = 0;
 			while(cmd[i][x] && cmd[i][x] != '=')
@@ -185,11 +219,13 @@ void	ft_parsebuiltin(t_general *g_mini,char **cmd)
 				x++;
 				y++;
 			}
-			ft_checkenv(g_mini->varenvs,ft_envnew(ft_strdup(keyvar), ft_strdup(valuevar)));
+			ft_checkenv(g_mini->varenvs,keyvar, valuevar);
 			free(keyvar);
 			free(valuevar);
+			
 			i++;
 		}
+		//bubbleSort(g_mini->varenvs);
 		
 	}
 }

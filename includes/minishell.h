@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/02 17:05:36 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/02 18:13:57 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	bubbleSort(t_env *start);
 void	swapenv(t_env *a, t_env *b);
 int		ft_envsize(t_env *lst);
 void	ft_parsebuiltin(t_general *g_mini,char **cmd);
-void	ft_checkenv(t_env *varenvs, t_env *new);
+void	ft_checkenv(t_env *varenvs, char *keyvar, char *valuevar);
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);

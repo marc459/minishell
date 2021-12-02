@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/02 12:24:38 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/02 17:07:30 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 		if (!ft_strncmp(cmd[0], "cd", 2))
 		{
 			ft_cd(&envp, cmd[1]);
-			ft_freebidstr(cmd);
 		}
 		//|| !ft_strncmp(cmd[0], "unset", 4) || !ft_strncmp(cmd[0], "pwd", 3)
 		//|| (!ft_strncmp(cmd[0], "echo", 4) && !ft_strncmp(cmd[1], "-n", 2)))

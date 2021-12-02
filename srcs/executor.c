@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/01 15:03:38 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/02 12:11:21 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,7 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 		administratepipe(i, g_mini);
 		cmd = ft_split(g_mini->args[g_mini->exec[i].posexec].content, ' ');
 		if (!ft_strncmp(cmd[0], "cd", 2))
-		{
 			ft_cd(&envp, cmd[1]);
-			ft_freebidstr(cmd);
-		}
 		else
 		{
 			pid[0] = fork();

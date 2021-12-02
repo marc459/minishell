@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/01 18:27:52 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/02 14:13:59 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,4 @@ void	ft_child(char **fullcmd, char **envp, int *stdo)
 	ft_putstr_fd("Quineshell: ",*stdo);
 	ft_putstr_fd(fullcmd[0],*stdo);
 	ft_putstr_fd(" command not found\n",*stdo);
-}
-
-void	ft_parsebuiltin(t_general *g_mini,char **cmd)
-{
-	if(!ft_strncmp(cmd[0], "export", 7) && ft_bidstrlen(cmd) == 1)
-	{
-		ft_printenv(g_mini->varenvs);
-	}
 }

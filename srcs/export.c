@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 17:58:01 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/02 21:36:29 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/03 20:04:46 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,15 +127,23 @@ void bubbleSort(t_env *start)
     }
 
 }
+void	ft_envadd_front(t_env **lst, t_env *new)
+{
+	new->next = lst[0];
+	lst[0] = new;
+	
+	
+}
 
-void	ft_checkenv(t_env *varenvs, char *keyvar, char *valuevar)
+
+void	ft_checkenv(t_env **varenvs, char *keyvar, char *valuevar)
 {
 	int updated;
 	int placed;
 	updated = 0;
 	t_env	*iter;
 
-	iter = varenvs;
+	iter = *varenvs;
 	
 	while (iter)
 	{
@@ -146,39 +154,39 @@ void	ft_checkenv(t_env *varenvs, char *keyvar, char *valuevar)
 		}
 		iter = iter->next;
 	}
-	iter = varenvs;
+	iter = *varenvs;
 	if(!updated)
 	{
 		t_env *new = ft_envnew(ft_strdup(keyvar), ft_strdup(valuevar));
 		placed = 0;
+		if (ft_strncmp(iter->envvar, keyvar, ft_strlen(keyvar) + 1) > 0)
+			ft_envadd_front(varenvs, new);
 		while (iter && !placed)
 		{
-			//printf("iter->envvar: %s\n",iter->envvar);
 			if (ft_strncmp(iter->envvar, keyvar, ft_strlen(keyvar) + 1) > 0)
             {
 				placed = 1;
-				/*t_env *tmp = iter->next;
-				iter->next = new;
-				new->next = tmp;*/
 
-				/*t_env *tmp = iter;
-				if(tmp->back)
-					tmp->back->next = new;
-				new->next = tmp;*/
-				printf("iter->envvar%s,%sn",iter->envvar, keyvar);
-				
-				iter->back->next = new;
-				printf("SF\n");
-				if(iter->back)
+				if(iter->back != NULL)
+				{
+					iter->back->next = new;
 					new->back = iter->back;
+					iter->back = new;
+				}
 				else
+				{
 					new->back=NULL;
-				iter->back = new;
-				new->next = iter;	
+				}
+				new->next = iter;
+				break;
+					
+				
             }
 			iter = iter->next;
 		}
-		//ft_envadd_back(&varenvs, new);
+		if(!placed)
+			ft_envadd_back(varenvs, new);
+		
 	}
 		
 }
@@ -219,7 +227,7 @@ void	ft_parsebuiltin(t_general *g_mini,char **cmd)
 				x++;
 				y++;
 			}
-			ft_checkenv(g_mini->varenvs,keyvar, valuevar);
+			ft_checkenv(&g_mini->varenvs,keyvar, valuevar);
 			free(keyvar);
 			free(valuevar);
 			

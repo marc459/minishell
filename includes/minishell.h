@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/29 11:12:33 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/03 17:06:05 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_general {
 	int		fdout;
 	int		quot;
 	int		dquot;
+	int		piperet;
 	t_parse	parse;
 	size_t	argssize;
 }			t_general;

@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/03 13:42:35 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/03 13:54:55 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@
 
 char	*read_line(char *prompt)
 {
-	char *command;
+	char	*command;
 
 	command = ft_calloc(sizeof(char), 64);
-	//free(command);
 	command = readline(prompt);
 	add_history (command);
 	return (command);
@@ -67,9 +66,10 @@ void	exit_error(char **command)
 		printf("minishell: exit: too many arguments\n");
 		*command = ft_strdup("noexit");
 	}
-	else if (ft_bidstrlen(freespaces) == 1 && (command[0][4] != '\0' && command[0][4] != ' '))
+	else if (ft_bidstrlen(freespaces) == 1 && (command[0][4] != '\0'
+		&& command[0][4] != ' '))
 	{
-		printf("minishell: %s: command not found\n",command[0]);
+		printf("minishell: %s: command not found\n", command[0]);
 		*command = ft_strdup("noexit");
 	}
 	ft_freebidstr(freespaces);
@@ -84,12 +84,12 @@ void	ft_prompt(t_general *g_m, char **environ)
 
 	ownenv = ft_ownenv(environ);
 	command = ft_calloc(sizeof(char), 64);
-	while (ft_strncmp(command,"exit",4))
+	while (ft_strncmp(command, "exit", 4))
 	{
 		ft_inigeneral(g_m);
 		free(command);
 		command = read_line("Minishell1-1.0:");
-		if (ft_strncmp(command,"exit",4))
+		if (ft_strncmp(command, "exit", 4))
 		{
 			ft_parse(g_m, command);
 			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCyan, Color_Off);

@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 17:58:01 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/03 20:34:10 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/03 23:11:18 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ void	ft_printenv(t_env *lst)
 	while (lst)
 	{
 		if(lst->content)
-			printf("%s=%s\n",lst->envvar, lst->content);
+			printf("declare -x %s=\"%s\"\n",lst->envvar, lst->content);
 		else
-			printf("%s\n",lst->envvar);
+			printf("declare -x %s\n",lst->envvar);
 		lst = lst->next;
 	}
 }
@@ -193,10 +193,9 @@ void	ft_checkenv(t_env **varenvs, char *keyvar, char *valuevar)
 
 void	ft_parsebuiltin(t_general *g_mini,char **cmd, char **envp)
 {
+	int i;
 	if(!ft_strncmp(cmd[0], "env", 4))
 	{
-		int i;
-
 		i = -1; 
 		while(++i < ft_bidstrlen(envp))
 			printf("%s\n",envp[i]);
@@ -209,7 +208,6 @@ void	ft_parsebuiltin(t_general *g_mini,char **cmd, char **envp)
 	{
 		char *keyvar;
 		char *valuevar;
-		int i;
 		int x;
 		int y;
 
@@ -217,24 +215,30 @@ void	ft_parsebuiltin(t_general *g_mini,char **cmd, char **envp)
 		
 		while(cmd[i])
 		{
-			keyvar = ft_calloc(ft_strlen(cmd[i]),sizeof(char));
-			valuevar = ft_calloc(ft_strlen(cmd[i]),sizeof(char));
 			x = 0;
 			y = 0;
 			while(cmd[i][x] && cmd[i][x] != '=')
-			{
-				keyvar[x] = cmd[i][x];
 				x++;
-			}
-			x++;
-			if(!cmd[i][x])
+			keyvar = ft_substr(cmd[i],0,x);
+			if(cmd[i][x++] == '=')
+				valuevar = ft_strdup(cmd[i] + x);
+			else
+			{
+				valuevar=ft_strdup(cmd[i] + x);
 				valuevar = NULL;
-			while(cmd[i][x])
-			{
-				valuevar[y] = cmd[i][x];
-				x++;
-				y++;
+				printf("valuevar%s;\n",valuevar);
 			}
+				
+			/*valuevar = ft_calloc(ft_strlen(cmd[i] + x),sizeof(char));
+			printf(":%s:%ld\n",valuevar,ft_strlen(cmd[i] + x));*/
+			/*if(cmd[i][x] == '\0')
+			{
+				printf("nocontent>%c;\n",cmd[i][x]);
+				valuevar=NULL;
+			}
+			else{
+				valuevar = ft_strdup(cmd[i] + x);
+			}*/
 			ft_checkenv(&g_mini->varenvs,keyvar, valuevar);
 			free(keyvar);
 			free(valuevar);
@@ -243,5 +247,30 @@ void	ft_parsebuiltin(t_general *g_mini,char **cmd, char **envp)
 		}
 		//bubbleSort(g_mini->varenvs);
 		
+	}
+	else if(!ft_strncmp(cmd[0], "unset", 5))
+	{
+		i = 1;
+		while(cmd[i])
+			ft_deleteenv(&g_mini->varenvs,cmd[i++]);
+	}
+}
+
+void	ft_deleteenv(t_env **varenvs, char *keyvar)
+{
+	t_env	*iter;
+
+	iter = *varenvs;
+	
+	while (iter)
+	{
+		if(!ft_strncmp(iter->envvar,keyvar,ft_strlen(iter->envvar) + 1))
+		{
+			if(iter->back)
+				iter->back->next = iter->next;
+			else
+				*varenvs = varenvs[0]->next;
+		}
+		iter = iter->next;
 	}
 }

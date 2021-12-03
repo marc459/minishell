@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/03 20:25:04 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/03 21:44:55 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int		ft_envsize(t_env *lst);
 void	ft_parsebuiltin(t_general *g_mini,char **cmd, char **envp);
 void	ft_checkenv(t_env **varenvs, char *keyvar, char *valuevar);
 void	ft_envadd_front(t_env **lst, t_env *new);
+void	ft_deleteenv(t_env **varenvs, char *keyvar);
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);

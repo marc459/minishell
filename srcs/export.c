@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 17:58:01 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/03 20:04:46 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/03 20:34:10 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,9 +191,17 @@ void	ft_checkenv(t_env **varenvs, char *keyvar, char *valuevar)
 		
 }
 
-void	ft_parsebuiltin(t_general *g_mini,char **cmd)
+void	ft_parsebuiltin(t_general *g_mini,char **cmd, char **envp)
 {
-	if(!ft_strncmp(cmd[0], "export", 7) && ft_bidstrlen(cmd) == 1)
+	if(!ft_strncmp(cmd[0], "env", 4))
+	{
+		int i;
+
+		i = -1; 
+		while(++i < ft_bidstrlen(envp))
+			printf("%s\n",envp[i]);
+	}
+	else if(!ft_strncmp(cmd[0], "export", 7) && ft_bidstrlen(cmd) == 1)
 	{
 		ft_printenv(g_mini->varenvs);
 	}

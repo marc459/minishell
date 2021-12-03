@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 21:01:26 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/24 03:23:35 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/03 13:40:40 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,24 @@
 char	*ft_getenv(char *str, size_t *last, size_t *j)
 {
 	size_t	i;
-	char	*env;
-	char	aux2;
+	char	*aux;
+	char	*ret;
 
 	i = 0;
-	env = NULL;
+	aux = NULL;
 	str++;
 	*last += 1;
 	*j += 1;
-	while (str[i] && str[i] != ' ' && str[i] != '\'' && str[i] != '\"')
+	while (ft_isalpha(str[i]))
 	{
 		*last += 1;
 		*j += 1;
 		i++;
 	}
-	env = ft_substr(str, 0, i);
-	return (ft_strdup(getenv(env)));
+	aux = ft_substr(str, 0, i);
+	ret = ft_strdup(getenv(aux));
+	free (aux);
+	return (ret);
 }
 
 void	ft_joinenv(char **str)
@@ -48,13 +50,13 @@ void	ft_joinenv(char **str)
 		{
 			line = ft_substr(str[0], last, j);
 			last = j;
-			aux = line;
-			line = ft_strjoin(line, ft_getenv(&str[0][j], &last, &j));
+			aux = ft_getenv(&str[0][j], &last, &j);
+			ft_strownjoin(&line, aux);
 			free (aux);
 		}
 	}
-	aux = line;
-	line = ft_strjoin(line, ft_substr(str[0], last, j));
+	aux = ft_substr(str[0], last, j);
+	ft_strownjoin(&line, aux);
 	free (aux);
 	free(str[0]);
 	str[0] = line;

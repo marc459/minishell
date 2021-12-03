@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/02 12:11:21 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/02 17:41:42 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,16 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 		administratepipe(i, g_mini);
 		cmd = ft_split(g_mini->args[g_mini->exec[i].posexec].content, ' ');
 		if (!ft_strncmp(cmd[0], "cd", 2))
+		{
 			ft_cd(&envp, cmd[1]);
+		}
+		//|| !ft_strncmp(cmd[0], "unset", 4) || !ft_strncmp(cmd[0], "pwd", 3)
+		//|| (!ft_strncmp(cmd[0], "echo", 4) && !ft_strncmp(cmd[1], "-n", 2)))
+		else if(!ft_strncmp(cmd[0], "env", 3) || !ft_strncmp(cmd[0], "export", 6))
+		{
+			//printf("Builtin detected\n");
+			ft_parsebuiltin(g_mini, cmd);
+		}
 		else
 		{
 			pid[0] = fork();

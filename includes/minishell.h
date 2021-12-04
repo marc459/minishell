@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/03 17:06:05 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/03 21:44:55 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,14 @@ typedef struct s_parse
 	size_t	comand;
 }			t_parse;
 
+typedef struct s_env
+{
+	char	*envvar;
+	char	*content;
+	struct s_env *next;
+	struct s_env *back;
+}			t_env;
+
 typedef struct s_general {
 	size_t	npipes;
 	size_t	nexecutables;
@@ -64,6 +72,7 @@ typedef struct s_general {
 	int		piperet;
 	t_parse	parse;
 	size_t	argssize;
+	t_env	*varenvs;
 }			t_general;
 
 void	signals(void);
@@ -79,6 +88,18 @@ void	administratestds(int i, t_general *g_mini);
 void	waitforthem(int *childpid, int nchilds);
 void	leakatexit(void);
 void	runcflag(t_general	g_minishell, char **environ, char **argv, int pid);
+t_env	*ft_envnew(char	*envvar,char *content);
+void	ft_envadd_back(t_env **lst, t_env *new);
+t_env	*ft_envlast(t_env *lst);
+void	ft_printenv(t_env *lst);
+void	ft_orderenv(t_env **lst);
+void	bubbleSort(t_env *start);
+void	swapenv(t_env *a, t_env *b);
+int		ft_envsize(t_env *lst);
+void	ft_parsebuiltin(t_general *g_mini,char **cmd, char **envp);
+void	ft_checkenv(t_env **varenvs, char *keyvar, char *valuevar);
+void	ft_envadd_front(t_env **lst, t_env *new);
+void	ft_deleteenv(t_env **varenvs, char *keyvar);
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);

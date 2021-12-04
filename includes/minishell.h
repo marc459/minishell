@@ -69,6 +69,7 @@ typedef struct s_general {
 	int		fdout;
 	int		quot;
 	int		dquot;
+	int		piperet;
 	t_parse	parse;
 	size_t	argssize;
 	t_env	*varenvs;

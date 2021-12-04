@@ -6,36 +6,45 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 21:01:26 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/03 13:40:40 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/03 17:56:21 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	*ft_getenv(char *str, size_t *last, size_t *j)
+void	ft_addvars(size_t *last, size_t *j)
+{
+	*last += 1;
+	*j += 1;
+}
+
+char	*ft_getenv(char *str, size_t *last, size_t *j, t_general *g)
 {
 	size_t	i;
 	char	*aux;
 	char	*ret;
 
-	i = 0;
+	i = -1;
 	aux = NULL;
 	str++;
-	*last += 1;
-	*j += 1;
-	while (ft_isalpha(str[i]))
+	ft_addvars(last, j);
+	if (str[i + 1] == '?')
 	{
-		*last += 1;
-		*j += 1;
-		i++;
+		ft_addvars(last, j);
+		return (ft_itoa(g->piperet));
 	}
-	aux = ft_substr(str, 0, i);
+	while (ft_isalpha(str[++i]))
+		ft_addvars(last, j);
+	if (!i)
+		return (ft_strdup("$"));
+	else
+		aux = ft_substr(str, 0, i);
 	ret = ft_strdup(getenv(aux));
 	free (aux);
 	return (ret);
 }
 
-void	ft_joinenv(char **str)
+void	ft_joinenv(char **str, t_general *g)
 {
 	char	*aux;
 	char	*line;
@@ -50,7 +59,7 @@ void	ft_joinenv(char **str)
 		{
 			line = ft_substr(str[0], last, j);
 			last = j;
-			aux = ft_getenv(&str[0][j], &last, &j);
+			aux = ft_getenv(&str[0][j], &last, &j, g);
 			ft_strownjoin(&line, aux);
 			free (aux);
 		}
@@ -62,24 +71,18 @@ void	ft_joinenv(char **str)
 	str[0] = line;
 }
 
-void	ft_expand(t_general *g, size_t i)
-{
-	char	*aux2;
-
-	aux2 = g->args[i].content;
-	if ((ft_getposition(aux2, '\"') < ft_getposition(aux2, '\''))
-		|| (ft_getposition(aux2, '\"') == ft_getposition(aux2, '\'')))
-		ft_joinenv(&g->args[i].content);
-}
-
 void	ft_expvar(t_general *g)
 {
 	size_t	i;
+	char	*aux;
 
 	i = -1;
 	while (++i < g->argssize)
 	{
-		if (ft_findchar(g->args[i].content, '$'))
-			ft_expand(g, i);
+		aux = g->args[i].content;
+		if (ft_findchar(aux, '$'))
+			if ((ft_getposition(aux, '\"') < ft_getposition(aux, '\''))
+				|| (ft_getposition(aux, '\"') == ft_getposition(aux, '\'')))
+				ft_joinenv(&g->args[i].content, g);
 	}
 }

@@ -6,10 +6,9 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/02 12:51:16 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/04 18:02:57 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include <minishell.h>
 
@@ -106,27 +105,25 @@ void	ft_prompt(t_general *g_m, char **environ)
 	ft_freebidstr(ownenv);
 }
 
-void	ft_saveenv(t_general *g_minishell,char **environ)
+void	ft_saveenv(t_general *g_m,char **environ)
 {
-	int i;
-	char **keyvalue;
+	int		i;
+	char	**keyvalue;
 
 	i = 0;
 	keyvalue = ft_split(environ[i], '=');
-	g_minishell->varenvs = ft_envnew(keyvalue[0], keyvalue[1]);
+	g_m->varenvs = ft_envnew(keyvalue[0], keyvalue[1]);
 	free(keyvalue);
 	i++;
-	while(i < (ft_bidstrlen(environ) - 1))
+	while (i < (ft_bidstrlen(environ) - 1))
 	{
 		keyvalue = ft_split(environ[i], '=');
-		ft_envadd_back(&g_minishell->varenvs,ft_envnew(keyvalue[0], keyvalue[1]));
+		ft_envadd_back(&g_m->varenvs, ft_envnew(keyvalue[0], keyvalue[1]));
 		free(keyvalue);
-		
 		i++;
 	}
-	bubbleSort(g_minishell->varenvs);
+	bubbleSort(g_m->varenvs);
 }
-
 
 int	main(int argc, char **argv)
 {

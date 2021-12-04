@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/03 13:54:55 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/04 16:35:15 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int	main(int argc, char **argv)
 
 	runcflag(g_minishell, environ, argv, pid);
 	//signals();
+	g_minishell.piperet = 0;
 	ft_prompt(&g_minishell, environ);
 	printf("exit\n");
 	return (0);

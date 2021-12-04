@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:32:36 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/03 17:07:01 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/04 16:42:58 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,9 @@ void	ft_inigeneral(t_general *general)
 	general->nsemicolons = 0;
 	general->quot = 1;
 	general->dquot = 1;
-	general->piperet = 0;
 	general->parse.comand = -1;
 	general->parse.comnds = NULL;
 	general->parse.comndssize = 0;
 	general->args = NULL;
 	general->argssize = 0;
-}
-
-void	leak(void)
-{
-	system("leaks parse");
 }

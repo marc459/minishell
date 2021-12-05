@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/05 12:00:59 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/05 13:30:14 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	ft_prompt(t_general *g_m)
 			exit_error(&command);
 	}
 	free(command);
-	ft_freebidstr(ownenv);
+	ft_freebidstr(g_m->ownenv);
 }
 
 void	ft_saveenv(t_general *g_m,char **environ)

@@ -6,7 +6,7 @@
 #    By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/01 13:26:03 by emgarcia          #+#    #+#              #
-#    Updated: 2021/11/29 13:45:25 by emgarcia         ###   ########.fr        #
+#    Updated: 2021/12/04 22:18:44 by emgarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,9 @@ SRCS	=	ft_strtrim.c	\
 			ft_splitlen.c	\
 			ft_trimallchar.c	\
 			ft_countchar.c	\
-			ft_strownjoin.c
+			ft_strownjoin.c	\
+			ft_strsort.c	\
+			ft_splitdup.c
 SRCS_B	= ft_lstmap.c ft_lstiter.c ft_lstclear.c ft_lstdelone.c ft_lstadd_back.c ft_lstlast.c ft_lstsize.c ft_lstadd_front.c ft_lstnew.c
 OBJS	= ${SRCS:.c=.o}
 OBJS_B	= ${SRCS_B:.c=.o}

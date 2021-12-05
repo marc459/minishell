@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ownenv.c                                        :+:      :+:    :+:   */
+/*   ft_strsort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/25 15:59:22 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/05 04:32:49 by emgarcia         ###   ########.fr       */
+/*   Created: 2021/12/04 19:47:54 by emgarcia          #+#    #+#             */
+/*   Updated: 2021/12/04 22:19:12 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "libft.h"
 
-void	ft_printsortenv(char **ownenv)
+char	**ft_strsort(char **split)
 {
-	size_t	i;
 	char	**sort;
-
-	if (!ownenv)
-		return ;
-	sort = ft_strsort(ownenv);
-	i = -1;
-	while (sort[++i])
-		printf("declare -x %s\n", sort[i]);
-	ft_freedouble(sort);
-}
-
-char	**ft_ownenv(char **environ)
-{
-	char	**ownenv;
 	size_t	i;
+	size_t	j;
+	size_t	cont;
 
-	ownenv = calloc(sizeof(char *), (ft_splitlen(environ) + 1));
-	if (!ownenv || !environ)
+	if (!split)
+		return (NULL);
+	sort = calloc(sizeof(char *), (ft_splitlen(split) + 1));
+	if (!sort)
 		return (NULL);
 	i = -1;
-	while (++i < ft_splitlen(environ))
-		ownenv[i] = ft_strdup(environ[i]);
-	return (ownenv);
+	while (++i < ft_splitlen(split))
+	{
+		j = -1;
+		cont = 0;
+		while (++j < ft_splitlen(split))
+			if (ft_strncmp(split[i], split[j], ft_strlen(split[i])) > 0)
+				cont++;
+		sort[cont] = ft_strdup(split[i]);
+	}
+	return (sort);
 }

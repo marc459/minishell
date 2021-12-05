@@ -6,10 +6,9 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/02 12:51:16 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/04 19:32:46 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include <minishell.h>
 
@@ -76,14 +75,13 @@ void	exit_error(char **command)
 	ft_freebidstr(freespaces);
 }
 
-void	ft_prompt(t_general *g_m, char **environ)
+void	ft_prompt(t_general *g_m)
 {
 	pid_t		pid;
 	char		*command;
 	char		*buf;
 	char		**ownenv;
 
-	ownenv = ft_ownenv(environ);
 	command = ft_calloc(sizeof(char), 64);
 	while (ft_strncmp(command, "exit", 4))
 	{
@@ -94,7 +92,7 @@ void	ft_prompt(t_general *g_m, char **environ)
 		{
 			ft_parse(g_m, command);
 			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCyan, Color_Off);
-			ft_executor(g_m, ownenv, &pid);
+			ft_executor(g_m, g_m->ownenv, &pid);
 			//printf("%s< REAL BASH >%s\n\n", BCyan, Color_Off);
 			//system(command);
 			free_gminishell(g_m);
@@ -106,33 +104,28 @@ void	ft_prompt(t_general *g_m, char **environ)
 	ft_freebidstr(ownenv);
 }
 
-void	ft_saveenv(t_general *g_minishell,char **environ)
+void	ft_saveenv(t_general *g_m,char **environ)
 {
-	int i;
-	char **keyvalue;
+	int		i;
+	char	**keyvalue;
 
 	i = 0;
 	keyvalue = ft_split(environ[i], '=');
-	g_minishell->varenvs = ft_envnew(keyvalue[0], keyvalue[1]);
+	g_m->varenvs = ft_envnew(keyvalue[0], keyvalue[1]);
 	free(keyvalue);
 	i++;
-	while(i < (ft_bidstrlen(environ) - 1))
+	while (i < (ft_bidstrlen(environ) - 1))
 	{
 		keyvalue = ft_split(environ[i], '=');
-		ft_envadd_back(&g_minishell->varenvs,ft_envnew(keyvalue[0], keyvalue[1]));
+		ft_envadd_back(&g_m->varenvs, ft_envnew(keyvalue[0], keyvalue[1]));
 		free(keyvalue);
-		
 		i++;
 	}
-	bubbleSort(g_minishell->varenvs);
+	bubbleSort(g_m->varenvs);
 }
-
 
 int	main(int argc, char **argv)
 {
-	/*char a[80] = "a";
-	char b[80] = "z";
-	printf("%d\n",ft_strncmp(a, b, ft_strlen(a)));*/
 	extern char	**environ;
 	pid_t		pid;
 	t_general	g_minishell;
@@ -141,7 +134,8 @@ int	main(int argc, char **argv)
 	runcflag(g_minishell, environ, argv, pid);
 	//signals();
 	g_minishell.piperet = 0;
-	ft_prompt(&g_minishell, environ);
+	g_minishell.ownenv = ft_ownenv(environ);
+	ft_prompt(&g_minishell);
 	printf("exit\n");
 	return (0);
 }

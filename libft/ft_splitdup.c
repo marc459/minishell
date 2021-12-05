@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_splitdup.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/29 15:49:08 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/04 22:09:23 by emgarcia         ###   ########.fr       */
+/*   Created: 2021/12/04 20:20:19 by emgarcia          #+#    #+#             */
+/*   Updated: 2021/12/04 20:23:37 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+char	**ft_splitdup(char **split)
 {
 	size_t	i;
+	char	**dup;
 
+	if (!split)
+		return (NULL);
+	dup = calloc(sizeof(char *), (ft_splitlen(split) + 1));
+	if (!dup)
+		return (NULL);
 	i = -1;
-	while (++i < n && s1[i] && s2[i])
-	{
-		if ((unsigned char)s1[i] > (unsigned char)s2[i])
-			return (1);
-		if ((unsigned char)s1[i] < (unsigned char)s2[i])
-			return (-1);
-	}
-	if (i < n)
-	{
-		if ((unsigned char)s1[i] > (unsigned char)s2[i])
-			return (1);
-		if ((unsigned char)s1[i] < (unsigned char)s2[i])
-			return (-1);
-	}
-	return (0);
+	while (++i < ft_splitlen(split))
+		dup[i] = ft_strdup(split[i]);
+	return (dup);
 }

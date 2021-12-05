@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/04 18:22:32 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/04 20:52:13 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,6 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 		else if (!ft_strncmp(cmd[0], "unset", 4)
 			|| !ft_strncmp(cmd[0], "export", 6))
 			ft_parsebuiltin(g_mini, cmd, envp);
-		/* else if (!ft_strncmp(cmd[0], "unset", 4)
-			|| !ft_strncmp(cmd[0], "env", 3)
-			|| !ft_strncmp(cmd[0], "export", 6))
-			ft_parsebuiltin(g_mini, cmd, envp); */
 		else
 		{
 			pid[0] = fork();

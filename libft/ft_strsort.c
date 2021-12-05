@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_strsort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/29 15:49:08 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/04 22:09:23 by emgarcia         ###   ########.fr       */
+/*   Created: 2021/12/04 19:47:54 by emgarcia          #+#    #+#             */
+/*   Updated: 2021/12/04 22:19:12 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+char	**ft_strsort(char **split)
 {
+	char	**sort;
 	size_t	i;
+	size_t	j;
+	size_t	cont;
 
+	if (!split)
+		return (NULL);
+	sort = calloc(sizeof(char *), (ft_splitlen(split) + 1));
+	if (!sort)
+		return (NULL);
 	i = -1;
-	while (++i < n && s1[i] && s2[i])
+	while (++i < ft_splitlen(split))
 	{
-		if ((unsigned char)s1[i] > (unsigned char)s2[i])
-			return (1);
-		if ((unsigned char)s1[i] < (unsigned char)s2[i])
-			return (-1);
+		j = -1;
+		cont = 0;
+		while (++j < ft_splitlen(split))
+			if (ft_strncmp(split[i], split[j], ft_strlen(split[i])) > 0)
+				cont++;
+		sort[cont] = ft_strdup(split[i]);
 	}
-	if (i < n)
-	{
-		if ((unsigned char)s1[i] > (unsigned char)s2[i])
-			return (1);
-		if ((unsigned char)s1[i] < (unsigned char)s2[i])
-			return (-1);
-	}
-	return (0);
+	return (sort);
 }

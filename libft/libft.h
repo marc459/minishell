@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 13:29:50 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/29 13:43:39 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/04 22:18:37 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ size_t	ft_splitlen(char **split);
 void	ft_trimallchar(char **str, char c);
 size_t	ft_countchar(char *str, char c);
 void	ft_strownjoin(char **s1, char *s2);
+char	**ft_splitdup(char **split);
+char	**ft_strsort(char **split);
 
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);

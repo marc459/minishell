@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ownenv2.c                                       :+:      :+:    :+:   */
+/*   ft_addenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/05 03:12:22 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/05 03:47:23 by emgarcia         ###   ########.fr       */
+/*   Created: 2021/12/05 05:18:15 by emgarcia          #+#    #+#             */
+/*   Updated: 2021/12/05 05:18:21 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	ft_checknewenv(t_general *g, char *newenv)
 	size_t	ultima;
 	char	*name;
 	char	*val;
-	char	*aux;
 
 	i = -1;
 	ultima = 0;
@@ -82,19 +81,17 @@ void	ft_checknewenv(t_general *g, char *newenv)
 	{
 		if (newenv[i] == '=' || i == ft_strlen(newenv) - 1)
 		{
-			aux = ft_substr(newenv, ultima, i - ultima);
+			name = ft_substr(newenv, ultima, i - ultima);
 			ultima = i + 1;
-			name = ft_dropquotes(g, aux);
-			free (aux);
 			if (!ft_checkenvname(name))
 				return ;
+			else
+				break ;
 		}
 	}
-	aux = ft_substr(newenv, ultima, i - ultima);
+	val = ft_substr(newenv, ultima, i - ultima);
 	ultima = i + 1;
-	val = ft_dropquotes(g, aux);
-	free (aux);
-	if (!ft_checkenvname(val))
-		return ;
 	ft_addenv(g, name, val);
+	free (name);
+	free (val);
 }

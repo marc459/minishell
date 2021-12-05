@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 17:58:01 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/05 01:26:34 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/05 05:02:37 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,42 +161,17 @@ void	ft_checkenv(t_env **varenvs, char *keyvar, char *valuevar)
 
 void	ft_parsebuiltin(t_general *g,char **cmd, char **envp)
 {
-	int		i;
-	char	*keyvar;
-	char	*valuevar;
-	int		x;
+	int	i;
 
+	i = 0;
 	if (!ft_strncmp(cmd[0], "export", 7) && ft_bidstrlen(cmd) == 1)
 		ft_printsortenv(g->ownenv);
 	else if (!ft_strncmp(cmd[0], "export", 6))
-	{
-		i = 1;
-		while (cmd[i])
-		{
-			x = 0;
-			while (cmd[i][x] && cmd[i][x] != '=')
-				x++;
-			keyvar = ft_substr(cmd[i], 0, x);
-			if (cmd[i][x++] == '=')
-				valuevar = ft_strdup(cmd[i] + x);
-			else
-			{
-				valuevar = ft_strdup(cmd[i] + x);
-				valuevar = NULL;
-				printf("valuevar%s;\n", valuevar);
-			}
-			ft_checkenv(&g->varenvs, keyvar, valuevar);
-			free(keyvar);
-			free(valuevar);
-			i++;
-		}
-	}
+		while (cmd[++i])
+			ft_checknewenv(g, cmd[i]);
 	else if (!ft_strncmp(cmd[0], "unset", 5))
-	{
-		i = 1;
-		while (cmd[i])
-			ft_deleteenv(&g->varenvs, cmd[i++]);
-	}
+		while (cmd[++i])
+			ft_deleteenv(&g->varenvs, cmd[i]);
 }
 
 void	ft_deleteenv(t_env **varenvs, char *keyvar)

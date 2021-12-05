@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 05:18:15 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/05 05:18:21 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/05 06:16:46 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,6 @@ size_t	ft_checkenvname(char *name)
 			return (0);
 	}
 	return (1);
-}
-
-size_t	ft_hasenv(t_general *g, char *name)
-{
-	size_t	i;
-
-	i = -1;
-	while (g->ownenv[++i])
-		if (ft_strncmp(name, g->ownenv[i], ft_strlen(name)) == 0
-			&& g->ownenv[i][ft_strlen(name)] == '=')
-			return (1);
-	return (0);
 }
 
 void	ft_addenv(t_general *g, char *name, char *val)

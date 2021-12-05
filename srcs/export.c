@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 17:58:01 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/05 05:02:37 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/05 07:13:28 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,21 +157,6 @@ void	ft_checkenv(t_env **varenvs, char *keyvar, char *valuevar)
 		if (!placed)
 			ft_envadd_back(varenvs, new);
 	}		
-}
-
-void	ft_parsebuiltin(t_general *g,char **cmd, char **envp)
-{
-	int	i;
-
-	i = 0;
-	if (!ft_strncmp(cmd[0], "export", 7) && ft_bidstrlen(cmd) == 1)
-		ft_printsortenv(g->ownenv);
-	else if (!ft_strncmp(cmd[0], "export", 6))
-		while (cmd[++i])
-			ft_checknewenv(g, cmd[i]);
-	else if (!ft_strncmp(cmd[0], "unset", 5))
-		while (cmd[++i])
-			ft_deleteenv(&g->varenvs, cmd[i]);
 }
 
 void	ft_deleteenv(t_env **varenvs, char *keyvar)

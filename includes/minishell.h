@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/05 03:16:55 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/05 07:09:05 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,14 @@ void	ft_orderenv(t_env **lst);
 void	bubbleSort(t_env *start);
 void	swapenv(t_env *a, t_env *b);
 int		ft_envsize(t_env *lst);
-void	ft_parsebuiltin(t_general *g_mini, char **cmd, char **envp);
+void	ft_parsebuiltin(t_general *g_mini, char **cmd);
 void	ft_checkenv(t_env **varenvs, char *keyvar, char *valuevar);
 void	ft_envadd_front(t_env **lst, t_env *new);
 void	ft_deleteenv(t_env **varenvs, char *keyvar);
 char	*ft_dropquotes(t_general *g, char *str);
 void	ft_checknewenv(t_general *g, char *newenv);
+size_t	ft_checkenvname(char *name);
+void	ft_remenv(t_general *g, char *remenv);
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);

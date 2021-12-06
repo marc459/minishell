@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/06 17:11:14 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/06 17:22:48 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,25 +104,6 @@ void	ft_prompt(t_general *g_m)
 	ft_freebidstr(g_m->ownenv);
 }
 
-void	ft_saveenv(t_general *g_m,char **environ)
-{
-	int		i;
-	char	**keyvalue;
-
-	i = 0;
-	keyvalue = ft_split(environ[i], '=');
-	g_m->varenvs = ft_envnew(keyvalue[0], keyvalue[1]);
-	free(keyvalue);
-	i++;
-	while (i < (ft_bidstrlen(environ) - 1))
-	{
-		keyvalue = ft_split(environ[i], '=');
-		ft_envadd_back(&g_m->varenvs, ft_envnew(keyvalue[0], keyvalue[1]));
-		free(keyvalue);
-		i++;
-	}
-	bubbleSort(g_m->varenvs);
-}
 
 int	main(int argc, char **argv)
 {
@@ -130,7 +111,6 @@ int	main(int argc, char **argv)
 	pid_t		pid;
 	t_general	g_minishell;
 
-	ft_saveenv(&g_minishell, environ);
 	runcflag(g_minishell, environ, argv, pid);
 	signals();
 	g_minishell.piperet = 0;

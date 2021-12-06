@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/05 13:30:14 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/06 17:11:14 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*read_line(char *prompt)
 {
 	char	*command;
 
-	command = ft_calloc(sizeof(char), 64);
+	//command = ft_calloc(sizeof(char), 64);
 	command = readline(prompt);
 	add_history (command);
 	return (command);
@@ -79,17 +79,17 @@ void	ft_prompt(t_general *g_m)
 {
 	pid_t		pid;
 	char		*command;
-	char		*buf;
-	char		**ownenv;
 
 	command = ft_calloc(sizeof(char), 64);
 	while (ft_strncmp(command, "exit", 4))
 	{
-		ft_inigeneral(g_m);
+		
 		free(command);
-		command = read_line("Minishell1-1.0:");
-		if (ft_strncmp(command, "exit", 4))
+		command = read_line("Minishell-1.0:");
+		if (ft_strncmp(command, "exit", 4) && ft_strncmp(command, "\0", 1))
 		{
+			ft_inigeneral(g_m);
+			
 			ft_parse(g_m, command);
 			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCyan, Color_Off);
 			ft_executor(g_m, g_m->ownenv, &pid);

@@ -18,7 +18,7 @@ PROGRAM_SRCS = minishell.c signals.c executor.c executor2.c			\
 				parse/ft_args.c parse/ft_args2.c parse/ft_args3.c	\
 				parse/ft_aux.c parse/ft_aux2.c parse/ft_parse.c		\
 				utils.c parse/ft_args4.c ft_cd.c ft_ownenv.c		\
-				parse/ft_aux3.c export.c ft_addenv.c ft_remenv.c	\
+				parse/ft_aux3.c ft_addenv.c ft_remenv.c	\
 				ft_expuns.c
 
 #OBJS
@@ -26,7 +26,7 @@ PROGRAM_OBJS = $(addprefix $(OBJ_PATH)/,$(PROGRAM_SRCS:.c=.o))
 	
 #FLAGS
 CC = gcc
-CFLAGS =  -g 
+CFLAGS =  -g  
 #-g3 -fsanitize=address -Wall -Werror -Wextra
 
 ifeq ($(OS),Windows_NT) 

@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/07 21:47:13 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/07 22:02:38 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	ft_prompt(t_general *g_m)
 	free(command);
 	ft_freebidstr(g_m->ownenv);
 }
-
 
 int	main(int argc, char **argv)
 {

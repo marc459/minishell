@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/06 17:09:48 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/07 23:07:04 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	define_fds(t_general *g_mini)
 {
 	int	i;
 	int	x;
+	char *command;
 
 	i = 0;
 	x = 0;
@@ -49,6 +50,19 @@ void	define_fds(t_general *g_mini)
 		else if (g_mini->args[i].type == 2)
 			g_mini->fdout = open(g_mini->args[i + 1].content,
 					O_CREAT | O_RDWR | O_TRUNC, 0755);
+		else if(g_mini->args[i].type == 7)
+			g_mini->fdout = open(g_mini->args[i + 1].content,
+					O_CREAT | O_RDWR | O_APPEND, 0755);
+		else if(g_mini->args[i].type == 8)
+		{
+			i = 0;
+			command = ft_calloc(sizeof(char), 64);
+			while(ft_strncmp(command, "hola", 4))
+			{
+				read(0,command,64);
+			}
+			
+		}
 		i++;
 	}
 }

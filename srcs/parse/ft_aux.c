@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:32:36 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/04 16:42:58 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/07 23:06:23 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	ft_inigeneral(t_general *general)
 {
 	general->npipes = 0;
 	general->nexecutables = 0;
-	general->nredirections = 0;
 	general->nsemicolons = 0;
+	general->nredirections = 0;
 	general->quot = 1;
 	general->dquot = 1;
 	general->parse.comand = -1;

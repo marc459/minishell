@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 21:01:26 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/03 17:56:21 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/07 15:45:26 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ char	*ft_getenv(char *str, size_t *last, size_t *j, t_general *g)
 	char	*aux;
 	char	*ret;
 
-	i = -1;
 	aux = NULL;
 	str++;
 	ft_addvars(last, j);
+	i = -1;
 	if (str[i + 1] == '?')
 	{
 		ft_addvars(last, j);
@@ -35,7 +35,7 @@ char	*ft_getenv(char *str, size_t *last, size_t *j, t_general *g)
 	}
 	while (ft_isalpha(str[++i]))
 		ft_addvars(last, j);
-	if (!i)
+	if (!i && str[i] != '\"' && str[i] != '\'')
 		return (ft_strdup("$"));
 	else
 		aux = ft_substr(str, 0, i);

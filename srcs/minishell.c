@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
 /*   Updated: 2021/12/08 04:50:29 by emgarcia         ###   ########.fr       */
@@ -85,18 +85,18 @@ void	ft_prompt(t_general *g_m)
 	{		
 		free(command);
 		command = read_line(BEGIN(1, 49, 34)"Minishell-1.0:"CLOSE);
-		printf("cmd : %s\n", command);
-		if (ft_strncmp(command, "exit", 4) && ft_strncmp(command, "\0", 1))
+		if (ft_strncmp(command, "exit", 4) && command[0] != '\0')
 		{
 			ft_inigeneral(g_m);
 			ft_parse(g_m, command);
+			ft_printgeneral(g_m);
 			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCyan, Color_Off);
 			ft_executor(g_m, g_m->ownenv, &pid);
 			//printf("%s< REAL BASH >%s\n\n", BCyan, Color_Off);
 			//system(command);
 			free_gminishell(g_m);
 		}
-		else if (command)
+		else if(!ft_strncmp(command, "exit", 4))
 			exit_error(&command);
 	}
 	free(command);

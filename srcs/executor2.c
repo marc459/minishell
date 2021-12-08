@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/02 14:13:59 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/07 17:52:50 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,13 @@ void	ft_child(char **fullcmd, char **envp, int *stdo)
 
 	paths = ft_parsepaths(envp);
 	i = 0;
+	
 	while (paths[i])
 	{
-		cmd = ft_strjoin(paths[i], fullcmd[0]);
+		if(ft_strchr(fullcmd[0], '/'))
+			cmd = ft_strdup(fullcmd[0]);
+		else
+			cmd = ft_strjoin(paths[i], fullcmd[0]);
 		if (cmd)
 		{
 			if (!access(cmd, X_OK))

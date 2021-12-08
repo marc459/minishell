@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:11:14 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/18 16:20:15 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/07 22:50:59 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void	ft_countthings(t_general *g)
 	i = -1;
 	while (++i < g->argssize)
 	{
-		if (g->args[i].type == 1 || g->args[i].type == 2)
+		if (g->args[i].type == 1 || g->args[i].type == 2 
+		|| g->args[i].type == 7 || g->args[i].type == 8)
 			g->nredirections++;
 		else if (g->args[i].type == 3)
 			g->nexecutables++;

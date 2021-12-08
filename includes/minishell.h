@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
 /*   Updated: 2021/12/08 04:50:24 by emgarcia         ###   ########.fr       */
@@ -62,9 +62,9 @@ typedef struct s_env
 typedef struct s_general {
 	size_t	npipes;
 	size_t	nexecutables;
-	size_t	nredirections;
 	size_t	nsemicolons;
 	size_t	ncommands;
+	size_t	nredirections;
 	t_arg	*args;
 	t_exec	*exec;
 	int		fdin;

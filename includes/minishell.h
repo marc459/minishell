@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/05 07:09:05 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/08 04:50:24 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 
 # define READ_END    0
 # define WRITE_END   1
+# define CLOSE "\001\033[0m\002"
+# define BEGIN(x, y, z) "\001\033["#x";"#y";"#z"m\002"
 
 typedef struct s_arg {
 	size_t	type;

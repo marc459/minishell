@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/07 23:01:28 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/08 14:40:37 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*read_line(char *prompt)
 }
 #endif
 
-void	hola(void)
+void	checkleaks(void)
 {
 	system("leaks minishell");
 }
@@ -112,7 +112,7 @@ int	main(int argc, char **argv)
 	t_general	g_minishell;
 
 	runcflag(g_minishell, environ, argv, pid);
-	signals();
+	//signals();
 	g_minishell.piperet = 0;
 	g_minishell.ownenv = ft_ownenv(environ);
 	ft_prompt(&g_minishell);

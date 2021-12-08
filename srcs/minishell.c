@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/08 14:40:37 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/08 15:16:15 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,17 @@ void	exit_error(char **command)
 
 void	ft_prompt(t_general *g_m)
 {
-	pid_t		pid;
-	char		*command;
+	pid_t	pid;
+	char	*command;
 
 	command = ft_calloc(sizeof(char), 64);
-	while (ft_strncmp(command, "exit", 4))
-	{
-		
+	while (command && ft_strncmp(command, "exit", 4))
+	{		
 		free(command);
-		command = read_line("Minishell-1.0:");
+		command = read_line(BEGIN(1, 49, 34)"Minishell-1.0:"CLOSE);
 		if (ft_strncmp(command, "exit", 4) && command[0] != '\0')
 		{
 			ft_inigeneral(g_m);
-			
 			ft_parse(g_m, command);
 			ft_printgeneral(g_m);
 			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCyan, Color_Off);

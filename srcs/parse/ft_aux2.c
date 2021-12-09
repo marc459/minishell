@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:11:14 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/09 17:06:59 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/09 17:21:10 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	ft_countthings(t_general *g)
 	i = -1;
 	while (++i < g->argssize)
 	{
-		if (g->args[i].type == 1 || g->args[i].type == 2 
-		|| g->args[i].type == 7 || g->args[i].type == 8)
+		if (g->args[i].type == 1 || g->args[i].type == 2
+			|| g->args[i].type == 7 || g->args[i].type == 8)
 			g->nredirections++;
 		else if (g->args[i].type == 3)
 			g->nexecutables++;

@@ -6,7 +6,11 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/12/08 23:32:28 by emgarcia         ###   ########.fr       */
+=======
+/*   Updated: 2021/12/08 15:16:15 by msantos-         ###   ########.fr       */
+>>>>>>> 0a8aa735520476dc1ff224286561f75496848b2c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +53,7 @@ char	*read_line(char *prompt)
 }
 #endif
 
-void	hola(void)
+void	checkleaks(void)
 {
 	system("leaks minishell");
 }

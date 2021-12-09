@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/08 21:15:33 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/09 01:15:10 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_general {
 	size_t	nredirections;
 	t_arg	*args;
 	t_exec	*exec;
+	char	*heredockcontent;
 	int		fdin;
 	int		fdout;
 	int		quot;

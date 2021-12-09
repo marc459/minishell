@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/08 23:20:23 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/09 01:15:29 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	define_fds(t_general *g_mini)
 {
 	int	i;
 	int	x;
+	char *tmp;
+	char *tmp2;
 	char *command;
 
 	i = 0;
@@ -55,13 +57,24 @@ void	define_fds(t_general *g_mini)
 					O_CREAT | O_RDWR | O_APPEND, 0755);
 		else if(g_mini->args[i].type == 8)
 		{
-			i = 0;
-			command = ft_calloc(sizeof(char), 64);
-			while(ft_strncmp(command, "hola", 4))
+			tmp = ft_strdup("");
+			g_mini->heredockcontent = ft_strdup("");
+			ft_putstr_fd("heredock:",1);
+			while(ft_strncmp(tmp, g_mini->args[i + 1].content , ft_strlen(g_mini->args[i + 1].content)))
 			{
-				read(0,command,64);
+				
+				free(tmp);
+				tmp = ft_calloc(sizeof(char), 64);
+				read(0,tmp,64);
+				tmp2 = ft_strdup(g_mini->heredockcontent);
+				free(g_mini->heredockcontent);
+				g_mini->heredockcontent = ft_strjoin(tmp2,tmp);
+				free(tmp2);
+				tmp2 = ft_strchr(tmp,'\n');
+				tmp2[0] = '\0';
 			}
-			
+			ft_putstr_fd("heredock content\n",1);
+			ft_putstr_fd(g_mini->heredockcontent,1);
 		}
 		i++;
 	}

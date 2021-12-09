@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 23:15:08 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/09 01:08:50 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/09 16:12:20 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,8 @@ void	ft_refacttypes(t_general *g)
 	while (++i < g->argssize)
 	{
 		if ((g->args[i].type == 1 || g->args[i].type == 2
-				|| g->args[i].type == 7) && (g->args[i + 1].content))
+				|| g->args[i].type == 7 || g->args[i].type == 8)
+			&& (g->args[i + 1].content))
 			ft_splitcount(g, &i, &newargs);
 		else
 			newargs++;

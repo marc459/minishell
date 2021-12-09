@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_args2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 23:15:08 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/17 17:01:56 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/09 01:08:50 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	ft_splitcount(t_general *g, size_t *i, size_t *newargs)
 
 char	*ft_joinstring(t_general *g, size_t *j, char **split)
 {
-	char	*aux;
 	char	*line;
 	size_t	k;
 
@@ -42,17 +41,16 @@ char	*ft_joinstring(t_general *g, size_t *j, char **split)
 	{
 		if (!k)
 		{
-			g->args[*j].type = 4;
+			if (g->args[*j - 1].type == 8)
+				g->args[*j].type = 10;
+			else
+				g->args[*j].type = 4;
 			g->args[(*j)++].content = ft_strdup(split[k]);
 		}
 		else
 		{
-			aux = line;
-			line = ft_strjoin(line, split[k]);
-			free(aux);
-			aux = line;
-			line = ft_strjoin(line, " ");
-			free(aux);
+			ft_strownjoin(&line, split[k]);
+			ft_strownjoin(&line, " ");
 		}
 	}
 	return (line);
@@ -93,7 +91,8 @@ void	ft_droprefact(t_general *g, size_t newargs)
 	j = 0;
 	while (tmp[++i].content)
 	{
-		if ((tmp[i].type == 1 || tmp[i].type == 2 || tmp[i].type == 7)
+		if ((tmp[i].type == 1 || tmp[i].type == 2
+				|| tmp[i].type == 7 || tmp[i].type == 8)
 			&& (tmp[i + 1].content))
 			ft_splitarg(g, &i, &j, tmp);
 		else

@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   ft_splitprint.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 22:12:07 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/08 23:31:33 by emgarcia         ###   ########.fr       */
+/*   Created: 2021/12/09 00:21:25 by emgarcia          #+#    #+#             */
+/*   Updated: 2021/12/09 00:26:30 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "libft.h"
 
-void	quitsignal(int sig)
+void	ft_splitprint(char **split)
 {
-	g_piperet = 1;
-	printf("\nMinishell-1.0:");
-}
+	size_t	i;
 
-void	signals(void)
-{
-	signal(SIGINT, &quitsignal);
-	signal(3, SIG_IGN);
+	if (!split)
+		return ;
+	i = -1;
+	while (split[++i])
+	{
+		write(1, split[i], ft_strlen(split[i]));
+		write(1, "\n", 1);
+	}
 }

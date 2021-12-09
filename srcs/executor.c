@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/07 23:07:04 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/08 23:20:23 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,16 @@ void	administratepipe(int i, t_general *g_mini)
 void	waitforthem(int *childpid, int nchilds)
 {
 	int	i;
+	//int	j;
 
 	i = 0;
 	while (i < nchilds)
 	{
+		//waitpid(-1, &j, 0);
 		wait(childpid);
 		i++;
 	}
+	//g_piperet = j % 255;
 }
 
 void	ft_executor(t_general *g_mini, char **envp, int *pid)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/08 04:50:29 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/08 23:32:28 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	ft_prompt(t_general *g_m)
 	{		
 		free(command);
 		command = read_line(BEGIN(1, 49, 34)"Minishell-1.0:"CLOSE);
-		if (ft_strncmp(command, "exit", 4) && command[0] != '\0')
+		if (command && ft_strncmp(command, "exit", 4) && command[0] != '\0')
 		{
 			ft_inigeneral(g_m);
 			ft_parse(g_m, command);
@@ -96,7 +96,7 @@ void	ft_prompt(t_general *g_m)
 			//system(command);
 			free_gminishell(g_m);
 		}
-		else if(!ft_strncmp(command, "exit", 4))
+		else if (command && !ft_strncmp(command, "exit", 4))
 			exit_error(&command);
 	}
 	free(command);
@@ -111,7 +111,7 @@ int	main(int argc, char **argv)
 
 	runcflag(g_minishell, environ, argv, pid);
 	signals();
-	g_minishell.piperet = 0;
+	g_piperet = 0;
 	g_minishell.ownenv = ft_ownenv(environ);
 	ft_prompt(&g_minishell);
 	printf("exit\n");

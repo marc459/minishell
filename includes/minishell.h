@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/08 04:50:24 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/08 21:15:33 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,13 @@ typedef struct s_general {
 	int		fdout;
 	int		quot;
 	int		dquot;
-	int		piperet;
 	char	**ownenv;
 	t_parse	parse;
 	size_t	argssize;
 	t_env	*varenvs;
 }			t_general;
+
+int	g_piperet;
 
 void	signals(void);
 void	quitsignal(int sig);

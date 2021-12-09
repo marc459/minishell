@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/07 17:52:50 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/08 23:29:37 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,16 @@ void	ft_child(char **fullcmd, char **envp, int *stdo)
 
 	paths = ft_parsepaths(envp);
 	i = 0;
-	
 	while (paths[i])
 	{
-		if(ft_strchr(fullcmd[0], '/'))
+		if (ft_strchr(fullcmd[0], '/'))
 			cmd = ft_strdup(fullcmd[0]);
 		else
 			cmd = ft_strjoin(paths[i], fullcmd[0]);
 		if (cmd)
 		{
 			if (!access(cmd, X_OK))
-				execve(cmd, fullcmd, envp);
+				g_piperet = execve(cmd, fullcmd, envp);
 			free(cmd);
 		}
 		i++;
@@ -84,4 +83,5 @@ void	ft_child(char **fullcmd, char **envp, int *stdo)
 	ft_putstr_fd("Quineshell: ",*stdo);
 	ft_putstr_fd(fullcmd[0],*stdo);
 	ft_putstr_fd(" command not found\n",*stdo);
+	g_piperet = 127;
 }

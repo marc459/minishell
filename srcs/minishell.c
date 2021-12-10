@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/10 15:08:49 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/10 15:26:22 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	main(int argc, char **argv)
 	t_general	g_minishell;
 
 	runcflag(g_minishell, environ, argv, pid);
-	//signals();
+	signals();
 	g_piperet = 0;
 	g_minishell.ownenv = ft_ownenv(environ);
 	ft_prompt(&g_minishell);

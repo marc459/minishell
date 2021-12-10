@@ -1,1 +1,1 @@
-grep: (standard input): Bad file descriptor
+./scripts/helper.sh: line 130: 35001 Segmentation fault: 11  ${MINISHELL_PATH} -c "$1"

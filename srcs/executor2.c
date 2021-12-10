@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/10 13:39:36 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/10 15:07:58 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**ft_parsepaths(char **envp)
 
 	paths = ft_findpath(envp);
 	if (!paths)
-		return (NULL);	
+		return (NULL);
 	spaths = ft_split(paths, ':');
 	i = -1;
 	while (spaths[++i])
@@ -83,7 +83,7 @@ void	ft_child(char **fullcmd, char **envp, int *stdo)
 	}
 	if (paths)
 		ft_freebidstr(paths);
-	ft_putstr_fd("Quineshell: ",*stdo);
+	ft_putstr_fd("Minishell: ",*stdo);
 	ft_putstr_fd(fullcmd[0],*stdo);
 	ft_putstr_fd(" command not found\n",*stdo);
 	g_piperet = 127;

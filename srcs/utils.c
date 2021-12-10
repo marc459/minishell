@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:57:21 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/04 16:34:16 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/10 14:24:37 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,24 @@ void	free_gminishell(t_general *g_minishell)
 
 void	runcflag(t_general	g_minishell, char **environ, char **argv, int pid)
 {
+	char **commands;
+	int i;
+
+	i = 0;
 	if (ft_bidstrlen(argv) >= 3 && !ft_strncmp(argv[1], "-c", 3))
 	{
-		ft_inigeneral(&g_minishell);
-		if (ft_strncmp(argv[2], "exit", 5) && ft_strncmp(argv[2], "", 1))
+		
+		commands = ft_split(argv[2], ';');
+		while(i < ft_bidstrlen(commands))
 		{
-			ft_parse(&g_minishell, argv[2]);
-			ft_executor(&g_minishell, environ, &pid);
-			ft_freeall(&g_minishell);
+			ft_inigeneral(&g_minishell);
+			if (ft_strncmp(commands[i], "exit", 4) && ft_strncmp(commands[i], "", 1))
+			{
+				ft_parse(&g_minishell, commands[i]);
+				ft_executor(&g_minishell, environ, &pid);
+				ft_freeall(&g_minishell);
+			}
+			i++;
 		}
 		exit (0);
 	}

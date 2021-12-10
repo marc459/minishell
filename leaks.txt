@@ -18,3 +18,25 @@ leaks Report Version: 4.0
 Process 78456: 370 nodes malloced for 311 KB
 Process 78456: 0 leaks for 0 total leaked bytes.
 
+Process:         minishell [26344]
+Path:            /Volumes/*/minishell
+Load Address:    0x1080ac000
+Identifier:      minishell
+Version:         ???
+Code Type:       X86-64
+Parent Process:  zsh [23516]
+
+Date/Time:       2021-12-10 14:16:21.872 +0100
+Launch Time:     2021-12-10 14:12:52.305 +0100
+OS Version:      Mac OS X 10.14.5 (18F132)
+Report Version:  7
+Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
+Analysis Tool Version:  Xcode 11.3.1 (11C505)
+----
+
+leaks Report Version: 4.0
+Process 26344: 390 nodes malloced for 312 KB
+Process 26344: 1 leak for 48 total leaked bytes.
+
+    1 (48 bytes) ROOT LEAK: 0x7f8b2cd00090 [48]  length: 33  "echo               text "msantos-"
+

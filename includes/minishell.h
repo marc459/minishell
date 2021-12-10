@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/09 20:27:46 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/10 15:19:56 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ char	*ft_dropquotes(t_general *g, char *str);
 void	ft_checknewenv(t_general *g, char *newenv);
 size_t	ft_checkenvname(char *name);
 void	ft_remenv(t_general *g, char *remenv);
+void	ft_printsortenv(char **ownenv);
+void    heredock(t_general *g_mini, int i);
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);

@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/09 17:07:05 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/09 20:27:46 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,6 @@ typedef struct s_parse
 	size_t	comand;
 }			t_parse;
 
-typedef struct s_env
-{
-	char	*envvar;
-	char	*content;
-	struct s_env *next;
-	struct s_env *back;
-}			t_env;
-
 typedef struct s_general {
 	size_t	npipes;
 	size_t	nexecutables;
@@ -76,7 +68,6 @@ typedef struct s_general {
 	char	**ownenv;
 	t_parse	parse;
 	size_t	argssize;
-	t_env	*varenvs;
 }			t_general;
 
 int	g_piperet;
@@ -94,18 +85,7 @@ void	administratestds(int i, t_general *g_mini);
 void	waitforthem(int *childpid, int nchilds);
 void	leakatexit(void);
 void	runcflag(t_general	g_minishell, char **environ, char **argv, int pid);
-t_env	*ft_envnew(char	*envvar, char *content);
-void	ft_envadd_back(t_env **lst, t_env *new);
-t_env	*ft_envlast(t_env *lst);
-void	ft_printsortenv(char **ownenv);
-void	ft_orderenv(t_env **lst);
-void	bubbleSort(t_env *start);
-void	swapenv(t_env *a, t_env *b);
-int		ft_envsize(t_env *lst);
 void	ft_parsebuiltin(t_general *g_mini, char **cmd);
-void	ft_checkenv(t_env **varenvs, char *keyvar, char *valuevar);
-void	ft_envadd_front(t_env **lst, t_env *new);
-void	ft_deleteenv(t_env **varenvs, char *keyvar);
 char	*ft_dropquotes(t_general *g, char *str);
 void	ft_checknewenv(t_general *g, char *newenv);
 size_t	ft_checkenvname(char *name);

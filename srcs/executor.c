@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/09 19:20:34 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/10 14:02:00 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	administratepipe(int i, t_general *g_mini)
 		close(g_mini->exec[i - 1].pipe[WRITE_END]);
 	if (i > 1)
 	{
+		close(g_mini->exec[i - 2].pipe[WRITE_END]);
 		close(g_mini->exec[i - 2].pipe[READ_END]);
 		close(g_mini->exec[i - 1].pipe[WRITE_END]);
 	}

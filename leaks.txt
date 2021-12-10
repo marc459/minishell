@@ -18,3 +18,23 @@ leaks Report Version: 4.0
 Process 78456: 370 nodes malloced for 311 KB
 Process 78456: 0 leaks for 0 total leaked bytes.
 
+Process:         minishell [2704]
+Path:            /Volumes/*/minishell
+Load Address:    0x1029d1000
+Identifier:      minishell
+Version:         ???
+Code Type:       X86-64
+Parent Process:  zsh [1987]
+
+Date/Time:       2021-12-10 14:44:41.019 +0100
+Launch Time:     2021-12-10 14:44:33.117 +0100
+OS Version:      Mac OS X 10.14.5 (18F132)
+Report Version:  7
+Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
+Analysis Tool Version:  Xcode 11.3.1 (11C505)
+----
+
+leaks Report Version: 4.0
+Process 2704: 374 nodes malloced for 311 KB
+Process 2704: 0 leaks for 0 total leaked bytes.
+

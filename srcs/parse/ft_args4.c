@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 21:01:26 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/08 18:50:31 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/10 15:11:38 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_expvar(t_general *g)
 	while (++i < g->argssize)
 	{
 		aux = g->args[i].content;
-		if (ft_findchar(aux, '$'))
+		if (ft_findchar(aux, '$') && g->args[i - 1].type != 8)
 			if ((ft_getposition(aux, '\"') < ft_getposition(aux, '\''))
 				|| (ft_getposition(aux, '\"') == ft_getposition(aux, '\'')))
 				ft_joinenv(&g->args[i].content, g);

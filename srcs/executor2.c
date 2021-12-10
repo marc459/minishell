@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/10 13:39:36 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/10 14:43:04 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**ft_parsepaths(char **envp)
 
 	paths = ft_findpath(envp);
 	if (!paths)
-		return (NULL);	
+		return (NULL);
 	spaths = ft_split(paths, ':');
 	i = -1;
 	while (spaths[++i])

@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/10 15:26:22 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:58:54 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ char	*read_line(char *prompt)
 	char	*command;
 
 	command = readline(prompt);
-	add_history (command);
+	if (command && *command)
+		add_history (command);
 	return (command);
 }
 #else

@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:57:21 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/10 14:24:37 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:00:51 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	runcflag(t_general	g_minishell, char **environ, char **argv, int pid)
 	i = 0;
 	if (ft_bidstrlen(argv) >= 3 && !ft_strncmp(argv[1], "-c", 3))
 	{
-		
 		commands = ft_split(argv[2], ';');
 		while(i < ft_bidstrlen(commands))
 		{
@@ -66,8 +65,8 @@ void	runcflag(t_general	g_minishell, char **environ, char **argv, int pid)
 			{
 				ft_parse(&g_minishell, commands[i]);
 				ft_executor(&g_minishell, environ, &pid);
-				ft_freeall(&g_minishell);
 			}
+			ft_freeall(&g_minishell);
 			i++;
 		}
 		exit (0);

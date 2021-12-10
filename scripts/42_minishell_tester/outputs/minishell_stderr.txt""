@@ -1,1 +1,1 @@
-./scripts/helper.sh: line 130: 35001 Segmentation fault: 11  ${MINISHELL_PATH} -c "$1"
+./scripts/helper.sh: line 130: 18733 Abort trap: 6           ${MINISHELL_PATH} -c "$1"

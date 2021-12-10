@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/08 23:29:37 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/10 13:39:36 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	**ft_parsepaths(char **envp)
 	char	*aux;
 
 	paths = ft_findpath(envp);
+	if (!paths)
+		return (NULL);	
 	spaths = ft_split(paths, ':');
 	i = -1;
 	while (spaths[++i])
@@ -65,7 +67,7 @@ void	ft_child(char **fullcmd, char **envp, int *stdo)
 
 	paths = ft_parsepaths(envp);
 	i = 0;
-	while (paths[i])
+	while (paths && paths[i])
 	{
 		if (ft_strchr(fullcmd[0], '/'))
 			cmd = ft_strdup(fullcmd[0]);
@@ -79,7 +81,8 @@ void	ft_child(char **fullcmd, char **envp, int *stdo)
 		}
 		i++;
 	}
-	ft_freebidstr(paths);
+	if (paths)
+		ft_freebidstr(paths);
 	ft_putstr_fd("Quineshell: ",*stdo);
 	ft_putstr_fd(fullcmd[0],*stdo);
 	ft_putstr_fd(" command not found\n",*stdo);

@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 05:18:15 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/06 18:48:35 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/11 12:04:42 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,8 @@ void	ft_addenv(t_general *g, char *name, char *val)
 	gvar = ft_strdup(name);
 	if (ft_strlen(val))
 	{
-		ft_strownjoin(&gvar, "=\"");
+		ft_strownjoin(&gvar, "=");
 		ft_strownjoin(&gvar, val);
-		ft_strownjoin(&gvar, "\"");
 	}
 	if (ft_modenv(g, name, &gvar))
 		return ;

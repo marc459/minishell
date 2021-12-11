@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ownenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 15:59:22 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/10 18:18:55 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/11 12:24:24 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+void	ft_printformat(char *sort)
+{
+	size_t	i;
+	char	**split;
+
+	split = ft_split(sort, '=');
+	i = -1;
+	while (split[++i])
+	{
+		if (!i)
+			printf("declare -x %s", split[i]);
+		if (i == 1)
+			printf("=\"%s", split[i]);
+		if (i > 1)
+			printf("=%s", split[i]);
+	}
+	printf("\"\n");
+	ft_freedouble(split);
+}
 
 void	ft_printsortenv(char **ownenv)
 {
@@ -22,7 +42,7 @@ void	ft_printsortenv(char **ownenv)
 	sort = ft_strsort(ownenv);
 	i = -1;
 	while (sort[++i])
-		printf("declare -x %s\n", sort[i]);
+		ft_printformat(sort[i]);
 	ft_freedouble(sort);
 }
 

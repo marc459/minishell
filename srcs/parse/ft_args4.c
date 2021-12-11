@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 21:01:26 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/10 15:11:38 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/11 11:46:51 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,27 @@ void	ft_addvars(size_t *last, size_t *j)
 {
 	*last += 1;
 	*j += 1;
+}
+
+char	*ft_findenv(char *envvar, t_general *g)
+{
+	size_t	i;
+	size_t	varlen;
+	size_t	owenvlen;
+
+	i = -1;
+	while (g->ownenv[++i])
+	{
+		if (ft_strncmp(envvar, g->ownenv[i], ft_strlen(envvar)) == 0
+			&& (g->ownenv[i][ft_strlen(envvar)] == '='
+			|| !g->ownenv[i][ft_strlen(envvar)]))
+		{
+			varlen = ft_strlen(envvar);
+			owenvlen = ft_strlen(g->ownenv[i]);
+			return (ft_substr(g->ownenv[i], varlen + 1, owenvlen - varlen - 1));
+		}
+	}
+	return (NULL);
 }
 
 char	*ft_getenv(char *str, size_t *last, size_t *j, t_general *g)
@@ -39,7 +60,7 @@ char	*ft_getenv(char *str, size_t *last, size_t *j, t_general *g)
 		return (ft_strdup("$"));
 	else
 		aux = ft_substr(str, 0, i);
-	ret = ft_strdup(getenv(aux));
+	ret = ft_findenv(aux, g);
 	free (aux);
 	return (ret);
 }

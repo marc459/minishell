@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/10 18:58:54 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/11 11:56:18 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,6 @@ int	main(int argc, char **argv)
 	g_minishell.ownenv = ft_ownenv(environ);
 	ft_prompt(&g_minishell);
 	printf("exit\n");
-	checkleaks();
+	//checkleaks();
 	return (0);
 }

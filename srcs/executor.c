@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/13 18:13:03 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/13 18:17:59 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,11 @@ void	administratepipe(int i, t_general *g_mini)
 	int x;
 
 	x = 0;
-	
+	if (i < g_mini->npipes)
+		pipe(g_mini->exec[i].pipe);
 	/*if(i == 0)
 		close(g_mini->exec[i].pipe[READ_END]);*/
-	if (i == 1)
+	else if (i == 1)
 		close(g_mini->exec[i - 1].pipe[WRITE_END]);
 	else if (i > 1)
 	{
@@ -83,9 +84,12 @@ void	administratepipe(int i, t_general *g_mini)
 			x++;
 		}
 		close(g_mini->exec[x].pipe[WRITE_END]);
+		if(i == (g_mini->nexecutables + g_mini->doeshd - 1))
+		{
+			printf("last executable\n");
+			close(g_mini->exec[i].pipe[WRITE_END]);
+		}
 	}
-	if (i < g_mini->npipes)
-		pipe(g_mini->exec[i].pipe);
 	
 	
 }

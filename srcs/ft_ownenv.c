@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 15:59:22 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/11 12:24:24 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/13 11:51:57 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ void	ft_printformat(char *sort)
 		if (i > 1)
 			printf("=%s", split[i]);
 	}
-	printf("\"\n");
+	if (i == 1)
+		printf("\n");
+	else
+		printf("\"\n");
 	ft_freedouble(split);
 }
 

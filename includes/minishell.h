@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/10 15:19:56 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/13 13:49:14 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ void	ft_checknewenv(t_general *g, char *newenv);
 size_t	ft_checkenvname(char *name);
 void	ft_remenv(t_general *g, char *remenv);
 void	ft_printsortenv(char **ownenv);
+char	*ft_dropexportquotes(t_general *g, char *str);
+char	*ft_dropquotes(t_general *g, char *str);
 void    heredock(t_general *g_mini, int i);
 
 void	leak(void);

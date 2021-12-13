@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/11 11:17:21 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/13 22:45:37 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,22 @@ void	administratestds(int i, t_general *g_mini)
 			g_mini->fdout = g_mini->exec[i].pipe[WRITE_END];
 		close(g_mini->exec[i].pipe[READ_END]);
 		dup2(g_mini->fdout, STDOUT_FILENO);
-		close(g_mini->exec[i].pipe[WRITE_END]);
+		close(g_mini->fdout);
 		dup2(g_mini->fdin, STDIN_FILENO);
+		close(g_mini->fdin);
 	}
 	else if (i == (g_mini->nexecutables - 1))
 	{
 		dup2(g_mini->exec[i - 1].pipe[READ_END], STDIN_FILENO);
 		close(g_mini->exec[i - 1].pipe[READ_END]);
 		dup2(g_mini->fdout, STDOUT_FILENO);
+		close(g_mini->fdout);
 	}
 	else
 	{
 		close(g_mini->exec[i].pipe[READ_END]);
 		dup2(g_mini->exec[i - 1].pipe[READ_END], STDIN_FILENO);
+		close(g_mini->exec[i - 1].pipe[READ_END]);
 		dup2(g_mini->exec[i].pipe[WRITE_END], STDOUT_FILENO);
 		close(g_mini->exec[i].pipe[WRITE_END]);
 	}

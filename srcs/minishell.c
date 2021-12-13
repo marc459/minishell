@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/13 12:02:00 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/13 17:50:22 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	main(int argc, char **argv)
 	t_general	g_minishell;
 
 	runcflag(g_minishell, environ, argv, pid);
-	signals();
+	//signals();
 	g_piperet = 0;
 	g_minishell.ownenv = ft_ownenv(environ);
 	ft_prompt(&g_minishell);

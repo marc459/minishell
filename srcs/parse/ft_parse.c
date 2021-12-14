@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:07:10 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/09 15:55:58 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/14 16:14:01 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,11 @@ void	ft_parse(t_general *general, char *str)
 	ft_fillcomands(general, str);
 	ft_checkquotes(general);
 	ft_iniargs(general);
-	ft_refacttypes(general);
-	ft_expvar(general);
-	ft_refactquotes(general);
-	ft_countthings(general);
+	if (general->args)
+	{
+		ft_refacttypes(general);
+		ft_expvar(general);
+		ft_refactquotes(general);
+		ft_countthings(general);
+	}
 }

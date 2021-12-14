@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 07:12:59 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/13 16:13:46 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/14 15:08:05 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,14 @@ size_t	ft_countkeyvalue(char *str)
 	return (size);
 }
 
+void	ft_changequote(int *quote, int *dquote, char c)
+{
+	if (c == '\'' && *dquote > 0)
+		*quote *= -1;
+	if (c == '\"' && *quote > 0)
+		*dquote *= -1;
+}
+
 char	**ft_dropkeyvalue(char *str, size_t size, int quote, int dquote)
 {
 	size_t	i;
@@ -59,10 +67,7 @@ char	**ft_dropkeyvalue(char *str, size_t size, int quote, int dquote)
 			cmd[j++] = ft_substr(str, ultima, i - ultima);
 			ultima = i + 1;
 		}
-		if (str[i] == '\'' && dquote > 0)
-			quote *= -1;
-		if (str[i] == '\"' && quote > 0)
-			dquote *= -1;
+		ft_changequote(&quote, &dquote, str[i]);
 	}
 	if (str[i - 1] != ' ')
 		cmd[j++] = ft_substr(str, ultima, i - ultima);

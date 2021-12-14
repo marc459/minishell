@@ -1,1 +1,13 @@
-./scripts/helper.sh: line 130: 18733 Abort trap: 6           ${MINISHELL_PATH} -c "$1"
+=================================================================
+==47262==ERROR: AddressSanitizer: attempting free on address which was not malloc()-ed: 0x7ffee0fb29b7 in thread T0
+    #0 0x10ed0b94d in wrap_free (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x6194d)
+    #1 0x10ec51c55 in ft_cd (minishell:x86_64+0x100004c55)
+    #2 0x10ec4f099 in ft_executor (minishell:x86_64+0x100002099)
+    #3 0x10ec515f0 in runcflag (minishell:x86_64+0x1000045f0)
+    #4 0x10ec4eaa2 in main (minishell:x86_64+0x100001aa2)
+    #5 0x7fff764103d4 in start (libdyld.dylib:x86_64+0x163d4)
+
+Address 0x7ffee0fb29b7 is located in stack of thread T0
+SUMMARY: AddressSanitizer: bad-free (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x6194d) in wrap_free
+==47262==ABORTING
+./scripts/helper.sh: line 130: 47262 Abort trap: 6           ${MINISHELL_PATH} -c "$1"

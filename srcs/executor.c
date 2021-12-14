@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/14 17:38:17 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/14 19:36:59 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 			pid[0] = fork();
 			if (pid[0] == 0)
 			{
-				
 				administratestds(i, g_mini);
 				ft_putstr_fd(g_mini->heredockcontent, 1);
 				ft_putstr_fd("\n", 1);

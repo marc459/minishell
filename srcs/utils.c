@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:57:21 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/10 18:00:51 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/14 19:43:22 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	free_gminishell(t_general *g_minishell)
 	ft_freebidstr(g_minishell->parse.comnds);
 }
 
-void	runcflag(t_general	g_minishell, char **environ, char **argv, int pid)
+void	runcflag(t_general	*g_mini, char **environ, char **argv, int pid)
 {
 	char **commands;
 	int i;
@@ -60,15 +60,19 @@ void	runcflag(t_general	g_minishell, char **environ, char **argv, int pid)
 		commands = ft_split(argv[2], ';');
 		while(i < ft_bidstrlen(commands))
 		{
-			ft_inigeneral(&g_minishell);
+			
 			if (ft_strncmp(commands[i], "exit", 4) && ft_strncmp(commands[i], "", 1))
 			{
-				ft_parse(&g_minishell, commands[i]);
-				ft_executor(&g_minishell, environ, &pid);
+				ft_inigeneral(g_mini);
+				ft_parse(g_mini, commands[i]);
+				ft_executor(g_mini, environ, &pid);
+				free_gminishell(g_mini);
 			}
-			ft_freeall(&g_minishell);
+			
 			i++;
 		}
+		ft_freebidstr(commands);
+		ft_freebidstr(g_mini->ownenv);
 		exit (0);
 	}
 }

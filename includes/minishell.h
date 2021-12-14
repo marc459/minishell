@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/13 22:10:33 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/14 19:36:53 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	administratepipe(int i, t_general *g_mini);
 void	administratestds(int i, t_general *g_mini);
 void	waitforthem(int *childpid, int nchilds);
 void	leakatexit(void);
-void	runcflag(t_general	g_minishell, char **environ, char **argv, int pid);
+void	runcflag(t_general	*g_mini, char **environ, char **argv, int pid);
 void	ft_parsebuiltin(t_general *g_mini, char **cmd);
 char	*ft_dropquotes(t_general *g, char *str);
 void	ft_checknewenv(t_general *g, char *newenv);

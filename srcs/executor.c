@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/13 22:44:46 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/14 16:49:15 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,29 @@ void	define_fds(t_general *g_mini)
 
 void	administratepipe(int i, t_general *g_mini)
 {
-	if (i > 1 && g_mini->npipes > 0)
+	/*if (i > 1 && g_mini->npipes > 0)
+		close(g_mini->exec[i - 1].pipe[WRITE_END]);*/
+	if (i == (g_mini->nexecutables - 1))
+	{
 		close(g_mini->exec[i - 1].pipe[WRITE_END]);
+		if(i > 1)
+			close(g_mini->exec[i - 2].pipe[READ_END]);
+	}
+	else if(i > 0)
+	{
+		close(g_mini->exec[i - 1].pipe[WRITE_END]);
+		/*if(i > 1)
+			close(g_mini->exec[i - 2].pipe[READ_END]);*/
+	}
 	if (i < g_mini->npipes)
+	{
+		printf("createpipe %d\n", i);
 		pipe(g_mini->exec[i].pipe);
-	if (g_mini->npipes > 0)
-		close(g_mini->exec[i].pipe[READ_END]);
+	}
+		
+	/*if (g_mini->npipes > 0)
+		close(g_mini->exec[i].pipe[READ_END]);*/
+	
 
 }
 
@@ -114,7 +131,7 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 			ft_parsebuiltin(g_mini, cmd);
 		else if (g_mini->doeshd && i == 0)
 		{
-			pid[0] = fork();
+			/*pid[0] = fork();
 			if (pid[0] == 0)
 			{
 				
@@ -124,13 +141,15 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 				ft_freebidstr(cmd);
 				exit (EXIT_FAILURE);
 			}
-			i++;
+			i++;*/
 		}
 		else if (cmd[0])
 		{
 			pid[0] = fork();
+			
 			if (pid[0] == 0)
 			{
+				//system("ps -a");
 				administratestds(i, g_mini);
 				ft_putstr_fd("ENtra\n",g_mini->fdout2);
 				ft_child(cmd, envp, &g_mini->fdout2);
@@ -140,6 +159,12 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 			else if (pid[0] < 0)
 				printf("Error");
 		}
+		
+		
+		close(g_mini->exec[i - 1].pipe[READ_END]);
+		close(g_mini->fdout2);
+		close(g_mini->fdout);
+		close(g_mini->fdin);
 		i++;
 		ft_freebidstr(cmd);
 	}

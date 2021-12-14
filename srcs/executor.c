@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/14 17:30:34 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/14 17:33:40 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void	administratepipe(int i, t_general *g_mini)
 		close(g_mini->exec[i - 1].pipe[WRITE_END]);
 	if (i < g_mini->npipes)
 	{
-		printf("createpipe %d\n", i);
 		pipe(g_mini->exec[i].pipe);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/14 17:33:40 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/14 17:38:17 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,8 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 			else if (pid[0] < 0)
 				printf("Error");
 		}
-		close(g_mini->exec[i - 1].pipe[READ_END]);
+		if(i > 1)
+			close(g_mini->exec[i - 1].pipe[READ_END]);
 		close(g_mini->fdout2);
 		close(g_mini->fdout);
 		close(g_mini->fdin);

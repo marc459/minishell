@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/13 13:38:40 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/14 17:30:34 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	define_fds(t_general *g_mini)
 
 	i = 0;
 	x = 0;
+	g_mini->fdout2 = dup(STDOUT_FILENO);
 	g_mini->fdout = dup(STDOUT_FILENO);
 	g_mini->fdin = dup(STDIN_FILENO);
 	g_mini->doeshd = 0;
@@ -43,21 +44,25 @@ void	define_fds(t_general *g_mini)
 	while (i < (g_mini->ncommands))
 	{
 		if (g_mini->args[i].type == 3)
-		{
-			g_mini->exec[x].posexec = i;
-			x++;
-		}
+			g_mini->exec[x++].posexec = i;
 		else if (g_mini->args[i].type == 1)
 		{
 			 g_mini->doeshd = 0;
+			 close(g_mini->fdin);
 			 g_mini->fdin = open(g_mini->args[i + 1].content, O_RDONLY);
 		}
 		else if (g_mini->args[i].type == 2)
+		{
+			close(g_mini->fdout);
 			g_mini->fdout = open(g_mini->args[i + 1].content,
 					O_CREAT | O_RDWR | O_TRUNC, 0755);
+		}
 		else if (g_mini->args[i].type == 7)
+		{
+			close(g_mini->fdout);
 			g_mini->fdout = open(g_mini->args[i + 1].content,
 					O_CREAT | O_RDWR | O_APPEND, 0755);
+		}
 		else if (g_mini->args[i].type == 8)
 			heredock(g_mini, i);
 		i++;
@@ -66,16 +71,20 @@ void	define_fds(t_general *g_mini)
 
 void	administratepipe(int i, t_general *g_mini)
 {
-	if (i == 1)
-		close(g_mini->exec[i - 1].pipe[WRITE_END]);
-	if (i > 1)
+
+	if (i == (g_mini->nexecutables - 1))
 	{
-		close(g_mini->exec[i - 2].pipe[WRITE_END]);
-		close(g_mini->exec[i - 2].pipe[READ_END]);
 		close(g_mini->exec[i - 1].pipe[WRITE_END]);
+		if(i > 1)
+			close(g_mini->exec[i - 2].pipe[READ_END]);
 	}
+	else if(i > 0)
+		close(g_mini->exec[i - 1].pipe[WRITE_END]);
 	if (i < g_mini->npipes)
+	{
+		printf("createpipe %d\n", i);
 		pipe(g_mini->exec[i].pipe);
+	}
 }
 
 void	waitforthem(int *childpid, int nchilds)
@@ -115,6 +124,7 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 			pid[0] = fork();
 			if (pid[0] == 0)
 			{
+				
 				administratestds(i, g_mini);
 				ft_putstr_fd(g_mini->heredockcontent, 1);
 				ft_putstr_fd("\n", 1);
@@ -126,16 +136,21 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 		else if (cmd[0])
 		{
 			pid[0] = fork();
+			
 			if (pid[0] == 0)
 			{
 				administratestds(i, g_mini);
-				ft_child(cmd, envp, &g_mini->fdout);
+				ft_child(cmd, envp, &g_mini->fdout2);
 				ft_freebidstr(cmd);
 				exit (EXIT_FAILURE);
 			}
 			else if (pid[0] < 0)
 				printf("Error");
 		}
+		close(g_mini->exec[i - 1].pipe[READ_END]);
+		close(g_mini->fdout2);
+		close(g_mini->fdout);
+		close(g_mini->fdin);
 		i++;
 		ft_freebidstr(cmd);
 	}

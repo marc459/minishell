@@ -59,7 +59,7 @@ libftt:
 							
 minishell: $(PROGRAM_OBJS)
 	
-	$(CC) $(CFLAGS) $(PROGRAM_OBJS)  $(LIBS) $(TERMCAP_LIB) -o $(PROGRAM) -lreadline
+	$(CC) $(CFLAGS) $(PROGRAM_OBJS)  $(LIBS) $(TERMCAP_LIB) -o $(PROGRAM)
 								
 clean:
 	@rm -rf $(OBJ_PATH)

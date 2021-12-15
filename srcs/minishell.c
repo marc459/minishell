@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/14 19:35:57 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/15 16:10:20 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ char	*read_line(char *prompt)
 
 void	checkleaks(void)
 {
-	system("leaks minishell >> leaks.txt");
+	char *leaks = ft_strjoin("leaks ",ft_itoa(getpid()));
+	system(leaks);
+	free(leaks);
 }
 
 void	exit_error(char **command)
@@ -92,6 +94,7 @@ void	ft_prompt(t_general *g_m)
 			//ft_printgeneral(g_m);
 			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCyan, Color_Off);
 			ft_executor(g_m, g_m->ownenv, &pid);
+			printf("return: %d\n",g_piperet);
 			/*printf("%s< REAL BASH >%s\n\n", BCyan, Color_Off);
 			system(command);*/
 			free_gminishell(g_m);

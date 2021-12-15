@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/14 19:36:59 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/15 16:07:44 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,14 +121,9 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 		else if (g_mini->doeshd && i == 0)
 		{
 			pid[0] = fork();
-			if (pid[0] == 0)
-			{
-				administratestds(i, g_mini);
-				ft_putstr_fd(g_mini->heredockcontent, 1);
-				ft_putstr_fd("\n", 1);
-				ft_freebidstr(cmd);
-				exit (EXIT_FAILURE);
-			}
+			administratestds(i, g_mini);
+			ft_putstr_fd(g_mini->heredockcontent, 1);
+			ft_putstr_fd("\n", 1);
 			i++;
 		}
 		else if (cmd[0])
@@ -140,7 +135,7 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 				administratestds(i, g_mini);
 				ft_child(cmd, envp, &g_mini->fdout2);
 				ft_freebidstr(cmd);
-				exit (EXIT_FAILURE);
+				exit (g_piperet);
 			}
 			else if (pid[0] < 0)
 				printf("Error");

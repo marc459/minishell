@@ -41,7 +41,7 @@ endif
 ifeq ($(detected_OS),Linux)
  TERMCAP_LIB =
 endif
-	
+
 #INSTRUCTIONS
 all: libftt minishell
 	

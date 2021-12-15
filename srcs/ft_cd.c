@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 03:57:11 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/14 19:32:40 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/15 17:44:28 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,26 @@ void	ft_cd(char	***env, char *path)
 
 	if (!chdir(path))
 	{
-		free (env[0][ft_getoldpathpos(env[0])]);
+		/*if (env[0][ft_getoldpathpos(env[0])])
+			free (env[0][ft_getoldpathpos(env[0])]);*/
 		auxpath = ft_strjoin("OLD", env[0][ft_getpathpos(env[0])]);
 		env[0][ft_getoldpathpos(env[0])] = ft_strdup(auxpath);
 		free (auxpath);
 		pwdbuf = calloc(sizeof(char), (PATH_MAX + 1));
 		getcwd(pwdbuf, PATH_MAX);
-		free (env[0][ft_getpathpos(env[0])]);
+		/*if (env[0][ft_getpathpos(env[0])])
+			free (env[0][ft_getpathpos(env[0])]);*/
 		env[0][ft_getpathpos(env[0])] = ft_strjoin("PWD=", pwdbuf);
 		free (pwdbuf);
 	}
 	else
-		printf("cd: no such file or directory: %s\n", path);
+	{
+		
+		/*ft_putstr_fd("minishell: cd: ",2);
+		ft_putstr_fd(path,2);
+		ft_putstr_fd(": No such file or directory\n",2);*/
+		ft_printf("minishell: cd: %s: No such file or directory\n", path);
+		g_piperet = 1;
+	}
+		
 }

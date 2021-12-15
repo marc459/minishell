@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/14 19:36:53 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/15 17:29:20 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include "../readline/readline.h"
 # include "../readline/history.h"
 # include "../libft/libft.h"
+# include "../libft/ft_printf/printf.h"
 # include "bashcolors.h"
 
 # define READ_END    0
@@ -122,5 +123,6 @@ void	ft_expvar(t_general *g);
 void	ft_cd(char	***env, char *path);
 char	**ft_ownenv(char **environ);
 void	ft_checkquotes(t_general *g);
+void	checkleaks(void);
 
 #endif

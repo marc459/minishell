@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 13:29:50 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/13 13:49:00 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/15 17:42:19 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ char	**ft_splitdup(char **split);
 char	**ft_strsort(char **split);
 void	ft_splitprint(char **split);
 void	ft_printsortenv(char **ownenv);
+void	ft_putchar(char c);
+char	*ft_strrev(char *str);
 
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);

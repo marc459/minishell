@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 20:04:33 by msantos-          #+#    #+#             */
-/*   Updated: 2020/02/24 20:28:09 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/15 18:19:34 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	check_widthflag_x(t_printf *f, char *str)
 		len = f->width - ft_strlen(str) - (tmp);
 		while (i < len)
 		{
-			ft_putchar(' ');
+			ft_putchar_fd(' ',f->fd);
 			f->len++;
 			i++;
 		}

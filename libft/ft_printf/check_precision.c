@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 20:19:00 by msantos-          #+#    #+#             */
-/*   Updated: 2020/02/24 20:27:45 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/15 18:19:48 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	check_precisionflag_i(t_printf *f, int integer)
 			len = 0;
 		if (integer < 0)
 		{
-			ft_putchar('-');
+			ft_putchar_fd('-',f->fd);
 			f->len++;
 		}
 		ft_print_charxtimes(f, '0', len);
@@ -93,7 +93,7 @@ char	*check_precisionflag_x(t_printf *f, const char *str)
 			i = 0;
 			while (i < (f->precision - (int)ft_strlen(str)))
 			{
-				ft_putchar('0');
+				ft_putchar_fd('0',f->fd);
 				f->len++;
 				i++;
 			}

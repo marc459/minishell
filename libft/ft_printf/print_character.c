@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 17:22:34 by msantos-          #+#    #+#             */
-/*   Updated: 2020/02/24 20:08:15 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/15 18:17:43 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	check_widthflag_c(t_printf *f)
 		len = f->width - 1;
 		while (i < len)
 		{
-			ft_putchar(' ');
+			ft_putchar_fd(' ',f->fd);
 			f->len++;
 			i++;
 		}
@@ -39,14 +39,14 @@ void	print_character(t_printf *f)
 	{
 		if (f->width < 0)
 			f->width = f->width * (-1);
-		ft_putchar(car);
+		ft_putchar_fd(car,f->fd);
 		f->len++;
 		check_widthflag_c(f);
 	}
 	else
 	{
 		check_widthflag_c(f);
-		ft_putchar(car);
+		ft_putchar_fd(car,f->fd);
 		f->len++;
 	}
 }

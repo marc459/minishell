@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 20:22:43 by msantos-          #+#    #+#             */
-/*   Updated: 2020/02/24 20:26:47 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/15 18:19:15 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	check_zeroflag_i(t_printf *f, int integer)
 		if (integer < 0)
 		{
 			len--;
-			ft_putchar('-');
+			ft_putchar_fd('-',f->fd);
 			f->len++;
 		}
 		ft_print_charxtimes(f, '0', len);

@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 03:57:11 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/15 17:44:28 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/15 18:23:00 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_cd(char	***env, char *path)
 		/*ft_putstr_fd("minishell: cd: ",2);
 		ft_putstr_fd(path,2);
 		ft_putstr_fd(": No such file or directory\n",2);*/
-		ft_printf("minishell: cd: %s: No such file or directory\n", path);
+		ft_printf_fd(2,"minishell: cd: %s: No such file or directory\n", path);
 		g_piperet = 1;
 	}
 		

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstrcounter.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 01:01:37 by marcos            #+#    #+#             */
-/*   Updated: 2021/06/24 01:01:44 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/15 18:21:49 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_putstrcounter(const char *s, t_printf *f)
 		return ;
 	while (i < ft_strlen(s))
 	{
-		write(1, &s[i], 1);
+		ft_putchar_fd(s[i],f->fd);
 		f->len++;
 		i++;
 	}

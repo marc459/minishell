@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 18:51:23 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/05 17:56:48 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/15 18:16:45 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,25 @@ void	parse_flags(const char *format, t_printf *f)
 		}
 		else
 		{
-			ft_putchar(format[f->i]);
+			ft_putchar_fd(format[f->i],f->fd);
 			f->len++;
 		}
 		f->i++;
 	}
 }
 
-int		ft_printf(const char *format, ...)
+int		ft_printf_fd(size_t fd,const char *format, ...)
 {
 	t_printf *f;
 
 	f = malloc(sizeof(t_printf));
+	if(fd > 0)
+		f->fd = fd;
 	f->i = 0;
 	f->len = 0;
 	va_start(f->ap, format);
 	if (ft_strchr(format, '%'))
-	{
 		parse_flags(format, f);
-	}
 	else
 	{
 		ft_putstrcounter(format, f);

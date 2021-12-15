@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 07:11:34 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/15 17:34:13 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/15 18:14:23 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ typedef	struct	s_printf
 	int			flag_precision;
 	int			width;
 	int			precision;
+	int			fd;
 }				t_printf;
 
-int				ft_printf(const char *format, ...);
+int				ft_printf_fd(size_t fd,const char *format, ...);
 void			initialize_flags(t_printf *f);
 void			flag_sorting(const char *format, t_printf *f);
 void			variable_sorting(const char *format, t_printf *f);

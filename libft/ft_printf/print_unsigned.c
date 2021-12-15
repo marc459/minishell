@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_unsigned.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:43:53 by msantos-          #+#    #+#             */
-/*   Updated: 2021/06/24 01:10:10 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/15 18:18:57 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	print_unsigned(t_printf *f)
 		check_widthflag_u(f, integer);
 		if ((f->flag_width == 1 || f->flag_zero == 1) && f->width > 0)
 		{
-			ft_putchar(' ');
+			ft_putchar_fd(' ',f->fd);
 			f->len++;
 		}
 	}

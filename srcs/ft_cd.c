@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 03:57:11 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/15 18:23:00 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/16 17:13:10 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,40 @@ size_t	ft_getoldpathpos(char	**env)
 	return (0);
 }
 
+size_t	ft_getenvpos(char *envvar, char **env)
+{
+	size_t	i;
+
+	i = -1;
+	while (env[++i])
+		if (!ft_strncmp(env[i], envvar, ft_strlen(envvar)))
+			return (i);
+	return (0);
+}
+
 void	ft_cd(char	***env, char *path)
 {
 	char	*pwdbuf;
 	char	*auxpath;
 
-	if (!chdir(path))
+	if (!path)
 	{
-		/*if (env[0][ft_getoldpathpos(env[0])])
-			free (env[0][ft_getoldpathpos(env[0])]);*/
-		auxpath = ft_strjoin("OLD", env[0][ft_getpathpos(env[0])]);
-		env[0][ft_getoldpathpos(env[0])] = ft_strdup(auxpath);
+		auxpath = ft_substr(env[0][ft_getenvpos("HOME", env[0])], 5,
+				ft_strlen(env[0][ft_getenvpos("HOME", env[0])]));
+		chdir(auxpath);
 		free (auxpath);
-		pwdbuf = calloc(sizeof(char), (PATH_MAX + 1));
-		getcwd(pwdbuf, PATH_MAX);
-		/*if (env[0][ft_getpathpos(env[0])])
-			free (env[0][ft_getpathpos(env[0])]);*/
-		env[0][ft_getpathpos(env[0])] = ft_strjoin("PWD=", pwdbuf);
-		free (pwdbuf);
 	}
-	else
+	else if (chdir(path))
 	{
-		
-		/*ft_putstr_fd("minishell: cd: ",2);
-		ft_putstr_fd(path,2);
-		ft_putstr_fd(": No such file or directory\n",2);*/
-		ft_printf_fd(2,"minishell: cd: %s: No such file or directory\n", path);
+		printf("minishell: cd: %s: No such file or directory\n", path);
 		g_piperet = 1;
+		return ;
 	}
-		
+	auxpath = ft_strjoin("OLD", env[0][ft_getpathpos(env[0])]);
+	env[0][ft_getoldpathpos(env[0])] = ft_strdup(auxpath);
+	free (auxpath);
+	pwdbuf = calloc(sizeof(char), (PATH_MAX + 1));
+	getcwd(pwdbuf, PATH_MAX);
+	env[0][ft_getpathpos(env[0])] = ft_strjoin("PWD=", pwdbuf);
+	free (pwdbuf);
 }

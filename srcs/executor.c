@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/16 18:55:04 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/16 21:22:31 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,64 @@ void	define_fds(t_general *g_mini)
 {
 	int		i;
 	int		x;
+	int		y;
 	char	*command;
 
 	i = 0;
+	x = 0;
+	y = 0;
+	g_mini->ncommands = g_mini->nexecutables + g_mini->npipes
+		+ (g_mini->nredirections * 2) + g_mini->nsemicolons;
+	g_mini->pospipes = malloc(sizeof(int) * g_mini->npipes + 1);
+	g_mini->pospipes[y++] = i;
+	while (i < (g_mini->ncommands))
+	{
+		if (g_mini->args[i].type == 3)
+			g_mini->exec[x++].posexec = i;
+		if (g_mini->args[i].type == 5)
+			g_mini->pospipes[y++] = i + 1;
+		/*else if (g_mini->args[i].type == 1)
+		{
+			 g_mini->doeshd = 0;
+			 close(g_mini->fdin);
+			 g_mini->fdin = open(g_mini->args[i + 1].content, O_RDONLY);
+		}
+		else if (g_mini->args[i].type == 2)
+		{
+			close(g_mini->fdout);
+			g_mini->fdout = open(g_mini->args[i + 1].content,
+					O_CREAT | O_RDWR | O_TRUNC, 0755);
+		}
+		else if (g_mini->args[i].type == 7)
+		{
+			close(g_mini->fdout);
+			g_mini->fdout = open(g_mini->args[i + 1].content,
+					O_CREAT | O_RDWR | O_APPEND, 0755);
+		}
+		else if (g_mini->args[i].type == 8)
+			heredock(g_mini, i);*/
+		i++;
+	}
+}
+
+void	define_fds2(t_general *g_mini,int exec)
+{
+	int		i;
+	int		x;
+	char	*command;
+
+	i = g_mini->pospipes[exec];
 	x = 0;
 	g_mini->fdout2 = dup(STDOUT_FILENO);
 	g_mini->fdout = dup(STDOUT_FILENO);
 	g_mini->fdin = dup(STDIN_FILENO);
 	g_mini->doeshd = 0;
-	g_mini->ncommands = g_mini->nexecutables + g_mini->npipes
-		+ (g_mini->nredirections * 2) + g_mini->nsemicolons;
-	while (i < (g_mini->ncommands))
+	
+	printf("i: %d\n",i);
+
+	while (g_mini->args[i].type != 5 && i < g_mini->ncommands)
 	{
-		if (g_mini->args[i].type == 3)
-			g_mini->exec[x++].posexec = i;
-		else if (g_mini->args[i].type == 1)
+		if (g_mini->args[i].type == 1)
 		{
 			 g_mini->doeshd = 0;
 			 close(g_mini->fdin);
@@ -109,8 +152,9 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 	i = 0;
 	g_mini->exec = calloc(sizeof(t_exec), (g_mini->nexecutables + 1));
 	define_fds(g_mini);
-	while (i < (g_mini->nexecutables + g_mini->doeshd))
+	while (i < g_mini->nexecutables)
 	{
+		define_fds2(g_mini,i);
 		administratepipe(i, g_mini);
 		cmd = ft_split(g_mini->args[g_mini->exec[i].posexec].content, ' ');
 		if (!ft_strncmp(cmd[0], "cd", 2))

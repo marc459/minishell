@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/15 16:07:44 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/16 18:55:04 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,16 +89,16 @@ void	administratepipe(int i, t_general *g_mini)
 void	waitforthem(int *childpid, int nchilds)
 {
 	int	i;
-	//int	j;
+	int	j;
 
 	i = 0;
 	while (i < nchilds)
 	{
-		//waitpid(-1, &j, 0);
+		waitpid(-1, &j, 0);
 		wait(childpid);
 		i++;
 	}
-	//g_piperet = j % 255;
+	g_piperet = j % 255;
 }
 
 void	ft_executor(t_general *g_mini, char **envp, int *pid)
@@ -141,7 +141,7 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 				printf("Error");
 		}
 		if(i > 1)
-			close(g_mini->exec[i - 1].pipe[READ_END]);
+			close(g_mini->exec[i - 2].pipe[READ_END]);
 		close(g_mini->fdout2);
 		close(g_mini->fdout);
 		close(g_mini->fdin);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/15 16:10:20 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/17 13:43:28 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ char	*read_line(char *prompt)
 
 void	checkleaks(void)
 {
-	char *leaks = ft_strjoin("leaks ",ft_itoa(getpid()));
+	char	*leaks;
+
+	leaks = ft_strjoin("leaks ", ft_itoa(getpid()));
 	system(leaks);
 	free(leaks);
 }

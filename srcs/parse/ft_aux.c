@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:32:36 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/09 17:06:53 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/17 13:59:04 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,18 @@ void	ft_printgeneral(t_general *general)
 
 	printf("------------ general struct --------------\n");
 	printf("npipes : %zu\n", general->npipes);
-	printf("ncomands : %zu\n", general->nexecutables);
+	printf("nexecutables : %zu\n", general->nexecutables);
 	printf("nredirections : %zu\n", general->nredirections);
 	printf("quot : %d\n", general->quot);
-	printf("dquot : %d\n", general->dquot);
+	printf("dquot : %d\n\n", general->dquot);
 	printf("comndssize : %zu\n", general->parse.comndssize);
+	printf("COMMNDS\n");
+	i = -1;
+	while (general->parse.comnds && ++i < general->parse.comndssize)
+		printf("comnds[%zu] : %s\n", i, general->parse.comnds[i]);
+	printf("\n");
 	printf("argssize : %zu\n", general->argssize);
+	printf("ARGS\n");
 	i = -1;
 	while (general->args && ++i < general->argssize)
 	{

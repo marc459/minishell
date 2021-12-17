@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/17 14:14:52 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/17 15:26:18 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,6 @@ void	define_fds(t_general *g_mini)
 			g_mini->exec[x++].posexec = i;
 		if (g_mini->args[i].type == 5)
 			g_mini->pospipes[y++] = i + 1;
-		/*else if (g_mini->args[i].type == 1)
-		{
-			 g_mini->doeshd = 0;
-			 close(g_mini->fdin);
-			 g_mini->fdin = open(g_mini->args[i + 1].content, O_RDONLY);
-		}
-		else if (g_mini->args[i].type == 2)
-		{
-			close(g_mini->fdout);
-			g_mini->fdout = open(g_mini->args[i + 1].content,
-					O_CREAT | O_RDWR | O_TRUNC, 0755);
-		}
-		else if (g_mini->args[i].type == 7)
-		{
-			close(g_mini->fdout);
-			g_mini->fdout = open(g_mini->args[i + 1].content,
-					O_CREAT | O_RDWR | O_APPEND, 0755);
-		}
-		else if (g_mini->args[i].type == 8)
-			heredock(g_mini, i);*/
 		i++;
 	}
 }
@@ -114,15 +94,17 @@ void	define_fds2(t_general *g_mini,int exec)
 
 void	administratepipe(int i, t_general *g_mini)
 {
-
-	if (i == (g_mini->nexecutables - 1))
+	if(g_mini->npipes > 0)
 	{
-		close(g_mini->exec[i - 1].pipe[WRITE_END]);
-		if(i > 1)
-			close(g_mini->exec[i - 2].pipe[READ_END]);
+		if (i == (g_mini->nexecutables - 1))
+		{
+			close(g_mini->exec[i - 1].pipe[WRITE_END]);
+			if(i > 1)
+				close(g_mini->exec[i - 2].pipe[READ_END]);
+		}
+		else if(i > 0)
+			close(g_mini->exec[i - 1].pipe[WRITE_END]);
 	}
-	else if(i > 0)
-		close(g_mini->exec[i - 1].pipe[WRITE_END]);
 	if (i < g_mini->npipes)
 	{
 		pipe(g_mini->exec[i].pipe);

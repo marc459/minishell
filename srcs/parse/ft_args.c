@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:05:23 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/14 17:12:33 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/17 14:58:19 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ size_t	ft_error(size_t ncomands)
 	return (0);
 }
 
-size_t	ft_checksp(t_general *g, size_t *i, size_t ncomands, size_t *size)
+size_t	ft_ifcheckesp(t_general *g, size_t *i, size_t ncomands, size_t *size)
 {
 	if (ncomands == 3 && ((g->parse.comnds[*i][0] == ';'
 			&& g->parse.comnds[*i + 1][0] == '<'
@@ -31,6 +31,7 @@ size_t	ft_checksp(t_general *g, size_t *i, size_t ncomands, size_t *size)
 	{
 		*size += 1;
 		*i += 2;
+		return (1);
 	}
 	else if (ncomands == 2 && ((g->parse.comnds[*i][0] == ';'
 			&& g->parse.comnds[*i + 1][0] == '<')
@@ -39,14 +40,22 @@ size_t	ft_checksp(t_general *g, size_t *i, size_t ncomands, size_t *size)
 	{
 		*size += 1;
 		*i += 1;
+		return (1);
 	}
-	else if (ncomands == 2 && ((g->parse.comnds[*i][0] == '<'
+	return (0);
+}
+
+size_t	ft_checksp(t_general *g, size_t *i, size_t ncomands, size_t *size)
+{
+	if (ncomands == 2 && ((g->parse.comnds[*i][0] == '<'
 			&& g->parse.comnds[*i + 1][0] == '<')
 		|| (g->parse.comnds[*i][0] == '>'
 		&& g->parse.comnds[*i + 1][0] == '>')))
 		*i += 1;
 	else if (ncomands > 1)
 		return (ft_error(ncomands));
+	else
+		ft_ifcheckesp(g, i, ncomands, size);
 	*size += 1;
 	return (1);
 }
@@ -115,7 +124,7 @@ void	ft_iniargs(t_general *g)
 	ncomnds = 0;
 	while (++i < g->parse.comndssize)
 	{
-		if (ft_strlen(g->parse.comnds[i]) > 1)
+		if (ft_strlen(g->parse.comnds[i]) != 1)
 		{
 			g->args[j].type = 3;
 			g->args[j++].content = ft_strdup(g->parse.comnds[i]);

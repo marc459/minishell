@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/16 21:22:31 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/17 14:14:52 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ void	define_fds2(t_general *g_mini,int exec)
 	i = g_mini->pospipes[exec];
 	x = 0;
 	g_mini->fdout2 = dup(STDOUT_FILENO);
-	g_mini->fdout = dup(STDOUT_FILENO);
-	g_mini->fdin = dup(STDIN_FILENO);
+	g_mini->fdout = -1;
+	g_mini->fdin = -1;
 	g_mini->doeshd = 0;
 	
 	printf("i: %d\n",i);
@@ -157,19 +157,18 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 		define_fds2(g_mini,i);
 		administratepipe(i, g_mini);
 		cmd = ft_split(g_mini->args[g_mini->exec[i].posexec].content, ' ');
+		if (g_mini->doeshd)
+		{
+			//administratestds(i, g_mini);
+			ft_putstr_fd(g_mini->heredockcontent, 0);
+			ft_putstr_fd("\n", 0);
+			i++;
+		}
 		if (!ft_strncmp(cmd[0], "cd", 2))
 			ft_cd(&envp, cmd[1]);
 		else if (!ft_strncmp(cmd[0], "unset", 4)
 			|| !ft_strncmp(cmd[0], "export", 6))
 			ft_parsebuiltin(g_mini, cmd);
-		else if (g_mini->doeshd && i == 0)
-		{
-			pid[0] = fork();
-			administratestds(i, g_mini);
-			ft_putstr_fd(g_mini->heredockcontent, 1);
-			ft_putstr_fd("\n", 1);
-			i++;
-		}
 		else if (cmd[0])
 		{
 			pid[0] = fork();
@@ -184,6 +183,7 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 			else if (pid[0] < 0)
 				printf("Error");
 		}
+		
 		if(i > 1)
 			close(g_mini->exec[i - 2].pipe[READ_END]);
 		close(g_mini->fdout2);

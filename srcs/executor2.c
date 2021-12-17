@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/14 16:02:21 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/17 14:39:11 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,35 @@ void	administratestds(int i, t_general *g_mini)
 {
 	if (i == 0)
 	{
-		if (g_mini->npipes > 0)
+		if(g_mini->fdin  == -1)
+			g_mini->fdin = dup(STDIN_FILENO);
+		if (g_mini->npipes > 0 && g_mini->fdout == -1)
 			g_mini->fdout = g_mini->exec[i].pipe[WRITE_END];
+		else if(g_mini->fdout  == -1)
+			g_mini->fdout = dup(STDOUT_FILENO);
 		close(g_mini->exec[i].pipe[READ_END]);
-		dup2(g_mini->fdout, STDOUT_FILENO);
-		close(g_mini->fdout);
-		dup2(g_mini->fdin, STDIN_FILENO);
-		close(g_mini->fdin);
 	}
 	else if (i == (g_mini->nexecutables - 1))
 	{
-		dup2(g_mini->exec[i - 1].pipe[READ_END], STDIN_FILENO);
-		close(g_mini->exec[i - 1].pipe[READ_END]);
-		dup2(g_mini->fdout, STDOUT_FILENO);
-		close(g_mini->fdout);
+		if(g_mini->fdout  == -1)
+			g_mini->fdout = STDIN_FILENO;
+		if(g_mini->fdin  == -1)
+			g_mini->fdin = g_mini->exec[i - 1].pipe[READ_END];
 	}
 	else
 	{
+		if(g_mini->fdin  == -1)
+			g_mini->fdin = g_mini->exec[i - 1].pipe[READ_END];
+		if(g_mini->fdout  == -1)
+			g_mini->fdout = g_mini->exec[i].pipe[WRITE_END];
 		close(g_mini->exec[i].pipe[READ_END]);
-		dup2(g_mini->exec[i - 1].pipe[READ_END], STDIN_FILENO);
-		close(g_mini->exec[i - 1].pipe[READ_END]);
-		dup2(g_mini->exec[i].pipe[WRITE_END], STDOUT_FILENO);
-		close(g_mini->exec[i].pipe[WRITE_END]);
 	}
+
+	ft_printf_fd(1,"fds: %d-%d\n",g_mini->fdin,g_mini->fdout);
+	dup2(g_mini->fdin, STDIN_FILENO);
+	close(g_mini->fdin);
+	dup2(g_mini->fdout, STDOUT_FILENO);
+	close(g_mini->fdout);
 }
 
 void	ft_child(char **fullcmd, char **envp, int *stdo)

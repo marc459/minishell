@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/17 15:36:15 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/17 15:38:11 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	administratestds(int i, t_general *g_mini)
 		close(g_mini->exec[i].pipe[READ_END]);
 	}
 
-	ft_printf_fd(1,"fds: %d-%d\n",g_mini->fdin,g_mini->fdout);
 	dup2(g_mini->fdin, STDIN_FILENO);
 	close(g_mini->fdin);
 	dup2(g_mini->fdout, STDOUT_FILENO);

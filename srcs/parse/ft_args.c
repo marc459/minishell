@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:05:23 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/17 14:58:19 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/18 12:33:21 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ size_t	ft_argssize(t_general *g)
 	{
 		if (ft_strlen(g->parse.comnds[i]) > 1)
 			argssize++;
-		else
+		else if (ft_strlen(g->parse.comnds[i]))
 		{
 			ncomnds = ft_contsp(g, i);
 			if (!ft_checksp(g, &i, ncomnds, &argssize))
@@ -124,12 +124,12 @@ void	ft_iniargs(t_general *g)
 	ncomnds = 0;
 	while (++i < g->parse.comndssize)
 	{
-		if (ft_strlen(g->parse.comnds[i]) != 1)
+		if (ft_strlen(g->parse.comnds[i]) > 1)
 		{
 			g->args[j].type = 3;
 			g->args[j++].content = ft_strdup(g->parse.comnds[i]);
 		}
-		else
+		else if (ft_strlen(g->parse.comnds[i]))
 		{
 			ncomnds = ft_contsp(g, i);
 			ft_dropspargs(g, &i, &j, ncomnds);

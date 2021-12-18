@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/17 16:43:09 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/18 11:25:20 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	exit_error(char **command)
 		printf("minishell: exit: 00-99: numeric argument required\n");
 	else if (ft_bidstrlen(freespaces) > 2)
 	{
-		printf("minishell: exit: too many arguments\n");
+		printf("minishell: exit: to< test.txt cat | < text.txt cato many arguments\n");
 		*command = ft_strdup("noexit");
 	}
 	else if (ft_bidstrlen(freespaces) == 1 && (command[0][4] != '\0'
@@ -92,6 +92,7 @@ void	ft_prompt(t_general *g_m)
 		if (command && ft_strncmp(command, "exit", 4) && command[0] != '\0')
 		{
 			ft_inigeneral(g_m);
+			printf("parse\n");
 			ft_parse(g_m, command);
 			ft_printgeneral(g_m);
 			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCyan, Color_Off);

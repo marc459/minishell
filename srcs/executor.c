@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/17 15:26:18 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/18 12:24:47 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	define_fds2(t_general *g_mini,int exec)
 	g_mini->fdout = -1;
 	g_mini->fdin = -1;
 	g_mini->doeshd = 0;
-	
+
 	printf("i: %d\n",i);
 
 	while (g_mini->args[i].type != 5 && i < g_mini->ncommands)

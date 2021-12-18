@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:32:36 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/17 13:59:04 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/18 12:52:42 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,15 @@ void	ft_printgeneral(t_general *general)
 		printf("arg[%zu].content : %s\n", i, general->args[i].content);
 	}
 	printf("-----------------------------------------\n");
+}
+
+size_t	ft_error(size_t ncomands)
+{
+	if (ncomands > 3)
+		printf("syntax error near unexpected token `>>'\n");
+	else
+		printf("syntax error near unexpected token `>'\n");
+	return (0);
 }
 
 void	ft_inigeneral(t_general *general)

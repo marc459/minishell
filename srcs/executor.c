@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/18 12:24:47 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/18 12:46:51 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ void	define_fds2(t_general *g_mini,int exec)
 	g_mini->fdout = -1;
 	g_mini->fdin = -1;
 	g_mini->doeshd = 0;
-
-	printf("i: %d\n",i);
 
 	while (g_mini->args[i].type != 5 && i < g_mini->ncommands)
 	{
@@ -165,9 +163,8 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 			else if (pid[0] < 0)
 				printf("Error");
 		}
-		
-		if(i > 1)
-			close(g_mini->exec[i - 2].pipe[READ_END]);
+		if(i > 0)
+			close(g_mini->exec[i - 1].pipe[READ_END]);
 		close(g_mini->fdout2);
 		close(g_mini->fdout);
 		close(g_mini->fdin);

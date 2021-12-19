@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/18 12:46:51 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/19 19:59:41 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,13 +137,6 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 		define_fds2(g_mini,i);
 		administratepipe(i, g_mini);
 		cmd = ft_split(g_mini->args[g_mini->exec[i].posexec].content, ' ');
-		if (g_mini->doeshd)
-		{
-			//administratestds(i, g_mini);
-			ft_putstr_fd(g_mini->heredockcontent, 0);
-			ft_putstr_fd("\n", 0);
-			i++;
-		}
 		if (!ft_strncmp(cmd[0], "cd", 2))
 			ft_cd(&envp, cmd[1]);
 		else if (!ft_strncmp(cmd[0], "unset", 4)
@@ -172,5 +165,6 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 		ft_freebidstr(cmd);
 	}
 	waitforthem(&i, g_mini->nexecutables);
+	
 	free(g_mini->exec);
 }

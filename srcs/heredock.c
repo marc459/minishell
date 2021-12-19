@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredock.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:13:08 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/10 15:24:39 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/19 20:11:35 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,11 @@ void	heredock(t_general *g_mini, int i)
 		read(0, tmp, 64);
 	}
 	free(tmp);
+	g_mini->fdin = open(".tmphd",
+					O_CREAT | O_RDWR | O_TRUNC, 0755);
+	ft_putstr_fd(g_mini->heredockcontent,g_mini->fdin);
+	close(g_mini->fdin);
+	g_mini->fdin = open(".tmphd", O_RDONLY);
+	unlink(".tmphd");
 	g_mini->doeshd = 1;
 }

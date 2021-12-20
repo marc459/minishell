@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/20 16:36:52 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/20 16:46:48 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct s_arg {
 typedef struct s_exec {
 	int	posexec;
 	int	pipe[2];
-	int hd[2];
 }				t_exec;
 
 typedef struct s_parse
@@ -56,7 +55,6 @@ typedef struct s_parse
 typedef struct s_general {
 	size_t	npipes;
 	size_t	nexecutables;
-	size_t	nsemicolons;
 	size_t	ncommands;
 	size_t	nredirections;
 	t_arg	*args;

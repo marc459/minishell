@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:11:14 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/20 14:35:21 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/20 16:47:30 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,5 @@ void	ft_countthings(t_general *g)
 			g->nexecutables++;
 		else if (g->args[i].type == 5)
 			g->npipes++;
-		else if (g->args[i].type == 6)
-			g->nsemicolons++;
 	}
 }

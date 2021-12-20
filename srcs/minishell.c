@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/20 14:39:55 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/20 16:47:51 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void	ft_prompt(t_general *g_m)
 		if (command && ft_strncmp(command, "exit", 4) && command[0] != '\0')
 		{
 			ft_inigeneral(g_m);
-			printf("hola\n");
 			ft_parse(g_m, command);
 			ft_printgeneral(g_m);
 			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCyan, Color_Off);

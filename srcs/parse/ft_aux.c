@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:32:36 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/18 12:52:42 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/20 16:47:16 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	ft_inigeneral(t_general *general)
 {
 	general->npipes = 0;
 	general->nexecutables = 0;
-	general->nsemicolons = 0;
 	general->nredirections = 0;
 	general->quot = 1;
 	general->dquot = 1;

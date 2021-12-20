@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/20 18:14:36 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/20 21:58:20 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct s_general {
 	t_arg	*args;
 	t_exec	*exec;
 	char	*heredockcontent;
-	int		doeshd;
 	int		fdin;
 	int		fdout;
 	int		fdout2;
@@ -100,6 +99,7 @@ void    heredock(t_general *g_mini, int i);
 void	define_fds2(t_general *g_mini,int exec);
 void	createtmpfile(t_general *g_mini);
 void	commandoutput(int ret);
+void	executecmd(t_general *g_mini, char **cmd, char **envp, int i);
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);

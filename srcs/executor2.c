@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/20 17:01:09 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/20 21:51:37 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,3 +115,39 @@ void	ft_child(char **fullcmd, char **envp, int *stdo)
 	g_piperet = 127;
 }
 
+void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
+{
+	int pid;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		administratestds(i, g_mini);
+		if (!ft_strncmp(cmd[0], "unset", 4)
+			|| !ft_strncmp(cmd[0], "export", 6))
+			ft_parsebuiltin(g_mini, cmd);
+		else
+			ft_child(cmd, envp, &g_mini->fdout2);
+		ft_freebidstr(cmd);
+		exit (g_piperet);
+	}
+	else if (pid < 0)
+		printf("Error");
+	if (i > 0)
+			close(g_mini->exec[i - 1].pipe[READ_END]);
+}
+
+void	waitforthem(int *childpid, int nchilds)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < nchilds)
+	{
+		waitpid(-1, &j, 0);
+		wait(childpid);
+		i++;
+	}
+	g_piperet = j % 255;
+}

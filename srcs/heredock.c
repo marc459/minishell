@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredock.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:13:08 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/20 16:18:08 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/20 21:58:16 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	createtmpfile(t_general *g_mini)
 	close(g_mini->fdin);
 	g_mini->fdin = open(".tmphd", O_RDONLY);
 	unlink(".tmphd");
-	g_mini->doeshd = 1;
 }
 
 void	heredock(t_general *g_mini, int i)

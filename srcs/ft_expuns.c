@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expuns.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 07:12:59 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/20 16:32:10 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/20 17:19:15 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	ft_parsebuiltin(t_general *g, char **cmd)
 	char	**auxcmd;
 
 	i = 0;
+	printf("Llegue\n");
 	if (!ft_strncmp(cmd[0], "export", 7) && ft_bidstrlen(cmd) == 1)
 		ft_printsortenv(g->ownenv);
 	else if (!ft_strncmp(cmd[0], "export", 6))

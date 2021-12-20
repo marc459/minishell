@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/20 17:15:40 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/20 17:42:46 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void	exit_error(char **command)
 void	ft_prompt(t_general *g_m)
 {
 	pid_t	pid;
-	char	*command;
 
 	command = ft_calloc(sizeof(char), 64);
 	while (command && ft_strncmp(command, "exit", 4))
@@ -117,7 +116,7 @@ int	main(int argc, char **argv)
 	g_piperet = 0;
 	g_minishell.ownenv = ft_ownenv(environ);
 	runcflag(&g_minishell, environ, argv, pid);
-	signals();
+	signals(&g_minishell);
 	ft_prompt(&g_minishell);
 	printf("exit\n");
 	return (0);

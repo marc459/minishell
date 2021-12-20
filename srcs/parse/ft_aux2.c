@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:11:14 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/09 17:21:10 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/20 14:35:21 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_arg	*ft_copycleanargs(t_general *g)
+t_arg	*ft_copycleanargs(t_general *g, size_t newargs)
 {
 	t_arg	*tmp;
 	size_t	i;
@@ -31,6 +31,7 @@ t_arg	*ft_copycleanargs(t_general *g)
 		free(g->args[i].content);
 	}
 	free(g->args);
+	g->argssize = newargs;
 	return (tmp);
 }
 

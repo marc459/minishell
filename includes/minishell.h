@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/19 21:31:30 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/20 16:36:52 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ size_t	ft_contsp(t_general *g, size_t i);
 void	ft_iniarg(t_general *g, size_t *j, char *str);
 void	ft_refacttypes(t_general *g);
 void	ft_freedouble(char **split);
-t_arg	*ft_copycleanargs(t_general *g);
+t_arg	*ft_copycleanargs(t_general *g, size_t newargs);
 void	ft_freecontent(t_arg *args, size_t argssize);
 void	ft_countthings(t_general *g);
 char	*ft_cutstr(char *str);

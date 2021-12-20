@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:12:27 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/20 16:56:51 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/20 19:14:51 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	ft_refactquotes(t_general *g)
 	i = -1;
 	while (++i < g->argssize)
 	{
-		if (ft_findchar(g->args[i].content, '\"')
-			|| ft_findchar(g->args[i].content, '\''))
+		if (ft_splitfindchar(g->args[i].content, '\"')
+			|| ft_splitfindchar(g->args[i].content, '\''))
 		{
 			str = ft_dropquotes(g, g->args[i].content);
 			if (!ft_strncmp(str, "export", 6))

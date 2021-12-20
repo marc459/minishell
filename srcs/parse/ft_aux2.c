@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:11:14 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/09 17:21:10 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/20 12:21:52 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,5 @@ void	ft_countthings(t_general *g)
 			g->nexecutables++;
 		else if (g->args[i].type == 5)
 			g->npipes++;
-		else if (g->args[i].type == 6)
-			g->nsemicolons++;
 	}
 }

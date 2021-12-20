@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/19 19:59:41 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/20 12:45:18 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,37 @@ void	define_fds(t_general *g_mini)
 	int		i;
 	int		x;
 	int		y;
-	char	*command;
+	int		cmdargs;
+	char	*tmp;
 
 	i = 0;
 	x = 0;
 	y = 0;
+	cmdargs = 0;
 	g_mini->ncommands = g_mini->nexecutables + g_mini->npipes
-		+ (g_mini->nredirections * 2) + g_mini->nsemicolons;
+		+ (g_mini->nredirections * 2);
 	g_mini->pospipes = malloc(sizeof(int) * g_mini->npipes + 1);
 	g_mini->pospipes[y++] = i;
-	while (i < (g_mini->ncommands))
+	while ((i < (g_mini->ncommands)))
 	{
-		if (g_mini->args[i].type == 3)
+		if (g_mini->args[i].type == 3 && cmdargs++ == 0)
 			g_mini->exec[x++].posexec = i;
-		if (g_mini->args[i].type == 5)
+		else if(g_mini->args[i].type == 3)
+		{
+			tmp = ft_strjoin(g_mini->args[g_mini->exec[x-1].posexec].content," ");
+			free(g_mini->args[g_mini->exec[x-1].posexec].content);
+			g_mini->args[g_mini->exec[x-1].posexec].content = ft_strjoin(tmp, g_mini->args[i].content);
+			free(tmp);
+		}
+		else if (g_mini->args[i].type == 5)
+		{
 			g_mini->pospipes[y++] = i + 1;
+			cmdargs = 0;
+		}
+		
 		i++;
 	}
+	g_mini->nexecutables = x;
 }
 
 void	define_fds2(t_general *g_mini,int exec)
@@ -130,7 +144,7 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 	char	**cmd;
 
 	i = 0;
-	g_mini->exec = calloc(sizeof(t_exec), (g_mini->nexecutables + 1));
+	g_mini->exec = ft_calloc(sizeof(t_exec), (g_mini->nexecutables + 1));
 	define_fds(g_mini);
 	while (i < g_mini->nexecutables)
 	{

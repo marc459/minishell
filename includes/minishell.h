@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/20 12:21:59 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/20 16:49:50 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ char	*ft_dropexportquotes(t_general *g, char *str);
 char	*ft_dropquotes(t_general *g, char *str);
 void    heredock(t_general *g_mini, int i);
 void	define_fds2(t_general *g_mini,int exec);
+void	createtmpfile(t_general *g_mini);
+void	commandoutput(int ret);
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);

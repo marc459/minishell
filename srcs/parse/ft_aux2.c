@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:11:14 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/20 12:21:52 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/20 16:21:20 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,7 @@ void	ft_countthings(t_general *g)
 		else if (g->args[i].type == 5)
 			g->npipes++;
 	}
+	g->ncommands = g->nexecutables + g->npipes
+		+ (g->nredirections * 2);
+	g->pospipes = malloc(sizeof(int) * g->npipes + 1);
 }

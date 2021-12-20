@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/20 16:47:51 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/20 17:15:40 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,8 @@ int	main(int argc, char **argv)
 	g_piperet = 0;
 	g_minishell.ownenv = ft_ownenv(environ);
 	runcflag(&g_minishell, environ, argv, pid);
-	//signals();
+	signals();
 	ft_prompt(&g_minishell);
 	printf("exit\n");
-	//checkleaks();
 	return (0);
 }

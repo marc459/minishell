@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/20 12:45:18 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/20 17:03:08 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,16 @@ void	define_fds(t_general *g_mini)
 	x = 0;
 	y = 0;
 	cmdargs = 0;
-	g_mini->ncommands = g_mini->nexecutables + g_mini->npipes
-		+ (g_mini->nredirections * 2);
-	g_mini->pospipes = malloc(sizeof(int) * g_mini->npipes + 1);
 	g_mini->pospipes[y++] = i;
 	while ((i < (g_mini->ncommands)))
 	{
 		if (g_mini->args[i].type == 3 && cmdargs++ == 0)
 			g_mini->exec[x++].posexec = i;
-		else if(g_mini->args[i].type == 3)
+		else if (g_mini->args[i].type == 3)
 		{
-			tmp = ft_strjoin(g_mini->args[g_mini->exec[x-1].posexec].content," ");
-			free(g_mini->args[g_mini->exec[x-1].posexec].content);
-			g_mini->args[g_mini->exec[x-1].posexec].content = ft_strjoin(tmp, g_mini->args[i].content);
+			tmp = ft_strjoin(g_mini->args[g_mini->exec[x - 1].posexec].content, " ");
+			free(g_mini->args[g_mini->exec[x - 1].posexec].content);
+			g_mini->args[g_mini->exec[x - 1].posexec].content = ft_strjoin(tmp, g_mini->args[i].content);
 			free(tmp);
 		}
 		else if (g_mini->args[i].type == 5)
@@ -59,13 +56,12 @@ void	define_fds(t_general *g_mini)
 			g_mini->pospipes[y++] = i + 1;
 			cmdargs = 0;
 		}
-		
 		i++;
 	}
 	g_mini->nexecutables = x;
 }
 
-void	define_fds2(t_general *g_mini,int exec)
+void	define_fds2(t_general *g_mini, int exec)
 {
 	int		i;
 	int		x;
@@ -77,7 +73,6 @@ void	define_fds2(t_general *g_mini,int exec)
 	g_mini->fdout = -1;
 	g_mini->fdin = -1;
 	g_mini->doeshd = 0;
-
 	while (g_mini->args[i].type != 5 && i < g_mini->ncommands)
 	{
 		if (g_mini->args[i].type == 1)
@@ -101,25 +96,6 @@ void	define_fds2(t_general *g_mini,int exec)
 		else if (g_mini->args[i].type == 8)
 			heredock(g_mini, i);
 		i++;
-	}
-}
-
-void	administratepipe(int i, t_general *g_mini)
-{
-	if(g_mini->npipes > 0)
-	{
-		if (i == (g_mini->nexecutables - 1))
-		{
-			close(g_mini->exec[i - 1].pipe[WRITE_END]);
-			if(i > 1)
-				close(g_mini->exec[i - 2].pipe[READ_END]);
-		}
-		else if(i > 0)
-			close(g_mini->exec[i - 1].pipe[WRITE_END]);
-	}
-	if (i < g_mini->npipes)
-	{
-		pipe(g_mini->exec[i].pipe);
 	}
 }
 
@@ -148,29 +124,29 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 	define_fds(g_mini);
 	while (i < g_mini->nexecutables)
 	{
-		define_fds2(g_mini,i);
+		define_fds2(g_mini, i);
 		administratepipe(i, g_mini);
 		cmd = ft_split(g_mini->args[g_mini->exec[i].posexec].content, ' ');
 		if (!ft_strncmp(cmd[0], "cd", 2))
 			ft_cd(&envp, cmd[1]);
-		else if (!ft_strncmp(cmd[0], "unset", 4)
-			|| !ft_strncmp(cmd[0], "export", 6))
-			ft_parsebuiltin(g_mini, cmd);
 		else if (cmd[0])
 		{
 			pid[0] = fork();
-			
 			if (pid[0] == 0)
 			{
 				administratestds(i, g_mini);
-				ft_child(cmd, envp, &g_mini->fdout2);
+				if (!ft_strncmp(cmd[0], "unset", 4)
+					|| !ft_strncmp(cmd[0], "export", 6))
+					ft_parsebuiltin(g_mini, cmd);
+				else
+					ft_child(cmd, envp, &g_mini->fdout2);
 				ft_freebidstr(cmd);
 				exit (g_piperet);
 			}
 			else if (pid[0] < 0)
 				printf("Error");
 		}
-		if(i > 0)
+		if (i > 0)
 			close(g_mini->exec[i - 1].pipe[READ_END]);
 		close(g_mini->fdout2);
 		close(g_mini->fdout);
@@ -179,6 +155,5 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 		ft_freebidstr(cmd);
 	}
 	waitforthem(&i, g_mini->nexecutables);
-	
 	free(g_mini->exec);
 }

@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/21 18:29:53 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/21 18:54:10 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,11 @@ char	*ft_findpath(char **envp)
 	return (NULL);
 }
 
-void	define_fds(t_general *g)
+void	define_fds(t_general *g, int i, int x, int y)
 {
-	int		i;
-	int		x;
-	int		y;
 	int		cmdargs;
 	char	**tmp;
 
-	i = 0;
-	x = 0;
-	y = 0;
 	cmdargs = 0;
 	g->pospipes[y++] = i;
 	while ((i < (g->ncommands)))
@@ -69,10 +63,8 @@ void	initializefds(t_general *g_mini)
 	g_mini->fdin = -1;
 }
 
-void	define_fds2(t_general *g_mini, int exec)
+void	define_fds2(t_general *g_mini, int exec, int i)
 {
-	int		i;
-
 	i = g_mini->pospipes[exec];
 	initializefds(g_mini);
 	while (g_mini->args[i].type != 5 && i < g_mini->ncommands)
@@ -95,10 +87,7 @@ void	define_fds2(t_general *g_mini, int exec)
 					O_CREAT | O_RDWR | O_APPEND, 0755);
 		}
 		else if (g_mini->args[i].type == 8)
-		{
 			g_mini->fdin = open(".tmphd", O_RDONLY);
-			unlink(".tmphd");
-		}
 		i++;
 	}
 }
@@ -110,10 +99,10 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 
 	i = 0;
 	g_mini->exec = ft_calloc(sizeof(t_exec), (g_mini->nexecutables + 1));
-	define_fds(g_mini);
+	define_fds(g_mini, 0, 0, 0);
 	while (i < g_mini->nexecutables)
 	{
-		define_fds2(g_mini, i);
+		define_fds2(g_mini, i, 0);
 		administratepipe(i, g_mini);
 		cmd = ft_bidstrdup(g_mini->args[g_mini->exec[i].posexec].content);
 		if (!ft_strncmp(cmd[0], "cd", 2))

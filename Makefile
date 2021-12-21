@@ -15,13 +15,13 @@ INCLUDES = -I ./includes -I ./readline -I ./readline/examples
 LIBS = $(LIBFT_PATH)/$(LIBFT) $(READLINE)
 
 #SRCS
-PROGRAM_SRCS = minishell.c signals.c executor.c executor2.c			\
+PROGRAM_SRCS = minishell.c signals.c executor.c executor2.c		\
 				parse/ft_args.c parse/ft_args2.c parse/ft_args3.c	\
-				parse/ft_aux.c parse/ft_aux2.c parse/ft_parse.c		\
-				utils.c parse/ft_args4.c ft_cd.c ft_ownenv.c		\
+				parse/ft_aux.c parse/ft_aux2.c parse/ft_parse.c	\
+				 parse/ft_args4.c ft_cd.c ft_ownenv.c	\
 				parse/ft_aux3.c ft_addenv.c ft_remenv.c	\
-				ft_expuns.c heredock.c parse/ft_dropquotes.c		\
-				ft_splitaux.c
+				ft_expuns.c heredock.c parse/ft_dropquotes.c	\
+				ft_splitaux.c utils.c utils2.c
 
 #OBJS
 PROGRAM_OBJS = $(addprefix $(OBJ_PATH)/,$(PROGRAM_SRCS:.c=.o))

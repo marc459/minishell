@@ -6,48 +6,11 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/21 18:24:58 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/21 18:39:58 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-#if defined(__APPLE__)
-# define SO "MACOS"
-
-char	*read_line(char *prompt)
-{
-	char	*command;
-
-	command = readline(prompt);
-	if (command && *command)
-		add_history (command);
-	return (command);
-}
-#else
-# define SO "LINUX"
-
-char	*read_line(char *prompt)
-{
-	int	i;
-	char *command;
-
-	i = 0;
-	command = ft_calloc(sizeof(char), 64);
-	ft_putstr_fd(prompt,1);
-	//scanf("%s");
-	read(0,command,64);
-	while (command[i])
-	{
-		if (command[i] == 10)
-		{
-			command[i] = '\0';
-		}
-		i++;
-	}
-	return (command);
-}
-#endif
 
 void	checkleaks(void)
 {
@@ -67,7 +30,7 @@ void	exit_error(char **command)
 		printf("minishell: exit: 00-99: numeric argument required\n");
 	else if (ft_bidstrlen(freespaces) > 2)
 	{
-		printf("minishell: exit: to< test.txt cat | < text.txt cato many arguments\n");
+		printf("minishell: exit: to many arguments\n");
 		*command = ft_strdup("noexit");
 	}
 	else if (ft_bidstrlen(freespaces) == 1 && (command[0][4] != '\0'

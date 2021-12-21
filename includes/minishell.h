@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/21 18:31:08 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/21 18:55:09 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*ft_findpath(char **envp);
 char	*read_line(char *command);
 void	ft_child(char **fullcmd, char **envp, int *stdo);
 char	**ft_parsepaths(char **envp);
-void	define_fds(t_general *g_mini);
+void	define_fds(t_general *g, int i, int x, int y);
 void	administratepipe(int i, t_general *g_mini);
 void	administratestds(int i, t_general *g_mini);
 void	waitforthem(int *childpid, int nchilds);
@@ -95,7 +95,7 @@ void	ft_remenv(t_general *g, char *remenv);
 void	ft_printsortenv(char **ownenv);
 char	*ft_dropexportquotes(t_general *g, char *str);
 void    heredock(t_general *g_mini, int i);
-void	define_fds2(t_general *g_mini,int exec);
+void	define_fds2(t_general *g_mini,int exec, int i);
 size_t	ft_error(size_t ncomands);
 char	**ft_dropkeyvalue(char *str, int quote, int dquote);
 size_t	ft_splitfindchar(char **split, char c);

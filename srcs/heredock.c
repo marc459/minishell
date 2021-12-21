@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   heredock.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:13:08 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/21 16:21:20 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/21 18:39:12 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
 void	createtmpfile(t_general *g_mini)
 {
 	g_mini->fdin = open(".tmphd",
@@ -27,7 +28,7 @@ void	heredock(t_general *g_mini, int i)
 	g_mini->fdin = dup(STDIN_FILENO);
 	g_mini->heredockcontent = ft_strdup("");
 	tmp = ft_calloc(sizeof(char), 64);
-	ft_printf_fd(1,">");
+	ft_printf_fd(1, ">");
 	read(0, tmp, 64);
 	while (ft_strncmp(tmp, g_mini->args[i + 1].content[0],
 			ft_strlen(g_mini->args[i + 1].content[0])))
@@ -40,10 +41,9 @@ void	heredock(t_general *g_mini, int i)
 		tmp2[0] = '\0';
 		free(tmp);
 		tmp = ft_calloc(sizeof(char), 64);
-		ft_printf_fd(1,">");
+		ft_printf_fd(1, ">");
 		read(0, tmp, 64);
 	}
 	free(tmp);
 	createtmpfile(g_mini);
-			
 }

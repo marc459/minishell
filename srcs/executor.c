@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/21 21:46:02 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/21 22:09:36 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	define_fds(t_general *g, int i, int x, int y)
 			tmp = ft_bidstrjoin(g->args[g->exec[x - 1].posexec].content, g->args[i].content);
 			ft_freebidstr(g->args[g->exec[x - 1].posexec].content);
 			g->args[g->exec[x - 1].posexec].content = tmp;
+			//ft_putbidstr(g->args[g->exec[x - 1].posexec].content);
 		}
 		else if (g->args[i].type == 5)
 		{
@@ -104,11 +105,12 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 	{
 		define_fds2(g_mini, i, 0);
 		administratepipe(i, g_mini);
-		cmd = ft_bidstrdup(g_mini->args[g_mini->exec[i].posexec].content);
+		cmd = g_mini->args[g_mini->exec[i].posexec].content;
 		if (!ft_strncmp(cmd[0], "cd", 2))
 			ft_cd(&envp, cmd[1]);
-		if (!ft_strncmp(cmd[0], "unset", 4)
-			|| !ft_strncmp(cmd[0], "export", 6))
+		if (!ft_strncmp(cmd[0], "unset", 5)
+			|| !ft_strncmp(cmd[0], "export", 6)
+			|| (!ft_strncmp(cmd[0], "exit", 4) && g_mini->npipes == 0))
 			ft_parsebuiltin(g_mini, cmd);
 		else if (cmd[0])
 			executecmd(g_mini, cmd, envp, i);

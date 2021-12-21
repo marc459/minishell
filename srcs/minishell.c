@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/21 20:23:35 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/21 21:59:52 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,37 +21,36 @@ void	checkleaks(void)
 	free(leaks);
 }
 
-void	exit_error(char **command)
+void	exit_error(char **command, t_general *g_m)
 {
-	char	**freespaces;
-
-	freespaces = ft_split(*command, ' ');
-	if (freespaces[1] && !str_isnumber(freespaces[1]))
-		printf("minishell: exit: 00-99: numeric argument required\n");
-	else if (ft_bidstrlen(freespaces) > 2)
-	{
+	if (ft_bidstrlen(command) > 2)
 		printf("minishell: exit: to many arguments\n");
-		*command = ft_strdup("noexit");
-	}
-	else if (ft_bidstrlen(freespaces) == 1 && (command[0][4] != '\0'
+	else if (ft_bidstrlen(command) == 1 && (command[0][4] != '\0'
 		&& command[0][4] != ' '))
-	{
 		printf("minishell: %s: command not found\n", command[0]);
-		*command = ft_strdup("noexit");
+	else if (command[1] && !str_isnumber(command[1]))
+	{
+		printf("minishell: exit: 00-99: numeric argument required\n");
+		exit(g_piperet);
+	}	
+	else
+	{
+		ft_printf_fd(1, "exit\n");
+		exit(g_piperet);
 	}
-	ft_freebidstr(freespaces);
 }
 
 void	ft_prompt(t_general *g_m)
 {
 	pid_t	pid;
+	char	*command;
 
 	command = ft_calloc(sizeof(char), 64);
-	while (command && ft_strncmp(command, "exit", 4))
+	while (command)
 	{		
 		free(command);
 		command = read_line(BEGIN(1, 49, 34)"Minishell-1.0:"CLOSE);
-		if (command && ft_strncmp(command, "exit", 4) && command[0] != '\0')
+		if (command && command[0] != '\0')
 		{
 			ft_inigeneral(g_m);
 			ft_parse(g_m, command);
@@ -63,11 +62,8 @@ void	ft_prompt(t_general *g_m)
 			system(command);*/
 			free_gminishell(g_m);
 		}
-		else if (command && !ft_strncmp(command, "exit", 4))
-			exit_error(&command);
 	}
 	free(command);
-	ft_freebidstr(g_m->ownenv);
 }
 
 int	main(int argc, char **argv)
@@ -81,6 +77,7 @@ int	main(int argc, char **argv)
 	runcflag(&g_minishell, environ, argv, pid);
 	signals(&g_minishell);
 	ft_prompt(&g_minishell);
+	ft_freebidstr(g_minishell.ownenv);
 	printf("exit\n");
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/21 19:08:31 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/21 21:52:33 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ typedef struct s_general {
 }			t_general;
 
 int	g_piperet;
-char	*command;
 
 void	signals(t_general *g);
 void	quitsignal(int sig);
@@ -104,6 +103,7 @@ size_t	ft_ignorespace(size_t i, char *str);
 void	createtmpfile(t_general *g_mini);
 void	commandoutput(int ret);
 void	executecmd(t_general *g_mini, char **cmd, char **envp, int i);
+void	exit_error(char **command, t_general *g_m);
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);

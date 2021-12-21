@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expuns.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 07:12:59 by emgarcia          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/12/21 21:48:59 by emgarcia         ###   ########.fr       */
+=======
+/*   Updated: 2021/12/21 21:52:48 by msantos-         ###   ########.fr       */
+>>>>>>> 63327165326798f3bce93fea33e7aa7ccefc3cc0
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,4 +117,6 @@ void	ft_parsebuiltin(t_general *g, char **cmd)
 	else if (!ft_strncmp(cmd[0], "unset", 5))
 		while (cmd[++i])
 			ft_remenv(g, cmd[i]);
+	else if (!ft_strncmp(cmd[0], "exit", 4))
+		exit_error(cmd, g);
 }

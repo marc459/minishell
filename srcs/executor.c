@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/21 19:07:25 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/21 21:46:02 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 		close(g_mini->fdout2);
 		close(g_mini->fdout);
 		close(g_mini->fdin);
-		ft_freebidstr(cmd);
 		i++;
 	}
 	waitforthem(&i, g_mini->nexecutables);

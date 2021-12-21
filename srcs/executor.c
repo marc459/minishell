@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/21 16:20:38 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/21 18:29:53 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	define_fds(t_general *g)
 			ft_freebidstr(g->args[g->exec[x - 1].posexec].content);
 			g->args[g->exec[x - 1].posexec].content = tmp;
 		}
-		
 		else if (g->args[i].type == 5)
 		{
 			g->pospipes[y++] = i + 1;
@@ -58,7 +57,6 @@ void	define_fds(t_general *g)
 		}
 		else if (g->args[i].type == 8)
 			heredock(g, i);
-			
 		i++;
 	}
 	g->nexecutables = x;
@@ -70,6 +68,7 @@ void	initializefds(t_general *g_mini)
 	g_mini->fdout = -1;
 	g_mini->fdin = -1;
 }
+
 void	define_fds2(t_general *g_mini, int exec)
 {
 	int		i;
@@ -95,54 +94,13 @@ void	define_fds2(t_general *g_mini, int exec)
 			g_mini->fdout = open(g_mini->args[i + 1].content[0],
 					O_CREAT | O_RDWR | O_APPEND, 0755);
 		}
-		else if(g_mini->args[i].type == 8)
+		else if (g_mini->args[i].type == 8)
 		{
 			g_mini->fdin = open(".tmphd", O_RDONLY);
 			unlink(".tmphd");
 		}
 		i++;
 	}
-}
-
-char	**ft_bidstrdup(char **str)
-{
-	char	**strcpy;
-	size_t	x;
-
-	if (!str)
-		return (NULL);
-	x = -1;
-	strcpy = (char **)malloc(sizeof(char *) * ft_bidstrlen(str));
-	
-	if (str == NULL)
-		return (NULL);
-	while(++x < ft_bidstrlen(str))
-		strcpy[x] = ft_strdup(str[x]);
-	return (strcpy);
-	
-}
-
-char	**ft_bidstrjoin(char **str,char **str2)
-{
-	char	**strcpy;
-	size_t	x;
-	size_t	y;
-	size_t	z;
-	size_t	len;
-
-	if (!str)
-		return (NULL);
-	x = -1;
-	y = -1;
-	strcpy = (char **)malloc(sizeof(char *) * (ft_bidstrlen(str) + ft_bidstrlen(str2)));
-	if (str == NULL)
-		return (NULL);
-	while(++x < ft_bidstrlen(str))
-		strcpy[x] = ft_strdup(str[x]);
-	while(++y < ft_bidstrlen(str))
-		strcpy[x++] = ft_strdup(str[y]);
-	return (strcpy);
-	
 }
 
 void	ft_executor(t_general *g_mini, char **envp, int *pid)
@@ -161,7 +119,7 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 		if (!ft_strncmp(cmd[0], "cd", 2))
 			ft_cd(&envp, cmd[1]);
 		else if (cmd[0])
-			executecmd(g_mini,cmd,envp,i);
+			executecmd(g_mini, cmd, envp, i);
 		if (i > 0)
 			close(g_mini->exec[i - 1].pipe[READ_END]);
 		close(g_mini->fdout2);

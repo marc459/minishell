@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/21 16:18:26 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/21 18:31:08 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ size_t	ft_ignorespace(size_t *i, char *str);
 void	createtmpfile(t_general *g_mini);
 void	commandoutput(int ret);
 void	executecmd(t_general *g_mini, char **cmd, char **envp, int i);
-char	**ft_bidstrdup(char **str);
-char	**ft_bidstrjoin(char **str,char **str2);
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);

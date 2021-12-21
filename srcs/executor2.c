@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/21 13:54:42 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/21 18:26:34 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	ft_child(char **fullcmd, char **envp, int *stdo)
 
 void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
 {
-	int pid;
+	int	pid;
 
 	pid = fork();
 	if (pid == 0)

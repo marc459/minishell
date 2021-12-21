@@ -6,7 +6,7 @@
 #    By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/01 13:26:03 by emgarcia          #+#    #+#              #
-#    Updated: 2021/12/15 17:42:29 by msantos-         ###   ########.fr        #
+#    Updated: 2021/12/21 18:35:22 by msantos-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,9 @@ SRCS	=	ft_strtrim.c	\
 			ft_splitdup.c	\
 			ft_splitprint.c \
 			ft_putchar.c \
-			ft_strrev.c
+			ft_strrev.c \
+			ft_bidstrjoin.c \
+			ft_bidstrdup.c
 
 FT_PRINTF_SRCS = flag_sorting.c ft_printf.c initialize_flags.c \
 print_integer.c print_string.c variable_sorting.c ft_putstrcounter.c \

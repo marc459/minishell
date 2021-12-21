@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expuns.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 07:12:59 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/21 21:52:48 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/21 22:10:22 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,21 +100,15 @@ char	**ft_splitkeyvalue(t_general *g, char *str)
 void	ft_parsebuiltin(t_general *g, char **cmd)
 {
 	int		i;
-	char	*joined;
-	char	**auxcmd;
 
 	i = 0;
 	if (!ft_strncmp(cmd[0], "export", 7) && ft_bidstrlen(cmd) == 1)
 		ft_printsortenv(g->ownenv);
 	else if (!ft_strncmp(cmd[0], "export", 6))
 	{
-		joined = ft_splitjoin(&cmd[1], ' ');
-		auxcmd = ft_splitkeyvalue(g, joined);
-		free (joined);
 		i = -1;
-		while (auxcmd[++i])
-			ft_checknewenv(g, auxcmd[i]);
-		free(auxcmd);
+		while (cmd[++i])
+			ft_checknewenv(g, cmd[i]);
 	}
 	else if (!ft_strncmp(cmd[0], "unset", 5))
 		while (cmd[++i])

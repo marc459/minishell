@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/20 18:14:31 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/21 13:57:23 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	ft_prompt(t_general *g_m)
 			ft_printgeneral(g_m);
 			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCyan, Color_Off);
 			ft_executor(g_m, g_m->ownenv, &pid);
-			//printf("return: %d\n",g_piperet);
+			printf("return: %d\n",g_piperet);
 			/*printf("%s< REAL BASH >%s\n\n", BCyan, Color_Off);
 			system(command);*/
 			free_gminishell(g_m);
@@ -117,7 +117,7 @@ int	main(int argc, char **argv)
 	g_piperet = 0;
 	g_minishell.ownenv = ft_ownenv(environ);
 	runcflag(&g_minishell, environ, argv, pid);
-	signals();
+	//signals();
 	ft_prompt(&g_minishell);
 	printf("exit\n");
 	return (0);

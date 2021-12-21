@@ -1,5 +1,6 @@
 #PROGRAMS
 PROGRAM = minishell
+UNAME_S := $(shell uname -s)
 
 #LIBS
 LIBFT = libft.a
@@ -26,8 +27,15 @@ PROGRAM_OBJS = $(addprefix $(OBJ_PATH)/,$(PROGRAM_SRCS:.c=.o))
 	
 #FLAGS
 CC = gcc
-#CFLAGS =  -g3 -fsanitize=address -Wall -Werror -Wextra
 CFLAGS =  -Wall -Werror -Wextra
+
+# SANITIZE ADDRESS
+ifeq ($(UNAME_S),Linux)
+	CFLAGS += -pedantic -g3 -fsanitize=address -fsanitize=leak -fsanitize=undefined -fsanitize=bounds -fsanitize=null
+endif
+ifeq ($(UNAME_S),Darwin)
+	CFLAGS += -pedantic -g3 -fsanitize=address
+endif
 
 ifeq ($(OS),Windows_NT) 
  detected_OS := Windows
@@ -48,7 +56,7 @@ all: libftt minishell
 #EVERY TIME A .O IS CALLED AS AN INSTRUCTION THIS WILL BE CREATED IN OBJ_PATH
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir -p $(OBJ_PATH)/parse 2> /dev/null || true
-	@$(CC) $(INCLUDES) -o $@ -c $^
+	@$(CC) $(INCLUDES) -lreadline -o $@ -c $^
 			
 submodule:
 	@git submodule init

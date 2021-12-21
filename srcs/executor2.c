@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/20 21:51:37 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/21 13:54:42 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,6 @@ void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
 	}
 	else if (pid < 0)
 		printf("Error");
-	if (i > 0)
-			close(g_mini->exec[i - 1].pipe[READ_END]);
 }
 
 void	waitforthem(int *childpid, int nchilds)

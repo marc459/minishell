@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:57:21 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/20 16:46:54 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/21 13:12:44 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	free_gminishell(t_general *g_minishell)
 		i++;
 	}
 	free(g_minishell->args);
+	free(g_minishell->pospipes);
 	ft_freebidstr(g_minishell->parse.comnds);
 }
 

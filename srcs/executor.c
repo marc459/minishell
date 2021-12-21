@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/20 21:58:11 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/21 15:40:38 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_findpath(char **envp)
 	return (NULL);
 }
 
-void	define_fds(t_general *g_mini)
+void	define_fds(t_general *g)
 {
 	int		i;
 	int		x;
@@ -39,26 +39,30 @@ void	define_fds(t_general *g_mini)
 	x = 0;
 	y = 0;
 	cmdargs = 0;
-	g_mini->pospipes[y++] = i;
-	while ((i < (g_mini->ncommands)))
+	g->pospipes[y++] = i;
+	while ((i < (g->ncommands)))
 	{
-		if (g_mini->args[i].type == 3 && cmdargs++ == 0)
-			g_mini->exec[x++].posexec = i;
-		else if (g_mini->args[i].type == 3)
+		if (g->args[i].type == 3 && cmdargs++ == 0)
+			g->exec[x++].posexec = i;
+		else if (g->args[i].type == 3)
 		{
-			tmp = ft_strjoin(g_mini->args[g_mini->exec[x - 1].posexec].content, " ");
-			free(g_mini->args[g_mini->exec[x - 1].posexec].content);
-			g_mini->args[g_mini->exec[x - 1].posexec].content = ft_strjoin(tmp, g_mini->args[i].content);
+			tmp = ft_strjoin(g->args[g->exec[x - 1].posexec].content, " ");
+			free(g->args[g->exec[x - 1].posexec].content);
+			g->args[g->exec[x - 1].posexec].content = ft_strjoin(tmp, g->args[i].content);
 			free(tmp);
 		}
-		else if (g_mini->args[i].type == 5)
+		
+		else if (g->args[i].type == 5)
 		{
-			g_mini->pospipes[y++] = i + 1;
+			g->pospipes[y++] = i + 1;
 			cmdargs = 0;
 		}
+		else if (g->args[i].type == 8)
+			heredock(g, i);
+			
 		i++;
 	}
-	g_mini->nexecutables = x;
+	g->nexecutables = x;
 }
 
 void	initializefds(t_general *g_mini)
@@ -92,8 +96,11 @@ void	define_fds2(t_general *g_mini, int exec)
 			g_mini->fdout = open(g_mini->args[i + 1].content,
 					O_CREAT | O_RDWR | O_APPEND, 0755);
 		}
-		else if (g_mini->args[i].type == 8)
-			heredock(g_mini, i);
+		else if(g_mini->args[i].type == 8)
+		{
+			g_mini->fdin = open(".tmphd", O_RDONLY);
+			unlink(".tmphd");
+		}
 		i++;
 	}
 }
@@ -116,6 +123,8 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 			ft_cd(&envp, cmd[1]);
 		else if (cmd[0])
 			executecmd(g_mini,cmd,envp,i);
+		if (i > 0)
+			close(g_mini->exec[i - 1].pipe[READ_END]);
 		close(g_mini->fdout2);
 		close(g_mini->fdout);
 		close(g_mini->fdin);

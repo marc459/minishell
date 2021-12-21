@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/21 17:27:49 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/21 19:08:31 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct s_general {
 	t_arg	*args;
 	t_exec	*exec;
 	char	*heredockcontent;
-	int		doeshd;
 	int		fdin;
 	int		fdout;
 	int		fdout2;
@@ -83,7 +82,7 @@ char	*ft_findpath(char **envp);
 char	*read_line(char *command);
 void	ft_child(char **fullcmd, char **envp, int *stdo);
 char	**ft_parsepaths(char **envp);
-void	define_fds(t_general *g_mini);
+void	define_fds(t_general *g, int i, int x, int y);
 void	administratepipe(int i, t_general *g_mini);
 void	administratestds(int i, t_general *g_mini);
 void	waitforthem(int *childpid, int nchilds);
@@ -97,13 +96,14 @@ void	ft_remenv(t_general *g, char *remenv);
 void	ft_printsortenv(char **ownenv);
 char	*ft_dropexportquotes(t_general *g, char *str);
 void    heredock(t_general *g_mini, int i);
-void	define_fds2(t_general *g_mini,int exec);
+void	define_fds2(t_general *g_mini,int exec, int i);
 size_t	ft_error(size_t ncomands);
 char	**ft_dropkeyvalue(char *str, int quote, int dquote);
 size_t	ft_splitfindchar(char **split, char c);
 size_t	ft_ignorespace(size_t i, char *str);
 void	createtmpfile(t_general *g_mini);
 void	commandoutput(int ret);
+void	executecmd(t_general *g_mini, char **cmd, char **envp, int i);
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);

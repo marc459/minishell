@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:57:21 by msantos-          #+#    #+#             */
 /*   Updated: 2021/12/20 16:46:54 by msantos-         ###   ########.fr       */
@@ -39,12 +39,9 @@ void	free_gminishell(t_general *g_minishell)
 {
 	int	i;
 
-	i = 0;
-	while (i < (g_minishell->ncommands))
-	{
-		free(g_minishell->args[i].content);
-		i++;
-	}
+	i = -1;
+	while (++i < g_minishell->argssize)
+		ft_freedouble(g_minishell->args[i].content);
 	free(g_minishell->args);
 	ft_freebidstr(g_minishell->parse.comnds);
 }

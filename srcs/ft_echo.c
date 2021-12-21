@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 21:43:49 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/21 22:08:34 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/21 22:15:10 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_echo(t_general *g, char **cmd)
 			backn = 0;
 		else if (backn == 1 && ft_strncmp(cmd[i], "-n", 2))
 			printf("%s\n", cmd[i]);
-		else if (!ft_strncmp(cmd[i], "-n", 2))
+		else if (ft_strncmp(cmd[i], "-n", 2))
 			printf("%s", cmd[i]);
 	}
 }

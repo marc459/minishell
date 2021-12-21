@@ -6,20 +6,11 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:05:23 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/18 12:33:21 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/21 12:23:50 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-size_t	ft_error(size_t ncomands)
-{
-	if (ncomands > 3)
-		printf("syntax error near unexpected token `>>'\n");
-	else
-		printf("syntax error near unexpected token `>'\n");
-	return (0);
-}
 
 size_t	ft_ifcheckesp(t_general *g, size_t *i, size_t ncomands, size_t *size)
 {
@@ -127,7 +118,7 @@ void	ft_iniargs(t_general *g)
 		if (ft_strlen(g->parse.comnds[i]) > 1)
 		{
 			g->args[j].type = 3;
-			g->args[j++].content = ft_strdup(g->parse.comnds[i]);
+			g->args[j++].content = ft_dropkeyvalue(g->parse.comnds[i], 1, 1);
 		}
 		else if (ft_strlen(g->parse.comnds[i]))
 		{

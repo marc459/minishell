@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:57:21 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/21 13:12:44 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/21 15:46:06 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,9 @@ void	free_gminishell(t_general *g_minishell)
 {
 	int	i;
 
-	i = 0;
-	while (i < (g_minishell->ncommands))
-	{
-		free(g_minishell->args[i].content);
-		i++;
-	}
+	i = -1;
+	while (++i < g_minishell->argssize)
+		ft_freedouble(g_minishell->args[i].content);
 	free(g_minishell->args);
 	free(g_minishell->pospipes);
 	ft_freebidstr(g_minishell->parse.comnds);

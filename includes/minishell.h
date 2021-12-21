@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/20 21:58:20 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/21 16:18:26 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 
 typedef struct s_arg {
 	size_t	type;
-	char	*content;
+	char	**content;
 }			t_arg;
 
 typedef struct s_exec {
@@ -94,12 +94,17 @@ size_t	ft_checkenvname(char *name);
 void	ft_remenv(t_general *g, char *remenv);
 void	ft_printsortenv(char **ownenv);
 char	*ft_dropexportquotes(t_general *g, char *str);
-char	*ft_dropquotes(t_general *g, char *str);
 void    heredock(t_general *g_mini, int i);
 void	define_fds2(t_general *g_mini,int exec);
+size_t	ft_error(size_t ncomands);
+char	**ft_dropkeyvalue(char *str, int quote, int dquote);
+size_t	ft_splitfindchar(char **split, char c);
+size_t	ft_ignorespace(size_t *i, char *str);
 void	createtmpfile(t_general *g_mini);
 void	commandoutput(int ret);
 void	executecmd(t_general *g_mini, char **cmd, char **envp, int i);
+char	**ft_bidstrdup(char **str);
+char	**ft_bidstrjoin(char **str,char **str2);
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);
@@ -114,7 +119,7 @@ size_t	ft_contsp(t_general *g, size_t i);
 void	ft_iniarg(t_general *g, size_t *j, char *str);
 void	ft_refacttypes(t_general *g);
 void	ft_freedouble(char **split);
-t_arg	*ft_copycleanargs(t_general *g);
+t_arg	*ft_copycleanargs(t_general *g, size_t newargs);
 void	ft_freecontent(t_arg *args, size_t argssize);
 void	ft_countthings(t_general *g);
 char	*ft_cutstr(char *str);

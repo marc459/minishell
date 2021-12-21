@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:13:08 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/21 15:44:40 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/21 16:21:20 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	heredock(t_general *g_mini, int i)
 	tmp = ft_calloc(sizeof(char), 64);
 	ft_printf_fd(1,">");
 	read(0, tmp, 64);
-	while (ft_strncmp(tmp, g_mini->args[i + 1].content,
-			ft_strlen(g_mini->args[i + 1].content)))
+	while (ft_strncmp(tmp, g_mini->args[i + 1].content[0],
+			ft_strlen(g_mini->args[i + 1].content[0])))
 	{
 		tmp2 = ft_strdup(g_mini->heredockcontent);
 		free(g_mini->heredockcontent);

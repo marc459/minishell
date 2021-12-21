@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:43:14 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/21 18:55:53 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/21 21:48:55 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,8 @@ void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
 		close(g_mini->fdin);
 		dup2(g_mini->fdout, STDOUT_FILENO);
 		close(g_mini->fdout);
-		if (!ft_strncmp(cmd[0], "unset", 4)
-			|| !ft_strncmp(cmd[0], "export", 6))
-			ft_parsebuiltin(g_mini, cmd);
+		if (!ft_strncmp(cmd[0], "exit", 4))
+			exit_error(cmd, g_mini);
 		else
 			ft_child(cmd, envp, &g_mini->fdout2);
 		ft_freebidstr(cmd);

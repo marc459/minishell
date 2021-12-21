@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:39:25 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/21 18:40:01 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/21 21:20:04 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,3 +47,15 @@ char	*read_line(char *prompt)
 	return (command);
 }
 #endif
+
+void	ft_putbidstr(char **str)
+{
+	int	x;
+
+	x = 0;
+	while (x < ft_bidstrlen(str))
+	{
+		ft_printf_fd(1, "%s\n", str[x]);
+		x++;
+	}
+}

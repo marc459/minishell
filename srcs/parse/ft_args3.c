@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:12:27 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/21 11:02:25 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/21 20:32:04 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ size_t	ft_contsp(t_general *g, size_t i)
 	size_t	ncomnds;
 
 	ncomnds = 0;
-	while (i < g->parse.comndssize && ft_strlen(g->parse.comnds[i++]) == 1)
+	while (i < g->parse.comndssize && ft_strlen(g->parse.comnds[i]) == 1
+		&& ft_spchar(g->parse.comnds[i++][0]))
 		ncomnds++;
 	return (ncomnds);
 }

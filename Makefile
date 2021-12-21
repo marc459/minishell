@@ -15,7 +15,7 @@ INCLUDES = -I ./includes -I ./readline -I ./readline/examples
 LIBS = $(LIBFT_PATH)/$(LIBFT) $(READLINE)
 
 #SRCS
-PROGRAM_SRCS = minishell.c signals.c executor.c executor2.c		\
+PROGRAM_SRCS = minishell.c signals.c executor.c executor2.c executor3.c		\
 				parse/ft_args.c parse/ft_args2.c parse/ft_args3.c	\
 				parse/ft_aux.c parse/ft_aux2.c parse/ft_parse.c	\
 				 parse/ft_args4.c ft_cd.c ft_ownenv.c	\

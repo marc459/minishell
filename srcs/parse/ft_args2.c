@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 23:15:08 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/20 19:50:50 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/21 13:26:41 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,17 @@
 void	ft_splitcount(t_general *g, size_t *i, size_t *newargs)
 {
 	size_t	j;
+	char	**split;
 
+	split = ft_splitdup(g->args[++(*i)].content);
 	j = 0;
-	while (g->args[*++i].content[j])
+	while (split[j])
 		j++;
 	if (j > 1)
 		*newargs += 3;
 	else
 		*newargs += 2;
+	ft_freedouble(split);
 }
 
 char	**ft_joinstring(t_general *g, size_t *j, char **split)
@@ -31,9 +34,10 @@ char	**ft_joinstring(t_general *g, size_t *j, char **split)
 	size_t	k;
 	size_t	l;
 
-	line = ft_calloc(sizeof(char *), ft_splitlen(split));
-	if (!line)
-		return (NULL);
+	if (ft_splitlen(split) == 1)
+		line = NULL;
+	else
+		line = ft_calloc(sizeof(char *), ft_splitlen(split));
 	k = -1;
 	l = 0;
 	while (split[++k])
@@ -44,7 +48,7 @@ char	**ft_joinstring(t_general *g, size_t *j, char **split)
 				g->args[*j].type = 10;
 			else
 				g->args[*j].type = 4;
-			g->args[(*j)++].content = ft_splitdup(split[k]);
+			g->args[(*j)++].content = ft_dropkeyvalue(split[k], 0, 0);
 		}
 		else
 			line[l++] = ft_strdup(split[k]);

@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/20 19:14:36 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/21 12:25:13 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	define_fds2(t_general *g_mini,int exec);
 size_t	ft_error(size_t ncomands);
 char	**ft_dropkeyvalue(char *str, int quote, int dquote);
 size_t	ft_splitfindchar(char **split, char c);
+size_t	ft_ignorespace(size_t *i, char *str);
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);

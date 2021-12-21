@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:11:14 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/20 19:38:33 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/21 10:53:49 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_freecontent(t_arg *args, size_t argssize)
 
 	i = -1;
 	while (++i < argssize)
-		free(args[i].content);
+		ft_freedouble(args[i].content);
 	free(args);
 }
 

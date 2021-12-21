@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:05:23 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/21 12:23:50 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/21 18:48:19 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ size_t	ft_ifcheckesp(t_general *g, size_t *i, size_t ncomands, size_t *size)
 	else if (ncomands == 2 && ((g->parse.comnds[*i][0] == ';'
 			&& g->parse.comnds[*i + 1][0] == '<')
 		|| (g->parse.comnds[*i][0] == ';'
-		&& g->parse.comnds[*i + 1][0] == '>')))
+		&& g->parse.comnds[*i + 1][0] == '>')
+		|| (g->parse.comnds[*i][0] == '|')))
 	{
 		*size += 1;
 		*i += 1;
@@ -38,15 +39,16 @@ size_t	ft_ifcheckesp(t_general *g, size_t *i, size_t ncomands, size_t *size)
 
 size_t	ft_checksp(t_general *g, size_t *i, size_t ncomands, size_t *size)
 {
-	if (ncomands == 2 && ((g->parse.comnds[*i][0] == '<'
-			&& g->parse.comnds[*i + 1][0] == '<')
-		|| (g->parse.comnds[*i][0] == '>'
-		&& g->parse.comnds[*i + 1][0] == '>')))
-		*i += 1;
-	else if (ncomands > 1)
-		return (ft_error(ncomands));
-	else
-		ft_ifcheckesp(g, i, ncomands, size);
+	if (!ft_ifcheckesp(g, i, ncomands, size))
+	{
+		if (ncomands == 2 && ((g->parse.comnds[*i][0] == '<'
+				&& g->parse.comnds[*i + 1][0] == '<')
+			|| (g->parse.comnds[*i][0] == '>'
+			&& g->parse.comnds[*i + 1][0] == '>')))
+			*i += 1;
+		else if (ncomands > 1)
+			return (ft_error(ncomands));
+	}
 	*size += 1;
 	return (1);
 }
@@ -83,7 +85,7 @@ void	ft_dropspargs(t_general *g, size_t *i, size_t *j, size_t ncomands)
 				g->parse.comnds[*i + 2]));
 		*i += 2;
 	}
-	else if (ncomands == 2 && g->parse.comnds[*i][0] == ';')
+	else if (ncomands == 2 && g->parse.comnds[*i][0] == '|')
 	{
 		ft_iniarg(g, j, ft_strdup(g->parse.comnds[*i]));
 		ft_iniarg(g, j, ft_strdup(g->parse.comnds[*i + 1]));

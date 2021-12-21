@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:07:10 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/21 14:02:38 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/21 17:45:22 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_comndssize(t_general *g, char *str)
 			g->dquot = -g->dquot;
 		else if (ft_spchar(str[i]) && g->quot > 0 && g->dquot > 0)
 			ft_pcont(g, 1);
-		else if (g->parse.comand)
+		else if (g->parse.comand && str[i] != ' ')
 			ft_pcont(g, 0);
 	}
 	g->quot = 1;
@@ -71,25 +71,6 @@ char	*ft_joincomnd(char **split, size_t *i, size_t size)
 	return (comnd);
 }
 
-void	ft_replaceempty(t_general *g)
-{
-	size_t	i;
-	size_t	j;
-
-	i = -1;
-	while (++i < g->parse.comndssize)
-	{
-		j = 0;
-		while (g->parse.comnds[i][j] == ' ')
-			j++;
-		if (j == ft_strlen(g->parse.comnds[i]))
-		{
-			free (g->parse.comnds[i]);
-			g->parse.comnds[i] = ft_strdup("");
-		}
-	}
-}
-
 void	ft_fillcomands(t_general *g, char *str)
 {
 	size_t	ini;
@@ -109,13 +90,12 @@ void	ft_fillcomands(t_general *g, char *str)
 		{
 			if (i - ini > 0)
 				g->parse.comnds[j++] = ft_substr(str, ini, i - ini);
-			g->parse.comnds[j++] = ft_substr(str, i++, 1);
-			ini = ft_ignorespace(&i, str);
+			g->parse.comnds[j++] = ft_substr(str, i, 1);
+			ini = ft_ignorespace(i + 1, str);
 		}
 	}
 	if (j < g->parse.comndssize)
 		g->parse.comnds[j++] = ft_substr(str, ini, i - ini);
-	ft_replaceempty(g);
 }
 
 void	ft_parse(t_general *general, char *str)
@@ -130,6 +110,7 @@ void	ft_parse(t_general *general, char *str)
 	ft_fillcomands(general, str);
 	ft_checkquotes(general);
 	ft_iniargs(general);
+	ft_printgeneral(general);
 	if (general->args)
 	{
 		ft_refacttypes(general);

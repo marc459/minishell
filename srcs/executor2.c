@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/19 19:52:59 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/20 17:01:09 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,34 +37,52 @@ void	administratestds(int i, t_general *g_mini)
 {
 	if (i == 0)
 	{
-		if(g_mini->fdin  == -1)
+		if (g_mini->fdin == -1)
 			g_mini->fdin = dup(STDIN_FILENO);
 		if (g_mini->npipes > 0 && g_mini->fdout == -1)
 			g_mini->fdout = g_mini->exec[i].pipe[WRITE_END];
-		else if(g_mini->fdout  == -1)
+		else if (g_mini->fdout == -1)
 			g_mini->fdout = dup(STDOUT_FILENO);
 		close(g_mini->exec[i].pipe[READ_END]);
 	}
 	else if (i == (g_mini->nexecutables - 1))
 	{
-		if(g_mini->fdout  == -1)
+		if (g_mini->fdout == -1)
 			g_mini->fdout = dup(STDIN_FILENO);
-		if(g_mini->fdin  == -1)
+		if (g_mini->fdin == -1)
 			g_mini->fdin = g_mini->exec[i - 1].pipe[READ_END];
 	}
 	else
 	{
-		if(g_mini->fdin  == -1)
+		if (g_mini->fdin == -1)
 			g_mini->fdin = g_mini->exec[i - 1].pipe[READ_END];
-		if(g_mini->fdout  == -1)
+		if (g_mini->fdout == -1)
 			g_mini->fdout = g_mini->exec[i].pipe[WRITE_END];
 		close(g_mini->exec[i].pipe[READ_END]);
 	}
-
 	dup2(g_mini->fdin, STDIN_FILENO);
 	close(g_mini->fdin);
 	dup2(g_mini->fdout, STDOUT_FILENO);
 	close(g_mini->fdout);
+}
+
+void	administratepipe(int i, t_general *g_mini)
+{
+	if (g_mini->npipes > 0)
+	{
+		if (i == (g_mini->nexecutables - 1))
+		{
+			close(g_mini->exec[i - 1].pipe[WRITE_END]);
+			if (i > 1)
+				close(g_mini->exec[i - 2].pipe[READ_END]);
+		}
+		else if (i > 0)
+			close(g_mini->exec[i - 1].pipe[WRITE_END]);
+	}
+	if (i < g_mini->npipes)
+	{
+		pipe(g_mini->exec[i].pipe);
+	}
 }
 
 void	ft_child(char **fullcmd, char **envp, int *stdo)
@@ -96,3 +114,4 @@ void	ft_child(char **fullcmd, char **envp, int *stdo)
 	ft_putstr_fd(" command not found\n",*stdo);
 	g_piperet = 127;
 }
+

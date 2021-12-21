@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:57:21 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/21 13:41:43 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/20 16:46:54 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,19 @@ void	runcflag(t_general	*g_mini, char **environ, char **argv, int pid)
 				ft_executor(g_mini, environ, &pid);
 				free_gminishell(g_mini);
 			}
-			
 			i++;
 		}
 		ft_freebidstr(commands);
 		ft_freebidstr(g_mini->ownenv);
 		exit (g_piperet);
 	}
+}
+
+void	commandoutput(int ret)
+{
+	int	pid;
+
+	pid = fork();
+	if (pid == 0)
+		exit (ret);
 }

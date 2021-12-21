@@ -76,4 +76,7 @@ void	ft_countthings(t_general *g)
 		else if (g->args[i].type == 5)
 			g->npipes++;
 	}
+	g->ncommands = g->nexecutables + g->npipes
+		+ (g->nredirections * 2);
+	g->pospipes = malloc(sizeof(int) * g->npipes + 1);
 }

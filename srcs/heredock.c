@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   heredock.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:13:08 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/21 13:46:04 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/20 16:18:08 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+void	createtmpfile(t_general *g_mini)
+{
+	createtmpfile(g_mini);
+	g_mini->fdin = open(".tmphd",
+			O_CREAT | O_RDWR | O_TRUNC, 0755);
+	ft_putstr_fd(g_mini->heredockcontent, g_mini->fdin);
+	close(g_mini->fdin);
+	g_mini->fdin = open(".tmphd", O_RDONLY);
+	unlink(".tmphd");
+	g_mini->doeshd = 1;
+}
 
 void	heredock(t_general *g_mini, int i)
 {
@@ -35,11 +46,4 @@ void	heredock(t_general *g_mini, int i)
 		read(0, tmp, 64);
 	}
 	free(tmp);
-	g_mini->fdin = open(".tmphd",
-					O_CREAT | O_RDWR | O_TRUNC, 0755);
-	ft_putstr_fd(g_mini->heredockcontent,g_mini->fdin);
-	close(g_mini->fdin);
-	g_mini->fdin = open(".tmphd", O_RDONLY);
-	unlink(".tmphd");
-	g_mini->doeshd = 1;
 }

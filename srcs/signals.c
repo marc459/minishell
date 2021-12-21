@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 22:12:07 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/20 21:40:17 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/21 18:23:05 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	quitsignal(int sig)
 {
-	//rl_on_new_line();
-	//rl_replace_line("minishell", 1);
-	//ft_printf_fd(1, "mini\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	ft_printf_fd(1, "\n");
+	rl_redisplay();
 	g_piperet = 1;
-	//printf(BEGIN(1, 49, 34)"\nMinishell-1.0:"CLOSE);
 }
 
 void	signals(void)

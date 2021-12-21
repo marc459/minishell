@@ -57,7 +57,7 @@ all: libftt minishell
 #EVERY TIME A .O IS CALLED AS AN INSTRUCTION THIS WILL BE CREATED IN OBJ_PATH
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir -p $(OBJ_PATH)/parse 2> /dev/null || true
-	@$(CC) $(INCLUDES) -lreadline -o $@ -c $^
+	@$(CC) $(INCLUDES) -o $@ -c $^
 			
 submodule:
 	@git submodule init

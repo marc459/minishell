@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/20 17:40:29 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/21 14:03:17 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 
 typedef struct s_arg {
 	size_t	type;
-	char	*content;
+	char	**content;
 }			t_arg;
 
 typedef struct s_exec {
@@ -99,6 +99,12 @@ char	*ft_dropexportquotes(t_general *g, char *str);
 void    heredock(t_general *g_mini, int i);
 void	define_fds2(t_general *g_mini,int exec);
 size_t	ft_error(size_t ncomands);
+<<<<<<< HEAD
+=======
+char	**ft_dropkeyvalue(char *str, int quote, int dquote);
+size_t	ft_splitfindchar(char **split, char c);
+size_t	ft_ignorespace(size_t *i, char *str);
+>>>>>>> 914fbb2328882a09ff4c40716b475649226388f3
 void	createtmpfile(t_general *g_mini);
 void	commandoutput(int ret);
 

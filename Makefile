@@ -19,7 +19,8 @@ PROGRAM_SRCS = minishell.c signals.c executor.c executor2.c			\
 				parse/ft_aux.c parse/ft_aux2.c parse/ft_parse.c		\
 				utils.c parse/ft_args4.c ft_cd.c ft_ownenv.c		\
 				parse/ft_aux3.c ft_addenv.c ft_remenv.c	\
-				ft_expuns.c heredock.c parse/ft_dropquotes.c
+				ft_expuns.c heredock.c parse/ft_dropquotes.c		\
+				ft_splitaux.c
 
 #OBJS
 PROGRAM_OBJS = $(addprefix $(OBJ_PATH)/,$(PROGRAM_SRCS:.c=.o))

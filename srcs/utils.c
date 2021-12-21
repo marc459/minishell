@@ -39,12 +39,9 @@ void	free_gminishell(t_general *g_minishell)
 {
 	int	i;
 
-	i = 0;
-	while (i < (g_minishell->ncommands))
-	{
-		free(g_minishell->args[i].content);
-		i++;
-	}
+	i = -1;
+	while (++i < g_minishell->argssize)
+		ft_freedouble(g_minishell->args[i].content);
 	free(g_minishell->args);
 	ft_freebidstr(g_minishell->parse.comnds);
 }

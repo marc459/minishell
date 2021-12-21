@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:32:36 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/20 17:16:02 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/21 14:02:14 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ size_t	ft_spchar(char c)
 void	ft_printgeneral(t_general *general)
 {
 	size_t	i;
+	size_t	j;
 
 	printf("------------ general struct --------------\n");
 	printf("npipes : %zu\n", general->npipes);
@@ -49,7 +50,9 @@ void	ft_printgeneral(t_general *general)
 	while (general->args && ++i < general->argssize)
 	{
 		printf("arg[%zu].type : %zu\n", i, general->args[i].type);
-		printf("arg[%zu].content : %s\n", i, general->args[i].content);
+		j = -1;
+		while (general->args[i].content[++j])
+			printf("arg[%zu].content[%zu] : %s\n", i, j, general->args[i].content[j]);
 	}
 	printf("-----------------------------------------\n");
 }

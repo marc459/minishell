@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:11:14 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/20 17:15:50 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/21 14:02:21 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ t_arg	*ft_copycleanargs(t_general *g, size_t newargs)
 	while (++i < g->argssize)
 	{
 		tmp[i].type = g->args[i].type;
-		tmp[i].content = ft_strdup(g->args[i].content);
-		free(g->args[i].content);
+		tmp[i].content = ft_splitdup(g->args[i].content);
+		ft_freedouble(g->args[i].content);
 	}
 	free(g->args);
 	g->argssize = newargs;
@@ -41,7 +41,7 @@ void	ft_freecontent(t_arg *args, size_t argssize)
 
 	i = -1;
 	while (++i < argssize)
-		free(args[i].content);
+		ft_freedouble(args[i].content);
 	free(args);
 }
 

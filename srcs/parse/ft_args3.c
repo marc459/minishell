@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:12:27 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/13 13:51:44 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/21 11:02:25 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_contsp(t_general *g, size_t i)
 
 void	ft_iniarg(t_general *g, size_t *j, char *str)
 {
-	g->args[*j].content = str;
+	g->args[*j].content = ft_dropkeyvalue(str, 1, 1);
 	if (ft_strlen(str) == 1)
 	{
 		if (str[0] == '<')
@@ -51,21 +51,26 @@ void	ft_refactquotes(t_general *g)
 {
 	char	*str;
 	size_t	i;
+	size_t	j;
 
 	i = -1;
 	while (++i < g->argssize)
 	{
-		if (ft_findchar(g->args[i].content, '\"')
-			|| ft_findchar(g->args[i].content, '\''))
+		j = -1;
+		while (g->args[i].content[++j])
 		{
-			str = ft_dropquotes(g, g->args[i].content);
-			if (!ft_strncmp(str, "export", 6))
+			if (ft_findchar(g->args[i].content[j], '\"')
+				|| ft_findchar(g->args[i].content[j], '\''))
 			{
-				free(str);
-				str = ft_dropexportquotes(g, g->args[i].content);
+				str = ft_dropquotes(g, g->args[i].content[j]);
+				if (!ft_strncmp(str, "export", 6))
+				{
+					free(str);
+					str = ft_dropexportquotes(g, g->args[i].content[j]);
+				}
+				free (g->args[i].content[j]);
+				g->args[i].content[j] = str;
 			}
-			free (g->args[i].content);
-			g->args[i].content = str;
 		}
 	}
 }

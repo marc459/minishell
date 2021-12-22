@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 21:01:26 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/21 12:19:55 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 12:52:33 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,16 @@ void	ft_joinenv(char **str, t_general *g)
 
 	last = 0;
 	j = -1;
+	line = NULL;
 	while (str[0][++j])
 	{
 		if (str[0][j] == '$')
 		{
-			line = ft_substr(str[0], last, j);
+			aux = ft_substr(str[0], last, j - last);
+			ft_strownjoin(&line, aux);
+			free (aux);
 			last = j;
+			printf("line : %s\n", line);
 			aux = ft_getenv(&str[0][j], &last, &j, g);
 			ft_strownjoin(&line, aux);
 			free (aux);

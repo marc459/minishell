@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 18:57:57 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/22 19:47:34 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ typedef struct s_general {
 	char	*heredockcontent;
 	int		fdin;
 	int		fdout;
+	int		fdincpy;
+	int		fdoutcpy;
 	int		fdout2;
 	int		quot;
 	int		dquot;
@@ -90,7 +92,7 @@ void	administratestds(int i, t_general *g_mini);
 void	waitforthem(int *childpid, int nchilds);
 void	leakatexit(void);
 void	runcflag(t_general	*g_mini, char **environ, char **argv, int pid);
-void	ft_parsebuiltin(t_general *g_mini, char **cmd);
+void	ft_parsebuiltin(t_general *g_mini, char **cmd, int i);
 char	*ft_dropquotes(t_general *g, char *str);
 void	ft_checknewenv(t_general *g, char *newenv);
 size_t	ft_checkenvname(char *name);
@@ -111,6 +113,8 @@ void	ft_echo(t_general *g, char **cmd);
 void	heredock2(t_general *g_mini, int i, char **tmp);
 void	openfiles(t_general *g, int i);
 void	closefds(t_general *g_mini, int i);
+void	changestds(t_general *g);
+void	givebackstds(t_general *g);
 
 
 void	leak(void);

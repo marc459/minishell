@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expuns.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 07:12:59 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 17:02:10 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 19:49:22 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,11 @@ char	**ft_splitkeyvalue(t_general *g, char *str)
 	return (cmd);
 }
 
-void	ft_parsebuiltin(t_general *g, char **cmd)
+void	ft_parsebuiltin(t_general *g, char **cmd, int i)
 {
-	int		i;
-
+	g->fdincpy = dup(STDIN_FILENO);
+	g->fdoutcpy = dup(STDOUT_FILENO);
+	administratestds(i, g);
 	i = 0;
 	if (!ft_strncmp(cmd[0], "export", 7) && ft_bidstrlen(cmd) == 1)
 		ft_printsortenv(g->ownenv);
@@ -113,6 +114,7 @@ void	ft_parsebuiltin(t_general *g, char **cmd)
 	else if (!ft_strncmp(cmd[0], "unset\0", 6))
 		while (cmd[++i])
 			ft_remenv(g, cmd[i]);
-	else if (!ft_strncmp(cmd[0], "exit", 4))
+	givebackstds(g);
+	if (!ft_strncmp(cmd[0], "exit", 4))
 		exit_error(cmd, g);
 }

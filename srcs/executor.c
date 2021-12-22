@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 18:57:50 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/22 19:37:58 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	define_fds2(t_general *g_mini, int exec, int i)
 	g_mini->fdout = -2;
 	g_mini->fdin = -2;
 	i = g_mini->pospipes[exec];
-	initializefds(g_mini);
 	while (g_mini->args[i].type != 5 && i < g_mini->ncommands)
 	{
 		openfiles(g_mini, i);
@@ -115,7 +114,7 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 		else if (!ft_strncmp(cmd[0], "unset\0", 6)
 			|| !ft_strncmp(cmd[0], "export", 6)
 			|| (!ft_strncmp(cmd[0], "exit", 4) && g_mini->npipes == 0))
-			ft_parsebuiltin(g_mini, cmd);
+			ft_parsebuiltin(g_mini, cmd, i);
 		else if (cmd[0])
 			executecmd(g_mini, cmd, envp, i);
 		closefds(g_mini, i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/21 22:09:36 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 14:41:58 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,13 @@ void	define_fds(t_general *g, int i, int x, int y)
 			g->exec[x++].posexec = i;
 		else if (g->args[i].type == 3)
 		{
-			tmp = ft_bidstrjoin(g->args[g->exec[x - 1].posexec].content, g->args[i].content);
+			tmp = ft_bidstrjoin(g->args[g->exec[x - 1].posexec].content,
+					g->args[i].content);
 			ft_freebidstr(g->args[g->exec[x - 1].posexec].content);
 			g->args[g->exec[x - 1].posexec].content = tmp;
-			//ft_putbidstr(g->args[g->exec[x - 1].posexec].content);
 		}
-		else if (g->args[i].type == 5)
-		{
+		else if (g->args[i].type == 5 && (cmdargs-- < 42))
 			g->pospipes[y++] = i + 1;
-			cmdargs = 0;
-		}
 		else if (g->args[i].type == 8)
 			heredock(g, i);
 		i++;

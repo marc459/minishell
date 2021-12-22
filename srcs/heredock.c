@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:13:08 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 14:20:01 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/22 15:02:13 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,24 @@ void	createtmpfile(t_general *g_mini)
 	close(g_mini->fdin);
 }
 
-void	heredock2(t_general *g_mini, int i, char *tmp)
+void	heredock2(t_general *g_mini, int i, char **tmp)
 {
 	char	*tmp2;
 
-	if ((!ft_strncmp(tmp, g_mini->args[i + 1].content[0],
+	if ((!ft_strncmp(tmp[0], g_mini->args[i + 1].content[0],
 				ft_strlen(g_mini->args[i + 1].content[0]))
-			&& (tmp[ft_strlen(g_mini->args[i + 1].content[0])] == '\0')))
+			&& (tmp[0][ft_strlen(g_mini->args[i + 1].content[0])] == '\0')))
 	{
-		free(tmp);
+		free(tmp[0]);
 		createtmpfile(g_mini);
 		exit(EXIT_SUCCESS);
 	}
 	tmp2 = ft_strdup(g_mini->heredockcontent);
 	free(g_mini->heredockcontent);
-	g_mini->heredockcontent = ft_strjoin(tmp2, tmp);
+	g_mini->heredockcontent = ft_strjoin(tmp2, tmp[0]);
 	free(tmp2);
-	free(tmp);
-	tmp = read_line(BEGIN(1, 49, 34)">"CLOSE);
+	free(tmp[0]);
+	tmp[0] = readline(">");
 }
 
 void	heredock(t_general *g_mini, int i)
@@ -52,9 +52,11 @@ void	heredock(t_general *g_mini, int i)
 		sig_heredock();
 		g_mini->fdin = dup(STDIN_FILENO);
 		g_mini->heredockcontent = ft_strdup("");
-		tmp = read_line(BEGIN(1, 49, 34)">"CLOSE);
+		tmp = readline(">");
 		while (tmp)
-			heredock2(g_mini, i, tmp);
+		{
+			heredock2(g_mini, i, &tmp);
+		}
 		ft_putstr_fd("warning: here-doc delimited by end-of-file\n", 1);
 		free(tmp);
 		createtmpfile(g_mini);

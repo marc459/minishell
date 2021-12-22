@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 21:01:26 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 13:41:56 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 14:22:24 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char	*ft_getenv(char *str, size_t *last, size_t *j, t_general *g)
 	}
 	while (ft_isalpha(str[++i]))
 		ft_addvars(last, j);
+	*j -= 1;
 	if (!i && str[i] != '\"' && str[i] != '\'')
 		return (ft_strdup("$"));
 	else
@@ -65,14 +66,12 @@ char	*ft_getenv(char *str, size_t *last, size_t *j, t_general *g)
 	return (ret);
 }
 
-void	ft_joinenv(char **str, t_general *g)
+void	ft_joinenv(char **str, t_general *g, size_t last)
 {
 	char	*aux;
 	char	*line;
 	size_t	j;
-	size_t	last;
 
-	last = 0;
 	j = -1;
 	line = NULL;
 	while (str[0][++j])
@@ -111,7 +110,7 @@ void	ft_expvar(t_general *g)
 			if (ft_findchar(aux, '$') && g->args[i - 1].type != 8)
 				if ((ft_getposition(aux, '\"') < ft_getposition(aux, '\''))
 					|| (ft_getposition(aux, '\"') == ft_getposition(aux, '\'')))
-					ft_joinenv(&g->args[i].content[j], g);
+					ft_joinenv(&g->args[i].content[j], g, 0);
 		}
 	}
 }

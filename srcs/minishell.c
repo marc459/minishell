@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/22 20:15:02 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/22 20:50:37 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,8 @@ void	ft_prompt(t_general *g_m)
 			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCYAN, COLOR_OFF);
 			if (g_m->args)
 				ft_executor(g_m, g_m->ownenv, &pid);
-			printf("return: %d\n", g_piperet);
 			free_gminishell(g_m);
-			system("leaks minishell > /dev/ttys002");
+			ft_checkleaksreturn();
 		}
 	}
 	free(command);

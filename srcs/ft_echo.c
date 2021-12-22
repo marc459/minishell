@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 21:43:49 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/21 22:15:10 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 16:15:53 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,20 @@ void	ft_echo(t_general *g, char **cmd)
 	size_t	i;
 	size_t	backn;
 
-	i = 0;
 	backn = 1;
+	if (cmd[1] && !ft_strncmp(cmd[1], "-n", 2))
+	{
+		i = 1;
+		backn = 0;
+	}
+	else
+		i = 0;
 	while (cmd[++i])
 	{
-		if (i == 1 && !ft_strncmp(cmd[i], "-n", 2))
-			backn = 0;
-		else if (backn == 1 && ft_strncmp(cmd[i], "-n", 2))
-			printf("%s\n", cmd[i]);
-		else if (ft_strncmp(cmd[i], "-n", 2))
-			printf("%s", cmd[i]);
+		printf("%s", cmd[i]);
+		if (i < ft_splitlen(cmd) - 1)
+			printf(" ");
 	}
+	if (backn == 1)
+		printf("\n");
 }

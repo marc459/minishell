@@ -6,29 +6,31 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 07:12:59 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/21 22:10:22 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 11:48:26 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-size_t	ft_countkeyvalue(char *str)
+size_t	ft_countkeyvalue(char *str, int quote, int dquote)
 {
 	size_t	i;
+	size_t	ultima;
 	size_t	size;
-	int		quote;
-	int		dquote;
 
 	if (!str)
 		return (0);
 	i = -1;
-	quote = 1;
-	dquote = 1;
 	size = 0;
+	ultima = 0;
 	while (str[++i])
 	{
-		if (str[i] == ' ' && dquote > 0 && quote > 0)
-			size++;
+		if (str[i] == ' ')
+		{
+			if (dquote > 0 && quote > 0 && i - ultima > 1)
+				size++;
+			ultima = i;
+		}
 		if (str[i] == '\'' && dquote > 0)
 			quote *= -1;
 		if (str[i] == '\"' && quote > 0)
@@ -54,7 +56,7 @@ char	**ft_dropkeyvalue(char *str, int quote, int dquote)
 	size_t	ultima;
 	char	**cmd;
 
-	cmd = ft_calloc(sizeof(char *), (ft_countkeyvalue(str) + 1));
+	cmd = ft_calloc(sizeof(char *), (ft_countkeyvalue(str, 1, 1) + 1));
 	if (!cmd)
 		return (NULL);
 	i = -1;
@@ -62,9 +64,10 @@ char	**ft_dropkeyvalue(char *str, int quote, int dquote)
 	ultima = 0;
 	while (str[++i])
 	{
-		if (str[i] == ' ' && dquote > 0 && quote > 0)
+		if (str[i] == ' ')
 		{
-			cmd[j++] = ft_substr(str, ultima, i - ultima);
+			if (dquote > 0 && quote > 0 && i - ultima > 0)
+				cmd[j++] = ft_substr(str, ultima, i - ultima);
 			ultima = i + 1;
 		}
 		ft_changequote(&quote, &dquote, str[i]);

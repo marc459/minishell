@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 03:57:11 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 17:20:53 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 18:00:21 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,11 @@ void	ft_cd(char	***env, char *path)
 		return ;
 	}
 	auxpath = ft_strjoin("OLD", env[0][ft_getpathpos(env[0])]);
-	env[0][ft_getoldpathpos(env[0])] = ft_strdup(auxpath);
-	free (auxpath);
+	free (env[0][ft_getoldpathpos(env[0])]);
+	env[0][ft_getoldpathpos(env[0])] = auxpath;
 	pwdbuf = calloc(sizeof(char), (PATH_MAX + 1));
 	getcwd(pwdbuf, PATH_MAX);
+	free (env[0][ft_getpathpos(env[0])]);
 	env[0][ft_getpathpos(env[0])] = ft_strjoin("PWD=", pwdbuf);
 	free (pwdbuf);
 }

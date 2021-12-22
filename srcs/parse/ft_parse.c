@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:07:10 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 20:11:28 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 21:07:36 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ void	ft_comndssize(t_general *g, char *str)
 		else if (g->parse.comand && str[i] != ' ')
 			ft_pcont(g, 0);
 	}
+	i--;
+	if ((str[i] == '\"' || str[i] == '\'') && (g->quot > 0 && g->dquot > 0))
+		g->parse.comndssize++;
 	g->quot = 1;
 	g->dquot = 1;
 }
@@ -98,27 +101,27 @@ void	ft_fillcomands(t_general *g, char *str)
 		g->parse.comnds[j++] = ft_substr(str, ini, i - ini);
 }
 
-void	ft_parse(t_general *general, char *str)
+void	ft_parse(t_general *g, char *str)
 {
 	size_t	i;
 
-	ft_comndssize(general, str);
-	general->parse.comnds = calloc(sizeof(char *),
-			(general->parse.comndssize + 1));
-	if (!general->parse.comnds)
+	ft_comndssize(g, str);
+	g->parse.comnds = ft_calloc(sizeof(char *),
+			(g->parse.comndssize + 1));
+	if (!g->parse.comnds)
 		return ;
-	ft_fillcomands(general, str);
-	ft_checkquotes(general);
-	if (general->parse.comnds[general->parse.comndssize - 1][0] != '>'
-		&& general->parse.comnds[general->parse.comndssize - 1][0] != '<')
-		ft_iniargs(general);
+	ft_fillcomands(g, str);
+	ft_checkquotes(g);
+	if (g->parse.comnds[g->parse.comndssize - 1][0] != '>'
+		&& g->parse.comnds[g->parse.comndssize - 1][0] != '<')
+		ft_iniargs(g);
 	else
-		printf("syntax error near unexpected token 'newline'");
-	if (general->args)
+		printf("syntax error near unexpected token 'newline'\n");
+	if (g->args)
 	{
-		ft_refacttypes(general);
-		ft_expvar(general);
-		ft_refactquotes(general);
-		ft_countthings(general);
+		ft_refacttypes(g);
+		ft_expvar(g);
+		ft_refactquotes(g);
+		ft_countthings(g);
 	}
 }

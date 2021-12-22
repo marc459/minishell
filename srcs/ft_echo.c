@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 21:43:49 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 20:32:00 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/22 21:01:46 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ void	ft_echo(t_general *g, char **cmd)
 	}
 	if (backn == 1)
 		printf("\n");
-	commandoutput(0);
+	g_piperet = 0;
 }

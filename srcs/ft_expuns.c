@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 07:12:59 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 21:00:07 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/22 21:08:57 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,15 +106,15 @@ void	ft_parsebuiltin(t_general *g, char **cmd, int i)
 	g->fdoutcpy = dup(STDOUT_FILENO);
 	administratestds(i, g);
 	i = 0;
-	if (!ft_strncmp(cmd[0], "export", 7) && ft_bidstrlen(cmd) == 1)
+	if (!ft_strncmp(cmd[0], "export\0", 7) && ft_bidstrlen(cmd) == 1)
 		ft_printsortenv(g->ownenv);
-	else if (!ft_strncmp(cmd[0], "export", 6))
+	givebackstds(g);
+	if (!ft_strncmp(cmd[0], "export", 6))
 		while (cmd[++i])
 			ft_checknewenv(g, cmd[i]);
 	else if (!ft_strncmp(cmd[0], "unset\0", 6))
 		while (cmd[++i])
 			ft_remenv(g, cmd[i]);
-	givebackstds(g);
 	if (!ft_strncmp(cmd[0], "exit", 4))
 		exit_error(cmd, g);
 }

@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 19:37:58 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/22 20:31:05 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	define_fds2(t_general *g_mini, int exec, int i)
 void	ft_executor(t_general *g_mini, char **envp, int *pid)
 {
 	int		i;
-	char	**cmd;
+	char	**cm;
 
 	i = 0;
 	g_mini->exec = ft_calloc(sizeof(t_exec), (g_mini->nexecutables + 1));
@@ -108,15 +108,15 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 	{
 		define_fds2(g_mini, i, 0);
 		administratepipe(i, g_mini);
-		cmd = g_mini->args[g_mini->exec[i].posexec].content;
-		if (!ft_strncmp(cmd[0], "cd", 2))
-			ft_cd(&envp, cmd[1]);
-		else if (!ft_strncmp(cmd[0], "unset\0", 6)
-			|| !ft_strncmp(cmd[0], "export", 6)
-			|| (!ft_strncmp(cmd[0], "exit", 4) && g_mini->npipes == 0))
-			ft_parsebuiltin(g_mini, cmd, i);
-		else if (cmd[0])
-			executecmd(g_mini, cmd, envp, i);
+		cm = g_mini->args[g_mini->exec[i].posexec].content;
+		if (!ft_strncmp(cm[0], "cd", 2))
+			ft_cd(&envp, cm[1]);
+		else if (!ft_strncmp(cm[0], "unset\0", 6)
+			|| !ft_strncmp(cm[0], "export", 6) || !ft_strncmp(cm[0], "echo", 4)
+			|| (!ft_strncmp(cm[0], "exit", 4) && g_mini->npipes == 0))
+			ft_parsebuiltin(g_mini, cm, i);
+		else if (cm[0])
+			executecmd(g_mini, cm, envp, i);
 		closefds(g_mini, i);
 		i++;
 	}

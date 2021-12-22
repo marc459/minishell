@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 21:43:49 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 18:05:54 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 20:32:00 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ void	ft_echo(t_general *g, char **cmd)
 	}
 	if (backn == 1)
 		printf("\n");
+	commandoutput(0);
 }

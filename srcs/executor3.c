@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:43:14 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 19:41:45 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/22 20:31:24 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
 			close(g_mini->fdout);
 			if (!ft_strncmp(cmd[0], "exit", 4))
 				exit_error(cmd, g_mini);
-			else if (!ft_strncmp(cmd[0], "echo", 4))
-				ft_echo(g_mini, cmd);
 			else
 				ft_child(cmd, envp, &g_mini->fdout2);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/22 21:35:09 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/22 22:21:20 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_prompt(t_general *g_m)
 		{
 			ft_inigeneral(g_m);
 			ft_parse(g_m, command);
-			//ft_printgeneral(g_m);
+			ft_printgeneral(g_m);
 			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCYAN, COLOR_OFF);
 			if (g_m->args)
 				ft_executor(g_m, g_m->ownenv, &pid);

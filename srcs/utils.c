@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:57:21 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 17:33:45 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 18:05:29 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	commandoutput(int ret)
 {
 	int	pid;
 
+	g_piperet = ret;
 	pid = fork();
 	if (pid == 0)
 		exit (ret);

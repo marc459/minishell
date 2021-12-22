@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:43:14 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 18:07:55 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 19:41:45 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	ft_child(char **fullcmd, char **envp, int *stdo)
 	if (paths)
 		ft_freebidstr(paths);
 	ft_printf_fd(*stdo, "Minishell: %s command not found\n", fullcmd[0]);
-	exit(127);
 }
 
 void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
@@ -50,21 +49,24 @@ void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
 	{
 		unlink(".tmphd");
 		administratestds(i, g_mini);
-		dup2(g_mini->fdin, STDIN_FILENO);
-		close(g_mini->fdin);
-		dup2(g_mini->fdout, STDOUT_FILENO);
-		close(g_mini->fdout);
-		if (!ft_strncmp(cmd[0], "exit", 4))
-			exit_error(cmd, g_mini);
-		else if (!ft_strncmp(cmd[0], "echo", 4))
-			ft_echo(g_mini, cmd);
-		else
-			ft_child(cmd, envp, &g_mini->fdout2);
+		if (g_mini->fdin > 0 && g_mini->fdout > 0)
+		{
+			dup2(g_mini->fdin, STDIN_FILENO);
+			close(g_mini->fdin);
+			dup2(g_mini->fdout, STDOUT_FILENO);
+			close(g_mini->fdout);
+			if (!ft_strncmp(cmd[0], "exit", 4))
+				exit_error(cmd, g_mini);
+			else if (!ft_strncmp(cmd[0], "echo", 4))
+				ft_echo(g_mini, cmd);
+			else
+				ft_child(cmd, envp, &g_mini->fdout2);
+		}
 		ft_freebidstr(cmd);
-		exit (g_piperet);
+		exit (127);
 	}
 	else if (pid < 0)
-		printf("Error");
+		ft_printf_fd(1, "Error\n");
 }
 
 void	waitforthem(int *childpid, int nchilds)

@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/21 18:54:21 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/22 18:21:25 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,26 @@ void	administratestds(int i, t_general *g_mini)
 {
 	if (i == 0)
 	{
-		if (g_mini->fdin == -1)
+		if (g_mini->fdin == -2)
 			g_mini->fdin = dup(STDIN_FILENO);
-		if (g_mini->npipes > 0 && g_mini->fdout == -1)
+		if (g_mini->npipes > 0 && g_mini->fdout == -2)
 			g_mini->fdout = g_mini->exec[i].pipe[WRITE_END];
-		else if (g_mini->fdout == -1)
+		else if (g_mini->fdout == -2)
 			g_mini->fdout = dup(STDOUT_FILENO);
 		close(g_mini->exec[i].pipe[READ_END]);
 	}
 	else if (i == (g_mini->nexecutables - 1))
 	{
-		if (g_mini->fdout == -1)
+		if (g_mini->fdout == -2)
 			g_mini->fdout = dup(STDIN_FILENO);
-		if (g_mini->fdin == -1)
+		if (g_mini->fdin == -2)
 			g_mini->fdin = g_mini->exec[i - 1].pipe[READ_END];
 	}
 	else
 	{
-		if (g_mini->fdin == -1)
+		if (g_mini->fdin == -2)
 			g_mini->fdin = g_mini->exec[i - 1].pipe[READ_END];
-		if (g_mini->fdout == -1)
+		if (g_mini->fdout == -2)
 			g_mini->fdout = g_mini->exec[i].pipe[WRITE_END];
 		close(g_mini->exec[i].pipe[READ_END]);
 	}

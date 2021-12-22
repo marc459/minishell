@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:05:23 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 20:02:22 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 20:33:13 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,12 +122,12 @@ void	ft_iniargs(t_general *g)
 	ncomnds = 0;
 	while (++i < g->parse.comndssize)
 	{
-		if (ft_strlen(g->parse.comnds[i]) > 1)
+		if (ft_strlen(g->parse.comnds[i]) > 1 || !ft_isspar(g->parse.comnds[i]))
 		{
 			g->args[j].type = 3;
 			g->args[j++].content = ft_dropkeyvalue(g->parse.comnds[i], 1, 1);
 		}
-		else if (ft_strlen(g->parse.comnds[i]))
+		else if (ft_isspar(g->parse.comnds[i]))
 		{
 			ncomnds = ft_contsp(g, i);
 			ft_dropspargs(g, &i, &j, ncomnds);

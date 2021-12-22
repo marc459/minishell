@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 07:12:59 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 20:31:47 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/22 21:00:07 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,6 @@ void	ft_parsebuiltin(t_general *g, char **cmd, int i)
 	else if (!ft_strncmp(cmd[0], "unset\0", 6))
 		while (cmd[++i])
 			ft_remenv(g, cmd[i]);
-	else if (!ft_strncmp(cmd[0], "echo", 4))
-		ft_echo(g, cmd);
 	givebackstds(g);
 	if (!ft_strncmp(cmd[0], "exit", 4))
 		exit_error(cmd, g);

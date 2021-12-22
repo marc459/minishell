@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 17:00:45 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 18:14:57 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	define_fds2(t_general *g_mini, int exec, int i)
 	initializefds(g_mini);
 	while (g_mini->args[i].type != 5 && i < g_mini->ncommands)
 	{
+		openfiles();
 		if (g_mini->args[i].type == 1)
 		{
 			 close(g_mini->fdin);

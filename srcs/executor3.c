@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:43:14 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 17:36:19 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 18:00:40 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	ft_child(char **fullcmd, char **envp, int *stdo)
 	if (paths)
 		ft_freebidstr(paths);
 	ft_printf_fd(*stdo, "Minishell: %s command not found\n", fullcmd[0]);
-	exit(127);
 }
 
 void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
@@ -61,7 +60,7 @@ void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
 		else
 			ft_child(cmd, envp, &g_mini->fdout2);
 		ft_freebidstr(cmd);
-		exit (g_piperet);
+		exit (127);
 	}
 	else if (pid < 0)
 		printf("Error");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_addenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 05:18:15 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/20 15:53:35 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/22 12:41:03 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,18 @@ void	ft_addenv(t_general *g, char *name, char *val)
 void	ft_checknewenv(t_general *g, char *newenv)
 {
 	size_t	i;
-	size_t	ultima;
+	size_t	last;
 	char	*name;
 	char	*val;
 
 	i = 0;
-	ultima = 0;
+	last = 0;
 	while (newenv[i] && newenv[i] != '=')
 		i++;
-	name = ft_substr(newenv, ultima, i);
-	ultima = i + 1;
-	val = ft_substr(newenv, ultima, i - ultima);
-	ultima = i + 1;
+	name = ft_substr(newenv, last, i);
+	last = i + 1;
+	val = ft_substr(newenv, last, i - last);
+	last = i + 1;
 	if (!ft_checkenvname(name) || !ft_strlen(name))
 	{
 		printf("minishell: export: %s=%s: not a valid identifier\n", name, val);

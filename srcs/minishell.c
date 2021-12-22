@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/21 21:59:52 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/22 13:35:39 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	main(int argc, char **argv)
 	g_piperet = 0;
 	g_minishell.ownenv = ft_ownenv(environ);
 	runcflag(&g_minishell, environ, argv, pid);
-	signals(&g_minishell);
+	sig_main();
 	ft_prompt(&g_minishell);
 	ft_freebidstr(g_minishell.ownenv);
 	printf("exit\n");

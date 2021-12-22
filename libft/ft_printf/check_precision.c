@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_precision.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 20:19:00 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/15 18:19:48 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/22 13:28:21 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	check_precisionflag_i(t_printf *f, int integer)
 	}
 }
 
-char	*check_precisionflag_s(t_printf *f, const char *str)
+char	*check_precisionflag_s(t_printf *f, char *str)
 {
 	char *tmp;
 
@@ -47,10 +47,10 @@ char	*check_precisionflag_s(t_printf *f, const char *str)
 		else if ((size_t)f->precision > ft_strlen(str))
 			f->precision = ft_strlen(str);
 	}
-	return (ft_strdup(str));
+	return (str);
 }
 
-char	*check_precisionflag_p(t_printf *f, const char *str)
+char	*check_precisionflag_p(t_printf *f, char *str)
 {
 	int i;
 
@@ -63,7 +63,7 @@ char	*check_precisionflag_p(t_printf *f, const char *str)
 			ft_print_charxtimes(f, '0', (f->precision - (int)ft_strlen(str)));
 		}
 	}
-	return (ft_strdup(str));
+	return (str);
 }
 
 void	check_precisionflag_u(t_printf *f, long int integer)
@@ -81,7 +81,7 @@ void	check_precisionflag_u(t_printf *f, long int integer)
 	}
 }
 
-char	*check_precisionflag_x(t_printf *f, const char *str)
+char	*check_precisionflag_x(t_printf *f, char *str)
 {
 	int i;
 
@@ -99,5 +99,5 @@ char	*check_precisionflag_x(t_printf *f, const char *str)
 			}
 		}
 	}
-	return (ft_strdup(str));
+	return (str);
 }

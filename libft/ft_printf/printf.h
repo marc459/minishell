@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 07:11:34 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/15 18:14:23 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/22 13:29:37 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void			print_integer(t_printf *f);
 void			ft_putstrcounter(const char *s, t_printf *f);
 void			print_string(t_printf *f);
 void			check_widthflag_s(t_printf *f, char *str);
-char			*check_precisionflag_s(t_printf *f, const char *str);
 void			print_character(t_printf *f);
 void			check_widthflag_c(t_printf *f);
 void			print_hexadecimal(t_printf *f, const char *format);
@@ -55,10 +54,10 @@ void			check_widthflag_p(t_printf *f, char *str);
 void			check_widthflag_u(t_printf *f, long int integer);
 void			check_widthflag_x(t_printf *f, char *str);
 void			check_precisionflag_i(t_printf *f, int integer);
-char			*check_precisionflag_s(t_printf *f, const char *str);
-char			*check_precisionflag_p(t_printf *f, const char *str);
+char			*check_precisionflag_s(t_printf *f, char *str);
+char			*check_precisionflag_p(t_printf *f, char *str);
 void			check_precisionflag_u(t_printf *f, long int integer);
-char			*check_precisionflag_x(t_printf *f, const char *str);
+char			*check_precisionflag_x(t_printf *f, char *str);
 void			check_zeroflag_i(t_printf *f, int integer);
 void			check_zeroflag_p(t_printf *f, char *str);
 void			check_zeroflag_u(t_printf *f, long int integer);

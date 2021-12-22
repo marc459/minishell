@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/21 22:13:32 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 13:36:01 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,9 @@ typedef struct s_general {
 
 int	g_piperet;
 
-void	signals(t_general *g);
+void	sig_main();
+void	sig_heredock(void);
+void	sig_ignore(void);
 void	quitsignal(int sig);
 void	ft_executor(t_general *g_minishell, char **envp, int *pid);
 char	*ft_findpath(char **envp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:43:14 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/21 22:13:07 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 13:48:08 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_child(char **fullcmd, char **envp, int *stdo)
 
 	paths = ft_parsepaths(envp);
 	i = 0;
+	sig_child();
 	while (paths && paths[i])
 	{
 		if (ft_strchr(fullcmd[0], '/'))

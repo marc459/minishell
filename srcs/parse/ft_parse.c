@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:07:10 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 21:07:36 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 21:57:59 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ void	ft_comndssize(t_general *g, char *str)
 			ft_pcont(g, 0);
 	}
 	i--;
+	g->parse.comndssize++;
+	/* printf("comndssize : %zu\n", g->parse.comndssize);
 	if ((str[i] == '\"' || str[i] == '\'') && (g->quot > 0 && g->dquot > 0))
-		g->parse.comndssize++;
+		g->parse.comndssize++; */
 	g->quot = 1;
 	g->dquot = 1;
 }

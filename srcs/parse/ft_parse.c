@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:07:10 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 22:25:29 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 23:17:51 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,11 @@ void	ft_comndssize(t_general *g, char *str)
 		else if (str[i] == '\"' && g->quot > 0)
 			g->dquot = -g->dquot;
 		else if (ft_spchar(str[i]) && g->quot > 0 && g->dquot > 0)
-			ft_pcont(g, 0);
-		else if (!g->parse.comand && str[i] != ' ')
 			ft_pcont(g, 1);
+		else if (g->parse.comand)
+			ft_pcont(g, 0);
 	}
 	i--;
-	printf("comndssize : %zu\n", g->parse.comndssize);
-	if ((str[i] == '\"' || str[i] == '\'') && (g->quot > 0 && g->dquot > 0))
-		g->parse.comndssize++;
 	g->quot = 1;
 	g->dquot = 1;
 }
@@ -105,6 +102,7 @@ void	ft_fillcomands(t_general *g, char *str)
 void	ft_parse(t_general *g, char *str)
 {
 	size_t	i;
+	char	*aux;
 
 	ft_comndssize(g, str);
 	g->parse.comnds = ft_calloc(sizeof(char *),
@@ -113,9 +111,8 @@ void	ft_parse(t_general *g, char *str)
 		return ;
 	ft_fillcomands(g, str);
 	ft_checkquotes(g);
-	if (g->parse.comnds[g->parse.comndssize - 1][0] != '>'
-		&& g->parse.comnds[g->parse.comndssize - 1][0] != '<'
-		&& g->parse.comnds[g->parse.comndssize - 1][0] != '|')
+	aux = g->parse.comnds[g->parse.comndssize - 1];
+	if (ft_strlen(aux) > 0 && aux[0] != '|' && aux[0] != '>' && aux[0] != '<')
 		ft_iniargs(g);
 	else
 		printf("syntax error near unexpected token 'newline'\n");

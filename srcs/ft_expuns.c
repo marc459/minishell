@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expuns.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 07:12:59 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 21:08:57 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/22 23:47:55 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ size_t	ft_countkeyvalue(char *str, int quote, int dquote)
 	{
 		if (str[i] == ' ' && dquote > 0 && quote > 0)
 		{
-			if (i - last > 1)
+			if (i - last > 0)
 				size++;
 			last = i;
 		}

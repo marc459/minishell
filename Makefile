@@ -28,7 +28,7 @@ PROGRAM_OBJS = $(addprefix $(OBJ_PATH)/,$(PROGRAM_SRCS:.c=.o))
 	
 #FLAGS
 CC = gcc
-CFLAGS =  -Wall -Werror -Wextra
+CFLAGS =  -g3
 
 # SANITIZE ADDRESS
 ifeq ($(UNAME_S),Linux)
@@ -57,7 +57,7 @@ all: libftt minishell
 #EVERY TIME A .O IS CALLED AS AN INSTRUCTION THIS WILL BE CREATED IN OBJ_PATH
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir -p $(OBJ_PATH)/parse 2> /dev/null || true
-	@$(CC) $(INCLUDES) -o $@ -c $^
+	@$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $^
 			
 submodule:
 	@git submodule init

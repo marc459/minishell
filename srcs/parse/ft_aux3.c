@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:53:31 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/21 17:27:30 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 23:03:35 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_checkquotes(t_general *g)
 
 size_t	ft_ignorespace(size_t i, char *str)
 {
-	while (str[i] == ' ')
+	while (str[i] && str[i] == ' ')
 		i++;
 	return (i);
 }

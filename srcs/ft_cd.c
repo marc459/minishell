@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 03:57:11 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 16:30:58 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 17:20:53 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	ft_cd(char	***env, char *path)
 	{
 		printf("minishell: cd: %s: No such file or directory\n", path);
 		g_piperet = 1;
-		commandoutput(1);
 		return ;
 	}
 	auxpath = ft_strjoin("OLD", env[0][ft_getpathpos(env[0])]);

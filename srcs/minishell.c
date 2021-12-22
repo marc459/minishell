@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/22 13:35:39 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/22 16:53:13 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	ft_prompt(t_general *g_m)
 			/*printf("%s< REAL BASH >%s\n\n", BCyan, Color_Off);
 			system(command);*/
 			free_gminishell(g_m);
+			system("leaks minishell > /dev/ttys000");
 		}
 	}
 	free(command);

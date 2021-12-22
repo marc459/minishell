@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 15:59:22 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/13 11:51:57 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 16:23:26 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	**ft_ownenv(char **environ)
 
 	if (ft_splitlen(environ))
 	{
-		ownenv = calloc(sizeof(char *), (ft_splitlen(environ) + 1));
+		ownenv = ft_calloc(sizeof(char *), (ft_splitlen(environ) + 1));
 		if (!ownenv)
 			return (NULL);
 		i = -1;
@@ -79,7 +79,7 @@ char	**ft_ownenv(char **environ)
 	}
 	else
 	{
-		ownenv = calloc(sizeof(char *), 5);
+		ownenv = ft_calloc(sizeof(char *), 5);
 		if (!ownenv)
 			return (NULL);
 		ft_makeenv(&ownenv);

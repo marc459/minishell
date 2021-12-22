@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 14:41:58 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/22 16:30:44 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 		cmd = g_mini->args[g_mini->exec[i].posexec].content;
 		if (!ft_strncmp(cmd[0], "cd", 2))
 			ft_cd(&envp, cmd[1]);
-		if (!ft_strncmp(cmd[0], "unset", 5)
+		else if (!ft_strncmp(cmd[0], "unset", 5)
 			|| !ft_strncmp(cmd[0], "export", 6)
 			|| (!ft_strncmp(cmd[0], "exit", 4) && g_mini->npipes == 0))
 			ft_parsebuiltin(g_mini, cmd);

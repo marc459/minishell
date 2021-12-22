@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 18:43:36 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/22 18:57:50 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,6 @@ void	define_fds(t_general *g, int i, int x, int y)
 	g->nexecutables = x;
 }
 
-void	initializefds(t_general *g_mini)
-{
-	g_mini->fdout2 = dup(STDOUT_FILENO);
-	g_mini->fdout = -2;
-	g_mini->fdin = -2;
-}
-
 void	openfiles(t_general *g, int i)
 {
 	if (g->args[i].type == 1)
@@ -90,6 +83,9 @@ void	openfiles(t_general *g, int i)
 
 void	define_fds2(t_general *g_mini, int exec, int i)
 {
+	g_mini->fdout2 = dup(STDOUT_FILENO);
+	g_mini->fdout = -2;
+	g_mini->fdin = -2;
 	i = g_mini->pospipes[exec];
 	initializefds(g_mini);
 	while (g_mini->args[i].type != 5 && i < g_mini->ncommands)
@@ -122,11 +118,7 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 			ft_parsebuiltin(g_mini, cmd);
 		else if (cmd[0])
 			executecmd(g_mini, cmd, envp, i);
-		if (i > 0)
-			close(g_mini->exec[i - 1].pipe[READ_END]);
-		close(g_mini->fdout2);
-		close(g_mini->fdout);
-		close(g_mini->fdin);
+		closefds(g_mini, i);
 		i++;
 	}
 	waitforthem(&i, g_mini->nexecutables);

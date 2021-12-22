@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 15:01:16 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/22 18:57:57 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ void	executecmd(t_general *g_mini, char **cmd, char **envp, int i);
 void	exit_error(char **command, t_general *g_m);
 void	ft_echo(t_general *g, char **cmd);
 void	heredock2(t_general *g_mini, int i, char **tmp);
+void	openfiles(t_general *g, int i);
+void	closefds(t_general *g_mini, int i);
 
 
 void	leak(void);

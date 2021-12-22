@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 13:36:01 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/22 14:20:14 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,10 @@ typedef struct s_general {
 
 int	g_piperet;
 
-void	sig_main();
+void	sig_main(void);
 void	sig_heredock(void);
 void	sig_ignore(void);
+void	sig_child(void);
 void	quitsignal(int sig);
 void	ft_executor(t_general *g_minishell, char **envp, int *pid);
 char	*ft_findpath(char **envp);
@@ -107,6 +108,8 @@ void	commandoutput(int ret);
 void	executecmd(t_general *g_mini, char **cmd, char **envp, int i);
 void	exit_error(char **command, t_general *g_m);
 void	ft_echo(t_general *g, char **cmd);
+void	heredock2(t_general *g_mini, int i, char *tmp);
+
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);

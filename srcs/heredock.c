@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredock.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:13:08 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 13:45:32 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/22 14:20:01 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,44 +20,42 @@ void	createtmpfile(t_general *g_mini)
 	close(g_mini->fdin);
 }
 
+void	heredock2(t_general *g_mini, int i, char *tmp)
+{
+	char	*tmp2;
+
+	if ((!ft_strncmp(tmp, g_mini->args[i + 1].content[0],
+				ft_strlen(g_mini->args[i + 1].content[0]))
+			&& (tmp[ft_strlen(g_mini->args[i + 1].content[0])] == '\0')))
+	{
+		free(tmp);
+		createtmpfile(g_mini);
+		exit(EXIT_SUCCESS);
+	}
+	tmp2 = ft_strdup(g_mini->heredockcontent);
+	free(g_mini->heredockcontent);
+	g_mini->heredockcontent = ft_strjoin(tmp2, tmp);
+	free(tmp2);
+	free(tmp);
+	tmp = read_line(BEGIN(1, 49, 34)">"CLOSE);
+}
+
 void	heredock(t_general *g_mini, int i)
 {
 	char	*tmp;
-	char	*tmp2;
 	pid_t	pid;
 	int		status;
 
 	pid = fork();
-	if(pid == 0)
+	if (pid == 0)
 	{
 		sig_heredock();
 		g_mini->fdin = dup(STDIN_FILENO);
 		g_mini->heredockcontent = ft_strdup("");
-		tmp = ft_calloc(sizeof(char), 64);
-		ft_printf_fd(1, ">");
-		read(0, tmp, 64);
+		tmp = read_line(BEGIN(1, 49, 34)">"CLOSE);
 		while (tmp)
-		{
-			if((!ft_strncmp(tmp, g_mini->args[i + 1].content[0],
-					ft_strlen(g_mini->args[i + 1].content[0]))
-				&& (tmp[ft_strlen(g_mini->args[i + 1].content[0])] == '\n')))
-			{
-				free(tmp);
-				createtmpfile(g_mini);
-				exit(EXIT_SUCCESS);
-			}
-			tmp2 = ft_strdup(g_mini->heredockcontent);
-			free(g_mini->heredockcontent);
-			g_mini->heredockcontent = ft_strjoin(tmp2, tmp);
-			free(tmp2);
-			tmp2 = ft_strchr(tmp, '\n');
-			tmp2[0] = '\0';
-			free(tmp);
-			tmp = ft_calloc(sizeof(char), 64);
-			ft_printf_fd(1, ">");
-			read(0, tmp, 64);
-		}
-		ft_putstr_fd(1, "warning: here-doc delimited by end-of-file\n");
+			heredock2(g_mini, i, tmp);
+		ft_putstr_fd("warning: here-doc delimited by end-of-file\n", 1);
 		free(tmp);
 		createtmpfile(g_mini);
 		exit(EXIT_SUCCESS);
@@ -66,11 +64,6 @@ void	heredock(t_general *g_mini, int i)
 	{
 		sig_ignore();
 		waitpid(pid, &status, 0);
-		/*if (WIFSIGNALED(status) && WTERMSIG(status) + 128 == 130)
-		{
-			write(STDOUT_FILENO, "\n", 1);
-			return (1);
-		}*/
 		sig_main();
 	}
 }

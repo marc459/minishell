@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 16:12:09 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 20:09:41 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/22 20:17:15 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@
 
 // Bold
 # define BBLACK "\033[1;30m"       // BLACK
-# define BRED"\033[1;31m"         // RED
+# define BRED "\033[1;31m"         // RED
 # define BGREEN "\033[1;32m"       // GREEN
 # define BYELLOW "\033[1;33m"      // YELLOW
 # define BBLUE "\033[1;34m"        // BLUE
 # define BPURPLE "\033[1;35m"      // PURPLE
 # define BCYAN "\033[1;36m"        // CYAN
-# define BWHITE"\033[1;37m"       // WHITE
+# define BWHITE "\033[1;37m"       // WHITE
 
 // Underline
 # define UBLACK "\033[4;30m"       // BLACK

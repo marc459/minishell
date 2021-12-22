@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 07:12:59 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 12:29:12 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 12:41:41 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 size_t	ft_countkeyvalue(char *str, int quote, int dquote)
 {
 	size_t	i;
-	size_t	ultima;
+	size_t	last;
 	size_t	size;
 
 	if (!str)
 		return (0);
 	i = -1;
 	size = 0;
-	ultima = 0;
+	last = 0;
 	while (str[++i])
 	{
 		if (str[i] == ' ' && dquote > 0 && quote > 0)
 		{
-			if (i - ultima > 1)
+			if (i - last > 1)
 				size++;
-			ultima = i;
+			last = i;
 		}
 		if (str[i] == '\'' && dquote > 0)
 			quote *= -1;
@@ -53,7 +53,7 @@ char	**ft_dropkeyvalue(char *str, int quote, int dquote)
 {
 	size_t	i;
 	size_t	j;
-	size_t	ultima;
+	size_t	last;
 	char	**cmd;
 
 	cmd = ft_calloc(sizeof(char *), (ft_countkeyvalue(str, 1, 1) + 1));
@@ -61,19 +61,19 @@ char	**ft_dropkeyvalue(char *str, int quote, int dquote)
 		return (NULL);
 	i = -1;
 	j = 0;
-	ultima = 0;
+	last = 0;
 	while (str[++i])
 	{
 		if (str[i] == ' ' && dquote > 0 && quote > 0)
 		{
-			if (i - ultima > 0)
-				cmd[j++] = ft_substr(str, ultima, i - ultima);
-			ultima = i + 1;
+			if (i - last > 0)
+				cmd[j++] = ft_substr(str, last, i - last);
+			last = i + 1;
 		}
 		ft_changequote(&quote, &dquote, str[i]);
 	}
 	if (str[i - 1] != ' ')
-		cmd[j++] = ft_substr(str, ultima, i - ultima);
+		cmd[j++] = ft_substr(str, last, i - last);
 	return (cmd);
 }
 

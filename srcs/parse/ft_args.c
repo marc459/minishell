@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:05:23 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 11:45:11 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/22 12:08:35 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ size_t	ft_ifcheckesp(t_general *g, size_t *i, size_t ncomands, size_t *size)
 			&& g->parse.comnds[*i + 1][0] == '<'
 		&& g->parse.comnds[*i + 2][0] == '<') || (g->parse.comnds[*i][0] == ';'
 		&& g->parse.comnds[*i + 1][0] == '>'
-		&& g->parse.comnds[*i + 2][0] == '>')))
+		&& g->parse.comnds[*i + 2][0] == '>')
+		|| (g->parse.comnds[*i][0] == '|')))
 	{
 		*size += 1;
 		*i += 2;

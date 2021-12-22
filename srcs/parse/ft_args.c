@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_args.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:05:23 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 13:24:18 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/22 18:52:51 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,30 +79,31 @@ size_t	ft_argssize(t_general *g)
 
 void	ft_dropspargs(t_general *g, size_t *i, size_t *j, size_t ncomands)
 {
-	char *tmp;
+	char	*aux;
+
 	if (ncomands == 3)
 	{
-		ft_iniarg(g, j, ft_strdup(g->parse.comnds[*i]));
-		ft_iniarg(g, j, ft_strjoin(g->parse.comnds[*i + 1],
-				g->parse.comnds[*i + 2]));
+		ft_iniarg(g, j, g->parse.comnds[*i]);
+		aux = ft_strjoin(g->parse.comnds[*i + 1], g->parse.comnds[*i + 2]);
+		ft_iniarg(g, j, aux);
+		free (aux);
 		*i += 2;
 	}
 	else if (ncomands == 2 && g->parse.comnds[*i][0] == '|')
 	{
-		ft_iniarg(g, j, ft_strdup(g->parse.comnds[*i]));
-		ft_iniarg(g, j, ft_strdup(g->parse.comnds[*i + 1]));
+		ft_iniarg(g, j, g->parse.comnds[*i]);
+		ft_iniarg(g, j, g->parse.comnds[*i + 1]);
 		*i += 1;
 	}
 	else if (ncomands == 2)
 	{
-		tmp = ft_strjoin(g->parse.comnds[*i],
-				g->parse.comnds[*i + 1]);
-		ft_iniarg(g, j, tmp);
+		aux = ft_strjoin(g->parse.comnds[*i], g->parse.comnds[*i + 1]);
+		ft_iniarg(g, j, aux);
+		free (aux);
 		*i += 1;
-		free(tmp);
 	}
 	else
-		ft_iniarg(g, j, ft_strdup(g->parse.comnds[*i]));
+		ft_iniarg(g, j, g->parse.comnds[*i]);
 }
 
 void	ft_iniargs(t_general *g)

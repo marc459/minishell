@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:43:14 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 21:02:31 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/22 21:31:16 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
 {
 	int	pid;
 
+	unlink(".tmphd");
 	pid = fork();
 	if (pid == 0)
 	{
-		unlink(".tmphd");
 		administratestds(i, g_mini);
 		if (g_mini->fdin > 0 && g_mini->fdout > 0)
 		{
@@ -58,7 +58,7 @@ void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
 			close(g_mini->fdout);
 			if (!ft_strncmp(cmd[0], "exit", 4))
 				exit_error(cmd, g_mini);
-			if (!ft_strncmp(cmd[0], "echo", 4))
+			else if (!ft_strncmp(cmd[0], "echo", 4))
 				ft_echo(g_mini, cmd);
 			else
 				ft_child(cmd, envp, &g_mini->fdout2);

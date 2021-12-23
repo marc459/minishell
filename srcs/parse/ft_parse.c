@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:07:10 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 23:17:51 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/23 12:08:08 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,24 @@ void	ft_pcont(t_general *g, size_t type)
 void	ft_comndssize(t_general *g, char *str)
 {
 	size_t	i;
+	char	*aux;
 
+	aux = ft_dropspace(str);
 	i = -1;
-	while (++i < ft_strlen(str))
+	while (++i < ft_strlen(aux))
 	{
-		if (str[i] == '\'' && g->dquot > 0)
+		if (aux[i] == '\'' && g->dquot > 0)
 			g->quot = -g->quot;
-		else if (str[i] == '\"' && g->quot > 0)
+		else if (aux[i] == '\"' && g->quot > 0)
 			g->dquot = -g->dquot;
-		else if (ft_spchar(str[i]) && g->quot > 0 && g->dquot > 0)
+		if (ft_spchar(aux[i]) && g->quot > 0 && g->dquot > 0)
 			ft_pcont(g, 1);
 		else if (g->parse.comand)
 			ft_pcont(g, 0);
 	}
-	i--;
 	g->quot = 1;
 	g->dquot = 1;
+	free (aux);
 }
 
 char	*ft_joincomnd(char **split, size_t *i, size_t size)
@@ -78,9 +80,9 @@ void	ft_fillcomands(t_general *g, char *str)
 	size_t	i;
 	size_t	j;
 
-	ini = 0;
-	i = -1;
 	j = 0;
+	i = -1;
+	ini = ft_ignorespace(i + 1, str);
 	while (++i < ft_strlen(str))
 	{
 		if (str[i] == '\'' && g->dquot > 0)
@@ -101,7 +103,6 @@ void	ft_fillcomands(t_general *g, char *str)
 
 void	ft_parse(t_general *g, char *str)
 {
-	size_t	i;
 	char	*aux;
 
 	ft_comndssize(g, str);

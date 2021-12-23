@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 21:00:18 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/23 11:15:20 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	define_fds(t_general *g, int i, int x, int y)
 
 	cmdargs = 0;
 	g->pospipes[y++] = i;
-	while ((i < (g->ncommands)))
+	while ((i < (int)(g->ncommands)))
 	{
 		if (g->args[i].type == 3 && cmdargs++ == 0)
 			g->exec[x++].posexec = i;
@@ -87,7 +87,7 @@ void	define_fds2(t_general *g_mini, int exec, int i)
 	g_mini->fdout = -2;
 	g_mini->fdin = -2;
 	i = g_mini->pospipes[exec];
-	while (g_mini->args[i].type != 5 && i < g_mini->ncommands)
+	while (g_mini->args[i].type != 5 && i < (int)g_mini->ncommands)
 	{
 		openfiles(g_mini, i);
 		if (g_mini->args[i].type == 8)
@@ -96,7 +96,7 @@ void	define_fds2(t_general *g_mini, int exec, int i)
 	}
 }
 
-void	ft_executor(t_general *g_mini, char **envp, int *pid)
+void	ft_executor(t_general *g_mini, char **envp)
 {
 	int		i;
 	char	**cm;
@@ -104,7 +104,7 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 	i = 0;
 	g_mini->exec = ft_calloc(sizeof(t_exec), (g_mini->nexecutables + 1));
 	define_fds(g_mini, 0, 0, 0);
-	while (i < g_mini->nexecutables)
+	while (i < (int)g_mini->nexecutables)
 	{
 		define_fds2(g_mini, i, 0);
 		administratepipe(i, g_mini);

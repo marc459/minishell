@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_args2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 23:15:08 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 23:49:58 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/23 11:40:37 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_droprefact(t_general *g, size_t newargs)
 
 	oldsizeargs = g->argssize;
 	tmp = ft_copycleanargs(g, newargs);
-	g->args = calloc(sizeof(t_arg), g->argssize);
+	g->args = ft_calloc(sizeof(t_arg), g->argssize);
 	if (!g->args)
 		exit(0);
 	i = -1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/23 11:48:42 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/23 12:48:34 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	define_fds(t_general *g, int i, int x, int y)
 
 	cmdargs = 0;
 	y++;
-	while ((i < (g->ncommands)))
+	while ((i < (int)(g->ncommands)))
 	{
 		if (g->args[i].type == 3 && cmdargs++ == 0)
 			g->exec[x++].posexec = i;
@@ -86,9 +86,9 @@ void	define_fds2(t_general *g_mini, int exec, int i)
 	g_mini->fdout2 = dup(STDOUT_FILENO);
 	g_mini->fdout = -2;
 	g_mini->fdin = -2;
-	if(g_mini->pospipes)
+	if (g_mini->pospipes)
 		i = g_mini->pospipes[exec];
-	while (i < g_mini->ncommands && g_mini->args[i].type != 5)
+	while (i < (int)g_mini->ncommands && g_mini->args[i].type != 5)
 	{
 		openfiles(g_mini, i);
 		if (g_mini->args[i].type == 8)

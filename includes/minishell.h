@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 20:52:32 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/23 12:52:17 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void	changestds(t_general *g);
 void	givebackstds(t_general *g);
 void	ft_checkleaksreturn(void);
 size_t	ft_isspar(char *str);
+void	checkopenendfds(t_general *g_mini);
 
 
 void	leak(void);

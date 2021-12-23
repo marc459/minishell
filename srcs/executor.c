@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/23 11:48:42 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/23 13:33:08 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ void	define_fds(t_general *g, int i, int x, int y)
 	char	**tmp;
 
 	cmdargs = 0;
-	y++;
 	while ((i < (g->ncommands)))
 	{
+		openfiles(g, i);
+		printf("%s\n",g->args[i].content[0]);
 		if (g->args[i].type == 3 && cmdargs++ == 0)
 			g->exec[x++].posexec = i;
 		else if (g->args[i].type == 3)
@@ -57,21 +58,15 @@ void	define_fds(t_general *g, int i, int x, int y)
 void	openfiles(t_general *g, int i)
 {
 	if (g->args[i].type == 1)
-	{
+	{	
 		close(g->fdin);
 		g->fdin = open(g->args[i + 1].content[0], O_RDONLY);
-		if (g->fdin == -1)
-			ft_printf_fd(1, "%s: Permission denied\n",
-				g->args[i + 1].content[0]);
 	}
 	else if (g->args[i].type == 2)
 	{
 		close(g->fdout);
 		g->fdout = open(g->args[i + 1].content[0],
 				O_CREAT | O_RDWR | O_TRUNC, 0755);
-		if (g->fdout == -1)
-			ft_printf_fd(1, "%s: Permission denied\n",
-				g->args[i + 1].content[0]);
 	}
 	else if (g->args[i].type == 7)
 	{
@@ -86,13 +81,14 @@ void	define_fds2(t_general *g_mini, int exec, int i)
 	g_mini->fdout2 = dup(STDOUT_FILENO);
 	g_mini->fdout = -2;
 	g_mini->fdin = -2;
-	if(g_mini->pospipes)
+	if (g_mini->pospipes)
 		i = g_mini->pospipes[exec];
 	while (i < g_mini->ncommands && g_mini->args[i].type != 5)
 	{
 		openfiles(g_mini, i);
 		if (g_mini->args[i].type == 8)
 			g_mini->fdin = open(".tmphd", O_RDONLY);
+		unlink(".tmphd");
 		i++;
 	}
 }
@@ -102,10 +98,12 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 	int		i;
 	char	**cm;
 
-	i = 0;
+	i = -1;
 	g_mini->exec = ft_calloc(sizeof(t_exec), (g_mini->nexecutables + 1));
-	define_fds(g_mini, 0, 0, 0);
-	while (i < g_mini->nexecutables)
+	define_fds(g_mini, 0, 0, 1);
+	if (g_mini->nexecutables == 0)
+		checkopenendfds(g_mini);
+	while (++i < g_mini->nexecutables)
 	{
 		define_fds2(g_mini, i, 0);
 		administratepipe(i, g_mini);
@@ -119,7 +117,6 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 		else if (cm[0])
 			executecmd(g_mini, cm, envp, i);
 		closefds(g_mini, i);
-		i++;
 	}
 	waitforthem(&i, g_mini->nexecutables);
 	free(g_mini->exec);

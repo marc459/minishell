@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_args.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:05:23 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 23:48:20 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/23 12:07:02 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	ft_iniargs(t_general *g)
 
 	if (!ft_argssize(g))
 		return ;
-	g->args = calloc(sizeof(t_arg), (g->argssize + 1));
+	g->args = ft_calloc(sizeof(t_arg), (g->argssize + 1));
 	if (!g->args)
 		return ;
 	i = -1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:32:36 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/23 14:33:30 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/23 18:22:44 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_printgeneral(t_general *general)
 
 	printf("------------ general struct --------------\n");
 	printf("npipes : %zu\n", general->npipes);
-	printf("nexecutables : %zu\n", general->nexecutables);
+	printf("nexecutables : %d\n", general->nexecutables);
 	printf("nredirections : %zu\n", general->nredirections);
 	printf("quot : %d\n", general->quot);
 	printf("dquot : %d\n\n", general->dquot);

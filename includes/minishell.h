@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/23 13:36:08 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/23 18:22:21 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_parse
 
 typedef struct s_general {
 	size_t	npipes;
-	size_t	nexecutables;
+	int		nexecutables;
 	size_t	ncommands;
 	size_t	nredirections;
 	t_arg	*args;

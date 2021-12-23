@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:11:14 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/23 11:38:39 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/23 18:51:32 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_countthings(t_general *g)
 		+ (g->nredirections * 2);
 	g->pospipes = NULL;
 	if(g->npipes > 0)
-		g->pospipes = malloc(sizeof(int) * g->npipes);
+		g->pospipes = malloc(sizeof(int) * (g->npipes + 1));
 	if(g->pospipes)
 		g->pospipes[0] = 0;
 }

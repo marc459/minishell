@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/23 14:40:28 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/23 18:54:32 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,20 @@ void	define_fds(t_general *g, int i, int x, int y)
 	char	**tmp;
 
 	cmdargs = 0;
-	y++;
+	g->nexecutables = g->npipes + 1;
+	i = 0;
+	if(i < g->nexecutables)
+		g->exec[i++].posexec = -1;
+	i = 0;
+	printf("nexec%d\n",g->nexecutables);
 	while ((i < (int)(g->argssize)))
 	{
 		openfiles(g, i);
 		if (g->args[i].type == 3 && cmdargs == 0)
 		{
+			printf("exec%d\n", x);
 			cmdargs = 1;
-			g->exec[x++].posexec = i;
+			g->exec[x].posexec = i;
 		}
 		else if (g->args[i].type == 3)
 		{
@@ -50,15 +56,18 @@ void	define_fds(t_general *g, int i, int x, int y)
 			g->args[g->exec[x - 1].posexec].content = tmp;
 		}
 		else if (g->args[i].type == 5 && g->pospipes)
-		{	
+		{
+			printf("dfsafsds1\n");
 			g->pospipes[y++] = i + 1;
+			printf("dfsafsds2\n");
 			cmdargs = 0;
+			x++;
+			
 		}
 		else if (g->args[i].type == 8)
 			heredock(g, i);
 		i++;
 	}
-	g->nexecutables = x;
 }
 
 void	openfiles(t_general *g, int i)
@@ -114,15 +123,18 @@ void	ft_executor(t_general *g_mini, char **envp)
 	{
 		define_fds2(g_mini, i, 0);
 		administratepipe(i, g_mini);
-		cm = g_mini->args[g_mini->exec[i].posexec].content;
-		if (!ft_strncmp(cm[0], "cd", 2))
-			ft_cd(&envp, cm[1]);
-		else if (!ft_strncmp(cm[0], "unset\0", 6)
-			|| !ft_strncmp(cm[0], "export", 6)
-			|| (!ft_strncmp(cm[0], "exit", 4) && g_mini->npipes == 0))
-			ft_parsebuiltin(g_mini, cm, i);
-		else if (cm[0])
-			executecmd(g_mini, cm, envp, i);
+		if(g_mini->exec[i].posexec != -1)
+		{
+			cm = g_mini->args[g_mini->exec[i].posexec].content;
+			if (!ft_strncmp(cm[0], "cd", 2))
+				ft_cd(&envp, cm[1]);
+			else if (!ft_strncmp(cm[0], "unset\0", 6)
+				|| !ft_strncmp(cm[0], "export", 6)
+				|| (!ft_strncmp(cm[0], "exit", 4) && g_mini->npipes == 0))
+				ft_parsebuiltin(g_mini, cm, i);
+			else if (cm[0])
+				executecmd(g_mini, cm, envp, i);
+		}
 		closefds(g_mini, i);
 	}
 	waitforthem(&i, g_mini->nexecutables);

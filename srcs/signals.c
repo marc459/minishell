@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 22:12:07 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/23 11:49:26 by marcos           ###   ########.fr       */
+/*   Updated: 2021/12/23 18:17:43 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	quitsignal(int sig)
 {
-	rl_on_new_line();
+	/*rl_on_new_line();
 	rl_replace_line("", 0);
 	ft_printf_fd(1, "\n");
-	rl_redisplay();
+	rl_redisplay();*/
 	commandoutput(130);
-	sig = 0;
+	printf("%d",sig);
 }
 
 void	sig_main(void)

@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/23 13:33:08 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/23 13:34:58 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	define_fds(t_general *g, int i, int x, int y)
 	char	**tmp;
 
 	cmdargs = 0;
-	while ((i < (g->ncommands)))
+	y++;
+	while ((i < (int)(g->ncommands)))
 	{
 		openfiles(g, i);
 		printf("%s\n",g->args[i].content[0]);
@@ -83,7 +84,7 @@ void	define_fds2(t_general *g_mini, int exec, int i)
 	g_mini->fdin = -2;
 	if (g_mini->pospipes)
 		i = g_mini->pospipes[exec];
-	while (i < g_mini->ncommands && g_mini->args[i].type != 5)
+	while (i < (int)g_mini->ncommands && g_mini->args[i].type != 5)
 	{
 		openfiles(g_mini, i);
 		if (g_mini->args[i].type == 8)
@@ -93,7 +94,7 @@ void	define_fds2(t_general *g_mini, int exec, int i)
 	}
 }
 
-void	ft_executor(t_general *g_mini, char **envp, int *pid)
+void	ft_executor(t_general *g_mini, char **envp)
 {
 	int		i;
 	char	**cm;
@@ -103,7 +104,7 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 	define_fds(g_mini, 0, 0, 1);
 	if (g_mini->nexecutables == 0)
 		checkopenendfds(g_mini);
-	while (++i < g_mini->nexecutables)
+	while (++i < (int)g_mini->nexecutables)
 	{
 		define_fds2(g_mini, i, 0);
 		administratepipe(i, g_mini);

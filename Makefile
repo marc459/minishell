@@ -28,7 +28,7 @@ PROGRAM_OBJS = $(addprefix $(OBJ_PATH)/,$(PROGRAM_SRCS:.c=.o))
 	
 #FLAGS
 CC = gcc
-CFLAGS =  -g3
+CFLAGS = -Wall -Wextra -Werror
 
 # SANITIZE ADDRESS
 ifeq ($(UNAME_S),Linux)

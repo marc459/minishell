@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/22 18:21:25 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/23 11:17:01 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	administratestds(int i, t_general *g_mini)
 			g_mini->fdout = dup(STDOUT_FILENO);
 		close(g_mini->exec[i].pipe[READ_END]);
 	}
-	else if (i == (g_mini->nexecutables - 1))
+	else if (i == (int)(g_mini->nexecutables - 1))
 	{
 		if (g_mini->fdout == -2)
 			g_mini->fdout = dup(STDIN_FILENO);
@@ -66,7 +66,7 @@ void	administratepipe(int i, t_general *g_mini)
 {
 	if (g_mini->npipes > 0)
 	{
-		if (i == (g_mini->nexecutables - 1))
+		if (i == (int)(g_mini->nexecutables - 1))
 		{
 			close(g_mini->exec[i - 1].pipe[WRITE_END]);
 			if (i > 1)
@@ -75,7 +75,7 @@ void	administratepipe(int i, t_general *g_mini)
 		else if (i > 0)
 			close(g_mini->exec[i - 1].pipe[WRITE_END]);
 	}
-	if (i < g_mini->npipes)
+	if (i < (int)g_mini->npipes)
 	{
 		pipe(g_mini->exec[i].pipe);
 	}

@@ -19,6 +19,7 @@ void	quitsignal(int sig)
 	ft_printf_fd(1, "\n");
 	rl_redisplay();
 	commandoutput(130);
+	sig = 0;
 }
 
 void	sig_main(void)

@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/23 11:56:19 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/23 13:35:19 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	checkleaks(void)
 	free(leaks);
 }
 
-void	exit_error(char **command, t_general *g_m)
+void	exit_error(char **command)
 {
 	if (ft_bidstrlen(command) > 2)
 		printf("minishell: exit: to many arguments\n");
@@ -42,14 +42,13 @@ void	exit_error(char **command, t_general *g_m)
 
 void	ft_prompt(t_general *g_m)
 {
-	pid_t	pid;
 	char	*command;
 
 	command = ft_calloc(sizeof(char), 64);
 	while (command)
 	{		
 		free(command);
-		command = read_line(BEGIN(1, 49, 34)"Minishell-1.0:"CLOSE);
+		command = read_line(BEGIN"Minishell-1.0:"CLOSE);
 		if (command && command[0] != '\0')
 		{
 			ft_inigeneral(g_m);
@@ -57,7 +56,7 @@ void	ft_prompt(t_general *g_m)
 			ft_printgeneral(g_m);
 			printf("%s< QUINES && MEXIL SHELL >%s\n\n", BCYAN, COLOR_OFF);
 			if (g_m->args)
-				ft_executor(g_m, g_m->ownenv, &pid);
+				ft_executor(g_m, g_m->ownenv);
 			free_gminishell(g_m);
 			//ft_checkleaksreturn();
 		}
@@ -65,15 +64,15 @@ void	ft_prompt(t_general *g_m)
 	free(command);
 }
 
-int	main(int argc, char **argv)
+int	main(void)
 {
 	extern char	**environ;
-	pid_t		pid;
 	t_general	g_minishell;
+	//pid_t		pid;
 
 	g_piperet = 0;
 	g_minishell.ownenv = ft_ownenv(environ);
-	runcflag(&g_minishell, environ, argv, pid);
+	//runcflag(&g_minishell, environ, argv, pid);
 	sig_main();
 	ft_prompt(&g_minishell);
 	ft_freebidstr(g_minishell.ownenv);

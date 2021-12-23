@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 07:12:59 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 23:47:55 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/23 11:18:18 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,5 @@ void	ft_parsebuiltin(t_general *g, char **cmd, int i)
 		while (cmd[++i])
 			ft_remenv(g, cmd[i]);
 	if (!ft_strncmp(cmd[0], "exit", 4))
-		exit_error(cmd, g);
+		exit_error(cmd);
 }

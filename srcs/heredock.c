@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredock.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:13:08 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 18:52:53 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/23 11:49:32 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	heredock2(t_general *g_mini, int i, char **tmp)
 	g_mini->heredockcontent = ft_strjoin(tmp2, tmp[0]);
 	free(tmp2);
 	free(tmp[0]);
-	tmp[0] = readline(">");
+	//tmp[0] = readline(">");
 }
 
 void	heredock(t_general *g_mini, int i)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:11:14 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 20:18:37 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/23 11:38:39 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,9 @@ void	ft_countthings(t_general *g)
 	}
 	g->ncommands = g->nexecutables + g->npipes
 		+ (g->nredirections * 2);
-	g->pospipes = malloc(sizeof(int) * g->npipes + 1);
+	g->pospipes = NULL;
+	if(g->npipes > 0)
+		g->pospipes = malloc(sizeof(int) * g->npipes);
+	if(g->pospipes)
+		g->pospipes[0] = 0;
 }

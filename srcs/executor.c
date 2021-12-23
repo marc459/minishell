@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/23 11:15:20 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/23 11:48:42 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	define_fds(t_general *g, int i, int x, int y)
 	char	**tmp;
 
 	cmdargs = 0;
-	g->pospipes[y++] = i;
-	while ((i < (int)(g->ncommands)))
+	y++;
+	while ((i < (g->ncommands)))
 	{
 		if (g->args[i].type == 3 && cmdargs++ == 0)
 			g->exec[x++].posexec = i;
@@ -45,7 +45,7 @@ void	define_fds(t_general *g, int i, int x, int y)
 			ft_freebidstr(g->args[g->exec[x - 1].posexec].content);
 			g->args[g->exec[x - 1].posexec].content = tmp;
 		}
-		else if (g->args[i].type == 5 && (cmdargs-- < 42))
+		else if (g->args[i].type == 5 && (cmdargs-- < 42) && g->pospipes)
 			g->pospipes[y++] = i + 1;
 		else if (g->args[i].type == 8)
 			heredock(g, i);
@@ -86,8 +86,9 @@ void	define_fds2(t_general *g_mini, int exec, int i)
 	g_mini->fdout2 = dup(STDOUT_FILENO);
 	g_mini->fdout = -2;
 	g_mini->fdin = -2;
-	i = g_mini->pospipes[exec];
-	while (g_mini->args[i].type != 5 && i < (int)g_mini->ncommands)
+	if(g_mini->pospipes)
+		i = g_mini->pospipes[exec];
+	while (i < g_mini->ncommands && g_mini->args[i].type != 5)
 	{
 		openfiles(g_mini, i);
 		if (g_mini->args[i].type == 8)

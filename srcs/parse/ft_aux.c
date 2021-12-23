@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:32:36 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/23 13:20:26 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/23 14:33:30 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	ft_inigeneral(t_general *general)
 	general->parse.comndssize = 0;
 	general->args = NULL;
 	general->argssize = 0;
+	general->fdout2 = dup(STDOUT_FILENO);
 	general->fdout = -2;
 	general->fdin = -2;
 }

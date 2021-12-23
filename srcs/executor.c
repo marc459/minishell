@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/23 13:34:58 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/23 14:40:28 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,14 @@ void	define_fds(t_general *g, int i, int x, int y)
 
 	cmdargs = 0;
 	y++;
-	while ((i < (int)(g->ncommands)))
+	while ((i < (int)(g->argssize)))
 	{
 		openfiles(g, i);
-		printf("%s\n",g->args[i].content[0]);
-		if (g->args[i].type == 3 && cmdargs++ == 0)
+		if (g->args[i].type == 3 && cmdargs == 0)
+		{
+			cmdargs = 1;
 			g->exec[x++].posexec = i;
+		}
 		else if (g->args[i].type == 3)
 		{
 			tmp = ft_bidstrjoin(g->args[g->exec[x - 1].posexec].content,
@@ -47,8 +49,11 @@ void	define_fds(t_general *g, int i, int x, int y)
 			ft_freebidstr(g->args[g->exec[x - 1].posexec].content);
 			g->args[g->exec[x - 1].posexec].content = tmp;
 		}
-		else if (g->args[i].type == 5 && (cmdargs-- < 42) && g->pospipes)
+		else if (g->args[i].type == 5 && g->pospipes)
+		{	
 			g->pospipes[y++] = i + 1;
+			cmdargs = 0;
+		}
 		else if (g->args[i].type == 8)
 			heredock(g, i);
 		i++;
@@ -79,7 +84,8 @@ void	openfiles(t_general *g, int i)
 
 void	define_fds2(t_general *g_mini, int exec, int i)
 {
-	g_mini->fdout2 = dup(STDOUT_FILENO);
+	close(g_mini->fdout);
+	close(g_mini->fdin);
 	g_mini->fdout = -2;
 	g_mini->fdin = -2;
 	if (g_mini->pospipes)

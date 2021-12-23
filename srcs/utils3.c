@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 19:36:17 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/23 13:18:19 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/23 14:18:00 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ft_checkleaksreturn(void)
 
 void	checkopenendfds(t_general *g_mini)
 {
+	printf("%d,%d\n", g_mini->fdin, g_mini->fdout);
 	if (g_mini->fdin == -1)
 		ft_printf_fd(1, "Permission denied\n");
 	if (g_mini->fdout == -1)

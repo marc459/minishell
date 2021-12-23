@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:43:14 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/23 13:34:37 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/23 14:43:17 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_child(char **fullcmd, char **envp, int *stdo)
 	paths = ft_parsepaths(envp);
 	i = 0;
 	sig_child();
+	ft_printf_fd(1, "cmd%s\n", fullcmd[0]);
 	while (paths && paths[i])
 	{
 		if (ft_strchr(fullcmd[0], '/'))

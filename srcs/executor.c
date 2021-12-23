@@ -97,7 +97,7 @@ void	define_fds2(t_general *g_mini, int exec, int i)
 	}
 }
 
-void	ft_executor(t_general *g_mini, char **envp, int *pid)
+void	ft_executor(t_general *g_mini, char **envp)
 {
 	int		i;
 	char	**cm;
@@ -105,7 +105,7 @@ void	ft_executor(t_general *g_mini, char **envp, int *pid)
 	i = 0;
 	g_mini->exec = ft_calloc(sizeof(t_exec), (g_mini->nexecutables + 1));
 	define_fds(g_mini, 0, 0, 0);
-	while (i < g_mini->nexecutables)
+	while (i < (int)g_mini->nexecutables)
 	{
 		define_fds2(g_mini, i, 0);
 		administratepipe(i, g_mini);

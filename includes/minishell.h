@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 20:52:32 by msantos-         ###   ########.fr       */
+/*   Updated: 2021/12/23 12:09:48 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define READ_END    0
 # define WRITE_END   1
 # define CLOSE "\001\033[0m\002"
-# define BEGIN(x, y, z) "\001\033["#x";"#y";"#z"m\002"
+# define BEGIN "\001\033[1;49;34m\002"
 
 typedef struct s_arg {
 	size_t	type;
@@ -71,7 +71,6 @@ typedef struct s_general {
 	t_parse	parse;
 	size_t	argssize;
 	int		*pospipes;
-	
 }			t_general;
 
 int	g_piperet;
@@ -81,7 +80,7 @@ void	sig_heredock(void);
 void	sig_ignore(void);
 void	sig_child(void);
 void	quitsignal(int sig);
-void	ft_executor(t_general *g_minishell, char **envp, int *pid);
+void	ft_executor(t_general *g_minishell, char **envp);
 char	*ft_findpath(char **envp);
 char	*read_line(char *command);
 void	ft_child(char **fullcmd, char **envp, int *stdo);
@@ -91,7 +90,7 @@ void	administratepipe(int i, t_general *g_mini);
 void	administratestds(int i, t_general *g_mini);
 void	waitforthem(int *childpid, int nchilds);
 void	leakatexit(void);
-void	runcflag(t_general	*g_mini, char **environ, char **argv, int pid);
+void	runcflag(t_general	*g_mini, char **environ, char **argv);
 void	ft_parsebuiltin(t_general *g_mini, char **cmd, int i);
 char	*ft_dropquotes(t_general *g, char *str);
 void	ft_checknewenv(t_general *g, char *newenv);
@@ -99,8 +98,8 @@ size_t	ft_checkenvname(char *name);
 void	ft_remenv(t_general *g, char *remenv);
 void	ft_printsortenv(char **ownenv);
 char	*ft_dropexportquotes(t_general *g, char *str);
-void    heredock(t_general *g_mini, int i);
-void	define_fds2(t_general *g_mini,int exec, int i);
+void	heredock(t_general *g_mini, int i);
+void	define_fds2(t_general *g_mini, int exec, int i);
 size_t	ft_error(size_t ncomands);
 char	**ft_dropkeyvalue(char *str, int quote, int dquote);
 size_t	ft_splitfindchar(char **split, char c);
@@ -108,8 +107,8 @@ size_t	ft_ignorespace(size_t i, char *str);
 void	createtmpfile(t_general *g_mini);
 void	commandoutput(int ret);
 void	executecmd(t_general *g_mini, char **cmd, char **envp, int i);
-void	exit_error(char **command, t_general *g_m);
-void	ft_echo(t_general *g, char **cmd);
+void	exit_error(char **command);
+void	ft_echo(char **cmd);
 void	heredock2(t_general *g_mini, int i, char **tmp);
 void	openfiles(t_general *g, int i);
 void	closefds(t_general *g_mini, int i);
@@ -117,7 +116,7 @@ void	changestds(t_general *g);
 void	givebackstds(t_general *g);
 void	ft_checkleaksreturn(void);
 size_t	ft_isspar(char *str);
-
+char	*ft_dropspace(char *str);
 
 void	leak(void);
 void	ft_parse(t_general *general, char *str);

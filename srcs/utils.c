@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:57:21 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 23:57:00 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/23 11:19:57 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	free_gminishell(t_general *g_minishell)
 	i = -1;
 	if (g_minishell->args)
 	{
-		while (++i < g_minishell->argssize)
+		while (++i < (int)g_minishell->argssize)
 			ft_freebidstr(g_minishell->args[i].content);
 		free(g_minishell->args);
 	}
@@ -52,7 +52,7 @@ void	free_gminishell(t_general *g_minishell)
 		ft_freebidstr(g_minishell->parse.comnds);
 }
 
-void	runcflag(t_general	*g_mini, char **environ, char **argv, int pid)
+void	runcflag(t_general	*g_mini, char **environ, char **argv)
 {
 	char	**commands;
 	int		i;
@@ -68,7 +68,7 @@ void	runcflag(t_general	*g_mini, char **environ, char **argv, int pid)
 			{
 				ft_inigeneral(g_mini);
 				ft_parse(g_mini, commands[i]);
-				ft_executor(g_mini, environ, &pid);
+				ft_executor(g_mini, environ);
 				free_gminishell(g_mini);
 			}
 			i++;

@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:53:31 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 23:03:35 by emgarcia         ###   ########.fr       */
+/*   Updated: 2021/12/23 11:39:26 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,27 @@ size_t	ft_ignorespace(size_t i, char *str)
 	while (str[i] && str[i] == ' ')
 		i++;
 	return (i);
+}
+
+char	*ft_dropspace(char *str)
+{
+	size_t	spaces;
+	size_t	i;
+	size_t	j;
+	char	*strnsp;
+
+	spaces = 0;
+	i = -1;
+	while (str[++i])
+		if (str[i] == ' ')
+			spaces++;
+	strnsp = ft_calloc(sizeof(char), (ft_strlen(str) - spaces + 1));
+	if (!strnsp)
+		return (NULL);
+	i = -1;
+	j = 0;
+	while (str[++i])
+		if (str[i] != ' ')
+			strnsp[j++] = str[i];
+	return (strnsp);
 }

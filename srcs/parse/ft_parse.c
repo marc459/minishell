@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:07:10 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/23 12:50:13 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/03 13:36:10 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ void	ft_fillcomands(t_general *g, char *str)
 
 void	ft_parse(t_general *g, char *str)
 {
-	char	*aux;
-
 	ft_comndssize(g, str);
 	g->parse.comnds = ft_calloc(sizeof(char *),
 			(g->parse.comndssize + 1));
@@ -112,11 +110,7 @@ void	ft_parse(t_general *g, char *str)
 		return ;
 	ft_fillcomands(g, str);
 	ft_checkquotes(g);
-	aux = g->parse.comnds[g->parse.comndssize - 1];
-	if (ft_strlen(aux) > 0 && aux[0] != '|' && aux[0] != '>' && aux[0] != '<')
-		ft_iniargs(g);
-	else
-		printf("syntax error near unexpected token 'newline'\n");
+	ft_iniargs(g);
 	if (g->args)
 	{
 		ft_refacttypes(g);

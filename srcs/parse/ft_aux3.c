@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:53:31 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/23 11:39:26 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/03 13:27:29 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,10 @@ char	*ft_dropspace(char *str)
 		if (str[i] != ' ')
 			strnsp[j++] = str[i];
 	return (strnsp);
+}
+
+size_t	ft_errorfinalarg(void)
+{
+	printf("syntax error near unexpected token 'newline'\n");
+	return (0);
 }

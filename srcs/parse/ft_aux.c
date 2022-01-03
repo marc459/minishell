@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:32:36 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/23 18:22:44 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/03 13:49:30 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,15 @@ void	ft_printgeneral(t_general *general)
 	printf("-----------------------------------------\n");
 }
 
-size_t	ft_error(size_t ncomands)
+size_t	ft_error(size_t ncomands, size_t i, char **cmds)
 {
-	if (ncomands > 3)
-		printf("syntax error near unexpected token `>>'\n");
-	else
-		printf("syntax error near unexpected token `>'\n");
+	size_t	j;
+
+	printf("syntax error near unexpected token `");
+	j = ncomands - 3;
+	while (++j < ncomands)
+		printf("%s", cmds[i + j]);
+	printf("\'\n");
 	return (0);
 }
 
@@ -81,4 +84,5 @@ void	ft_inigeneral(t_general *general)
 	general->fdout2 = dup(STDOUT_FILENO);
 	general->fdout = -2;
 	general->fdin = -2;
+	general->pospipes = NULL;
 }

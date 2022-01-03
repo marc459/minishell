@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/28 11:30:37 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/03 13:34:10 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	ft_printsortenv(char **ownenv);
 char	*ft_dropexportquotes(t_general *g, char *str);
 void	heredock(t_general *g_mini, int i);
 void	define_fds2(t_general *g_mini, int exec, int i);
-size_t	ft_error(size_t ncomands);
+size_t	ft_error(size_t ncomands, size_t i, char **cmds);
 char	**ft_dropkeyvalue(char *str, int quote, int dquote);
 size_t	ft_splitfindchar(char **split, char c);
 size_t	ft_ignorespace(size_t i, char *str);
@@ -117,6 +117,7 @@ void	givebackstds(t_general *g);
 void	ft_checkleaksreturn(void);
 size_t	ft_isspar(char *str);
 void	checkopenendfds(t_general *g_mini);
+size_t	ft_errorfinalarg(void);
 
 char	*ft_dropspace(char *str);
 void	leak(void);

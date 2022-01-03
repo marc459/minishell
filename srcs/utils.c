@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:57:21 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/23 13:35:10 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/03 13:50:02 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,14 @@ void	free_gminishell(t_general *g_minishell)
 	int	i;
 
 	i = -1;
+	while (++i < g_minishell->argssize)
+		ft_freebidstr(g_minishell->args[i].content);
 	if (g_minishell->args)
-	{
-		while (++i < (int)g_minishell->argssize)
-			ft_freebidstr(g_minishell->args[i].content);
 		free(g_minishell->args);
-	}
-	if (g_minishell->pospipes)
-		free(g_minishell->pospipes);
 	if (g_minishell->parse.comnds)
 		ft_freebidstr(g_minishell->parse.comnds);
+	if (g_minishell->pospipes)
+		free(g_minishell->pospipes);
 }
 
 void	runcflag(t_general	*g_mini, char **environ, char **argv)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_args.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:05:23 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/23 12:07:02 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/03 13:33:28 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ size_t	ft_checksp(t_general *g, size_t *i, size_t ncomands, size_t *size)
 			&& g->parse.comnds[*i + 1][0] == '>')))
 			*i += 1;
 		else if (ncomands > 1)
-			return (ft_error(ncomands));
+			return (ft_error(ncomands, *i, g->parse.comnds));
 	}
 	*size += 1;
 	return (1);
@@ -59,6 +59,7 @@ size_t	ft_argssize(t_general *g)
 	size_t	argssize;
 	size_t	ncomnds;
 	size_t	i;
+	char	*aux;
 
 	i = -1;
 	argssize = 0;
@@ -73,6 +74,9 @@ size_t	ft_argssize(t_general *g)
 				return (0);
 		}
 	}
+	aux = g->parse.comnds[g->parse.comndssize - 1];
+	if (aux[0] == '|' || aux[0] == '>' || aux[0] == '<')
+		return (ft_errorfinalarg());
 	g->argssize = argssize;
 	return (1);
 }

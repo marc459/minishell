@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/05 22:27:18 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/05 22:33:59 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ char	*ft_findpath(char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		if (envp[i][0] == 'P' && envp[i][1] == 'A'
-		&& envp[i][2] == 'T' && envp[i][3] == 'H')
+		if (!ft_strncmp(envp[i],"PATH",4))
 			return (envp[i] + 5);
 		i++;
 	}

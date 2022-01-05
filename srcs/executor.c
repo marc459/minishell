@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/23 18:54:32 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/05 09:21:20 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,11 @@ void	define_fds(t_general *g, int i, int x, int y)
 	if(i < g->nexecutables)
 		g->exec[i++].posexec = -1;
 	i = 0;
-	printf("nexec%d\n",g->nexecutables);
 	while ((i < (int)(g->argssize)))
 	{
 		openfiles(g, i);
 		if (g->args[i].type == 3 && cmdargs == 0)
 		{
-			printf("exec%d\n", x);
 			cmdargs = 1;
 			g->exec[x].posexec = i;
 		}
@@ -57,9 +55,7 @@ void	define_fds(t_general *g, int i, int x, int y)
 		}
 		else if (g->args[i].type == 5 && g->pospipes)
 		{
-			printf("dfsafsds1\n");
 			g->pospipes[y++] = i + 1;
-			printf("dfsafsds2\n");
 			cmdargs = 0;
 			x++;
 			

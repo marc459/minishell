@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 03:57:11 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/28 11:30:21 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/05 22:15:40 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,15 @@ size_t	ft_getenvpos(char *envvar, char **env)
 	return (0);
 }
 
-void	ft_cd(char	***env, char *path)
+void	ft_cd(t_general *g, char *path)
 {
 	char	*pwdbuf;
 	char	*auxpath;
 
 	if (!path)
 	{
-		auxpath = ft_substr(env[0][ft_getenvpos("HOME", env[0])], 5,
-				ft_strlen(env[0][ft_getenvpos("HOME", env[0])]));
+		auxpath = ft_substr(g->ownenv[ft_getenvpos("HOME", g->ownenv)], 5,
+				ft_strlen(g->ownenv[ft_getenvpos("HOME", g->ownenv)]));
 		chdir(auxpath);
 		free (auxpath);
 	}
@@ -63,12 +63,22 @@ void	ft_cd(char	***env, char *path)
 		commandoutput(1);
 		return ;
 	}
-	auxpath = ft_strjoin("OLD", env[0][ft_getpathpos(env[0])]);
-	free (env[0][ft_getoldpathpos(env[0])]);
-	env[0][ft_getoldpathpos(env[0])] = auxpath;
-	pwdbuf = calloc(sizeof(char), (PATH_MAX + 1));
-	getcwd(pwdbuf, PATH_MAX);
-	free (env[0][ft_getpathpos(env[0])]);
-	env[0][ft_getpathpos(env[0])] = ft_strjoin("PWD=", pwdbuf);
-	free (pwdbuf);
+	else{
+		if(!ft_getoldpathpos(g->ownenv))
+		{
+			printf("no existe OLDPATH\n");
+			ft_addenv(g, "OLDPWD", g->ownenv[ft_getpathpos(g->ownenv)] + 5);
+		}
+		else{
+			auxpath = ft_strjoin("OLDPWD=", g->ownenv[ft_getpathpos(g->ownenv)] + 4);
+			free (g->ownenv[ft_getoldpathpos(g->ownenv)]);
+			g->ownenv[ft_getoldpathpos(g->ownenv)] = auxpath;
+		}
+		pwdbuf = ft_calloc(sizeof(char), (PATH_MAX + 1));
+		getcwd(pwdbuf, PATH_MAX);
+		printf("getpathpos:%ld, %ld\n", ft_getpathpos(g->ownenv),ft_getoldpathpos(g->ownenv));
+		free (g->ownenv[ft_getpathpos(g->ownenv)]);
+		g->ownenv[ft_getpathpos(g->ownenv)] = ft_strjoin("PWD=", pwdbuf);
+		free (pwdbuf);
+	}
 }

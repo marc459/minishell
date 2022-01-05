@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/03 13:34:10 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/05 22:11:04 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void	ft_checkleaksreturn(void);
 size_t	ft_isspar(char *str);
 void	checkopenendfds(t_general *g_mini);
 size_t	ft_errorfinalarg(void);
+void	ft_cd(t_general *g, char *path);
 
 char	*ft_dropspace(char *str);
 void	leak(void);
@@ -143,7 +144,6 @@ int		str_isnumber(char *str);
 void	free_gminishell(t_general *g_minishell);
 void	ft_refactquotes(t_general *g);
 void	ft_expvar(t_general *g);
-void	ft_cd(char	***env, char *path);
 char	**ft_ownenv(char **environ);
 void	ft_checkquotes(t_general *g);
 void	checkleaks(void);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2021/12/23 11:17:01 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/06 13:29:46 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,25 @@ void	administratestds(int i, t_general *g_mini)
 {
 	if (i == 0)
 	{
-		if (g_mini->fdin == -2)
-			g_mini->fdin = dup(STDIN_FILENO);
-		if (g_mini->npipes > 0 && g_mini->fdout == -2)
+		if (g_mini->npipes > 0)
+		{
+			close(g_mini->fdout);
 			g_mini->fdout = g_mini->exec[i].pipe[WRITE_END];
-		else if (g_mini->fdout == -2)
-			g_mini->fdout = dup(STDOUT_FILENO);
+			
+		}
 		close(g_mini->exec[i].pipe[READ_END]);
 	}
 	else if (i == (int)(g_mini->nexecutables - 1))
 	{
-		if (g_mini->fdout == -2)
-			g_mini->fdout = dup(STDIN_FILENO);
-		if (g_mini->fdin == -2)
-			g_mini->fdin = g_mini->exec[i - 1].pipe[READ_END];
+		close(g_mini->fdin);
+		g_mini->fdin = g_mini->exec[i - 1].pipe[READ_END];
 	}
 	else
 	{
-		if (g_mini->fdin == -2)
-			g_mini->fdin = g_mini->exec[i - 1].pipe[READ_END];
-		if (g_mini->fdout == -2)
-			g_mini->fdout = g_mini->exec[i].pipe[WRITE_END];
+		g_mini->fdin = g_mini->exec[i - 1].pipe[READ_END];
+		close(g_mini->fdout);
+		g_mini->fdout = g_mini->exec[i].pipe[WRITE_END];
+		printf("ehcho something in %d\n",g_mini->fdout);
 		close(g_mini->exec[i].pipe[READ_END]);
 	}
 }
@@ -73,10 +71,14 @@ void	administratepipe(int i, t_general *g_mini)
 				close(g_mini->exec[i - 2].pipe[READ_END]);
 		}
 		else if (i > 0)
+		{
 			close(g_mini->exec[i - 1].pipe[WRITE_END]);
+		}
+			
 	}
 	if (i < (int)g_mini->npipes)
 	{
 		pipe(g_mini->exec[i].pipe);
+		printf("Creating pipe %d-%d\n",g_mini->exec[i].pipe[0], g_mini->exec[i].pipe[1]);
 	}
 }

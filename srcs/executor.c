@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/05 22:33:59 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/06 13:23:45 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	define_fds(t_general *g, int i, int x, int y)
 	char	**tmp;
 
 	cmdargs = 0;
+	
 	g->nexecutables = g->npipes + 1;
 	i = 0;
 	if(i < g->nexecutables)
@@ -88,10 +89,6 @@ void	openfiles(t_general *g, int i)
 
 void	define_fds2(t_general *g_mini, int exec, int i)
 {
-	close(g_mini->fdout);
-	close(g_mini->fdin);
-	g_mini->fdout = -2;
-	g_mini->fdin = -2;
 	if (g_mini->pospipes)
 		i = g_mini->pospipes[exec];
 	while (i < (int)g_mini->ncommands && g_mini->args[i].type != 5)
@@ -116,7 +113,11 @@ void	ft_executor(t_general *g_mini, char **envp)
 		checkopenendfds(g_mini);
 	while (++i < (int)g_mini->nexecutables)
 	{
-		define_fds2(g_mini, i, 0);
+		close(g_mini->fdin);
+		close(g_mini->fdout);
+		g_mini->fdin = dup(STDIN_FILENO);
+		g_mini->fdout = dup(STDOUT_FILENO);
+		printf("base -> %d-%d\n",  g_mini->fdin ,g_mini->fdout);
 		administratepipe(i, g_mini);
 		if(g_mini->exec[i].posexec != -1)
 		{
@@ -131,6 +132,7 @@ void	ft_executor(t_general *g_mini, char **envp)
 				executecmd(g_mini, cm, envp, i);
 		}
 		closefds(g_mini, i);
+		printf("\n\n");
 	}
 	waitforthem(&i, g_mini->nexecutables);
 	free(g_mini->exec);

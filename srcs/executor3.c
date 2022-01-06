@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:43:14 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/06 13:27:19 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/06 13:32:41 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
 		administratestds(i, g_mini);
 		define_fds2(g_mini, i, 0);
 		checkopenendfds(g_mini);
-		printf("%d -> %d-%d\n", i, g_mini->fdin ,g_mini->fdout);
 		if (g_mini->fdin > 0 && g_mini->fdout > 0)
 		{
 			changestds(g_mini);

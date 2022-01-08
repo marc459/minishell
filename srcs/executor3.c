@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:43:14 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/05 09:24:02 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/08 19:09:18 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,14 @@ void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
 	pid = fork();
 	if (pid == 0)
 	{
+		
 		checkopenendfds(g_mini);
 		administratestds(i, g_mini);
-		if (g_mini->fdin > 0 && g_mini->fdout > 0)
+		
+		if (g_mini->fdin >= 0 && g_mini->fdout >= 0)
 		{
+			printf("execfds %d - %d\n",g_mini->fdin ,g_mini->fdout);
+			//printf("execfdss\n");
 			changestds(g_mini);
 			if (!ft_strncmp(cmd[0], "exit", 4))
 				exit_error(cmd);

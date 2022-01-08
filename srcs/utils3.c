@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 19:36:17 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/05 09:20:41 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/08 19:09:04 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,23 @@
 
 void	changestds(t_general *g)
 {
-	dup2(g->fdin, STDIN_FILENO);
-	close(g->fdin);
-	dup2(g->fdout, STDOUT_FILENO);
-	close(g->fdout);
+	if(g->fdin != 0)
+	{
+		ft_printf_fd(g->fdout2,"changefd1\n");
+		dup2(g->fdin, STDIN_FILENO);
+		close(g->fdin);
+		
+	}
+	else
+		ft_printf_fd(g->fdout2,"fdin defecto\n");
+	if(g->fdout != 1)
+	{
+		ft_printf_fd(g->fdout2,"changefd2\n");
+		dup2(g->fdout, STDOUT_FILENO);
+		close(g->fdout);
+	}
+	else
+		ft_printf_fd(g->fdout2,"fdout defecto\n");
 }
 
 void	givebackstds(t_general *g)

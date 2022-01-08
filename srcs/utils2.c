@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:39:25 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 19:36:27 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/08 19:29:10 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	closefds(t_general *g_mini, int i)
 {
 	if (i > 0)
 		close(g_mini->exec[i - 1].pipe[READ_END]);
-	close(g_mini->fdout2);
+	if (i < g_mini->npipes)
+		close(g_mini->exec[i].pipe[WRITE_END]);
 	close(g_mini->fdout);
 	close(g_mini->fdin);
 }

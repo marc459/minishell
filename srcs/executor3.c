@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:43:14 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/08 20:15:14 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/09 14:17:35 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
 				exit_error(cmd);
 			else if (!ft_strncmp(cmd[0], "echo", 4))
 				ft_echo(cmd);
+			else if (!ft_strncmp(cmd[0], "export\0", 7) && ft_bidstrlen(cmd) == 1)
+		        ft_printsortenv(g_mini->ownenv);
 			else
 				ft_child(cmd, envp, &g_mini->fdout2);
 		}

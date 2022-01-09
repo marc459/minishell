@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/09 14:02:42 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/09 14:21:21 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	ft_executor(t_general *g_mini, char **envp)
 			if (!ft_strncmp(cm[0], "cd", 2))
 				ft_cd(g_mini, cm[1]);
 			else if (!ft_strncmp(cm[0], "unset\0", 6)
-				|| !ft_strncmp(cm[0], "export", 6)
+				|| (!ft_strncmp(cm[0], "export", 6) && ft_bidstrlen(cm) > 1) 
 				|| (!ft_strncmp(cm[0], "exit", 4) && g_mini->npipes == 0))
 				ft_parsebuiltin(g_mini, cm, i);
 			else if (cm[0])

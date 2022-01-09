@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 07:12:59 by emgarcia          #+#    #+#             */
-/*   Updated: 2022/01/09 02:46:24 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/09 14:22:12 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,15 +102,6 @@ char	**ft_splitkeyvalue(t_general *g, char *str)
 
 void	ft_parsebuiltin(t_general *g, char **cmd, int i)
 {
-	g->fdincpy = dup(STDIN_FILENO);
-	g->fdoutcpy = dup(STDOUT_FILENO);
-	checkopenendfds(g);
-	administratestds(i, g);
-	changestds(g);
-	i = 0;
-	if (!ft_strncmp(cmd[0], "export\0", 7) && ft_bidstrlen(cmd) == 1)
-		ft_printsortenv(g->ownenv);
-	givebackstds(g);
 	if (!ft_strncmp(cmd[0], "export", 6))
 		while (cmd[++i])
 			ft_checknewenv(g, cmd[i]);

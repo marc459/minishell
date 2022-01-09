@@ -6,7 +6,7 @@
 /*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/08 19:11:40 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/09 14:02:42 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ void	define_fds(t_general *g, int i, int x, int y)
 		}
 		else if (g->args[i].type == 3)
 		{
-			tmp = ft_bidstrjoin(g->args[g->exec[x - 1].posexec].content,
+			tmp = ft_bidstrjoin(g->args[g->exec[x].posexec].content,
 					g->args[i].content);
-			ft_freebidstr(g->args[g->exec[x - 1].posexec].content);
-			g->args[g->exec[x - 1].posexec].content = tmp;
+			ft_freebidstr(g->args[g->exec[x].posexec].content);
+			g->args[g->exec[x].posexec].content = tmp;
 		}
 		else if (g->args[i].type == 5 && g->pospipes)
 		{
@@ -62,7 +62,10 @@ void	define_fds(t_general *g, int i, int x, int y)
 		else if (g->args[i].type == 8)
 			heredock(g, i);
 		i++;
+		/*ft_putbidstr(g->args[g->exec[0].posexec].content);
+		printf("\n");*/
 	}
+	
 }
 
 void	openfiles(t_general *g, int i)

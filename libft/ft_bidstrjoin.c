@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bidstrjoin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:28:19 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 20:12:12 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/09 14:01:04 by marcos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ char	**ft_bidstrjoin(char **str, char **str2)
 		return (NULL);
 	x = -1;
 	y = -1;
-	len = ft_bidstrlen(str) + ft_bidstrlen(str2);
-	strcpy = (char **)malloc(sizeof(char *) * len);
+	len = ft_bidstrlen(str) + ft_bidstrlen(str2) + 1;
+	strcpy = calloc(sizeof(char *) , len);
 	if (str == NULL)
 		return (NULL);
 	while (++x < ft_bidstrlen(str))
 		strcpy[x] = ft_strdup(str[x]);
-	while (++y < ft_bidstrlen(str))
-		strcpy[x++] = ft_strdup(str[y]);
+	while (++y < ft_bidstrlen(str2))
+		strcpy[x++] = ft_strdup(str2[y]);
 	return (strcpy);
 }

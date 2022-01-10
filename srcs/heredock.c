@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:13:08 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/10 13:15:40 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/10 13:21:15 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,12 @@ void	heredock2(t_general *g_mini, int i, char **tmp)
 	tmp[0] = readline(">");
 }
 
-void	heredock(t_general *g_mini)
+void	heredock(t_general *g_mini, int i)
 {
 	char	*tmp;
 	pid_t	pid;
 	int		status;
+
 
 	pid = fork();
 	if (pid == 0)

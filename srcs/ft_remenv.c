@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_remenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 06:05:29 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/23 18:55:48 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/10 13:47:28 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,14 @@ void	ft_remenv(t_general *g, char *remenv)
 	if (!ft_checkenvname(remenv))
 	{
 		ft_printf_fd(1, "minishell: syntax error\n");
-		return commandoutput(1);
+		commandoutput(1);
+		return ;
 	}
 	if (!ft_varenvexist(g, remenv))
-		return (commandoutput(0));
+	{
+		commandoutput(0);
+		return ;
+	}
 	newenv = calloc(sizeof(char *), ft_splitlen(g->ownenv));
 	if (!newenv)
 		return ;
@@ -48,5 +52,5 @@ void	ft_remenv(t_general *g, char *remenv)
 			newenv[j++] = ft_strdup(g->ownenv[i]);
 	ft_freedouble(g->ownenv);
 	g->ownenv = newenv;
-	return (commandoutput(0));
+	commandoutput(0);
 }

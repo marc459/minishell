@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2022/01/10 13:36:27 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/10 13:44:41 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_prompt(t_general *g_m)
 			if (g_m->args)
 				ft_executor(g_m, g_m->ownenv);
 			free_gminishell(g_m);
-			ft_checkleaksreturn();
+			//ft_checkleaksreturn();
 		}
 	}
 	free(command);
@@ -73,7 +73,7 @@ int	main(void)
 	g_piperet = 0;
 	g_minishell.ownenv = ft_ownenv(environ);
 	//runcflag(&g_minishell, environ, argv, pid);
-	//sig_main();
+	sig_main();
 	ft_prompt(&g_minishell);
 	ft_freebidstr(g_minishell.ownenv);
 	printf("exit\n");

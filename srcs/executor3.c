@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:43:14 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/09 14:17:35 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/10 16:14:31 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,16 @@ void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
 	pid = fork();
 	if (pid == 0)
 	{
-		
 		checkopenendfds(g_mini);
 		administratestds(i, g_mini);
 		
 		if (g_mini->fdin >= 0 && g_mini->fdout >= 0)
 		{
 			changestds(g_mini);
-			if (!ft_strncmp(cmd[0], "exit", 4))
-				exit_error(cmd);
+			if (ft_parsebuiltin(g_mini, cmd, i))
+				;
 			else if (!ft_strncmp(cmd[0], "echo", 4))
 				ft_echo(cmd);
-			else if (!ft_strncmp(cmd[0], "export\0", 7) && ft_bidstrlen(cmd) == 1)
-		        ft_printsortenv(g_mini->ownenv);
 			else
 				ft_child(cmd, envp, &g_mini->fdout2);
 		}

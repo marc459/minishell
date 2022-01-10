@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2022/01/08 20:15:48 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/10 13:49:42 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ void	administratestds(int i, t_general *g_mini)
 			g_mini->fdin = g_mini->exec[i - 1].pipe[READ_END];
 		if (g_mini->fdout == -2)
 			g_mini->fdout = g_mini->exec[i].pipe[WRITE_END];
-		//printf("2 fdin %d\n",g_mini->fdin);
-		//printf("2 fdout %d\n",g_mini->fdout);
 		close(g_mini->exec[i].pipe[READ_END]);
 	}
 }

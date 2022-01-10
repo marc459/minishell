@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expuns.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 07:12:59 by emgarcia          #+#    #+#             */
-/*   Updated: 2022/01/09 14:22:12 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/10 16:12:17 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,29 @@ char	**ft_splitkeyvalue(t_general *g, char *str)
 	return (cmd);
 }
 
-void	ft_parsebuiltin(t_general *g, char **cmd, int i)
+int	ft_parsebuiltin(t_general *g, char **cmd, int i)
 {
-	if (!ft_strncmp(cmd[0], "export", 6))
+	if (!ft_strncmp(cmd[0], "export", 6) && ft_bidstrlen(cmd) > 1)
+	{
 		while (cmd[++i])
 			ft_checknewenv(g, cmd[i]);
+		return(1);
+	}
+	else if (!ft_strncmp(cmd[0], "export\0", 7) && ft_bidstrlen(cmd) == 1)
+	{
+		ft_printsortenv(g->ownenv);
+		return(1);
+	}
 	else if (!ft_strncmp(cmd[0], "unset\0", 6))
+	{
 		while (cmd[++i])
 			ft_remenv(g, cmd[i]);
-	if (!ft_strncmp(cmd[0], "exit", 4))
+		return(1);
+	}
+	else if (!ft_strncmp(cmd[0], "exit", 4))
+	{
 		exit_error(cmd);
+		return(1);
+	}	
+	return(0);
 }

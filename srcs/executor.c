@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/10 16:09:27 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/10 19:55:42 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	ft_executor(t_general *g_mini, char **envp)
 			if (!ft_strncmp(cm[0], "cd", 2))
 				ft_cd(&g_mini->ownenv, cm[1]);
 			else if (g_mini->npipes == 0 && ft_parsebuiltin(g_mini, cm, i))
-				printf("entra\n");
+				;
 			else if (cm[0])
 				executecmd(g_mini, cm, envp, i);
 		}

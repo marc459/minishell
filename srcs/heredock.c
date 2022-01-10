@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:13:08 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/10 13:21:15 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/10 19:58:32 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	createtmpfile(t_general *g_mini)
 {
 	g_mini->fdin = open(".tmphd",
 			O_CREAT | O_RDWR | O_TRUNC, 0755);
-	ft_putstr_fd(g_mini->heredockcontent, g_mini->fdin);
+	ft_printf_fd(g_mini->fdin,"%s\n",g_mini->heredockcontent);
 	close(g_mini->fdin);
 }
 

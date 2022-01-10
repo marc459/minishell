@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 22:12:07 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/10 11:44:47 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/10 19:58:52 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	quitsignal(int sig)
 	ft_printf_fd(1, "\n");
 	rl_redisplay();
 	commandoutput(130);
-	printf("%d",sig);
 }
 
 void	sig_main(void)

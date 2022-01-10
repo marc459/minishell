@@ -28,14 +28,15 @@ PROGRAM_OBJS = $(addprefix $(OBJ_PATH)/,$(PROGRAM_SRCS:.c=.o))
 	
 #FLAGS
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS =
+#-Wall -Wextra -Werror
 
 # SANITIZE ADDRESS
 ifeq ($(UNAME_S),Linux)
 	CFLAGS += -pedantic -g3 -fsanitize=address -fsanitize=leak -fsanitize=undefined -fsanitize=bounds -fsanitize=null
 endif
 ifeq ($(UNAME_S),Darwin)
-	CFLAGS += -pedantic -g3 -fsanitize=address
+	#CFLAGS += -pedantic -g3 -fsanitize=address
 endif
 
 ifeq ($(OS),Windows_NT) 

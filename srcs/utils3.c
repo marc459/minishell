@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 19:36:17 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/10 13:36:07 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/10 18:08:56 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	givebackstds(t_general *g)
 void	ft_checkleaksreturn(void)
 {
 	printf("return: %d\n", g_piperet);
-	system("leaks minishell | grep -E '[1-200] leaks for' >> leaks.txt ");
+	system("echo 'Getting leaks from minishell' > /dev/ttys000 ; leaks minishell | grep -ioE '[1-9]+ leaks for' > /dev/ttys000");
 }
 
 void	checkopenendfds(t_general *g_mini)

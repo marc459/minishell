@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:39:25 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/10 13:14:20 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/10 13:15:37 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	closefds(t_general *g_mini, int i)
 		unlink(".tmphd");
 	if (i > 0)
 		close(g_mini->exec[i - 1].pipe[READ_END]);
-	if (i < g_mini->npipes)
+	if (i < (int)g_mini->npipes)
 		close(g_mini->exec[i].pipe[WRITE_END]);
 	close(g_mini->fdout);
 	close(g_mini->fdin);

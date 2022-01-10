@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:53:31 by emgarcia          #+#    #+#             */
-/*   Updated: 2022/01/03 13:27:29 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/10 12:51:59 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,16 @@ size_t	ft_errorfinalarg(void)
 {
 	printf("syntax error near unexpected token 'newline'\n");
 	return (0);
+}
+
+void	ft_checkquote(char c, char *kindquote)
+{
+	if (c == '\"' && !kindquote[0])
+		*kindquote = '\"';
+	else if (c == '\'' && !kindquote[0])
+		*kindquote = '\'';
+	else if (c == '\"' && kindquote[0] == '\"')
+		*kindquote = 0;
+	else if (c == '\'' && kindquote[0] == '\'')
+		*kindquote = 0;
 }

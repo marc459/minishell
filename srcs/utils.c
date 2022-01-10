@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:57:21 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/03 13:50:02 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/10 12:46:39 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	free_gminishell(t_general *g_minishell)
 	int	i;
 
 	i = -1;
-	while (++i < g_minishell->argssize)
+	while (++i < (int)g_minishell->argssize)
 		ft_freebidstr(g_minishell->args[i].content);
 	if (g_minishell->args)
 		free(g_minishell->args);

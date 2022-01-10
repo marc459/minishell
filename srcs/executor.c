@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/09 14:21:21 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/10 13:11:43 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ void	define_fds(t_general *g, int i, int x, int y)
 		else if (g->args[i].type == 8)
 			heredock(g, i);
 		i++;
-		/*ft_putbidstr(g->args[g->exec[0].posexec].content);
-		printf("\n");*/
 	}
 	
 }
@@ -101,8 +99,7 @@ void	define_fds2(t_general *g_mini, int exec, int i)
 	{
 		openfiles(g_mini, i);
 		if (g_mini->args[i].type == 8)
-			g_mini->fdin = open(".tmphd", O_RDONLY);
-		unlink(".tmphd");
+			g_mini->fdin = open(".tmphd", O_RDONLY);	
 		i++;
 	}
 }

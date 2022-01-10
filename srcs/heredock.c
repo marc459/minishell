@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredock.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:13:08 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/23 18:24:53 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/10 13:06:23 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ void	heredock2(t_general *g_mini, int i, char **tmp)
 	g_mini->heredockcontent = ft_strjoin(tmp2, tmp[0]);
 	free(tmp2);
 	free(tmp[0]);
-	//tmp[0] = readline(">");
+	tmp[0] = readline(">");
 }
 
 void	heredock(t_general *g_mini, int i)
 {
-	//char	*tmp;
+	char	*tmp;
 	pid_t	pid;
 	int		status;
 
@@ -52,11 +52,11 @@ void	heredock(t_general *g_mini, int i)
 		sig_heredock();
 		g_mini->fdin = dup(STDIN_FILENO);
 		g_mini->heredockcontent = ft_strdup("");
-		/*tmp = readline(">");
+		tmp = readline(">");
 		while (tmp)
 			heredock2(g_mini, i, &tmp);
 		ft_putstr_fd("warning: here-doc delimited by end-of-file\n", 1);
-		free(tmp);*/
+		free(tmp);
 		createtmpfile(g_mini);
 		exit(EXIT_SUCCESS);
 	}

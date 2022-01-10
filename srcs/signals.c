@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 22:12:07 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/23 18:17:43 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/10 11:44:47 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	quitsignal(int sig)
 {
-	/*rl_on_new_line();
+	rl_on_new_line();
 	rl_replace_line("", 0);
 	ft_printf_fd(1, "\n");
-	rl_redisplay();*/
+	rl_redisplay();
 	commandoutput(130);
 	printf("%d",sig);
 }

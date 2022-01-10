@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 21:01:26 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/28 17:37:25 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/10 12:50:21 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*ft_getenv(char *str, size_t *last, size_t *j, t_general *g)
 	return (ret);
 }
 
-void	ft_joinenv(char **str, t_general *g, size_t last)
+void	ft_joinenv(char **str, t_general *g, size_t last, char kquote)
 {
 	char	*aux;
 	char	*line;
@@ -76,7 +76,8 @@ void	ft_joinenv(char **str, t_general *g, size_t last)
 	line = NULL;
 	while (str[0][++j])
 	{
-		if (str[0][j] == '$')
+		ft_checkquote(str[0][j], &kquote);
+		if (str[0][j] == '$' && (kquote == '\"' || !kquote))
 		{
 			aux = ft_substr(str[0], last, j - last);
 			ft_strownjoin(&line, aux);
@@ -108,9 +109,7 @@ void	ft_expvar(t_general *g)
 		{
 			aux = g->args[i].content[j];
 			if (!i || (ft_findchar(aux, '$') && g->args[i - 1].type != 8))
-				if ((ft_getposition(aux, '\"') < ft_getposition(aux, '\''))
-					|| (ft_getposition(aux, '\"') == ft_getposition(aux, '\'')))
-					ft_joinenv(&g->args[i].content[j], g, 0);
+				ft_joinenv(&g->args[i].content[j], g, 0, 0);
 		}
 	}
 }

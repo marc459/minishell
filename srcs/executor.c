@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/09 14:21:21 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/10 12:46:05 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	define_fds(t_general *g, int i, int x, int y)
 			
 		}
 		else if (g->args[i].type == 8)
-			heredock(g, i);
+			heredock(g);
 		i++;
 		/*ft_putbidstr(g->args[g->exec[0].posexec].content);
 		printf("\n");*/
@@ -125,7 +125,7 @@ void	ft_executor(t_general *g_mini, char **envp)
 		{
 			cm = g_mini->args[g_mini->exec[i].posexec].content;
 			if (!ft_strncmp(cm[0], "cd", 2))
-				ft_cd(g_mini, cm[1]);
+				ft_cd(&g_mini->ownenv, cm[1]);
 			else if (!ft_strncmp(cm[0], "unset\0", 6)
 				|| (!ft_strncmp(cm[0], "export", 6) && ft_bidstrlen(cm) > 1) 
 				|| (!ft_strncmp(cm[0], "exit", 4) && g_mini->npipes == 0))

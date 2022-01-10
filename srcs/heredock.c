@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredock.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:13:08 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/23 18:24:53 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/10 12:44:03 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	heredock2(t_general *g_mini, int i, char **tmp)
 	//tmp[0] = readline(">");
 }
 
-void	heredock(t_general *g_mini, int i)
+void	heredock(t_general *g_mini)
 {
 	//char	*tmp;
 	pid_t	pid;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/09 13:25:12 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/10 12:51:30 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ size_t	ft_checkenvname(char *name);
 void	ft_remenv(t_general *g, char *remenv);
 void	ft_printsortenv(char **ownenv);
 char	*ft_dropexportquotes(t_general *g, char *str);
-void	heredock(t_general *g_mini, int i);
+void	heredock(t_general *g_mini);
 void	define_fds2(t_general *g_mini, int exec, int i);
 size_t	ft_error(size_t ncomands, size_t i, char **cmds);
 char	**ft_dropkeyvalue(char *str, int quote, int dquote);
@@ -118,8 +118,9 @@ void	ft_checkleaksreturn(void);
 size_t	ft_isspar(char *str);
 void	checkopenendfds(t_general *g_mini);
 size_t	ft_errorfinalarg(void);
-void	ft_cd(t_general *g, char *path);
+void	ft_cd(char	***env, char *path);
 void	ft_putbidstr(char **str);
+void	ft_checkquote(char c, char *kindquote);
 
 char	*ft_dropspace(char *str);
 void	leak(void);

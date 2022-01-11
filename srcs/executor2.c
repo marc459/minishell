@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2022/01/10 13:49:42 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/11 15:10:37 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,17 @@ void	administratestds(int i, t_general *g_mini)
 	if (i == 0)
 	{
 		if (g_mini->fdin == -2)
-		{
 			g_mini->fdin = STDIN_FILENO;
-		}
-			
 		if (g_mini->npipes > 0 && g_mini->fdout == -2)
 			g_mini->fdout = g_mini->exec[i].pipe[WRITE_END];
 		else if (g_mini->fdout == -2)
-		{
 			g_mini->fdout = STDOUT_FILENO;
-		}
 		close(g_mini->exec[i].pipe[READ_END]);
 	}
 	else if (i == (int)(g_mini->nexecutables - 1))
 	{
 		if (g_mini->fdout == -2)
 			g_mini->fdout = STDOUT_FILENO;
-			
 		if (g_mini->fdin == -2)
 			g_mini->fdin = g_mini->exec[i - 1].pipe[READ_END];
 	}
@@ -81,11 +75,8 @@ void	administratepipe(int i, t_general *g_mini)
 		else if (i > 0)
 		{
 			close(g_mini->exec[i - 1].pipe[WRITE_END]);
-		}
-			
+		}	
 	}
 	if (i < (int)g_mini->npipes)
-	{
 		pipe(g_mini->exec[i].pipe);
-	}
 }

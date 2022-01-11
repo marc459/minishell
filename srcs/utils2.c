@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:39:25 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/10 13:15:37 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/11 15:09:15 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_putbidstr(char **str)
 
 void	closefds(t_general *g_mini, int i)
 {
-	if(i == g_mini->nexecutables - 1)
+	if (i == g_mini->nexecutables - 1)
 		unlink(".tmphd");
 	if (i > 0)
 		close(g_mini->exec[i - 1].pipe[READ_END]);
@@ -72,5 +72,4 @@ void	closefds(t_general *g_mini, int i)
 	close(g_mini->fdin);
 	if (g_mini->heredockcontent)
 		free(g_mini->heredockcontent);
-	
 }

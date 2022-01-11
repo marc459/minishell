@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:43:14 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/10 16:14:31 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/11 15:10:11 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
 	{
 		checkopenendfds(g_mini);
 		administratestds(i, g_mini);
-		
 		if (g_mini->fdin >= 0 && g_mini->fdout >= 0)
 		{
 			changestds(g_mini);

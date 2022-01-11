@@ -1,0 +1,5 @@
+void	ft_checkleaksreturn(void)
+{
+	printf("return: %d\n", g_piperet);
+	system("echo 'Getting leaks from minishell' > /dev/ttys000 ; leaks minishell | grep -iE '[1-9]+ leak[s]* for' > /dev/ttys000");
+}

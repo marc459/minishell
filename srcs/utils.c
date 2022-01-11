@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:57:21 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/10 16:43:24 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/11 15:09:31 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	runcflag(t_general	*g_mini, char **environ, char **argv)
 		}
 		ft_freebidstr(commands);
 		ft_freebidstr(g_mini->ownenv);
-		ft_checkleaksreturn();
 		exit (g_piperet);
 	}
 }

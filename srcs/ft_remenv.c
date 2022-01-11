@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_remenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 06:05:29 by emgarcia          #+#    #+#             */
-/*   Updated: 2022/01/10 13:47:28 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/11 13:44:25 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ size_t	ft_varenvexist(t_general *g, char *varenv)
 	i = -1;
 	while (g->ownenv[++i])
 		if (!ft_strncmp(varenv, g->ownenv[i], ft_strlen(varenv))
-			&& g->ownenv[i][ft_strlen(varenv)] == '=')
+			&& (g->ownenv[i][ft_strlen(varenv)] == '='
+			|| g->ownenv[i][ft_strlen(varenv)] == '\0'))
 			return (1);
 	return (0);
 }

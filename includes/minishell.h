@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/10 16:09:05 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/11 13:57:24 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <sys/wait.h>
 # include <sys/uio.h>
 # include <fcntl.h>
-# include "../readline/readline.h"
-# include "../readline/history.h"
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "../libft/libft.h"
 # include "../libft/ft_printf/printf.h"
 # include "bashcolors.h"

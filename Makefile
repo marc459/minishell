@@ -4,15 +4,16 @@ UNAME_S := $(shell uname -s)
 
 #LIBS
 LIBFT = libft.a
-READLINE = readline/libreadline.a readline/libhistory.a 
+#READLINE = readline/libreadline.a readline/libhistory.a 
 
 
 #PATHS
 OBJ_PATH = ./objs
 SRC_PATH = ./srcs
 LIBFT_PATH = ./libft
-INCLUDES = -I ./includes -I ./readline -I ./readline/examples
-LIBS = $(LIBFT_PATH)/$(LIBFT) $(READLINE)
+INCLUDES = -I ./includes -I /Users/$(USER)/.brew/opt/readline/include
+LDFLAGS	= -L /Users/$(USER)/.brew/opt/readline/lib
+LIBS = $(LIBFT_PATH)/$(LIBFT)
 
 #SRCS
 PROGRAM_SRCS = minishell.c signals.c executor.c executor2.c executor3.c		\
@@ -69,7 +70,7 @@ libftt:
 							
 minishell: $(PROGRAM_OBJS)
 	
-	$(CC) $(CFLAGS) $(PROGRAM_OBJS)  $(LIBS) $(TERMCAP_LIB) -o $(PROGRAM)
+	$(CC) $(CFLAGS) $(PROGRAM_OBJS)  $(LIBS) $(TERMCAP_LIB) -o $(PROGRAM) -lreadline ${LDFLAGS}
 normi:
 	norminette srcs/*.c libft/*.c includes/*h
 								

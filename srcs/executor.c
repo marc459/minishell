@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/11 15:08:54 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:18:41 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,9 @@ char	*ft_findpath(char **envp)
 void	define_fds(t_general *g, int i, int x, int y)
 {
 	int		cmdargs;
-	char	**tmp;
 
 	cmdargs = 0;
-	g->nexecutables = g->npipes + 1;
-	i = 0;
-	if (i < g->nexecutables)
-		g->exec[i++].posexec = -1;
-	i = 0;
-	while ((i < (int)(g->argssize)))
+	while (++i < (int)(g->argssize))
 	{
 		openfiles(g, i);
 		if (g->args[i].type == 3 && cmdargs == 0)
@@ -45,13 +39,8 @@ void	define_fds(t_general *g, int i, int x, int y)
 			cmdargs = 1;
 			g->exec[x].posexec = i;
 		}
-		else if (g->args[i].type == 3)
-		{
-			tmp = ft_bidstrjoin(g->args[g->exec[x].posexec].content,
-					g->args[i].content);
-			ft_freebidstr(g->args[g->exec[x].posexec].content);
-			g->args[g->exec[x].posexec].content = tmp;
-		}
+		else if (defineexec(g, i, x))
+			;
 		else if (g->args[i].type == 5 && g->pospipes)
 		{
 			g->pospipes[y++] = i + 1;
@@ -60,7 +49,6 @@ void	define_fds(t_general *g, int i, int x, int y)
 		}
 		else if (g->args[i].type == 8)
 			heredock(g, i);
-		i++;
 	}
 }
 
@@ -108,7 +96,7 @@ void	ft_executor(t_general *g_mini, char **envp)
 	char	**cm;
 
 	i = -1;
-	define_fds(g_mini, 0, 0, 1);
+	define_fds(g_mini, -1, 0, 1);
 	if (g_mini->nexecutables == 0)
 		checkopenendfds(g_mini);
 	while (++i < (int)g_mini->nexecutables)

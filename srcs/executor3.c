@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:43:14 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/11 15:10:11 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:18:50 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,19 @@ void	waitforthem(int *childpid, int nchilds)
 		i++;
 	}
 	g_piperet = j % 255;
+}
+
+int	defineexec(t_general *g, int i, int x)
+{
+	char	**tmp;
+
+	if (g->args[i].type == 3)
+	{
+		tmp = ft_bidstrjoin(g->args[g->exec[x].posexec].content,
+				g->args[i].content);
+		ft_freebidstr(g->args[g->exec[x].posexec].content);
+		g->args[g->exec[x].posexec].content = tmp;
+		return (1);
+	}
+	return (0);
 }

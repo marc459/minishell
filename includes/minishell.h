@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/11 13:57:24 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:18:00 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ size_t	ft_errorfinalarg(void);
 void	ft_cd(char	***env, char *path);
 void	ft_putbidstr(char **str);
 void	ft_checkquote(char c, char *kindquote);
+int		defineexec(t_general *g, int i, int x);
 
 char	*ft_dropspace(char *str);
 void	leak(void);

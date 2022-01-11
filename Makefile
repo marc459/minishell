@@ -72,7 +72,7 @@ minishell: $(PROGRAM_OBJS)
 	
 	$(CC) $(CFLAGS) $(PROGRAM_OBJS)  $(LIBS) $(TERMCAP_LIB) -o $(PROGRAM) -lreadline ${LDFLAGS}
 normi:
-	norminette srcs/*.c libft/*.c includes/*h
+	norminette srcs/*.c srcs/parse/*.c libft/*.c includes/*h
 								
 clean:
 	@rm -rf $(OBJ_PATH)

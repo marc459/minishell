@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:11:14 by emgarcia          #+#    #+#             */
-/*   Updated: 2022/01/11 15:12:44 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:13:16 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,8 @@ void	ft_countthings(t_general *g)
 	if (g->pospipes)
 		g->pospipes[0] = 0;
 	g->exec = ft_calloc(sizeof(t_exec), (g->nexecutables + 1));
+	g->nexecutables = g->npipes + 1;
+	i = -1;
+	if (++i < g->nexecutables)
+		g->exec[i].posexec = -1;
 }

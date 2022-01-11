@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_zero.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 20:22:43 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/15 18:19:15 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:43:16 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 void	check_zeroflag_i(t_printf *f, int integer)
 {
-	int len;
-	int tmp;
+	int	len;
+	int	tmp;
 
 	tmp = 0;
 	if (f->flag_precision == 1 && f->flag_zero == 1)
 	{
 		if (f->flag_precision)
 			tmp = f->precision - ft_intlen(integer);
-		tmp = (tmp < 0) ? 0 : tmp;
 		len = f->width - ft_intlen(integer) - (tmp);
 		if (integer < 0)
 			len--;
@@ -34,7 +33,7 @@ void	check_zeroflag_i(t_printf *f, int integer)
 		if (integer < 0)
 		{
 			len--;
-			ft_putchar_fd('-',f->fd);
+			ft_putchar_fd('-', f->fd);
 			f->len++;
 		}
 		ft_print_charxtimes(f, '0', len);
@@ -43,9 +42,9 @@ void	check_zeroflag_i(t_printf *f, int integer)
 
 void	check_zeroflag_p(t_printf *f, char *str)
 {
-	int len;
-	int i;
-	int tmp;
+	int	len;
+	int	i;
+	int	tmp;
 
 	i = 0;
 	tmp = 0;
@@ -67,9 +66,9 @@ void	check_zeroflag_p(t_printf *f, char *str)
 
 void	check_zeroflag_u(t_printf *f, long int integer)
 {
-	int len;
-	int i;
-	int tmp;
+	int	len;
+	int	i;
+	int	tmp;
 
 	i = 0;
 	tmp = 0;
@@ -93,9 +92,9 @@ void	check_zeroflag_u(t_printf *f, long int integer)
 
 void	check_zeroflag_x(t_printf *f, char *str)
 {
-	int len;
-	int i;
-	int tmp;
+	int	len;
+	int	i;
+	int	tmp;
 
 	i = 0;
 	tmp = 0;

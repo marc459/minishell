@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flag_sorting.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 20:04:38 by msantos-          #+#    #+#             */
-/*   Updated: 2020/02/24 19:53:13 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:45:39 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ void	dot_finder(const char *format, t_printf *f, int precision)
 
 void	flag_sorting(const char *format, t_printf *f)
 {
-	int width;
-	int precision;
+	int	width;
+	int	precision;
 
 	width = 0;
 	precision = 0;

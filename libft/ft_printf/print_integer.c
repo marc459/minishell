@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_integer.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 15:12:20 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/15 18:20:19 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:47:17 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	checkflags_minus_on_i(t_printf *f, int integer)
 	check_precisionflag_i(f, integer);
 	if (integer < 0 && f->flag_precision == 0)
 	{
-		ft_putchar_fd('-',f->fd);
+		ft_putchar_fd('-', f->fd);
 		f->len++;
 	}
 	ft_putstrcounter(ft_itoa_without_minus(integer), f);
@@ -35,7 +35,7 @@ void	checkflags_minus_off_i(t_printf *f, int integer)
 	check_precisionflag_i(f, integer);
 	if (integer < 0 && f->flag_zero == 0 && f->flag_precision == 0)
 	{
-		ft_putchar_fd('-',f->fd);
+		ft_putchar_fd('-', f->fd);
 		f->len++;
 	}
 	ft_putstrcounter(ft_itoa_without_minus(integer), f);
@@ -43,7 +43,7 @@ void	checkflags_minus_off_i(t_printf *f, int integer)
 
 void	print_integer(t_printf *f)
 {
-	int integer;
+	int	integer;
 
 	integer = va_arg(f->ap, int);
 	if (f->flag_precision == 1 && f->precision == 0 && integer == 0)
@@ -54,7 +54,7 @@ void	print_integer(t_printf *f)
 		check_widthflag_i(f, integer);
 		if ((f->flag_width == 1 || f->flag_zero == 1) && f->width > 0)
 		{
-			ft_putchar_fd(' ',f->fd);
+			ft_putchar_fd(' ', f->fd);
 			f->len++;
 		}
 	}

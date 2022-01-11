@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_width.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 20:04:33 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/15 18:19:34 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:49:07 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	check_widthflag_i(t_printf *f, int integer)
 {
-	int len;
-	int i;
-	int tmp;
+	int	len;
+	int	i;
+	int	tmp;
 
 	i = 0;
 	tmp = 0;
@@ -35,8 +35,8 @@ void	check_widthflag_i(t_printf *f, int integer)
 
 void	check_widthflag_s(t_printf *f, char *str)
 {
-	int len;
-	int tmp;
+	int	len;
+	int	tmp;
 
 	tmp = 0;
 	if (f->flag_width == 1)
@@ -52,8 +52,8 @@ void	check_widthflag_s(t_printf *f, char *str)
 
 void	check_widthflag_p(t_printf *f, char *str)
 {
-	int len;
-	int tmp;
+	int	len;
+	int	tmp;
 
 	tmp = 0;
 	if (f->flag_width == 1)
@@ -69,9 +69,9 @@ void	check_widthflag_p(t_printf *f, char *str)
 
 void	check_widthflag_u(t_printf *f, long int integer)
 {
-	int len;
-	int i;
-	int tmp;
+	int	len;
+	int	i;
+	int	tmp;
 
 	i = 0;
 	tmp = 0;
@@ -90,9 +90,9 @@ void	check_widthflag_u(t_printf *f, long int integer)
 
 void	check_widthflag_x(t_printf *f, char *str)
 {
-	int len;
-	int i;
-	int tmp;
+	int	len;
+	int	i;
+	int	tmp;
 
 	i = 0;
 	tmp = 0;
@@ -105,7 +105,7 @@ void	check_widthflag_x(t_printf *f, char *str)
 		len = f->width - ft_strlen(str) - (tmp);
 		while (i < len)
 		{
-			ft_putchar_fd(' ',f->fd);
+			ft_putchar_fd(' ', f->fd);
 			f->len++;
 			i++;
 		}

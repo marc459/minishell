@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_precision.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 20:19:00 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 13:28:21 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/11 18:45:00 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	check_precisionflag_i(t_printf *f, int integer)
 {
-	int len;
-	int i;
+	int	len;
+	int	i;
 
 	i = 0;
 	if (f->flag_precision == 1)
@@ -25,7 +25,7 @@ void	check_precisionflag_i(t_printf *f, int integer)
 			len = 0;
 		if (integer < 0)
 		{
-			ft_putchar_fd('-',f->fd);
+			ft_putchar_fd('-', f->fd);
 			f->len++;
 		}
 		ft_print_charxtimes(f, '0', len);
@@ -34,7 +34,7 @@ void	check_precisionflag_i(t_printf *f, int integer)
 
 char	*check_precisionflag_s(t_printf *f, char *str)
 {
-	char *tmp;
+	char	*tmp;
 
 	if (f->flag_precision == 1)
 	{
@@ -52,7 +52,7 @@ char	*check_precisionflag_s(t_printf *f, char *str)
 
 char	*check_precisionflag_p(t_printf *f, char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (f->flag_precision == 1)
@@ -83,7 +83,7 @@ void	check_precisionflag_u(t_printf *f, long int integer)
 
 char	*check_precisionflag_x(t_printf *f, char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (f->flag_precision == 1)
@@ -93,7 +93,7 @@ char	*check_precisionflag_x(t_printf *f, char *str)
 			i = 0;
 			while (i < (f->precision - (int)ft_strlen(str)))
 			{
-				ft_putchar_fd('0',f->fd);
+				ft_putchar_fd('0', f->fd);
 				f->len++;
 				i++;
 			}

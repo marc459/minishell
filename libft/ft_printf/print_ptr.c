@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_ptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 21:56:51 by msantos-          #+#    #+#             */
-/*   Updated: 2021/06/24 01:09:46 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/11 18:46:21 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ char	*dec_to_hex_p(unsigned long int num)
 	while (num > 0)
 	{
 		rem = num % 16;
-		hex[i] = rem < 10 ? (char)rem + 48 : (char)rem + 55;
 		num /= 16;
 		i++;
 	}

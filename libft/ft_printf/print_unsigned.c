@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_unsigned.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:43:53 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/15 18:18:57 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:41:34 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	checkflags_minus_off_u(t_printf *f, unsigned int integer)
 
 void	print_unsigned(t_printf *f)
 {
-	unsigned int integer;
+	unsigned int	integer;
 
 	integer = va_arg(f->ap, unsigned int);
 	if (f->flag_precision == 1 && f->precision == 0 && integer == 0)
@@ -44,7 +44,7 @@ void	print_unsigned(t_printf *f)
 		check_widthflag_u(f, integer);
 		if ((f->flag_width == 1 || f->flag_zero == 1) && f->width > 0)
 		{
-			ft_putchar_fd(' ',f->fd);
+			ft_putchar_fd(' ', f->fd);
 			f->len++;
 		}
 	}

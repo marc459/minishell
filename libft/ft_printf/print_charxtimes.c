@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_charxtimes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 17:53:24 by msantos-          #+#    #+#             */
-/*   Updated: 2020/02/24 18:13:21 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:48:05 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_print_charxtimes(t_printf *f, char c, int x)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < x)

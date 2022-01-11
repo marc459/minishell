@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_string.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:18:15 by msantos-          #+#    #+#             */
-/*   Updated: 2021/06/24 01:09:54 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/11 18:45:21 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_string(t_printf *f)
 {
-	char *string;
+	char	*string;
 
 	string = (char *)va_arg(f->ap, char *);
 	if (f->precision == 0 && f->flag_precision == 1)

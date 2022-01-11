@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_hexadecimal.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 18:16:30 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/15 18:19:59 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:47:54 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ char	*dec_to_hex(unsigned int num)
 	while (num > 0)
 	{
 		rem = num % 16;
-		hex[i] = rem < 10 ? (char)rem + 48 : (char)rem + 55;
 		num /= 16;
 		i++;
 	}
@@ -41,18 +40,16 @@ void	checkflags_x(t_printf *f, int num, char *string)
 {
 	if (f->flag_precision == 1 && f->precision == 0 && num == 0)
 	{
-		f->width = (f->width < 0) ? f->width * (-1) : f->width;
 		check_zeroflag_x(f, string);
 		check_widthflag_x(f, string);
 		if ((f->flag_width == 1 || f->flag_zero == 1) && f->width > 0)
 		{
-			ft_putchar_fd(' ',f->fd);
+			ft_putchar_fd(' ', f->fd);
 			f->len++;
 		}
 	}
 	else if (f->flag_minus == 1 || f->width < 0)
 	{
-		f->width = (f->width < 0) ? f->width * (-1) : f->width;
 		ft_putstrcounter(check_precisionflag_x(f, string), f);
 		check_widthflag_x(f, string);
 		f->flag_precision = 1;

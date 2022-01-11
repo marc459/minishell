@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_percentage.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 23:44:26 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/15 18:18:40 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:44:03 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	check_zeroflag_0(t_printf *f)
 {
-	int len;
-	int i;
+	int	len;
+	int	i;
 
 	i = 0;
 	if (f->flag_zero == 1 && f->flag_minus == 0)
@@ -23,7 +23,7 @@ void	check_zeroflag_0(t_printf *f)
 		len = f->width - 1;
 		while (i < len)
 		{
-			ft_putchar_fd('0',f->fd);
+			ft_putchar_fd('0', f->fd);
 			f->len++;
 			i++;
 		}
@@ -33,7 +33,7 @@ void	check_zeroflag_0(t_printf *f)
 		len = f->width - 1;
 		while (i < len)
 		{
-			ft_putchar_fd(' ',f->fd);
+			ft_putchar_fd(' ', f->fd);
 			f->len++;
 			i++;
 		}
@@ -42,8 +42,8 @@ void	check_zeroflag_0(t_printf *f)
 
 void	check_widthflag_0(t_printf *f)
 {
-	int len;
-	int i;
+	int	len;
+	int	i;
 
 	i = 0;
 	if (f->flag_width == 1)
@@ -51,7 +51,7 @@ void	check_widthflag_0(t_printf *f)
 		len = f->width - 1;
 		while (i < len)
 		{
-			ft_putchar_fd(' ',f->fd);
+			ft_putchar_fd(' ', f->fd);
 			f->len++;
 			i++;
 		}
@@ -65,7 +65,7 @@ void	print_0(t_printf *f)
 		f->flag_minus = 1;
 		if (f->width < 0)
 			f->width = f->width * (-1);
-		ft_putchar_fd('%',f->fd);
+		ft_putchar_fd('%', f->fd);
 		f->len++;
 		check_widthflag_0(f);
 		check_zeroflag_0(f);
@@ -74,7 +74,7 @@ void	print_0(t_printf *f)
 	{
 		check_zeroflag_0(f);
 		check_widthflag_0(f);
-		ft_putchar_fd('%',f->fd);
+		ft_putchar_fd('%', f->fd);
 		f->len++;
 	}
 }

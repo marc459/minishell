@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcos <marcos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 07:11:34 by msantos-          #+#    #+#             */
-/*   Updated: 2021/12/22 13:29:37 by marcos           ###   ########.fr       */
+/*   Updated: 2022/01/11 18:41:00 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <strings.h>
-#include "../libft.h"
+# include "../libft.h"
 
-typedef	struct	s_printf
+typedef struct s_printf
 {
 	va_list		ap;
 	int			len;
@@ -33,7 +33,7 @@ typedef	struct	s_printf
 	int			fd;
 }				t_printf;
 
-int				ft_printf_fd(size_t fd,const char *format, ...);
+int				ft_printf_fd(size_t fd, const char *format, ...);
 void			initialize_flags(t_printf *f);
 void			flag_sorting(const char *format, t_printf *f);
 void			variable_sorting(const char *format, t_printf *f);

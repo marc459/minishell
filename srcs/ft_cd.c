@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 03:57:11 by emgarcia          #+#    #+#             */
-/*   Updated: 2022/01/10 12:43:31 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/12 17:31:27 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ void	ft_cd(char	***env, char *path)
 	char	*auxpath;
 	char	*auxoldpath;
 
-	if (!path)
+	if (!path && ft_getenvpos("HOME\0", env[0]) != -1)
 	{
-		auxpath = ft_substr(env[0][ft_getenvpos("HOME", env[0])], 5,
-				ft_strlen(env[0][ft_getenvpos("HOME", env[0])]));
+		auxpath = ft_substr(env[0][ft_getenvpos("HOME\0", env[0])], 5,
+				ft_strlen(env[0][ft_getenvpos("HOME\0", env[0])]));
 		chdir(auxpath);
 		free (auxpath);
 	}

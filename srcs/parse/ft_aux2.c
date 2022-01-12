@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:11:14 by emgarcia          #+#    #+#             */
-/*   Updated: 2022/01/12 14:01:31 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/12 16:04:39 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_arg	*ft_copycleanargs(t_general *g, size_t newargs)
 {
 	t_arg	*tmp;
-	int	i;
+	int		i;
 
 	i = -1;
 	tmp = malloc(sizeof(t_arg) * (g->argssize + 1));

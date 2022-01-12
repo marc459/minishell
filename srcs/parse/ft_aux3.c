@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:53:31 by emgarcia          #+#    #+#             */
-/*   Updated: 2022/01/10 12:51:59 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/12 16:04:21 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,11 @@ char	*ft_dropspace(char *str)
 	char	*strnsp;
 
 	spaces = 0;
-	i = -1;
-	while (str[++i])
-		if (str[i] == ' ')
-			spaces++;
+	if (!ft_checkjoinsp(str, &spaces))
+	{
+		g_piperet = 258;
+		return (0);
+	}
 	strnsp = ft_calloc(sizeof(char), (ft_strlen(str) - spaces + 1));
 	if (!strnsp)
 		return (NULL);

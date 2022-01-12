@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:32:36 by emgarcia          #+#    #+#             */
-/*   Updated: 2022/01/12 15:14:11 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/12 16:05:03 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,29 @@ void	ft_inigeneral(t_general *general)
 	general->fdout = STDOUT_FILENO;
 	general->fdin = STDIN_FILENO;
 	general->pospipes = NULL;
+}
+
+size_t	ft_checkjoinsp(char *str, size_t *spaces)
+{
+	size_t	i;
+	size_t	others;
+
+	others = 1;
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == ' ')
+			(*spaces)++;
+		else if (!ft_spchar(str[i]))
+			others = 1;
+		else if (ft_spchar(str[i]) && others)
+			others = 0;
+		else if (ft_spchar(str[i]) && !others && !ft_spchar(str[i - 1]))
+		{
+			printf("syntax error near unexpected token `");
+			printf("%c'\n", str[i]);
+			return (0);
+		}
+	}
+	return (1);
 }

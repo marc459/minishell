@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2022/01/12 19:48:59 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/12 19:51:06 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	exit_error(char **command)
 	}	
 	else
 	{
+		if (ft_bidstrlen(command) == 2)
+			g_piperet = ft_atol(command[1]);
 		ft_printf_fd(1, "exit\n");
 		exit(g_piperet);
 	}

@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/12 14:12:46 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/12 15:02:06 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	openfiles(t_general *g, int i)
 	{	
 		close(g->fdin);
 		g->fdin = open(g->args[i + 1].content[0], O_RDONLY);
-		printf("in %d%s\n", g->fdin, g->args[i + 1].content[0]);
 	}
 	else if (g->args[i].type == 2)
 	{
@@ -76,10 +75,6 @@ void	openfiles(t_general *g, int i)
 
 void	define_fds2(t_general *g_mini, int exec, int i)
 {
-	close(g_mini->fdout);
-	close(g_mini->fdin);
-	g_mini->fdout = -2;
-	g_mini->fdin = -2;
 	if (g_mini->pospipes)
 		i = g_mini->pospipes[exec];
 	while (i < (int)g_mini->ncommands && g_mini->args[i].type != 5)

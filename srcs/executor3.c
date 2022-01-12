@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:43:14 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/12 14:23:24 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/12 15:01:16 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
 		administratestds(i, g_mini);
 		if (g_mini->fdin >= 0 && g_mini->fdout >= 0)
 		{
-			printf("%d-%d\n", g_mini->fdin, g_mini->fdout);
 			changestds(g_mini);
-			close(g_mini->fdin);
-			close(g_mini->fdout);
 			if (ft_parsebuiltin(g_mini, cmd, i))
 				;
 			else if (!ft_strncmp(cmd[0], "echo", 4))

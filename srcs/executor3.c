@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:43:14 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/12 15:01:16 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/12 15:26:45 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
 	pid = fork();
 	if (pid == 0)
 	{
-		checkopenendfds(g_mini);
 		administratestds(i, g_mini);
+		define_fds2(g_mini, i, 0);
+		checkopenendfds(g_mini);
 		if (g_mini->fdin >= 0 && g_mini->fdout >= 0)
 		{
 			changestds(g_mini);

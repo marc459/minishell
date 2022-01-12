@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/12 15:02:06 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/12 15:11:35 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,15 @@ void	openfiles(t_general *g, int i)
 {
 	if (g->args[i].type == 1)
 	{	
-		close(g->fdin);
 		g->fdin = open(g->args[i + 1].content[0], O_RDONLY);
 	}
 	else if (g->args[i].type == 2)
 	{
-		close(g->fdout);
 		g->fdout = open(g->args[i + 1].content[0],
 				O_CREAT | O_RDWR | O_TRUNC, 0755);
 	}
 	else if (g->args[i].type == 7)
 	{
-		close(g->fdout);
 		g->fdout = open(g->args[i + 1].content[0],
 				O_CREAT | O_RDWR | O_APPEND, 0755);
 	}
@@ -97,7 +94,6 @@ void	ft_executor(t_general *g_mini, char **envp)
 		checkopenendfds(g_mini);
 	while (++i < (int)g_mini->nexecutables)
 	{
-		define_fds2(g_mini, i, 0);
 		administratepipe(i, g_mini);
 		if (g_mini->exec[i].posexec != -1)
 		{

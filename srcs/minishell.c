@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2022/01/12 13:47:10 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/12 15:22:17 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_prompt(t_general *g_m)
 	char	*command;
 
 	command = ft_calloc(sizeof(char), 64);
-	while (command)
+	while (42)
 	{		
 		free(command);
 		command = read_line(BEGIN"Minishell-1.0:"CLOSE);

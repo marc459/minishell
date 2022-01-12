@@ -33,7 +33,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 # SANITIZE ADDRESS
 ifeq ($(UNAME_S),Linux)
-	CFLAGS += -pedantic -g3 -fsanitize=address -fsanitize=leak -fsanitize=undefined -fsanitize=bounds -fsanitize=null
+	#CFLAGS += -pedantic -g3 -fsanitize=address -fsanitize=leak -fsanitize=undefined -fsanitize=bounds -fsanitize=null
 endif
 ifeq ($(UNAME_S),Darwin)
 	#CFLAGS += -pedantic -g3 -fsanitize=address

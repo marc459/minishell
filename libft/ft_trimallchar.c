@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_trimallchar.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:05:49 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/29 13:55:43 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/12 16:01:50 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_trimallchar(char **str, char c)
 	size_t	j;
 	char	*final;
 
-	final = calloc(sizeof(char), ft_strlen(*str) - ft_countchar(*str, c) + 1);
+	final = ft_calloc(sizeof(char), ft_strlen(*str) - ft_countchar(*str, c) + 1);
 	if (!str[0] || !final)
 		return ;
 	i = -1;

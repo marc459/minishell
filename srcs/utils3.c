@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 19:36:17 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/11 15:11:41 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/12 14:17:41 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	changestds(t_general *g)
 	}
 	if (g->fdout != 1)
 	{
+		printf("changestdout\n");
 		dup2(g->fdout, STDOUT_FILENO);
 		close(g->fdout);
 	}

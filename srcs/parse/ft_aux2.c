@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 04:11:14 by emgarcia          #+#    #+#             */
-/*   Updated: 2022/01/11 18:13:16 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/12 14:01:31 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_arg	*ft_copycleanargs(t_general *g, size_t newargs)
 {
 	t_arg	*tmp;
-	size_t	i;
+	int	i;
 
 	i = -1;
 	tmp = malloc(sizeof(t_arg) * (g->argssize + 1));
@@ -24,7 +24,7 @@ t_arg	*ft_copycleanargs(t_general *g, size_t newargs)
 	tmp[g->argssize].type = 0;
 	tmp[g->argssize].content = NULL;
 	i = -1;
-	while (++i < g->argssize)
+	while (++i < (int)g->argssize)
 	{
 		tmp[i].type = g->args[i].type;
 		tmp[i].content = ft_splitdup(g->args[i].content);
@@ -37,17 +37,17 @@ t_arg	*ft_copycleanargs(t_general *g, size_t newargs)
 
 void	ft_freecontent(t_arg *args, size_t argssize)
 {
-	size_t	i;
+	int	i;
 
 	i = -1;
-	while (++i < argssize)
+	while (++i < (int)argssize)
 		ft_freedouble(args[i].content);
 	free(args);
 }
 
 void	ft_freedouble(char **split)
 {
-	size_t	i;
+	int	i;
 
 	i = -1;
 	while (split[++i])
@@ -63,10 +63,10 @@ void	ft_freeall(t_general *g)
 
 void	ft_countthings(t_general *g)
 {
-	size_t	i;
+	int	i;
 
 	i = -1;
-	while (++i < g->argssize)
+	while (++i < (int)g->argssize)
 	{
 		if (g->args[i].type == 1 || g->args[i].type == 2
 			|| g->args[i].type == 7 || g->args[i].type == 8)

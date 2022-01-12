@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 22:12:07 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/12 16:45:54 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/12 19:47:20 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	quitsignal(int sig)
 	rl_replace_line("", 0);
 	ft_printf_fd(1, "\n");
 	rl_redisplay();
-	commandoutput(130);
-	printf("%d", sig);
+	sig = sig + 1;
+	g_piperet = 130;
 }
 
 void	sig_main(void)
@@ -40,8 +40,14 @@ void	sig_ignore(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
+void	intchild(int sig)
+{
+	exit(sig);
+}
+
 void	sig_child(void)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 }
+

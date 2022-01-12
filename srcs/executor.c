@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/12 15:11:35 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/12 19:48:05 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,7 @@ void	ft_executor(t_general *g_mini, char **envp)
 		if (g_mini->exec[i].posexec != -1)
 		{
 			cm = g_mini->args[g_mini->exec[i].posexec].content;
-			if (!ft_strncmp(cm[0], "cd", 2))
-				ft_cd(&g_mini->ownenv, cm[1]);
-			else if (g_mini->npipes == 0 && ft_parsebuiltin(g_mini, cm, i))
+			if (g_mini->npipes == 0 && ft_parsebuiltin(g_mini, cm, i))
 				;
 			else if (cm[0])
 				executecmd(g_mini, cm, envp, i);

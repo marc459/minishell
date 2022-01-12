@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/12 16:06:07 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/12 19:49:16 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ size_t	ft_ignorespace(size_t i, char *str);
 void	createtmpfile(t_general *g_mini);
 void	commandoutput(int ret);
 void	executecmd(t_general *g_mini, char **cmd, char **envp, int i);
-void	exit_error(char **command);
+int		exit_error(char **command);
 void	ft_echo(char **cmd);
 void	heredock2(t_general *g_mini, int i, char **tmp);
 void	openfiles(t_general *g, int i);

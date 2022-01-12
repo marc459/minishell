@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2022/01/12 16:52:45 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/12 19:48:59 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	checkleaks(void)
 	free(leaks);
 }
 
-void	exit_error(char **command)
+int	exit_error(char **command)
 {
 	if (ft_bidstrlen(command) > 2)
 		printf("minishell: exit: to many arguments\n");
@@ -38,6 +38,7 @@ void	exit_error(char **command)
 		ft_printf_fd(1, "exit\n");
 		exit(g_piperet);
 	}
+	return (1);
 }
 
 void	ft_prompt(t_general *g_m)
@@ -45,7 +46,7 @@ void	ft_prompt(t_general *g_m)
 	char	*command;
 
 	command = ft_calloc(sizeof(char), 64);
-	while (42)
+	while (command)
 	{		
 		free(command);
 		command = read_line(BEGIN"Minishell-1.0:"CLOSE);

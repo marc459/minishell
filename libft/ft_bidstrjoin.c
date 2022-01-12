@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:28:19 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/11 15:12:07 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/12 16:01:29 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**ft_bidstrjoin(char **str, char **str2)
 	x = -1;
 	y = -1;
 	len = ft_bidstrlen(str) + ft_bidstrlen(str2) + 1;
-	strcpy = calloc(sizeof(char *), len);
+	strcpy = ft_calloc(sizeof(char *), len);
 	if (str == NULL)
 		return (NULL);
 	while (++x < ft_bidstrlen(str))

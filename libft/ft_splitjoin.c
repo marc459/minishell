@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_splitjoin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 15:51:36 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/21 16:28:40 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/12 16:01:41 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_splitjoin(char	**split, char cjoin)
 	char	*c;
 	char	*aux;
 
-	c = calloc(sizeof(char), 2);
+	c = ft_calloc(sizeof(char), 2);
 	if (!split || !split[0] || !c)
 		return (NULL);
 	join = ft_strdup(split[0]);

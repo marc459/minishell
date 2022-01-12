@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ownenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 15:59:22 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/22 16:23:26 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/12 16:02:03 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_makeenv(char ***ownenv)
 {
 	char	*pwdbuf;
 
-	pwdbuf = calloc(sizeof(char), (PATH_MAX + 1));
+	pwdbuf = ft_calloc(sizeof(char), (PATH_MAX + 1));
 	getcwd(pwdbuf, PATH_MAX);
 	ownenv[0][0] = ft_strjoin("PWD=", pwdbuf);
 	ownenv[0][1] = ft_strjoin("OLDPWD=", pwdbuf);

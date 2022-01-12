@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:43:14 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/12 15:26:45 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/12 20:20:28 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	ft_child(char **fullcmd, char **envp, int *stdo)
 
 	paths = ft_parsepaths(envp);
 	i = 0;
-	sig_child();
 	while (paths && paths[i])
 	{
 		if (ft_strchr(fullcmd[0], '/'))
@@ -45,9 +44,11 @@ void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
 {
 	int	pid;
 
+	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == 0)
 	{
+		signal(SIGINT, intchild);
 		administratestds(i, g_mini);
 		define_fds2(g_mini, i, 0);
 		checkopenendfds(g_mini);
@@ -81,6 +82,7 @@ void	waitforthem(int *childpid, int nchilds)
 		i++;
 	}
 	g_piperet = j % 255;
+	sig_main();
 }
 
 int	defineexec(t_general *g, int i, int x)

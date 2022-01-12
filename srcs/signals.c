@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 22:12:07 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/12 19:47:20 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/12 20:21:01 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,7 @@ void	sig_ignore(void)
 
 void	intchild(int sig)
 {
+	ft_printf_fd(1, "\n");
+	g_piperet = -1;
 	exit(sig);
 }
-
-void	sig_child(void)
-{
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
-}
-

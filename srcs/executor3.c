@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:43:14 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/12 20:20:28 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/13 12:09:00 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,10 @@ void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
 {
 	int	pid;
 
-	signal(SIGINT, SIG_IGN);
+	signal(SIGINT, intchild);
 	pid = fork();
 	if (pid == 0)
 	{
-		signal(SIGINT, intchild);
 		administratestds(i, g_mini);
 		define_fds2(g_mini, i, 0);
 		checkopenendfds(g_mini);
@@ -81,7 +80,10 @@ void	waitforthem(int *childpid, int nchilds)
 		wait(childpid);
 		i++;
 	}
-	g_piperet = j % 255;
+	if (g_piperet == -130)
+		g_piperet = 130;
+	else
+		g_piperet = j % 255;
 	sig_main();
 }
 

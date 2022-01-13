@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/12 20:21:05 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/13 11:49:07 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void	ft_checkquote(char c, char *kindquote);
 int		defineexec(t_general *g, int i, int x);
 size_t	ft_checkjoinsp(char *str, size_t *spaces);
 void	intchild(int sig);
+void	intsignal(int sig);
 
 char	*ft_dropspace(char *str);
 void	leak(void);

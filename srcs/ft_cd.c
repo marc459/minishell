@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 03:57:11 by emgarcia          #+#    #+#             */
-/*   Updated: 2022/01/12 17:31:27 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/13 17:53:54 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_changepwds(char ***env, char *auxoldpath, char *auxpath)
 	env[0] = newenv;
 }
 
-void	ft_cd(char	***env, char *path)
+int	ft_cd(char	***env, char *path)
 {
 	char	*pwdbuf;
 	char	*auxpath;
@@ -81,7 +81,7 @@ void	ft_cd(char	***env, char *path)
 	else if (chdir(path))
 	{
 		printf("minishell: cd: %s: No such file or directory\n", path);
-		return ;
+		return (1);
 	}
 	auxoldpath = ft_strjoin("OLD", env[0][ft_getpathpos(env[0])]);
 	pwdbuf = ft_calloc(sizeof(char), (PATH_MAX + 1));
@@ -89,4 +89,5 @@ void	ft_cd(char	***env, char *path)
 	auxpath = ft_strjoin("PWD=", pwdbuf);
 	free (pwdbuf);
 	ft_changepwds(env, auxoldpath, auxpath);
+	return (1);
 }

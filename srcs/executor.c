@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/13 17:47:01 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:35:17 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	ft_executor(t_general *g_mini, char **envp)
 	int		i;
 	char	**cm;
 
-	g_mini->pids = malloc(sizeof(int) * g_mini->nexecutables);
 	i = -1;
 	define_fds(g_mini, -1, 0, 1);
 	if (g_mini->nexecutables == 0)
@@ -102,8 +101,11 @@ void	ft_executor(t_general *g_mini, char **envp)
 		if (g_mini->exec[i].posexec != -1)
 		{
 			cm = g_mini->args[g_mini->exec[i].posexec].content;
-			if (g_mini->npipes == 0 && ft_parsebuiltin(g_mini, cm, i))
-				;
+			if (g_mini->npipes == 0 && (!ft_strncmp(cm[0], "unset\0", 6)
+					|| !ft_strncmp(cm[0], "exit\0", 4)
+					|| (!ft_strncmp(cm[0], "export\0", 7)
+						&& ft_bidstrlen(cm) > 1)))
+				ft_parsebuiltin(g_mini, cm, i);
 			else if (cm[0])
 				executecmd(g_mini, cm, envp, i);
 		}
@@ -111,6 +113,4 @@ void	ft_executor(t_general *g_mini, char **envp)
 	}
 	waitforthem(g_mini, g_mini->nexecutables);
 	free(g_mini->exec);
-	if (g_mini->pids)
-		free(g_mini->pids);
 }

@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 07:12:59 by emgarcia          #+#    #+#             */
-/*   Updated: 2022/01/12 19:48:43 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:24:53 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ char	**ft_splitkeyvalue(t_general *g, char *str)
 
 int	ft_parsebuiltin(t_general *g, char **cmd, int i)
 {
-	if (!ft_strncmp(cmd[0], "export", 6) && ft_bidstrlen(cmd) > 1)
+	if (!ft_strncmp(cmd[0], "export\0", 7) && ft_bidstrlen(cmd) > 1)
 	{
 		while (cmd[++i])
 			ft_checknewenv(g, cmd[i]);
@@ -119,12 +119,11 @@ int	ft_parsebuiltin(t_general *g, char **cmd, int i)
 			ft_remenv(g, cmd[i]);
 		return (1);
 	}
-	else if (!ft_strncmp(cmd[0], "exit", 4))
-		exit_error(cmd);
-	if (!ft_strncmp(cmd[0], "cd", 2))
-	{
-		ft_cd(&g->ownenv, cmd[1]);
-		return (1);
-	}	
+	else if (!ft_strncmp(cmd[0], "exit\0", 5))
+		return (exit_error(cmd));
+	else if (!ft_strncmp(cmd[0], "cd\0", 3))
+		return (ft_cd(&g->ownenv, cmd[1]));
+	else if (!ft_strncmp(cmd[0], "pwd\0", 4))
+		return (ft_pwd());
 	return (0);
 }

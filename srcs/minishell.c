@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2022/01/12 19:51:06 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:28:57 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	ft_prompt(t_general *g_m)
 		{
 			ft_inigeneral(g_m);
 			ft_parse(g_m, command);
+			g_m->pids = malloc(sizeof(int) * g_m->nexecutables);
 			if (g_m->args)
 				ft_executor(g_m, g_m->ownenv);
 			free_gminishell(g_m);

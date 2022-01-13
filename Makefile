@@ -22,7 +22,8 @@ PROGRAM_SRCS = minishell.c signals.c executor.c executor2.c executor3.c		\
 				 parse/ft_args4.c ft_cd.c ft_ownenv.c	\
 				parse/ft_aux3.c ft_addenv.c ft_remenv.c	\
 				ft_expuns.c heredock.c parse/ft_dropquotes.c	\
-				ft_splitaux.c utils.c utils2.c utils3.c ft_echo.c
+				ft_splitaux.c utils.c utils2.c utils3.c ft_echo.c \
+				ft_pwd.c
 
 #OBJS
 PROGRAM_OBJS = $(addprefix $(OBJ_PATH)/,$(PROGRAM_SRCS:.c=.o))
@@ -36,7 +37,7 @@ ifeq ($(UNAME_S),Linux)
 	#CFLAGS += -pedantic -g3 -fsanitize=address -fsanitize=leak -fsanitize=undefined -fsanitize=bounds -fsanitize=null
 endif
 ifeq ($(UNAME_S),Darwin)
-	#CFLAGS += -pedantic -g3 -fsanitize=address
+	CFLAGS += -pedantic -g3 -fsanitize=address
 endif
 
 ifeq ($(OS),Windows_NT) 

@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 07:12:59 by emgarcia          #+#    #+#             */
-/*   Updated: 2022/01/13 18:40:04 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/13 19:09:04 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,11 +119,10 @@ int	ft_parsebuiltin(t_general *g, char **cmd, int i)
 	else if (!ft_strncmp(cmd[0], "cd\0", 3))
 		return (ft_cd(&g->ownenv, cmd[1]));
 	else if (!ft_strncmp(cmd[0], "export\0", 7) && ft_bidstrlen(cmd) == 1)
-	{
-		ft_printsortenv(g->ownenv);
-		return (1);
-	}
+		return (ft_printsortenv(g->ownenv));
 	else if (!ft_strncmp(cmd[0], "pwd\0", 4))
 		return (ft_pwd());
+	else if (!ft_strncmp(cmd[0], "echo\0", 5))
+		return (ft_echo(cmd));
 	return (0);
 }

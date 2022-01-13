@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 13:29:50 by emgarcia          #+#    #+#             */
-/*   Updated: 2022/01/10 13:45:23 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/13 19:10:02 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void	ft_strownjoin(char **s1, char *s2);
 char	**ft_splitdup(char **split);
 char	**ft_strsort(char **split);
 void	ft_splitprint(char **split);
-void	ft_printsortenv(char **ownenv);
 void	ft_putchar(char c);
 char	*ft_strrev(char *str);
 char	**ft_bidstrjoin(char **str, char **str2);

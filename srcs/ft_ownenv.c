@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 15:59:22 by emgarcia          #+#    #+#             */
-/*   Updated: 2022/01/12 16:02:03 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/13 19:10:25 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,19 @@ void	ft_printformat(char *sort)
 	ft_freedouble(split);
 }
 
-void	ft_printsortenv(char **ownenv)
+int	ft_printsortenv(char **ownenv)
 {
 	size_t	i;
 	char	**sort;
 
 	if (!ownenv)
-		return ;
+		return (1);
 	sort = ft_strsort(ownenv);
 	i = -1;
 	while (sort[++i])
 		ft_printformat(sort[i]);
 	ft_freedouble(sort);
+	return (1);
 }
 
 void	ft_makeenv(char ***ownenv)

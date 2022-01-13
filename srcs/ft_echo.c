@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 21:43:49 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/12/23 11:20:41 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/13 19:07:47 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	ft_echo(char **cmd)
+int	ft_echo(char **cmd)
 {
 	size_t	i;
 	size_t	backn;
@@ -34,4 +34,5 @@ void	ft_echo(char **cmd)
 	if (backn == 1)
 		printf("\n");
 	g_piperet = 0;
+	return (1);
 }

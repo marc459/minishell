@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:43:14 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/13 18:14:42 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/13 19:06:01 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
 	pid = fork();
 	if (pid == 0)
 	{
+		signal(SIGQUIT, SIG_DFL);
 		administratestds(i, g_mini);
 		define_fds2(g_mini, i, 0);
 		checkopenendfds(g_mini);
@@ -57,8 +58,6 @@ void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
 			changestds(g_mini);
 			if (ft_parsebuiltin(g_mini, cmd, i))
 				;
-			else if (!ft_strncmp(cmd[0], "echo\0", 5))
-				ft_echo(cmd);
 			else
 				ft_child(cmd, envp, &g_mini->fdout2);
 		}

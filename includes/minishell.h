@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/13 17:54:29 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/13 19:08:42 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char	*ft_dropquotes(t_general *g, char *str);
 void	ft_checknewenv(t_general *g, char *newenv);
 size_t	ft_checkenvname(char *name);
 void	ft_remenv(t_general *g, char *remenv);
-void	ft_printsortenv(char **ownenv);
+int		ft_printsortenv(char **ownenv);
 char	*ft_dropexportquotes(t_general *g, char *str);
 void	heredock(t_general *g_mini, int i);
 void	define_fds2(t_general *g_mini, int exec, int i);
@@ -108,7 +108,7 @@ void	createtmpfile(t_general *g_mini);
 void	commandoutput(int ret);
 void	executecmd(t_general *g_mini, char **cmd, char **envp, int i);
 int		exit_error(char **command);
-void	ft_echo(char **cmd);
+int		ft_echo(char **cmd);
 void	heredock2(t_general *g_mini, int i, char **tmp);
 void	openfiles(t_general *g, int i);
 void	closefds(t_general *g_mini, int i);

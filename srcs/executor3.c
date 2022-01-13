@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:43:14 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/13 12:09:00 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/13 17:47:45 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,19 @@ void	ft_child(char **fullcmd, char **envp, int *stdo)
 
 	paths = ft_parsepaths(envp);
 	i = 0;
+	if (ft_strchr(fullcmd[0], '/'))
+	{
+		cmd = ft_strdup(fullcmd[0]);
+		if (!access(cmd, X_OK))
+			execve(cmd, fullcmd, envp);
+		free(cmd);
+	}
 	while (paths && paths[i])
 	{
-		if (ft_strchr(fullcmd[0], '/'))
-			cmd = ft_strdup(fullcmd[0]);
-		else
-			cmd = ft_strjoin(paths[i], fullcmd[0]);
-		if (cmd)
-		{
-			if (!access(cmd, X_OK))
-				execve(cmd, fullcmd, envp);
-			free(cmd);
-		}
+		cmd = ft_strjoin(paths[i], fullcmd[0]);
+		if (!access(cmd, X_OK))
+			execve(cmd, fullcmd, envp);
+		free(cmd);
 		i++;
 	}
 	if (paths)
@@ -56,19 +57,20 @@ void	executecmd(t_general *g_mini, char **cmd, char **envp, int i)
 			changestds(g_mini);
 			if (ft_parsebuiltin(g_mini, cmd, i))
 				;
-			else if (!ft_strncmp(cmd[0], "echo", 4))
+			else if (!ft_strncmp(cmd[0], "echo\0", 5))
 				ft_echo(cmd);
 			else
 				ft_child(cmd, envp, &g_mini->fdout2);
 		}
-		ft_freebidstr(cmd);
 		exit (g_piperet);
 	}
 	else if (pid < 0)
 		ft_printf_fd(1, "Error\n");
+	else
+		g_mini->pids[i] = pid;
 }
 
-void	waitforthem(int *childpid, int nchilds)
+void	waitforthem(t_general *g, int nchilds)
 {
 	int	i;
 	int	j;
@@ -76,8 +78,7 @@ void	waitforthem(int *childpid, int nchilds)
 	i = 0;
 	while (i < nchilds)
 	{
-		waitpid(-1, &j, 0);
-		wait(childpid);
+		waitpid(g->pids[i], &j, 0);
 		i++;
 	}
 	if (g_piperet == -130)

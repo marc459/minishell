@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/13 12:06:42 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/13 17:47:01 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ void	define_fds2(t_general *g_mini, int exec, int i)
 	{
 		openfiles(g_mini, i);
 		if (g_mini->args[i].type == 8)
+		{
 			g_mini->fdin = open(".tmphd", O_RDONLY);
+			unlink(".tmphd");
+		}
 		i++;
 	}
 }
@@ -88,6 +91,7 @@ void	ft_executor(t_general *g_mini, char **envp)
 	int		i;
 	char	**cm;
 
+	g_mini->pids = malloc(sizeof(int) * g_mini->nexecutables);
 	i = -1;
 	define_fds(g_mini, -1, 0, 1);
 	if (g_mini->nexecutables == 0)
@@ -105,6 +109,8 @@ void	ft_executor(t_general *g_mini, char **envp)
 		}
 		closefds(g_mini, i);
 	}
-	waitforthem(&i, g_mini->nexecutables);
+	waitforthem(g_mini, g_mini->nexecutables);
 	free(g_mini->exec);
+	if (g_mini->pids)
+		free(g_mini->pids);
 }

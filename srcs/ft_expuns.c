@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 07:12:59 by emgarcia          #+#    #+#             */
-/*   Updated: 2022/01/13 18:24:53 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:40:04 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,6 @@ int	ft_parsebuiltin(t_general *g, char **cmd, int i)
 			ft_checknewenv(g, cmd[i]);
 		return (1);
 	}
-	else if (!ft_strncmp(cmd[0], "export\0", 7) && ft_bidstrlen(cmd) == 1)
-	{
-		ft_printsortenv(g->ownenv);
-		return (1);
-	}
 	else if (!ft_strncmp(cmd[0], "unset\0", 6))
 	{
 		while (cmd[++i])
@@ -123,6 +118,11 @@ int	ft_parsebuiltin(t_general *g, char **cmd, int i)
 		return (exit_error(cmd));
 	else if (!ft_strncmp(cmd[0], "cd\0", 3))
 		return (ft_cd(&g->ownenv, cmd[1]));
+	else if (!ft_strncmp(cmd[0], "export\0", 7) && ft_bidstrlen(cmd) == 1)
+	{
+		ft_printsortenv(g->ownenv);
+		return (1);
+	}
 	else if (!ft_strncmp(cmd[0], "pwd\0", 4))
 		return (ft_pwd());
 	return (0);

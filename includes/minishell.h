@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/13 11:49:07 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/13 16:48:27 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int		defineexec(t_general *g, int i, int x);
 size_t	ft_checkjoinsp(char *str, size_t *spaces);
 void	intchild(int sig);
 void	intsignal(int sig);
+void	ft_pwd(void);
 
 char	*ft_dropspace(char *str);
 void	leak(void);

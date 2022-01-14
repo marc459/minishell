@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 19:36:46 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/14 12:00:32 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/14 15:33:19 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ size_t	ft_checkjoinsp(char *str, size_t *spaces);
 void	intchild(int sig);
 void	intsignal(int sig);
 int		ft_pwd(void);
+size_t	ft_isredirect(char c);
 
 char	*ft_dropspace(char *str);
 void	leak(void);

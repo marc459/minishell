@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:32:36 by emgarcia          #+#    #+#             */
-/*   Updated: 2022/01/14 15:22:47 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/14 15:34:16 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ size_t	ft_checkjoinsp(char *str, size_t *spaces)
 	{
 		if (str[i] == ' ')
 			(*spaces)++;
-		else if (!ft_spchar(str[i]))
+		else if (!ft_isredirect(str[i]))
 			others = 1;
-		else if (ft_spchar(str[i]) && others)
+		else if (ft_isredirect(str[i]) && others)
 			others = 0;
-		else if (ft_spchar(str[i]) && !others && !ft_spchar(str[i - 1]))
+		else if (ft_isredirect(str[i]) && !others && !ft_isredirect(str[i - 1]))
 		{
 			printf("syntax error near unexpected token `");
 			printf("%c'\n", str[i]);

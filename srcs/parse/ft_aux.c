@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:32:36 by emgarcia          #+#    #+#             */
-/*   Updated: 2022/01/13 17:34:07 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/14 12:00:35 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ size_t	ft_error(size_t ncomands, size_t i, char **cmds)
 
 void	ft_inigeneral(t_general *general)
 {
+	general->hderror = 0;
 	general->npipes = 0;
 	general->nexecutables = 0;
 	general->nredirections = 0;

@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   heredock.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:13:08 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/11 15:09:41 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/14 12:25:58 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	createtmpfile(t_general *g_mini)
+void createtmpfile(t_general *g_mini)
 {
 	g_mini->fdin = open(".tmphd",
-			O_CREAT | O_RDWR | O_TRUNC, 0755);
-	ft_printf_fd(g_mini->fdin, "%s\n", g_mini->heredockcontent);
+						O_CREAT | O_RDWR | O_TRUNC, 0755);
+	ft_putstr_fd(g_mini->heredockcontent, g_mini->fdin);
 	close(g_mini->fdin);
 }
 
-void	heredock2(t_general *g_mini, int i, char **tmp)
+void heredock2(t_general *g_mini, int i, char **tmp)
 {
-	char	*tmp2;
+	char *tmp2;
 
 	if ((!ft_strncmp(tmp[0], g_mini->args[i + 1].content[0],
-				ft_strlen(g_mini->args[i + 1].content[0]))
-			&& (tmp[0][ft_strlen(g_mini->args[i + 1].content[0])] == '\0')))
+					 ft_strlen(g_mini->args[i + 1].content[0])) &&
+		 (tmp[0][ft_strlen(g_mini->args[i + 1].content[0])] == '\0')))
 	{
 		free(tmp[0]);
 		createtmpfile(g_mini);
@@ -37,19 +37,24 @@ void	heredock2(t_general *g_mini, int i, char **tmp)
 	g_mini->heredockcontent = ft_strjoin(tmp2, tmp[0]);
 	free(tmp2);
 	free(tmp[0]);
+	tmp2 = ft_strdup(g_mini->heredockcontent);
+	free(g_mini->heredockcontent);
+	g_mini->heredockcontent = ft_strjoin(tmp2, "\n");
+	free(tmp2);
 	tmp[0] = readline(">");
 }
 
-void	heredock(t_general *g_mini, int i)
+void heredock(t_general *g_mini, int i)
 {
-	char	*tmp;
-	pid_t	pid;
-	int		status;
+	char *tmp;
+	pid_t pid;
+	int status;
 
+	signal(SIGINT, intchild);
 	pid = fork();
 	if (pid == 0)
 	{
-		sig_heredock();
+		signal(SIGINT, SIG_DFL);
 		g_mini->fdin = dup(STDIN_FILENO);
 		g_mini->heredockcontent = ft_strdup("");
 		tmp = readline(">");
@@ -62,8 +67,9 @@ void	heredock(t_general *g_mini, int i)
 	}
 	else if (pid > 0)
 	{
-		sig_ignore();
 		waitpid(pid, &status, 0);
+		if (WIFSIGNALED(status) && WTERMSIG(status) + 128 == 130)
+			g_mini->hderror = 1;
 		sig_main();
 	}
 }

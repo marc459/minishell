@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/13 18:42:37 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/14 12:01:09 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	ft_executor(t_general *g_mini, char **envp)
 	while (++i < (int)g_mini->nexecutables)
 	{
 		administratepipe(i, g_mini);
-		if (g_mini->exec[i].posexec != -1)
+		if (g_mini->exec[i].posexec != -1 && !g_mini->hderror)
 		{
 			cm = g_mini->args[g_mini->exec[i].posexec].content;
 			if (g_mini->npipes == 0 && (!ft_strncmp(cm[0], "unset\0", 6)

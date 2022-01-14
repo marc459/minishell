@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 22:12:07 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/13 12:08:14 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/14 12:19:43 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	sig_main(void)
 
 void	sig_heredock(void)
 {
-	signal(SIGINT, SIG_DFL);
+	signal(SIGINT, intchild);
 	signal(SIGQUIT, SIG_IGN);
 }
 
@@ -44,4 +44,5 @@ void	intchild(int sig)
 {
 	(void)sig;
 	g_piperet = -130;
+	printf("hola\n");
 }

@@ -6,7 +6,7 @@
 /*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 21:01:26 by emgarcia          #+#    #+#             */
-/*   Updated: 2022/01/10 12:50:21 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/14 12:30:30 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	ft_joinenv(char **str, t_general *g, size_t last, char kquote)
 
 	j = -1;
 	line = NULL;
+	printf("str : %s\n", str[0]);
+	printf("c : %s\n", str[0][j + 1]);
 	while (str[0][++j])
 	{
 		ft_checkquote(str[0][j], &kquote);

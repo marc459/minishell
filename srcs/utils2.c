@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:39:25 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/14 14:13:23 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/14 15:04:58 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,4 @@ void	closefds(t_general *g_mini, int i)
 		close(g_mini->fdout);
 	if (g_mini->fdin > 1)
 		close(g_mini->fdin);
-	if (g_mini->heredockcontent)
-		free(g_mini->heredockcontent);
 }

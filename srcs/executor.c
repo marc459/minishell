@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/14 14:14:10 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/14 15:09:21 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	define_fds2(t_general *g_mini, int exec, int i)
 		if (g_mini->args[i].type == 8)
 		{
 			g_mini->fdin = open(".tmphd", O_RDONLY);
-			unlink(".tmphd");
 		}
 		i++;
 	}

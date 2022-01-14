@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:43:14 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/14 14:14:00 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/14 15:10:32 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,11 @@ void	waitforthem(t_general *g, int nchilds)
 		waitpid(g->pids[i], &j, 0);
 		i++;
 	}
+	if (g->heredockcontent)
+		free(g->heredockcontent);
+	unlink(".tmphd");
+	if (g->fdin > 1)
+		close(g->fdin);
 	if (g_piperet == -130)
 		g_piperet = 130;
 	else

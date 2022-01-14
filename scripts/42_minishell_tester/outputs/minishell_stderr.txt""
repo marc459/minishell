@@ -1,0 +1,19 @@
+minishell: unset: `TES\\T': not a valid identifier
+minishell: T: command not found
+minishell: unset: `TES.T': not a valid identifier
+minishell: unset: `TES+T': not a valid identifier
+minishell: unset: `TES=T': not a valid identifier
+minishell: unset: `TES}T': not a valid identifier
+minishell: unset: `TES{T': not a valid identifier
+minishell: unset: `TES-T': not a valid identifier
+minishell: unset: -T: invalid option
+unset: usage: unset [-f] [-v] [name ...]
+minishell: unset: `TE*ST': not a valid identifier
+minishell: unset: `TES#T': not a valid identifier
+minishell: unset: `TES@T': not a valid identifier
+minishell: unset: `TES!T': not a valid identifier
+minishell: unset: `============': not a valid identifier
+minishell: unset: `+++++++': not a valid identifier
+minishell: unset: `TES^T': not a valid identifier
+minishell: unset: `TES!T': not a valid identifier
+minishell: unset: `TES~T': not a valid identifier

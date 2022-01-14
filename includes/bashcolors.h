@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bashcolors.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 16:12:09 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/15 18:42:38 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/10 13:45:37 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,75 +14,75 @@
 # define BASHCOLORS_H
 
 // Reset
-# define Color_Off "\033[0m"       // Text Reset
+# define COLOR_OFF "\033[0m"       // Text Reset
 
 // Regular Colors
-# define Black "\033[0;30m"        // Black
-# define Red "\033[0;31m"          // Red
-# define Green "\033[0;32m"        // Green
-# define Yellow "\033[0;33m"       // Yellow
-# define Blue "\033[0;34m"         // Blue
-# define Purple "\033[0;35m"       // Purple
-# define Cyan "\033[0;36m"         // Cyan
-# define White "\033[0;37m"        // White
- 
+# define BLACK "\033[0;30m"        // BLACK
+# define RED "\033[0;31m"          // RED
+# define GREEN "\033[0;32m"        // GREEN
+# define YELLOW "\033[0;33m"       // YELLOW
+# define BLUE "\033[0;34m"         // BLUE
+# define PURPLE "\033[0;35m"       // PURPLE
+# define CYAN "\033[0;36m"         // CYAN
+# define WHITE "\033[0;37m"        // WHITE
+
 // Bold
-# define BBlack "\033[1;30m"       // Black
-# define BRed "\033[1;31m"         // Red
-# define BGreen "\033[1;32m"       // Green
-# define BYellow "\033[1;33m"      // Yellow
-# define BBlue "\033[1;34m"        // Blue
-# define BPurple "\033[1;35m"      // Purple
-# define BCyan "\033[1;36m"        // Cyan
-# define BWhite "\033[1;37m"       // White
+# define BBLACK "\033[1;30m"       // BLACK
+# define BRED "\033[1;31m"         // RED
+# define BGREEN "\033[1;32m"       // GREEN
+# define BYELLOW "\033[1;33m"      // YELLOW
+# define BBLUE "\033[1;34m"        // BLUE
+# define BPURPLE "\033[1;35m"      // PURPLE
+# define BCYAN "\033[1;36m"        // CYAN
+# define BWHITE "\033[1;37m"       // WHITE
 
 // Underline
-# define UBlack "\033[4;30m"       // Black
-# define URed "\033[4;31m"         // Red
-# define UGreen "\033[4;32m"       // Green
-# define UYellow "\033[4;33m"      // Yellow
-# define UBlue "\033[4;34m"        // Blue
-# define UPurple "\033[4;35m"      // Purple
-# define UCyan "\033[4;36m"        // Cyan
-# define UWhite "\033[4;37m"       // White
+# define UBLACK "\033[4;30m"       // BLACK
+# define URED "\033[4;31m"         // RED
+# define UGREEN "\033[4;32m"       // GREEN
+# define UYELLOW "\033[4;33m"      // YELLOW
+# define UBLUE "\033[4;34m"        // BLUE
+# define UPURPLE "\033[4;35m"      // PURPLE
+# define UCYAN "\033[4;36m"        // CYAN
+# define UWHITE "\033[4;37m"       // WHITE
 
 // Background
-# define On_Black "\033[40m"       // Black
-# define On_Red "\033[41m"         // Red
-# define On_Green "\033[42m"       // Green
-# define On_Yellow "\033[43m"      // Yellow
-# define On_Blue "\033[44m"        // Blue
-# define On_Purple "\033[45m"      // Purple
-# define On_Cyan "\033[46m"        // Cyan
-# define On_White "\033[47m"       // White
+# define ON_BLACK "\033[40m"       // BLACK
+# define ON_RED "\033[41m"         // RED
+# define ON_GREEN "\033[42m"       // GREEN
+# define ON_YELLOW "\033[43m"      // YELLOW
+# define ON_BLUE "\033[44m"        // BLUE
+# define ON_PURPLE "\033[45m"      // PURPLE
+# define ON_CYAN "\033[46m"        // CYAN
+# define ON_WHITE "\033[47m"       // WHITE
 
 // High Intensty
-# define IBlack "\033[0;90m"       // Black
-# define IRed "\033[0;91m"         // Red
-# define IGreen "\033[0;92m"       // Green
-# define IYellow "\033[0;93m"      // Yellow
-# define IBlue "\033[0;94m"        // Blue
-# define IPurple "\033[0;95m"      // Purple
-# define ICyan "\033[0;96m"        // Cyan
-# define IWhite "\033[0;97m"       // White
+# define IBLACK "\033[0;90m"       // BLACK
+# define IRED "\033[0;91m"         // RED
+# define IGREEN "\033[0;92m"       // GREEN
+# define IYELLOW "\033[0;93m"      // YELLOW
+# define IBLUE "\033[0;94m"        // BLUE
+# define IPURPLE "\033[0;95m"      // PURPLE
+# define ICYAN "\033[0;96m"        // CYAN
+# define IWHITE "\033[0;97m"       // WHITE
 
 // Bold High Intensty
-# define BIBlack "\033[1;90m"      // Black
-# define BIRed "\033[1;91m"        // Red
-# define BIGreen "\033[1;92m"      // Green
-# define BIYellow "\033[1;93m"     // Yellow
-# define BIBlue "\033[1;94m"       // Blue
-# define BIPurple "\033[1;95m"     // Purple
-# define BICyan "\033[1;96m"       // Cyan
-# define BIWhite "\033[1;97m"      // White
+# define BIBLACK "\033[1;90m"      // BLACK
+# define BIRED "\033[1;91m"        // RED
+# define BIGREEN "\033[1;92m"      // GREEN
+# define BIYELLOW "\033[1;93m"     // YELLOW
+# define BIBLUE "\033[1;94m"       // BLUE
+# define BIPURPLE "\033[1;95m"     // PURPLE
+# define BICYAN "\033[1;96m"       // CYAN
+# define BIWHITE "\033[1;97m"      // WHITE
 
 // High Intensty backgrounds
-# define On_IBlack "\033[0;100m"   // Black
-# define On_IRed "\033[0;101m"     // Red
-# define On_IGreen "\033[0;102m"   // Green
-# define On_IYellow "\033[0;103m"  // Yellow
-# define On_IPurple "\033[10;95m"  // Purple
-# define On_ICyan "\033[0;106m"    // Cyan
-# define On_IWhite "\033[0;107m"   // White
+# define ON_IBLACK "\033[0;100m"   // BLACK
+# define ON_IRED "\033[0;101m"     // RED
+# define ON_IGREEN "\033[0;102m"   // GREEN
+# define ON_IYELLOW "\033[0;103m"  // YELLOW
+# define ON_IPURPLE "\033[10;95m"  // PURPLE
+# define ON_ICYAN "\033[0;106m"    // CYAN
+# define ON_IWHITE "\033[0;107m"   // WHITE
 
 #endif

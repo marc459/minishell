@@ -6,5 +6,6 @@
 # ls <> a
 # w c
 #a
+#ls <>
 cd `find . -name "42_minishell_tester"`
-bash grademe.sh -c exit
+bash grademe.sh -c

@@ -6,13 +6,14 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 13:29:50 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/13 22:01:53 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/13 19:10:02 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include "get_next_line/get_next_line.h"
+# include <limits.h>
 
 typedef struct s_list
 {
@@ -69,6 +70,21 @@ int		ft_intlen(const long int value);
 char	*ft_itoa_without_minus(long int n);
 int		ft_len(long nb);
 void	ft_freebidstr(char **s);
+char	*ft_splitjoin(char	**split, char cjoin);
+size_t	ft_getposition(char	*str, char c);
+void	ft_trimchar(char **str, char c);
+void	ft_revtrimchar(char **str, char c);
+size_t	ft_splitlen(char **split);
+void	ft_trimallchar(char **str, char c);
+size_t	ft_countchar(char *str, char c);
+void	ft_strownjoin(char **s1, char *s2);
+char	**ft_splitdup(char **split);
+char	**ft_strsort(char **split);
+void	ft_splitprint(char **split);
+void	ft_putchar(char c);
+char	*ft_strrev(char *str);
+char	**ft_bidstrjoin(char **str, char **str2);
+char	**ft_bidstrdup(char **str);
 
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
@@ -79,6 +95,5 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-
 
 #endif

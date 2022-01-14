@@ -6,9 +6,11 @@
 #    By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/01 13:26:03 by emgarcia          #+#    #+#              #
-#    Updated: 2021/11/13 21:37:26 by msantos-         ###   ########.fr        #
+#    Updated: 2021/12/21 18:35:22 by msantos-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+FT_PRINTF_SRCS_PATH = ./ft_printf
 
 SRCS	=	ft_strtrim.c	\
 			ft_putnbr_fd.c	\
@@ -56,26 +58,54 @@ SRCS	=	ft_strtrim.c	\
 			ft_intlen.c		\
 			ft_itoa_without_minus.c	\
 			ft_len.c \
-			ft_freebidstr.c 
+			ft_freebidstr.c \
+			ft_splitjoin.c	\
+			ft_getposition.c	\
+			ft_trimchar.c	\
+			ft_revtrimchar.c	\
+			ft_splitlen.c	\
+			ft_trimallchar.c	\
+			ft_countchar.c	\
+			ft_strownjoin.c	\
+			ft_strsort.c	\
+			ft_splitdup.c	\
+			ft_splitprint.c \
+			ft_putchar.c \
+			ft_strrev.c \
+			ft_bidstrjoin.c \
+			ft_bidstrdup.c
+
+FT_PRINTF_SRCS = flag_sorting.c ft_printf.c initialize_flags.c \
+print_integer.c print_string.c variable_sorting.c ft_putstrcounter.c \
+print_character.c print_hexadecimal.c print_ptr.c print_percentage.c \
+print_unsigned.c print_charxtimes.c \
+check_width.c check_precision.c check_zero.c
+
 SRCS_B	= ft_lstmap.c ft_lstiter.c ft_lstclear.c ft_lstdelone.c ft_lstadd_back.c ft_lstlast.c ft_lstsize.c ft_lstadd_front.c ft_lstnew.c
 OBJS	= ${SRCS:.c=.o}
 OBJS_B	= ${SRCS_B:.c=.o}
+PRINTFOBJS = $(FT_PRINTF_SRCS:.c=.o)
+
 GNLA	= get_next_line/gnl.a
 NAME	= libft.a
 CC		= gcc
 #CFLAGS	= -Wall -Wextra -Werror -fsanitize=address -g3
 CFLAGS	= -Wall -Wextra -Werror
 RM		= rm -rf
+FT_PRINTF_OBJS = $(addprefix $(FT_PRINTF_SRCS_PATH)/, $(PRINTFOBJS))
 
 all: submodule ${NAME}
 
 %.o: %.c
 	@${CC} ${CFLAGS} -c $< -o $@
 
-$(NAME): ${OBJS}
+$(FT_PRINTF_SRCS_PATH)/%.o: $(FT_PRINTF_SRCS_PATH)/%.c
+	@gcc -o $@ -c $<
+
+$(NAME): ${OBJS} $(FT_PRINTF_OBJS)
 	@make -C get_next_line
 	@cp ${GNLA} ${NAME}
-	@ar -crs ${NAME} ${OBJS}
+	@ar -crs ${NAME} ${OBJS} $(FT_PRINTF_OBJS)
 
 submodule:
 	@git submodule init

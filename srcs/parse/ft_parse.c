@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:07:10 by emgarcia          #+#    #+#             */
-/*   Updated: 2021/11/13 23:13:38 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/10 17:13:29 by emgarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,24 @@ void	ft_pcont(t_general *g, size_t type)
 void	ft_comndssize(t_general *g, char *str)
 {
 	size_t	i;
+	char	*aux;
 
+	aux = ft_dropspace(str);
 	i = -1;
-	while (++i < ft_strlen(str))
+	while (++i < ft_strlen(aux))
 	{
-		if (str[i] == '\'' && g->dquot > 0)
+		if (aux[i] == '\'' && g->dquot > 0)
 			g->quot = -g->quot;
-		else if (str[i] == '\"' && g->quot > 0)
+		else if (aux[i] == '\"' && g->quot > 0)
 			g->dquot = -g->dquot;
-		else if (ft_spchar(str[i]) && g->quot > 0 && g->dquot > 0)
+		if (ft_spchar(aux[i]) && g->quot > 0 && g->dquot > 0)
 			ft_pcont(g, 1);
 		else if (g->parse.comand)
 			ft_pcont(g, 0);
 	}
+	g->quot = 1;
+	g->dquot = 1;
+	free (aux);
 }
 
 char	*ft_joincomnd(char **split, size_t *i, size_t size)
@@ -75,9 +80,9 @@ void	ft_fillcomands(t_general *g, char *str)
 	size_t	i;
 	size_t	j;
 
-	ini = 0;
-	i = -1;
 	j = 0;
+	i = -1;
+	ini = ft_ignorespace(i + 1, str);
 	while (++i < ft_strlen(str))
 	{
 		if (str[i] == '\'' && g->dquot > 0)
@@ -89,25 +94,28 @@ void	ft_fillcomands(t_general *g, char *str)
 			if (i - ini > 0)
 				g->parse.comnds[j++] = ft_substr(str, ini, i - ini);
 			g->parse.comnds[j++] = ft_substr(str, i, 1);
-			ini = i + 1;
+			ini = ft_ignorespace(i + 1, str);
 		}
 	}
 	if (j < g->parse.comndssize)
 		g->parse.comnds[j++] = ft_substr(str, ini, i - ini);
 }
 
-void	ft_parse(t_general *general, char *str)
+void	ft_parse(t_general *g, char *str)
 {
-	size_t	i;
-
-	ft_comndssize(general, str);
-	general->parse.comnds = calloc(sizeof(char *),
-			(general->parse.comndssize + 1));
-	if (general->parse.comnds)
+	ft_comndssize(g, str);
+	g->parse.comnds = ft_calloc(sizeof(char *),
+			(g->parse.comndssize + 1));
+	if (!g->parse.comnds || !g->parse.comndssize)
+		return ;
+	ft_fillcomands(g, str);
+	ft_checkquotes(g);
+	ft_iniargs(g);
+	if (g->args)
 	{
-		ft_fillcomands(general, str);
-		ft_iniargs(general);
-		ft_refacttypes(general);
+		ft_refacttypes(g);
+		ft_expvar(g);
+		ft_refactquotes(g);
+		ft_countthings(g);
 	}
-	ft_countthings(general);
 }

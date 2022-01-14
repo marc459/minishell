@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 22:12:07 by msantos-          #+#    #+#             */
-/*   Updated: 2021/11/17 17:00:46 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/14 14:09:51 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,34 @@
 
 void	quitsignal(int sig)
 {
-	printf("\nQuineshell-1.0:");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	ft_printf_fd(1, "\n");
+	rl_redisplay();
+	sig = sig + 1;
+	g_piperet = 130;
 }
 
-void	signals(void)
+void	sig_main(void)
 {
-	signal(SIGINT, &quitsignal);
+	signal(SIGINT, quitsignal);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	sig_heredock(void)
+{
+	signal(SIGINT, intchild);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	sig_ignore(void)
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	intchild(int sig)
+{
+	(void)sig;
+	g_piperet = -130;
 }

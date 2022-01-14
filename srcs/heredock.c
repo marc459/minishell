@@ -6,27 +6,27 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:13:08 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/14 13:50:08 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/14 14:11:26 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void createtmpfile(t_general *g_mini)
+void	createtmpfile(t_general *g_mini)
 {
 	g_mini->fdin = open(".tmphd",
-						O_CREAT | O_RDWR | O_TRUNC, 0755);
+			O_CREAT | O_RDWR | O_TRUNC, 0755);
 	ft_putstr_fd(g_mini->heredockcontent, g_mini->fdin);
 	close(g_mini->fdin);
 }
 
-void heredock2(t_general *g_mini, int i, char **tmp)
+void	heredock2(t_general *g_mini, int i, char **tmp)
 {
-	char *tmp2;
+	char	*tmp2;
 
 	if ((!ft_strncmp(tmp[0], g_mini->args[i + 1].content[0],
-					 ft_strlen(g_mini->args[i + 1].content[0])) &&
-		 (tmp[0][ft_strlen(g_mini->args[i + 1].content[0])] == '\0')))
+				ft_strlen(g_mini->args[i + 1].content[0]))
+			&& (tmp[0][ft_strlen(g_mini->args[i + 1].content[0])] == '\0')))
 	{
 		free(tmp[0]);
 		createtmpfile(g_mini);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 22:12:07 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/14 12:19:43 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/14 14:09:51 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,4 @@ void	intchild(int sig)
 {
 	(void)sig;
 	g_piperet = -130;
-	printf("hola\n");
 }

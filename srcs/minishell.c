@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2022/01/14 12:08:20 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/14 14:18:56 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ft_prompt(t_general *g_m)
 			if (g_m->args)
 				ft_executor(g_m, g_m->ownenv);
 			free_gminishell(g_m);
+			system("leaks > ttys001");
 		}
 	}
 	free(command);

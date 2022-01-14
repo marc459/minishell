@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/14 15:09:21 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/14 15:39:44 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	define_fds(t_general *g, int i, int x, int y)
 			cmdargs = 0;
 			x++;
 		}
-		else if (g->args[i].type == 8)
+		else if (g->args[i].type == 8 && !g->hderror)
 			heredock(g, i);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 18:43:14 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/14 15:10:32 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/14 15:39:07 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	waitforthem(t_general *g, int nchilds)
 	int	j;
 
 	i = 0;
+	g->hderror = 0;
 	while (i < nchilds)
 	{
 		waitpid(g->pids[i], &j, 0);

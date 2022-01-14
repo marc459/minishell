@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredock.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:13:08 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/14 12:25:58 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/14 12:42:55 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ void heredock2(t_general *g_mini, int i, char **tmp)
 	tmp[0] = readline(">");
 }
 
-void heredock(t_general *g_mini, int i)
+void	heredock(t_general *g_mini, int i)
 {
-	char *tmp;
-	pid_t pid;
-	int status;
+	char	*tmp;
+	pid_t	pid;
+	int		status;
 
-	signal(SIGINT, intchild);
+	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == 0)
 	{

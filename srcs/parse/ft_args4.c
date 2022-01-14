@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_args4.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emgarcia <emgarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 21:01:26 by emgarcia          #+#    #+#             */
-/*   Updated: 2022/01/14 12:30:30 by emgarcia         ###   ########.fr       */
+/*   Updated: 2022/01/14 13:40:22 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ void	ft_joinenv(char **str, t_general *g, size_t last, char kquote)
 
 	j = -1;
 	line = NULL;
-	printf("str : %s\n", str[0]);
-	printf("c : %s\n", str[0][j + 1]);
 	while (str[0][++j])
 	{
 		ft_checkquote(str[0][j], &kquote);

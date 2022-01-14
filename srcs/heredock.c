@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:13:08 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/14 12:42:55 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/14 13:50:08 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	heredock(t_general *g_mini, int i)
 		tmp = readline(">");
 		while (tmp)
 			heredock2(g_mini, i, &tmp);
-		ft_putstr_fd("warning: here-doc delimited by end-of-file\n", 1);
 		free(tmp);
 		createtmpfile(g_mini);
 		exit(EXIT_SUCCESS);

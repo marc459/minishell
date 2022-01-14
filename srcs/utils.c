@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:57:21 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/13 18:43:29 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/14 16:04:29 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	runcflag(t_general	*g_mini, char **environ, char **argv)
 			{
 				ft_inigeneral(g_mini);
 				ft_parse(g_mini, commands[i]);
+				g_mini->pids = malloc(sizeof(int) * g_mini->nexecutables);
 				ft_executor(g_mini, environ);
 				free_gminishell(g_mini);
 			}

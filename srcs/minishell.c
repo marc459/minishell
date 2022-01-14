@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 22:32:27 by marcos            #+#    #+#             */
-/*   Updated: 2022/01/14 15:41:04 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/14 16:04:41 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ int	main(int argc, char **argv)
 	t_general	g_minishell;
 
 	g_piperet = 0;
-	argc = 0;
 	g_minishell.ownenv = ft_ownenv(environ);
-	runcflag(&g_minishell, environ, argv);
+	if (argc > 1)
+		runcflag(&g_minishell, environ, argv);
 	sig_main();
 	ft_prompt(&g_minishell);
 	ft_freebidstr(g_minishell.ownenv);

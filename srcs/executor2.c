@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:42:04 by marcos            #+#    #+#             */
-/*   Updated: 2022/01/12 15:16:29 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/15 16:42:00 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	administratestds(int i, t_general *g_mini)
 
 void	administratepipe(int i, t_general *g_mini)
 {
+	g_mini->fdin = 0;
+	g_mini->fdout = 1;
 	if (g_mini->npipes > 0)
 	{
 		if (i == (int)(g_mini->nexecutables - 1))

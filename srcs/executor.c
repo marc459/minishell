@@ -6,7 +6,7 @@
 /*   By: msantos- <msantos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:11:40 by msantos-          #+#    #+#             */
-/*   Updated: 2022/01/14 15:39:44 by msantos-         ###   ########.fr       */
+/*   Updated: 2022/01/15 16:41:54 by msantos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	define_fds(t_general *g, int i, int x, int y)
 	int		cmdargs;
 
 	cmdargs = 0;
+	g->nexecutables = 0;
 	while (++i < (int)(g->argssize))
 	{
 		openfiles(g, i);
@@ -38,6 +39,7 @@ void	define_fds(t_general *g, int i, int x, int y)
 		{
 			cmdargs = 1;
 			g->exec[x].posexec = i;
+			g->nexecutables++;
 		}
 		else if (defineexec(g, i, x))
 			;

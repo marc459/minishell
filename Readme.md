@@ -1,8 +1,99 @@
-# MINISHELL #
-Minishell is a project that simulate a real shel like bash or zsh.
 
-## INSTALL ##
- make && ./minishell
+███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗     
+████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     
+██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║     
+██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║     
+██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗
+╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝
+                                                                   
+Minishell is a project that simulate a real shell like bash.
+Compatible with linux && Mac.
+
+## How to use
+
+### Clone repo
+
+```sh
+git clone https://github.com/marc459/minishell.git
+```
+
+### Linux dependencies
+
+Install readline library:
+
+- On Debian based platforms, like Ubuntu:
+
+```sh
+sudo apt install libreadline-dev
+```
+
+- Platforms with `yum`, like SUSE:
+
+```sh
+yum install readline-devel
+```
+
+- For other platform please search for the package name on google, thx :)
+
+### MAC dependencies
+
+- Install readline library:
+
+```sh
+brew install readline
+```
+
+### Compile and execute
+
+Run `make` (make rules: `all`, `clean`, `fclean` and `re`)
+
+```sh
+cd ./minishell && make
+```
+
+Execute the `./minishell` binary generated after running `make`
+
+```sh
+./minishell
+```
+
+## Features
+
+- Recreates most of the bash shell.
+- support for config file `.minishrc` (like bash `.bashrc`).
+- comments with `#` (NOTE: `#` must be at the start of the line).
+- Pipes `|` works like in bash.
+- Redirections `<`, `>`, `<<`, `>>` work like in bash.
+- `$?` works like in bash.
+- wildcards `*` and `?` works for the current directory.
+- Handle signals: `Ctrl-C`, `Ctrl-D` and `Ctrl-\` like in bash.
+- Enviroments variables.
+- Arrow keys.
+- History (command history).
+- Auto-complete with tab key.
+//Bonus Features to implement
+- `;`, `&&` and `||` work like in bash.
+- Parenthesis: `(` and `)` works with `&&`, `||` and `;` for priorities.
+
+### Built-in commands
+
+- `echo`
+- `cd`
+- `pwd`
+- `export`
+- `unset`
+- `env`
+- `exit`
+
+## Components
+
+minishell is formed by 3 components:
+
+1. Lexical analyzer: parse the input line into tokens.
+
+2. Parser: parse tokens into an abstract syntax tree (ast).
+
+3. Executor: execute the commands
 
 ## DEVELOPING PARTS ##
 

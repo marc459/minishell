@@ -6,11 +6,11 @@
 ██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗
 ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝
 
-                                                                   
+```                                                                 
 Minishell is a project that simulate a real shell like bash.
 Compatible with linux && Mac.
 
-## How to use
+### How to use
 
 ### Clone repo
 
